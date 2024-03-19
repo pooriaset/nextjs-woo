@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "@/config/theme";
-
-const inter = Inter({ subsets: ["latin"] });
+import RTLProvider from "@/components/common/RTLProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,10 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="fa" dir="rtl">
+      <body>
         <CssBaseline />
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <RTLProvider>
+            <Container>{children}</Container>
+          </RTLProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

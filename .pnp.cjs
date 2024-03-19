@@ -26,6 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@emotion/cache", "npm:11.11.0"],\
           ["@emotion/react", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:11.11.4"],\
           ["@emotion/styled", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:11.11.0"],\
           ["@mui/icons-material", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:5.15.14"],\
@@ -33,6 +34,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.67"],\
           ["@types/react-dom", "npm:18.2.22"],\
+          ["@types/stylis", "npm:4.2.5"],\
           ["autoprefixer", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:10.4.18"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:14.1.3"],\
@@ -40,6 +42,8 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.37"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:18.2.0"],\
+          ["stylis", "npm:4.3.1"],\
+          ["stylis-plugin-rtl", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:2.1.1"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["typescript", "patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=5adc0c"]\
         ],\
@@ -1082,6 +1086,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/stylis", [\
+      ["npm:4.2.5", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@types-stylis-npm-4.2.5-402b8fb751-10c0.zip/node_modules/@types/stylis/",\
+        "packageDependencies": [\
+          ["@types/stylis", "npm:4.2.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@typescript-eslint/parser", [\
       ["npm:6.21.0", {\
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@typescript-eslint-parser-npm-6.21.0-d7ff8425ee-10c0.zip/node_modules/@typescript-eslint/parser/",\
@@ -1856,6 +1869,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/cssesc-npm-3.0.0-15ec56f86f-10c0.zip/node_modules/cssesc/",\
         "packageDependencies": [\
           ["cssesc", "npm:3.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["cssjanus", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/cssjanus-npm-2.1.0-6e9b558bde-10c0.zip/node_modules/cssjanus/",\
+        "packageDependencies": [\
+          ["cssjanus", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4975,6 +4997,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["shop-app", "workspace:."],\
+          ["@emotion/cache", "npm:11.11.0"],\
           ["@emotion/react", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:11.11.4"],\
           ["@emotion/styled", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:11.11.0"],\
           ["@mui/icons-material", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:5.15.14"],\
@@ -4982,6 +5005,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.30"],\
           ["@types/react", "npm:18.2.67"],\
           ["@types/react-dom", "npm:18.2.22"],\
+          ["@types/stylis", "npm:4.2.5"],\
           ["autoprefixer", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:10.4.18"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:14.1.3"],\
@@ -4989,6 +5013,8 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.37"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:18.2.0"],\
+          ["stylis", "npm:4.3.1"],\
+          ["stylis-plugin-rtl", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:2.1.1"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["typescript", "patch:typescript@npm%3A5.4.2#optional!builtin<compat/typescript>::version=5.4.2&hash=5adc0c"]\
         ],\
@@ -5253,6 +5279,36 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/stylis-npm-4.2.0-6b07f11c99-10c0.zip/node_modules/stylis/",\
         "packageDependencies": [\
           ["stylis", "npm:4.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.3.1", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/stylis-npm-4.3.1-df21265105-10c0.zip/node_modules/stylis/",\
+        "packageDependencies": [\
+          ["stylis", "npm:4.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["stylis-plugin-rtl", [\
+      ["npm:2.1.1", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/stylis-plugin-rtl-npm-2.1.1-03f0c0e6dc-10c0.zip/node_modules/stylis-plugin-rtl/",\
+        "packageDependencies": [\
+          ["stylis-plugin-rtl", "npm:2.1.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:2.1.1", {\
+        "packageLocation": "./.yarn/__virtual__/stylis-plugin-rtl-virtual-3c274d0f4a/3/AppData/Local/Yarn/Berry/cache/stylis-plugin-rtl-npm-2.1.1-03f0c0e6dc-10c0.zip/node_modules/stylis-plugin-rtl/",\
+        "packageDependencies": [\
+          ["stylis-plugin-rtl", "virtual:80c5e9bf9fd50277a3cfde80fdcd08e81c810bd52b5d224b9fbccf2779c2fe254e7e881b3870bcbf9b396369202f8311eaf19a707090fcf16f3d2a31c7c6b566#npm:2.1.1"],\
+          ["@types/stylis", "npm:4.2.5"],\
+          ["cssjanus", "npm:2.1.0"],\
+          ["stylis", "npm:4.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/stylis",\
+          "stylis"\
         ],\
         "linkType": "HARD"\
       }]\
