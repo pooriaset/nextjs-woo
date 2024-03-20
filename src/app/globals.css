@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "Vazir";
+  font-weight: 900;
+  src: url("/assets/fonts/vazir/Vazir-Black-FD.eot");
+  src: url("/assets/fonts/vazir/Vazir-Black-FD.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/vazir/Vazir-Black-FD.woff") format("woff"),
+    url("/assets/fonts/vazir/Vazir-Black-FD.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazir";
+  font-weight: 700;
+  src: url("/assets/fonts/vazir/Vazir-Bold-FD.eot");
+  src: url("/assets/fonts/vazir/Vazir-Bold-FD.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/vazir/Vazir-Bold-FD.woff") format("woff"),
+    url("/assets/fonts/vazir/Vazir-Bold-FD.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazir";
+  font-weight: 500;
+  src: url("/assets/fonts/vazir/Vazir-Medium-FD.eot");
+  src: url("/assets/fonts/vazir/Vazir-Medium-FD.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/vazir/Vazir-Medium-FD.woff") format("woff"),
+    url("/assets/fonts/vazir/Vazir-Medium-FD.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazir";
+  font-weight: 400;
+  src: url("/assets/fonts/vazir/Vazir-Regular-FD.eot");
+  src: url("/assets/fonts/vazir/Vazir-Regular-FD.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/vazir/Vazir-Regular-FD.woff") format("woff"),
+    url("/assets/fonts/vazir/Vazir-Regular-FD.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazir";
+  font-weight: 300;
+  src: url("/assets/fonts/vazir/Vazir-Light-FD.eot");
+  src: url("/assets/fonts/vazir/Vazir-Light-FD.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/vazir/Vazir-Light-FD.woff") format("woff"),
+    url("/assets/fonts/vazir/Vazir-Light-FD.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vazir";
+  font-weight: 100;
+  src: url("/assets/fonts/vazir/Vazir-Thin-FD.eot");
+  src: url("/assets/fonts/vazir/Vazir-Thin-FD.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/vazir/Vazir-Thin-FD.woff") format("woff"),
+    url("/assets/fonts/vazir/Vazir-Thin-FD.ttf") format("truetype");
+  font-display: swap;
+}
