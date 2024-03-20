@@ -6,7 +6,7 @@ import { DesktopView, MobileView } from "./components";
 const Header = () => {
   return (
     <AppBar
-      color="default"
+      color="transparent"
       elevation={0}
       position="static"
       sx={{
