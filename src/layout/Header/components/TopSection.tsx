@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import Image from "next/image";
+import Link from "next/link";
 import { FC, useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
@@ -89,12 +90,14 @@ const TopSection: FC = () => {
   return (
     <>
       <Toolbar disableGutters>
-        <Image
-          src="/assets/images/logo.svg"
-          alt="Logo"
-          width={176}
-          height={26}
-        />
+        <Link href="/">
+          <Image
+            src="/assets/images/logo.svg"
+            alt="Logo"
+            width={176}
+            height={26}
+          />
+        </Link>
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
@@ -107,22 +110,20 @@ const TopSection: FC = () => {
         </Search>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <IconButton
-            size="large"
-            aria-label="show 3 cart items"
-            color="inherit"
-          >
-            <Badge
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              badgeContent={3}
-              color="error"
-            >
-              <ShoppingBasketOutlined />
-            </Badge>
-          </IconButton>
+          <Link href="/cart">
+            <IconButton size="large" aria-label="show 3 cart items">
+              <Badge
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                badgeContent={3}
+                color="error"
+              >
+                <ShoppingBasketOutlined />
+              </Badge>
+            </IconButton>
+          </Link>
           <Divider orientation="vertical" variant="middle" flexItem />
           <IconButton
             size="large"
@@ -131,7 +132,6 @@ const TopSection: FC = () => {
             aria-controls={menuId}
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
-            color="inherit"
           >
             <AccountCircleOutlined />
           </IconButton>
