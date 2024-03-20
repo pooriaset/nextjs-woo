@@ -16,15 +16,15 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { FC, useState } from "react";
 
-const Search = styled("div")(({ theme }) => ({
+const DesktopSearch = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
   width: "100%",
+  marginRight: theme.spacing(2),
   marginLeft: theme.spacing(3),
 }));
 
@@ -55,7 +55,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const TopSection: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
-
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -104,7 +103,7 @@ const TopSection: FC = () => {
             height={26}
           />
         </Link>
-        <Search>
+        <DesktopSearch>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -113,9 +112,9 @@ const TopSection: FC = () => {
             placeholder="جستجو..."
             inputProps={{ "aria-label": "search" }}
           />
-        </Search>
+        </DesktopSearch>
         <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+        <Box sx={{ display: "flex" }}>
           <NextLink href="/cart">
             <IconButton size="large" aria-label="show 3 cart items">
               <Badge

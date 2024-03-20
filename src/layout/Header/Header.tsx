@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { TopSection, BottomSection } from "./components";
-import { AppBar, Container, Toolbar } from "@mui/material";
+import { AppBar, Container } from "@mui/material";
+import { DesktopView, MobileView } from "./components";
 
 const Header = () => {
   return (
@@ -18,8 +17,8 @@ const Header = () => {
       }}
     >
       <Container maxWidth="xl">
-        <TopSection />
-        <BottomSection />
+        <DesktopView />
+        <MobileView />
       </Container>
     </AppBar>
   );

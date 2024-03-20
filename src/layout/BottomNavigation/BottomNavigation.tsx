@@ -11,6 +11,7 @@ import {
   CategoryOutlined,
 } from "@mui/icons-material";
 import Link from "next/link";
+import useIsMobile from "@/hooks/useIsMobile";
 
 interface Page {
   label: string;
@@ -44,16 +45,17 @@ const pages: Page[] = [
 const BottomNavigation = () => {
   const [value, setValue] = useState(0);
 
+  const isMobile = useIsMobile();
+  if (!isMobile) {
+    return null;
+  }
+
   return (
     <Box
       sx={{
         width: "100%",
-        display: {
-          md: "none",
-          sx: "block",
-          position: "fixed",
-          bottom: 0,
-        },
+        position: "fixed",
+        bottom: 0,
         boxShadow: (theme) => theme.shadows[3],
       }}
     >

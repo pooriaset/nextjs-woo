@@ -13,10 +13,7 @@ const BottomSection = () => {
     <Box
       sx={{
         py: 1,
-        display: {
-          xs: "none",
-          md: "flex",
-        },
+        display: "flex",
       }}
     >
       {pages.map((page) => (
