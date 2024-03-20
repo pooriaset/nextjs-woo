@@ -23,11 +23,8 @@ const Search = styled("div")(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
-  marginLeft: 0,
   width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-  },
+  marginLeft: theme.spacing(3),
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -50,6 +47,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
     border: "1px solid",
     borderColor: theme.palette.divider,
+    borderRadius: theme.shape.borderRadius,
   },
 }));
 
@@ -71,14 +69,14 @@ const TopSection: FC = () => {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: "center",
+        horizontal: "left",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "bottom",
-        horizontal: "center",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -95,7 +93,7 @@ const TopSection: FC = () => {
           src="/assets/images/logo.svg"
           alt="Logo"
           width={176}
-          height={28}
+          height={26}
         />
         <Search>
           <SearchIconWrapper>
@@ -105,16 +103,13 @@ const TopSection: FC = () => {
             fullWidth
             placeholder="جستجو..."
             inputProps={{ "aria-label": "search" }}
-            slotProps={{
-              input: {},
-            }}
           />
         </Search>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <IconButton
             size="large"
-            aria-label="show 17 new notifications"
+            aria-label="show 3 cart items"
             color="inherit"
           >
             <Badge

@@ -11,10 +11,6 @@ const Header = () => {
       elevation={0}
       position="static"
       sx={{
-        display: {
-          xs: "none",
-          md: "flex",
-        },
         borderBottom: "2px solid",
         borderColor: (theme) => theme.palette.divider,
       }}

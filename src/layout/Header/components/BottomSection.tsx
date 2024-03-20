@@ -10,7 +10,15 @@ const pages = [
 
 const BottomSection = () => {
   return (
-    <Box sx={{ display: "flex", py: 1 }}>
+    <Box
+      sx={{
+        py: 1,
+        display: {
+          xs: "none",
+          md: "flex",
+        },
+      }}
+    >
       {pages.map((page) => (
         <Button key={page}>{page}</Button>
       ))}
