@@ -3,7 +3,7 @@ import {
   ShoppingBasketOutlined,
 } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
-import { Divider } from "@mui/material";
+import { Divider, Link } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "next/link";
 import { FC, useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
@@ -90,7 +90,13 @@ const TopSection: FC = () => {
   return (
     <>
       <Toolbar disableGutters>
-        <Link href="/">
+        <Link
+          component={NextLink}
+          href="/"
+          sx={{
+            display: "flex",
+          }}
+        >
           <Image
             src="/assets/images/logo.svg"
             alt="Logo"
@@ -110,7 +116,7 @@ const TopSection: FC = () => {
         </Search>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Link href="/cart">
+          <NextLink href="/cart">
             <IconButton size="large" aria-label="show 3 cart items">
               <Badge
                 anchorOrigin={{
@@ -123,7 +129,7 @@ const TopSection: FC = () => {
                 <ShoppingBasketOutlined />
               </Badge>
             </IconButton>
-          </Link>
+          </NextLink>
           <Divider orientation="vertical" variant="middle" flexItem />
           <IconButton
             size="large"

@@ -13,6 +13,8 @@ const Header = () => {
       sx={{
         borderBottom: "2px solid",
         borderColor: (theme) => theme.palette.divider,
+        position: "sticky",
+        top: 0,
       }}
     >
       <Container maxWidth="xl">
