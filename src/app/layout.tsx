@@ -2,7 +2,7 @@ import RTLProvider from "@/components/common/RTLProvider";
 import { theme } from "@/config/theme";
 import { BottomNavigation } from "@/layout/BottomNavigation";
 import { Header } from "@/layout/Header";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -21,6 +21,13 @@ export default function RootLayout({
       <body>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <GlobalStyles
+            styles={{
+              a: {
+                textDecoration: "none",
+              },
+            }}
+          />
           <RTLProvider>
             <Header />
             <Box

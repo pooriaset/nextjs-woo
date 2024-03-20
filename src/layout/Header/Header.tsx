@@ -6,7 +6,6 @@ import { DesktopView, MobileView } from "./components";
 const Header = () => {
   return (
     <AppBar
-      color="transparent"
       elevation={0}
       position="static"
       sx={{
@@ -14,6 +13,7 @@ const Header = () => {
         borderColor: (theme) => theme.palette.divider,
         position: "sticky",
         top: 0,
+        backgroundColor: "#ffffff",
       }}
     >
       <Container maxWidth="xl">

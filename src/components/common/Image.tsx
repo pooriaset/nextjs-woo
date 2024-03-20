@@ -20,8 +20,10 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
         {...props}
         onLoad={handleOnLoad}
         style={{
+          ...props.style,
           visibility: loaded ? "visible" : "hidden",
-          height: loaded ? "auto" : 0,
+          height: loaded ? height : 0,
+          maxWidth: "100%",
         }}
       />
     </>

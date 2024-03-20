@@ -1,11 +1,12 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 const pages = [
-  "محصولات",
-  "دسته‌بندی کالاها",
-  "پرفروش‌ترین‌ها",
-  "تخفیف‌ها و پیشنهادها",
+  { label: "محصولات", href: "/search" },
+  { label: "دسته‌بندی کالاها", href: "/categories" },
+  { label: "پرفروش‌ترین‌ها", href: "/best-selling" },
+  { label: "تخفیف‌ها و پیشنهادها", href: "/promotion-center" },
 ];
 
 const BottomSection = () => {
@@ -17,7 +18,9 @@ const BottomSection = () => {
       }}
     >
       {pages.map((page) => (
-        <Button key={page}>{page}</Button>
+        <Button LinkComponent={Link} href={page.href} key={page.label}>
+          {page.label}
+        </Button>
       ))}
     </Box>
   );

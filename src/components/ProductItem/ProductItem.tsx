@@ -1,18 +1,78 @@
-import { Card, CardContent, CardMedia } from "@mui/material";
+import { Badge, Box, Card, CardContent, Chip, Typography } from "@mui/material";
 
-import React from "react";
 import Image from "../common/Image";
+import useIsMobile from "@/hooks/useIsMobile";
+import PriceLabel from "../common/PriceLabel";
+import { grey } from "@mui/material/colors";
+import Link from "next/link";
 
 const ProductItem = () => {
+  const isMobile = useIsMobile();
+
+  const size = isMobile ? 120 : 240;
+
+  const oldPrice = 2560000;
+
   return (
-    <Card>
-      <CardContent>
+    <Card
+      component={Link}
+      href={`/product/2546/title`}
+      sx={{
+        display: "block",
+      }}
+    >
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Image
-          height={100}
-          width={100}
-          src="/assets/images/placeholders/100x100.jpg"
+          height={size}
+          width={size}
+          src="/assets/images/placeholders/300x300.png"
           alt="Product Image"
+          style={{
+            objectFit: "contain",
+            display: "block",
+            margin: "0 auto",
+          }}
         />
+        {!isMobile && <Box mt={3} />}
+
+        <Typography variant="body2">
+          محصول تست فروشگاه مدل تستی رنگ مشکی
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "top",
+            justifyContent: "space-between",
+            mt: 1,
+          }}
+        >
+          <Chip
+            size="small"
+            color="error"
+            label="37%"
+            sx={{
+              fontWeight: 600,
+              fontSize: "75%",
+            }}
+          />
+          <Box>
+            <PriceLabel value={1568000} />
+            <Typography
+              variant="caption"
+              sx={{
+                textDecorationLine: "line-through",
+                color: grey[500],
+              }}
+            >
+              {oldPrice.toLocaleString()}
+            </Typography>
+          </Box>
+        </Box>
       </CardContent>
     </Card>
   );

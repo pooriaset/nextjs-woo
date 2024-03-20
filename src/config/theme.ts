@@ -6,7 +6,7 @@ import { green, grey } from "@mui/material/colors";
 export const theme = createTheme({
   direction: "rtl",
   typography: {
-    fontFamily: "Vazir, Arial",
+    fontFamily: "IranYekan, Arial",
   },
   palette: {
     primary: {
@@ -16,6 +16,7 @@ export const theme = createTheme({
   shape: {
     borderRadius: 8,
   },
+
   components: {
     MuiCard: {
       defaultProps: {
