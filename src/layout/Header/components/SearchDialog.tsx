@@ -16,6 +16,7 @@ const SearchDialog: FC<DialogProps> = (props) => {
           pb: 9,
         }}
       >
+        {props.children}
         <Box
           sx={{
             position: "fixed",

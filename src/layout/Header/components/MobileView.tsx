@@ -4,8 +4,11 @@ import { Box, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useState } from "react";
 import SearchDialog from "./SearchDialog";
+import SearchSection from "./SearchSection";
+import { useRouter } from "next/navigation";
 
 const MobileView = () => {
+  const router = useRouter();
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
 
@@ -17,6 +20,13 @@ const MobileView = () => {
     setOpen((prevState) => !prevState);
   };
 
+  const onClickOnSearch = () => {
+    const params = new URLSearchParams();
+    params.set("q", "value");
+    router.push(`/search?${params}`);
+    setOpen(false);
+  };
+
   return (
     <>
       <Box
@@ -25,7 +35,7 @@ const MobileView = () => {
           my: 1,
           backgroundColor: grey[200],
           width: "100%",
-          borderRadius: (theme) => theme.shape.borderRadius,
+          borderRadius: (theme) => theme.shape.borderRadius / 8,
           height: 44,
           display: "flex",
           alignItems: "center",
@@ -60,7 +70,12 @@ const MobileView = () => {
           شاپ
         </Typography>
       </Box>
-      <SearchDialog open={open} onClose={handleToggleDialog} />
+      <SearchDialog open={open} onClose={handleToggleDialog}>
+        <SearchSection
+          onClickOnBack={handleToggleDialog}
+          onClickOnSearch={onClickOnSearch}
+        />
+      </SearchDialog>
     </>
   );
 };

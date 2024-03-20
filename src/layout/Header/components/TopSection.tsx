@@ -1,22 +1,22 @@
 import {
   AccountCircleOutlined,
+  SearchOutlined,
   ShoppingBasketOutlined,
 } from "@mui/icons-material";
-import SearchIcon from "@mui/icons-material/Search";
-import { Divider, Link } from "@mui/material";
+import { Divider, Link, TextField } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import Image from "next/image";
 import NextLink from "next/link";
-import { FC, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { DOMAttributes, FC, useEffect, useRef, useState } from "react";
 
-const DesktopSearch = styled("div")(({ theme }) => ({
+const Form = styled("form")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -28,31 +28,17 @@ const DesktopSearch = styled("div")(({ theme }) => ({
   marginLeft: theme.spacing(3),
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    border: "1px solid",
-    borderColor: theme.palette.divider,
-    borderRadius: theme.shape.borderRadius,
-  },
-}));
-
 const TopSection: FC = () => {
+  const params = useSearchParams();
+  const q = params.get("q") ?? "";
+
+  const inputRef = useRef<HTMLInputElement>();
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = q;
+    }
+  }, [q]);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -61,6 +47,15 @@ const TopSection: FC = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const router = useRouter();
+  const handleSubmitSearch: DOMAttributes<HTMLFormElement>["onSubmit"] = (
+    event
+  ) => {
+    event.preventDefault();
+    const q = event.currentTarget.q.value;
+    router.push(`/search?q=${q}`);
   };
 
   const menuId = "primary-search-account-menu";
@@ -94,25 +89,38 @@ const TopSection: FC = () => {
           href="/"
           sx={{
             display: "flex",
+            userSelect: "none",
           }}
         >
           <Image
+            draggable={false}
             src="/assets/images/logo.svg"
             alt="Logo"
             width={176}
             height={26}
           />
         </Link>
-        <DesktopSearch>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
+        <Form onSubmit={handleSubmitSearch}>
+          <TextField
+            autoComplete="off"
+            size="small"
+            inputRef={inputRef}
+            name="q"
             fullWidth
             placeholder="جستجو..."
             inputProps={{ "aria-label": "search" }}
+            InputProps={{
+              startAdornment: (
+                <IconButton disableRipple type="submit">
+                  <SearchOutlined />
+                </IconButton>
+              ),
+              sx: {
+                pl: 0.5,
+              },
+            }}
           />
-        </DesktopSearch>
+        </Form>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex" }}>
           <NextLink href="/cart">

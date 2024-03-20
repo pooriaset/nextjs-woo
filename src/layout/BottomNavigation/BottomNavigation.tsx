@@ -12,6 +12,7 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
+import { usePathname } from "next/navigation";
 
 interface Page {
   label: string;
@@ -44,6 +45,7 @@ const pages: Page[] = [
 
 const BottomNavigation = () => {
   const [value, setValue] = useState(0);
+  const pathname = usePathname();
 
   const isMobile = useIsMobile();
   if (!isMobile) {
