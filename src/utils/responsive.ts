@@ -1,4 +1,8 @@
 export const isMobileBrowser = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
   const value =
     window.navigator.userAgent ||
     window.navigator.vendor ||
