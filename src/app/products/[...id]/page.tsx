@@ -19,6 +19,7 @@ import PriceLabel from "@/components/common/PriceLabel";
 import DiscountPercentage from "@/components/common/DiscountPercentage";
 import OldPrice from "@/components/common/OldPrice";
 import { grey } from "@mui/material/colors";
+import BuyBox from "@/components/BuyBox";
 
 type PageProps = {
   params: { id: string };
@@ -94,41 +95,10 @@ const Page: FC<PageProps> = ({ params }) => {
           <Card>
             <CardContent
               sx={{
-                display: "flex",
-                gap: 2,
-                flexDirection: "column",
                 backgroundColor: grey[100],
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "end",
-                  gap: 1,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: 0.5,
-                  }}
-                >
-                  <OldPrice value={2560000} />
-                  <DiscountPercentage value={37} />
-                </Box>
-                <PriceLabel value={1556400} />
-              </Box>
-              <Box>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="error"
-                  size="large"
-                >
-                  افزودن به سبد خرید
-                </Button>
-              </Box>
+              <BuyBox />
             </CardContent>
           </Card>
         </Grid>
