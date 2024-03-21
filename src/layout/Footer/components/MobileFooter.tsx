@@ -1,18 +1,17 @@
 "use client";
 
-import Box from "@mui/material/Box";
-import MuiBottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import { ReactNode, useState } from "react";
 import {
   AccountCircleOutlined,
+  CategoryOutlined,
   HomeOutlined,
   ShoppingBasketOutlined,
-  CategoryOutlined,
 } from "@mui/icons-material";
+import MuiBottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Box from "@mui/material/Box";
 import Link from "next/link";
-import useIsMobile from "@/hooks/useIsMobile";
 import { usePathname } from "next/navigation";
+import { ReactNode, useState } from "react";
 
 interface Page {
   label: string;
@@ -44,13 +43,7 @@ const pages: Page[] = [
 ];
 
 const BottomNavigation = () => {
-  const [value, setValue] = useState(0);
   const pathname = usePathname();
-
-  const isMobile = useIsMobile();
-  if (!isMobile) {
-    return null;
-  }
 
   return (
     <Box
@@ -63,10 +56,7 @@ const BottomNavigation = () => {
     >
       <MuiBottomNavigation
         showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
+        value={pages.findIndex((page) => page.href === pathname)}
       >
         {pages.map((page) => {
           return (

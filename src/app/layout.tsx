@@ -1,6 +1,6 @@
 import RTLProvider from "@/components/common/RTLProvider";
 import { globalStyles, theme } from "@/config/theme";
-import { BottomNavigation } from "@/layout/BottomNavigation";
+import { Footer } from "@/layout/Footer";
 import { Header } from "@/layout/Header";
 import { Box, CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
@@ -30,7 +30,7 @@ export default function RootLayout({
             >
               {children}
             </Box>
-            <BottomNavigation />
+            <Footer />
           </RTLProvider>
         </ThemeProvider>
       </body>
