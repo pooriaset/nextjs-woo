@@ -6,6 +6,7 @@ const ColumnFilters = () => {
     <Card
       sx={{
         position: "sticky",
+        top: 130,
       }}
     >
       <CardContent>Filters</CardContent>

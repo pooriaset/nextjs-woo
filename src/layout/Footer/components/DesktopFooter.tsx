@@ -1,39 +1,55 @@
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { Box, Container, Divider, Link, Grid, Typography } from "@mui/material";
+import NextLink from "next/link";
 
 const Footer = () => {
   return (
-    <footer>
-      <Container maxWidth="lg" sx={{ py: 3 }}>
-        <Grid container justifyContent="center" alignItems="center" spacing={2}>
-          <Grid item xs={12} md={6} textAlign="center">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography variant="body2">
-                تمامی حقوق سایت متعلق به تیم آنلاین شاپ می‌باشد
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Typography variant="body2" align="center">
-              <Link href="#" color="inherit" sx={{ mx: 1 }}>
-                درباره‌ی ما
-              </Link>
-              <Link href="#" color="inherit" sx={{ mx: 1 }}>
-                تماس با ما
-              </Link>
-              <Link href="#" color="inherit" sx={{ mx: 1 }}>
-                شرایط استفاده
-              </Link>
-            </Typography>
-          </Grid>
-        </Grid>
+    <Box
+      component="footer"
+      sx={{
+        borderTop: "1px solid",
+        borderColor: (theme) => theme.palette.divider,
+        py: 2,
+      }}
+    >
+      <Container
+        maxWidth="xl"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Typography variant="body2">
+            تمامی حقوق سایت متعلق به تیم آنلاین شاپ می‌باشد
+          </Typography>
+        </Box>
+
+        <Typography
+          variant="body2"
+          align="center"
+          sx={{ display: "flex", alignItems: "center", gap: 2 }}
+        >
+          <Link component={NextLink} href="#">
+            درباره‌ی ما
+          </Link>
+
+          <Link component={NextLink} href="#">
+            تماس با ما
+          </Link>
+
+          <Link component={NextLink} href="#">
+            شرایط استفاده
+          </Link>
+        </Typography>
       </Container>
-    </footer>
+    </Box>
   );
 };
 

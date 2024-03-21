@@ -42,7 +42,7 @@ const pages: Page[] = [
   },
 ];
 
-const BottomNavigation = () => {
+const MobileFooter = () => {
   const pathname = usePathname();
 
   return (
@@ -74,4 +74,4 @@ const BottomNavigation = () => {
   );
 };
 
-export default BottomNavigation;
+export default MobileFooter;

@@ -1,3 +1,4 @@
+import useInputFiller from "@/hooks/useInputFiller";
 import {
   AccountCircleOutlined,
   SearchOutlined,
@@ -13,8 +14,8 @@ import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import Image from "next/image";
 import NextLink from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { DOMAttributes, FC, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { DOMAttributes, FC, useState } from "react";
 
 const Form = styled("form")(({ theme }) => ({
   position: "relative",
@@ -29,15 +30,7 @@ const Form = styled("form")(({ theme }) => ({
 }));
 
 const TopSection: FC = () => {
-  const params = useSearchParams();
-  const q = params.get("q") ?? "";
-
-  const inputRef = useRef<HTMLInputElement>();
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.value = q;
-    }
-  }, [q]);
+  const { inputRef } = useInputFiller();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);

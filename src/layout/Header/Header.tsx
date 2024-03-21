@@ -13,6 +13,7 @@ const Header = () => {
         borderColor: (theme) => theme.palette.divider,
         position: "sticky",
         top: 0,
+        zIndex: 1,
         backgroundColor: "#ffffff",
       }}
     >

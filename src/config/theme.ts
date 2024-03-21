@@ -5,7 +5,7 @@ import { green, grey } from "@mui/material/colors";
 
 export const globalStyles: GlobalStylesProps["styles"] = {
   a: {
-    textDecoration: "none",
+    textDecoration: "none !important",
   },
 };
 

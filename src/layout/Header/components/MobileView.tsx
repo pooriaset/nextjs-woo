@@ -5,11 +5,15 @@ import { grey } from "@mui/material/colors";
 import { useState } from "react";
 import SearchDialog from "./SearchDialog";
 import SearchSection from "./SearchSection";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const MobileView = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
+
+  const params = useSearchParams();
+  const q = params.get("q");
+
   const [open, setOpen] = useState(false);
 
   if (!isMobile) {
@@ -20,9 +24,9 @@ const MobileView = () => {
     setOpen((prevState) => !prevState);
   };
 
-  const onClickOnSearch = () => {
+  const onClickOnSearch = (q: string) => {
     const params = new URLSearchParams();
-    params.set("q", "value");
+    params.set("q", q);
     router.push(`/search?${params}`);
     setOpen(false);
   };
@@ -56,19 +60,21 @@ const MobileView = () => {
             pl: 1,
           }}
         >
-          جستجو در
+          {q ? q : "جستجو در"}
         </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            color: (theme) => theme.palette.primary.main,
-            fontWeight: "bold",
-            pl: 0.5,
-          }}
-        >
-          {/* Your custom logo */}
-          شاپ
-        </Typography>
+        {!q && (
+          <Typography
+            variant="body1"
+            sx={{
+              color: (theme) => theme.palette.primary.main,
+              fontWeight: "bold",
+              pl: 0.5,
+            }}
+          >
+            {/* Your custom logo */}
+            شاپ
+          </Typography>
+        )}
       </Box>
       <SearchDialog open={open} onClose={handleToggleDialog}>
         <SearchSection
