@@ -33,7 +33,7 @@ const Page = () => {
       <Typography variant="h6">سبد خرید شما خالی است</Typography>
       <Button
         component={Link}
-        href="/products"
+        href="/search"
         endIcon={<ChevronLeft />}
         variant="outlined"
       >

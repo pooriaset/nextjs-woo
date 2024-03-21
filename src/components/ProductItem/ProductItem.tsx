@@ -5,6 +5,8 @@ import useIsMobile from "@/hooks/useIsMobile";
 import PriceLabel from "../common/PriceLabel";
 import { grey } from "@mui/material/colors";
 import Link from "next/link";
+import DiscountPercentage from "../common/DiscountPercentage";
+import OldPrice from "../common/OldPrice";
 
 const ProductItem = () => {
   const isMobile = useIsMobile();
@@ -67,26 +69,10 @@ const ProductItem = () => {
                 mt: 1,
               }}
             >
-              <Chip
-                size="small"
-                color="error"
-                label="37%"
-                sx={{
-                  fontWeight: 600,
-                  fontSize: "75%",
-                }}
-              />
+              <DiscountPercentage value={37} />
               <Box>
                 <PriceLabel value={1568000} />
-                <Typography
-                  variant="caption"
-                  sx={{
-                    textDecorationLine: "line-through",
-                    color: grey[500],
-                  }}
-                >
-                  {oldPrice.toLocaleString()}
-                </Typography>
+                <OldPrice value={2560000} />
               </Box>
             </Box>
           </Box>

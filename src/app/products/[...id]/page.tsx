@@ -15,6 +15,10 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { headers } from "next/headers";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import SizeSelector from "@/components/SizeSelector";
+import PriceLabel from "@/components/common/PriceLabel";
+import DiscountPercentage from "@/components/common/DiscountPercentage";
+import OldPrice from "@/components/common/OldPrice";
+import { grey } from "@mui/material/colors";
 
 type PageProps = {
   params: { id: string };
@@ -70,10 +74,10 @@ const Page: FC<PageProps> = ({ params }) => {
               mt: 2,
             }}
           >
-            <Grid item xs={4}>
+            <Grid item xs={6} md={4} lg={3}>
               <SizeSelector />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6} md={4} lg={3}>
               <Button
                 fullWidth
                 variant="outlined"
@@ -88,7 +92,44 @@ const Page: FC<PageProps> = ({ params }) => {
         </Grid>
         <Grid item md={3} xs={12}>
           <Card>
-            <CardContent>BuyBox</CardContent>
+            <CardContent
+              sx={{
+                display: "flex",
+                gap: 2,
+                flexDirection: "column",
+                backgroundColor: grey[100],
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "end",
+                  gap: 1,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 0.5,
+                  }}
+                >
+                  <OldPrice value={2560000} />
+                  <DiscountPercentage value={37} />
+                </Box>
+                <PriceLabel value={1556400} />
+              </Box>
+              <Box>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="error"
+                  size="large"
+                >
+                  افزودن به سبد خرید
+                </Button>
+              </Box>
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
