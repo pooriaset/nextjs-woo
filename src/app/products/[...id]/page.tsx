@@ -20,6 +20,7 @@ import DiscountPercentage from "@/components/common/DiscountPercentage";
 import OldPrice from "@/components/common/OldPrice";
 import { grey } from "@mui/material/colors";
 import BuyBox from "@/components/BuyBox";
+import ProductImages from "@/components/ProductImages";
 
 type PageProps = {
   params: { id: string };
@@ -48,12 +49,7 @@ const Page: FC<PageProps> = ({ params }) => {
     <Container maxWidth="xl" sx={{ mt: 3 }}>
       <Grid container spacing={2}>
         <Grid item md={4} xs={12}>
-          <Image
-            width={500}
-            height={500}
-            src="/assets/images/placeholders/500x500.png"
-            alt="Product Image"
-          />
+          <ProductImages />
         </Grid>
         <Grid item md={5} xs={12}>
           <Breadcrumbs />

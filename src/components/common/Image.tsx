@@ -22,11 +22,11 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
         {...props}
         onLoad={handleOnLoad}
         style={{
+          maxWidth: "100%",
+          objectFit: "contain",
           ...props.style,
           visibility: loaded ? "visible" : "hidden",
           height: loaded ? "auto" : 0,
-          maxWidth: "100%",
-          objectFit: "contain",
         }}
       />
     </>
