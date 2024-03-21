@@ -3,7 +3,11 @@ import React from "react";
 
 const ColumnFilters = () => {
   return (
-    <Card>
+    <Card
+      sx={{
+        position: "sticky",
+      }}
+    >
       <CardContent>Filters</CardContent>
     </Card>
   );
