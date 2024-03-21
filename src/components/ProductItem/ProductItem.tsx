@@ -16,7 +16,7 @@ const ProductItem = () => {
   return (
     <Card
       component={Link}
-      href={`/product/2546/title`}
+      href={`/products/2546/title`}
       sx={{
         display: "block",
       }}
