@@ -27,50 +27,68 @@ const ProductItem = () => {
           flexDirection: "column",
         }}
       >
-        <Image
-          height={size}
-          width={size}
-          src="/assets/images/placeholders/300x300.png"
-          alt="Product Image"
-          style={{
-            objectFit: "contain",
-            display: "block",
-            margin: "0 auto",
-          }}
-        />
-        {!isMobile && <Box mt={3} />}
-
-        <Typography variant="body2">
-          محصول تست فروشگاه مدل تستی رنگ مشکی
-        </Typography>
         <Box
           sx={{
             display: "flex",
-            alignItems: "top",
-            justifyContent: "space-between",
-            mt: 1,
+            flexDirection: isMobile ? "row" : "column",
+            gap: 1,
           }}
         >
-          <Chip
-            size="small"
-            color="error"
-            label="37%"
-            sx={{
-              fontWeight: 600,
-              fontSize: "75%",
+          <Image
+            height={size}
+            width={size}
+            src="/assets/images/placeholders/300x300.png"
+            alt="Product Image"
+            style={{
+              objectFit: "contain",
+              display: "block",
+              width: isMobile ? 120 : "100%",
             }}
           />
-          <Box>
-            <PriceLabel value={1568000} />
-            <Typography
-              variant="caption"
+          {!isMobile && <Box mt={3} />}
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: 1,
+              width: "100%",
+            }}
+          >
+            <Typography variant="body2">
+              محصول تست فروشگاه مدل تستی رنگ مشکی
+            </Typography>
+            <Box
               sx={{
-                textDecorationLine: "line-through",
-                color: grey[500],
+                display: "flex",
+                alignItems: "top",
+                justifyContent: "space-between",
+                mt: 1,
               }}
             >
-              {oldPrice.toLocaleString()}
-            </Typography>
+              <Chip
+                size="small"
+                color="error"
+                label="37%"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: "75%",
+                }}
+              />
+              <Box>
+                <PriceLabel value={1568000} />
+                <Typography
+                  variant="caption"
+                  sx={{
+                    textDecorationLine: "line-through",
+                    color: grey[500],
+                  }}
+                >
+                  {oldPrice.toLocaleString()}
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </CardContent>
