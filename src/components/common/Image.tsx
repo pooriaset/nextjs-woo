@@ -1,3 +1,5 @@
+"use client";
+
 import Skeleton from "@mui/material/Skeleton";
 import NextImage, { ImageProps } from "next/image";
 import { FC, useState } from "react";
@@ -22,8 +24,9 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
         style={{
           ...props.style,
           visibility: loaded ? "visible" : "hidden",
-          height: loaded ? height : 0,
+          height: loaded ? "auto" : 0,
           maxWidth: "100%",
+          objectFit: "contain",
         }}
       />
     </>
