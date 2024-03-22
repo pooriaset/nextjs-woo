@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 
 import PriceUnit from "./PriceUnit";
 import { Box, Typography } from "@mui/material";

@@ -2,8 +2,11 @@
 
 import { AppBar, Container } from "@mui/material";
 import { DesktopView, MobileView } from "./components";
+import { Suspense } from "react";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const Header = () => {
+  const isMobile = useIsMobile();
   return (
     <AppBar
       elevation={0}
@@ -18,8 +21,13 @@ const Header = () => {
       }}
     >
       <Container maxWidth="xl">
-        <DesktopView />
-        <MobileView />
+        {isMobile ? (
+          <Suspense>
+            <MobileView />
+          </Suspense>
+        ) : (
+          <DesktopView />
+        )}
       </Container>
     </AppBar>
   );

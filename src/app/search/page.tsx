@@ -4,7 +4,7 @@ import { ColumnFilters } from "@/components/ColumnFilters";
 import { InlineFilters } from "@/components/InlineFilters";
 import ProductsList from "@/components/ProductsList/ProductsList";
 import useIsMobile from "@/hooks/useIsMobile";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React from "react";
 
 const Page = () => {

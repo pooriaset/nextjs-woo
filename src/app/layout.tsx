@@ -1,7 +1,7 @@
-import RTLProvider from "@/components/common/RTLProvider";
-import { globalStyles, theme } from "@/config/theme";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import RTLProvider from "@/components/common/RTLProvider";
+import { globalStyles, theme } from "@/config/theme";
 import { Box, CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 

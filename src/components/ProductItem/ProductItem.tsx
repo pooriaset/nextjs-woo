@@ -1,19 +1,16 @@
-import { Badge, Box, Card, CardContent, Chip, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 
-import Image from "../common/Image";
 import useIsMobile from "@/hooks/useIsMobile";
-import PriceLabel from "../common/PriceLabel";
-import { grey } from "@mui/material/colors";
 import Link from "next/link";
 import DiscountPercentage from "../common/DiscountPercentage";
+import Image from "../common/Image";
 import OldPrice from "../common/OldPrice";
+import PriceLabel from "../common/PriceLabel";
 
 const ProductItem = () => {
   const isMobile = useIsMobile();
 
   const size = isMobile ? 120 : 240;
-
-  const oldPrice = 2560000;
 
   return (
     <Card

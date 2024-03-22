@@ -1,24 +1,17 @@
-import useIsMobile from "@/hooks/useIsMobile";
 import { SearchOutlined } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import SearchDialog from "./SearchDialog";
 import SearchSection from "./SearchSection";
-import { useRouter, useSearchParams } from "next/navigation";
 
 const MobileView = () => {
   const router = useRouter();
-  const isMobile = useIsMobile();
-
   const params = useSearchParams();
   const q = params.get("q");
 
   const [open, setOpen] = useState(false);
-
-  if (!isMobile) {
-    return null;
-  }
 
   const handleToggleDialog = () => {
     setOpen((prevState) => !prevState);
