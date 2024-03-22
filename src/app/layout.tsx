@@ -2,7 +2,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import RTLProvider from "@/components/common/RTLProvider";
 import { globalStyles, theme } from "@/config/theme";
-import AppProvider from "@/providers/AppProvider";
+import { AppProvider, ApolloProvider } from "@/providers";
 import { Box, CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 
@@ -30,7 +30,7 @@ export default function RootLayout({
                   pb: { xs: "56px", md: 0 },
                 }}
               >
-                {children}
+                <ApolloProvider>{children}</ApolloProvider>
               </Box>
               <Footer />
             </AppProvider>
