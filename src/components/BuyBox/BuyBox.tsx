@@ -10,9 +10,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { grey } from "@mui/material/colors";
-import DiscountPercentage from "./common/DiscountPercentage";
-import OldPrice from "./common/OldPrice";
-import PriceLabel from "./common/PriceLabel";
+import DiscountPercentage from "../common/DiscountPercentage";
+import OldPrice from "../common/OldPrice";
+import PriceLabel from "../common/PriceLabel";
 
 const listItems = [
   {

@@ -12,10 +12,10 @@ import {
 import type { Metadata, ResolvingMetadata } from "next";
 import { headers } from "next/headers";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import SizeSelector from "@/components/SizeSelector";
+import SizeSelector from "@/components/SizeSelector/SizeSelector";
 import { grey } from "@mui/material/colors";
-import BuyBox from "@/components/BuyBox";
-import ProductImages from "@/components/ProductImages";
+import { BuyBox } from "@/components/BuyBox";
+import { ProductImages } from "@/components/ProductImages";
 
 type PageProps = {
   params: { id: string };

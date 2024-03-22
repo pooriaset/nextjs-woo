@@ -1,6 +1,6 @@
 "use client";
 
-import FilterListIcon from "@mui/icons-material/FilterList";
+import { SortOutlined } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box, Button } from "@mui/material";
 
@@ -21,7 +21,7 @@ const InlineFilters = () => {
         px: (theme) => theme.spacing(3),
       }}
     >
-      <Button variant="outlined" size="small" endIcon={<FilterListIcon />}>
+      <Button variant="outlined" size="small" endIcon={<SortOutlined />}>
         مرتبط‌ترین
       </Button>
       <Button
