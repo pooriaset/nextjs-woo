@@ -14,7 +14,14 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
   return (
     <>
       {!loaded && (
-        <Skeleton variant="rectangular" width={width} height={height} />
+        <Skeleton
+          variant="rectangular"
+          width={width}
+          height={height}
+          sx={{
+            maxWidth: "100%",
+          }}
+        />
       )}
       <NextImage
         width={width}

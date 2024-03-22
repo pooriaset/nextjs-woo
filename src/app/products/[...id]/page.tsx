@@ -1,5 +1,9 @@
 import { FC } from "react";
 
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import { BuyBox } from "@/components/BuyBox";
+import { ProductImages } from "@/components/ProductImages";
+import SizeSelector from "@/components/SizeSelector/SizeSelector";
 import {
   Button,
   Card,
@@ -9,13 +13,9 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import type { Metadata, ResolvingMetadata } from "next";
-import { headers } from "next/headers";
-import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import SizeSelector from "@/components/SizeSelector/SizeSelector";
 import { grey } from "@mui/material/colors";
-import { BuyBox } from "@/components/BuyBox";
-import { ProductImages } from "@/components/ProductImages";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 
 type PageProps = {
   params: { id: string };
@@ -23,10 +23,9 @@ type PageProps = {
 
 const title = "محصول تست فروشگاه مدل تستی رنگ مشکی";
 
-export async function generateMetadata(
-  { params }: PageProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const id = params.id;
   const url = new URL(headers().get("x-url")!);
   const slug = title.replaceAll(" ", "-");

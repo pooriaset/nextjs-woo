@@ -1,11 +1,11 @@
 "use client";
 
-import useIsMobile from "@/hooks/useIsMobile";
 import { DesktopFooter, MobileFooter } from "./components";
 import { Box } from "@mui/material";
+import { useAppContext } from "@/hooks/useAppContext";
 
 const Footer = () => {
-  const isMobile = useIsMobile();
+  const { isMobile } = useAppContext();
 
   return <Box mt={2}>{isMobile ? <MobileFooter /> : <DesktopFooter />}</Box>;
 };

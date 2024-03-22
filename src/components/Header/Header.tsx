@@ -3,10 +3,10 @@
 import { AppBar, Container } from "@mui/material";
 import { DesktopView, MobileView } from "./components";
 import { Suspense } from "react";
-import useIsMobile from "@/hooks/useIsMobile";
+import { useAppContext } from "@/hooks/useAppContext";
 
 const Header = () => {
-  const isMobile = useIsMobile();
+  const { isMobile } = useAppContext();
   return (
     <AppBar
       elevation={0}

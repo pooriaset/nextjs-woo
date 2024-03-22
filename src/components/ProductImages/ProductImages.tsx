@@ -15,6 +15,7 @@ const ProductImages = () => {
         draggable={false}
         style={{
           userSelect: "none",
+          width: "100%",
         }}
       />
       <Box

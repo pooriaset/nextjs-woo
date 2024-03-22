@@ -5,12 +5,11 @@ import { InlineFilters } from "@/components/InlineFilters";
 import ProductsCount from "@/components/ProductsCount/ProductsCount";
 import ProductsList from "@/components/ProductsList/ProductsList";
 import SortRow from "@/components/SortRow/SortRow";
-import useIsMobile from "@/hooks/useIsMobile";
+import { useAppContext } from "@/hooks/useAppContext";
 import { Box, Container } from "@mui/material";
-import React from "react";
 
 const Page = () => {
-  const isMobile = useIsMobile();
+  const { isMobile } = useAppContext();
 
   if (isMobile) {
     return (

@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 
-import useIsMobile from "@/hooks/useIsMobile";
+import { useAppContext } from "@/hooks/useAppContext";
 import Link from "next/link";
 import DiscountPercentage from "../common/DiscountPercentage";
 import Image from "../common/Image";
@@ -8,7 +8,7 @@ import OldPrice from "../common/OldPrice";
 import PriceLabel from "../common/PriceLabel";
 
 const ProductItem = () => {
-  const isMobile = useIsMobile();
+  const { isMobile } = useAppContext();
 
   const size = isMobile ? 120 : 240;
 

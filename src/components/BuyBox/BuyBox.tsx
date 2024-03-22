@@ -13,6 +13,7 @@ import { grey } from "@mui/material/colors";
 import DiscountPercentage from "../common/DiscountPercentage";
 import OldPrice from "../common/OldPrice";
 import PriceLabel from "../common/PriceLabel";
+import { useAppContext } from "@/hooks/useAppContext";
 
 const listItems = [
   {
@@ -26,6 +27,7 @@ const listItems = [
 ];
 
 const BuyBox = () => {
+  const { isMobile } = useAppContext();
   return (
     <Box
       sx={{
