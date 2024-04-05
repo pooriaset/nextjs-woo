@@ -79,7 +79,16 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
               width: '100%',
             }}
           >
-            <Typography variant="body2">{data.name}</Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+              }}
+            >
+              {data.name}
+            </Typography>
             <Box
               sx={{
                 display: 'flex',

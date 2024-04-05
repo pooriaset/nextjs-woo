@@ -1,21 +1,19 @@
-import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
-import { useSuspenseQuery } from '@apollo/client';
-import { Grid } from '@mui/material';
-import { VariableProductItem } from '../VariableProductItem';
 import { GetAllVariableProductsQuery } from '@/gql/graphql';
+import { Grid } from '@mui/material';
+import { FC } from 'react';
+import { VariableProductItem } from '../VariableProductItem';
 
-const ProductsList = () => {
-  const { data } = useSuspenseQuery<GetAllVariableProductsQuery>(
-    GET_ALL_VARIABLE_PRODUCTS_QUERY,
-  );
-
+export interface ProductsListProps {
+  items: GetAllVariableProductsQuery['products'];
+}
+const ProductsList: FC<ProductsListProps> = ({ items }) => {
   return (
     <Grid container spacing={1}>
-      {data?.products?.nodes?.map((data) => {
-        if (data.__typename === 'VariableProduct') {
+      {items?.nodes?.map((item) => {
+        if (item.__typename === 'VariableProduct') {
           return (
-            <Grid key={data.databaseId} item xs={12} md={6} lg={4} xl={3}>
-              <VariableProductItem data={data} />
+            <Grid key={item.databaseId} item xs={12} md={6} lg={4} xl={3}>
+              <VariableProductItem data={item} />
             </Grid>
           );
         }

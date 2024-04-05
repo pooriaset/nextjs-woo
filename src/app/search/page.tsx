@@ -1,15 +1,34 @@
-"use client";
+'use client';
 
-import { ColumnFilters } from "@/components/ColumnFilters";
-import { InlineFilters } from "@/components/InlineFilters";
-import ProductsCount from "@/components/ProductsCount/ProductsCount";
-import ProductsList from "@/components/ProductsList/ProductsList";
-import SortRow from "@/components/SortRow/SortRow";
-import { useAppContext } from "@/hooks/useAppContext";
-import { Box, Container } from "@mui/material";
+import { ColumnFilters } from '@/components/ColumnFilters';
+import { InlineFilters } from '@/components/InlineFilters';
+import ProductsCount from '@/components/ProductsCount/ProductsCount';
+import ProductsList from '@/components/ProductsList/ProductsList';
+import SortRow from '@/components/SortRow/SortRow';
+import {
+  GetAllVariableProductsQuery,
+  OrderEnum,
+  ProductsOrderByEnum,
+  StockStatusEnum,
+} from '@/gql/graphql';
+import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
+import { useAppContext } from '@/hooks/useAppContext';
+import { useSuspenseQuery } from '@apollo/client';
+import { Box, Container } from '@mui/material';
 
 const Page = () => {
   const { isMobile } = useAppContext();
+
+  const { data } = useSuspenseQuery<GetAllVariableProductsQuery>(
+    GET_ALL_VARIABLE_PRODUCTS_QUERY,
+    {
+      variables: {
+        field: ProductsOrderByEnum.Date,
+        order: OrderEnum.Desc,
+        stockStatus: StockStatusEnum.InStock,
+      },
+    },
+  );
 
   if (isMobile) {
     return (
@@ -17,7 +36,7 @@ const Page = () => {
         <InlineFilters />
 
         <Container sx={{ mt: 2 }}>
-          <ProductsList />
+          <ProductsList items={data.products} />
         </Container>
       </>
     );
@@ -27,9 +46,9 @@ const Page = () => {
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Box
         sx={{
-          display: "flex",
+          display: 'flex',
           gap: 1,
-          position: "relative",
+          position: 'relative',
         }}
       >
         <Box
@@ -43,18 +62,18 @@ const Page = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
               mb: 1,
-              borderBottom: "1px solid",
+              borderBottom: '1px solid',
               borderColor: (theme) => theme.palette.divider,
             }}
           >
             <SortRow />
-            <ProductsCount />
+            <ProductsCount value={data.products?.pageInfo.total} />
           </Box>
-          <ProductsList />
+          <ProductsList items={data.products} />
         </Box>
       </Box>
     </Container>
