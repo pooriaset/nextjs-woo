@@ -40,7 +40,7 @@ const Page = () => {
         >
           <ColumnFilters />
         </Box>
-        <Box>
+        <Box sx={{ flexGrow: 1 }}>
           <Box
             sx={{
               display: "flex",

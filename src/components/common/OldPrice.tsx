@@ -1,12 +1,13 @@
+import { extractNumbers } from "@/utils/price";
 import { Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { FC } from "react";
 
 export interface OldPriceProps {
-  value: number;
+  value: string;
 }
 
-const OldPrice : FC<OldPriceProps> = ({ value }) => {
+const OldPrice: FC<OldPriceProps> = ({ value }) => {
   return (
     <Typography
       variant="caption"
@@ -15,7 +16,7 @@ const OldPrice : FC<OldPriceProps> = ({ value }) => {
         color: grey[500],
       }}
     >
-      {value.toLocaleString()}
+      {extractNumbers(value).toLocaleString()}
     </Typography>
   );
 };

@@ -82,10 +82,10 @@ const BuyBox = () => {
             gap: 0.5,
           }}
         >
-          <OldPrice value={2560000} />
+          <OldPrice value={"2560000"} />
           <DiscountPercentage value={37} />
         </Box>
-        <PriceLabel value={1556400} />
+        <PriceLabel value={"1556400"} />
       </Box>
       <Box>
         <Button fullWidth variant="contained" color="error" size="large">

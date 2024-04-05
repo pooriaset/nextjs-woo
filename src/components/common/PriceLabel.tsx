@@ -2,9 +2,10 @@ import { FC } from "react";
 
 import PriceUnit from "./PriceUnit";
 import { Box, Typography } from "@mui/material";
+import { extractNumbers, getMinOfRangePrice } from "@/utils/price";
 
 export interface PriceLabelProps {
-  value: number;
+  value: string;
 }
 
 const PriceLabel: FC<PriceLabelProps> = ({ value }) => {
@@ -15,7 +16,7 @@ const PriceLabel: FC<PriceLabelProps> = ({ value }) => {
           fontWeight: 500,
         }}
       >
-        {value.toLocaleString()}
+        {extractNumbers(getMinOfRangePrice(value))?.toLocaleString()}
       </Typography>
       <PriceUnit />
     </Box>

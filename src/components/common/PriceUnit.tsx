@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const PriceUnit = () => {
+const PriceUnit = ({ title = "تومان" }) => {
   return (
     <Typography
       sx={{
@@ -10,7 +10,7 @@ const PriceUnit = () => {
         paddingLeft: 0.5,
       }}
     >
-      تومان
+      {title}
     </Typography>
   );
 };
