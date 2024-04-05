@@ -31,5 +31,9 @@ export const getProfitPercentage = (
     return 0;
   }
 
+  if (newPrice >= oldPrice) {
+    return 0;
+  }
+
   return Math.floor(((oldPrice - newPrice) / oldPrice) * 100);
 };

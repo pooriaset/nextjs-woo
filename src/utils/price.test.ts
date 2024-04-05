@@ -73,4 +73,10 @@ describe('getProfitPercentage function', () => {
     expect(getProfitPercentage(80, 100)).toBe(20);
     expect(getProfitPercentage(55, 82)).toBe(32);
   });
+
+  it('should return zero when the new price is greater than or equal to the old price', () => {
+    expect(getProfitPercentage(10, 9)).toBe(0);
+    expect(getProfitPercentage(10, 10)).toBe(0);
+    expect(getProfitPercentage(0.5, 0)).toBe(0);
+  });
 });
