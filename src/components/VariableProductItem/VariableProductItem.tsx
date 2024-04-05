@@ -12,11 +12,21 @@ import {
   getMinOfRangePrice,
   getProfitPercentage,
 } from '@/utils/price';
+import { GetAllVariableProductsQuery } from '@/gql/graphql';
+
+type ExtractVariableProduct<T> = T extends { __typename?: 'VariableProduct' }
+  ? T
+  : never;
+
+export type VariableProduct = ExtractVariableProduct<
+  NonNullable<GetAllVariableProductsQuery['products']>['nodes'][number]
+>;
 
 export interface ProductItemProps {
-  data: any;
+  data: VariableProduct;
 }
-const ProductItem: FC<ProductItemProps> = ({ data }) => {
+
+const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
   const { isMobile } = useAppContext();
 
   const size = isMobile ? 120 : 240;
@@ -50,7 +60,7 @@ const ProductItem: FC<ProductItemProps> = ({ data }) => {
           <Image
             height={size}
             width={size}
-            src={data.image.sourceUrl}
+            src={data.image?.sourceUrl as string}
             alt="Product Image"
             style={{
               objectFit: 'contain',
@@ -74,7 +84,7 @@ const ProductItem: FC<ProductItemProps> = ({ data }) => {
               sx={{
                 display: 'flex',
                 alignItems: 'top',
-                justifyContent: 'space-between',
+                justifyContent: data.onSale ? 'space-between' : 'end',
                 mt: 1,
               }}
             >
@@ -96,4 +106,4 @@ const ProductItem: FC<ProductItemProps> = ({ data }) => {
   );
 };
 
-export default ProductItem;
+export default VariableProductItem;

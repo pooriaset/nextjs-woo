@@ -1,10 +1,10 @@
-import { extractNumbers } from "@/utils/price";
-import { Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
-import React, { FC } from "react";
+import { extractNumbers } from '@/utils/price';
+import { Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import React, { FC } from 'react';
 
 export interface OldPriceProps {
-  value: string;
+  value?: string | null;
 }
 
 const OldPrice: FC<OldPriceProps> = ({ value }) => {
@@ -12,11 +12,11 @@ const OldPrice: FC<OldPriceProps> = ({ value }) => {
     <Typography
       variant="caption"
       sx={{
-        textDecorationLine: "line-through",
+        textDecorationLine: 'line-through',
         color: grey[500],
       }}
     >
-      {extractNumbers(value).toLocaleString()}
+      {extractNumbers(value)?.toLocaleString()}
     </Typography>
   );
 };

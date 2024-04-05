@@ -1,4 +1,6 @@
-export const extractNumbers = (price: string | null): number | null => {
+export const extractNumbers = (
+  price: string | null | undefined,
+): number | null => {
   if (!price) {
     return null;
   }
@@ -10,12 +12,12 @@ export const extractNumbers = (price: string | null): number | null => {
   return result;
 };
 
-export const getMinOfRangePrice = (price: string | null): string | null => {
+export const getMinOfRangePrice = (
+  price: string | null | undefined,
+): string | null => {
   if (!price) {
     return null;
   }
-
-  console.log(price);
 
   if (price.includes(' - ')) {
     return price.split('-')[0].trim();

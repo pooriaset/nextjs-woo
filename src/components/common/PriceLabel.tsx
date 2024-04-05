@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import PriceUnit from "./PriceUnit";
-import { Box, Typography } from "@mui/material";
-import { extractNumbers, getMinOfRangePrice } from "@/utils/price";
+import PriceUnit from './PriceUnit';
+import { Box, Typography } from '@mui/material';
+import { extractNumbers, getMinOfRangePrice } from '@/utils/price';
 
 export interface PriceLabelProps {
-  value: string;
+  value?: string | null;
 }
 
 const PriceLabel: FC<PriceLabelProps> = ({ value }) => {

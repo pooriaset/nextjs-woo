@@ -3,27 +3,21 @@ import { gql } from '@apollo/client';
 /**
  * Fetch Woocommerce products from GraphQL
  */
-export const FETCH_ALL_PRODUCTS_QUERY = gql`
-  query GetAllProducts {
+export const GET_ALL_VARIABLE_PRODUCTS_QUERY = gql`
+  query GetAllVariableProducts {
     products(first: 10) {
       nodes {
-        databaseId
-        name
-        onSale
-        type
-        averageRating
-        slug
-        image {
-          sourceUrl
-        }
-        ... on SimpleProduct {
-          databaseId
-          price
-          regularPrice
-          salePrice
-        }
+        __typename
         ... on VariableProduct {
           databaseId
+          name
+          onSale
+          type
+          averageRating
+          slug
+          image {
+            sourceUrl
+          }
           price
           regularPrice
           salePrice
