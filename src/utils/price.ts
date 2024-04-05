@@ -3,7 +3,7 @@ export const extractNumbers = (price: string | null): number | null => {
     return null;
   }
 
-  const result = price.match(/\d+/g);
+  const result = price.match(/[\d.]+/g);
   if (result) {
     return +result.join('');
   }
@@ -15,8 +15,10 @@ export const getMinOfRangePrice = (price: string | null): string | null => {
     return null;
   }
 
+  console.log(price);
+
   if (price.includes(' - ')) {
-    return price.split('-')[0];
+    return price.split('-')[0].trim();
   }
   return price;
 };
@@ -29,6 +31,5 @@ export const getProfitPercentage = (
     return 0;
   }
 
-  const divided = oldPrice / newPrice;
-  return Math.floor((divided - 1) * 100);
+  return Math.floor(((oldPrice - newPrice) / oldPrice) * 100);
 };
