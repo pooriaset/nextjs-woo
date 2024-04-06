@@ -42,12 +42,16 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
       href={`/products/2546/title`}
       sx={{
         display: 'block',
+        height: '100%',
       }}
     >
       <CardContent
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          '&:last-child': {
+            paddingBottom: (theme) => `${theme.spacing(2)}`,
+          },
         }}
       >
         <Box
