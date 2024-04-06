@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  query Categories {\n    productCategories {\n      nodes {\n        id: databaseId\n        name\n        parentId: parentDatabaseId\n      }\n    }\n  }\n": types.CategoriesDocument,
     "\n  query GetAllVariableProducts(\n    $stockStatus: [StockStatusEnum]\n    $field: ProductsOrderByEnum!\n    $order: OrderEnum\n  ) {\n    products(\n      first: 10\n      where: {\n        stockStatus: $stockStatus\n        orderby: { field: $field, order: $order }\n      }\n    ) {\n      pageInfo {\n        total\n        hasNextPage\n        hasPreviousPage\n      }\n      nodes {\n        __typename\n        ... on VariableProduct {\n          databaseId\n          name\n          onSale\n          type\n          averageRating\n          slug\n          image {\n            sourceUrl\n          }\n          price\n          regularPrice\n          salePrice\n          variations {\n            nodes {\n              price\n              regularPrice\n              salePrice\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GetAllVariableProductsDocument,
 };
 
@@ -30,6 +31,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Categories {\n    productCategories {\n      nodes {\n        id: databaseId\n        name\n        parentId: parentDatabaseId\n      }\n    }\n  }\n"): (typeof documents)["\n  query Categories {\n    productCategories {\n      nodes {\n        id: databaseId\n        name\n        parentId: parentDatabaseId\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

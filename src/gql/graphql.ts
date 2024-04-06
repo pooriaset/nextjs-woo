@@ -7989,6 +7989,8 @@ export enum MimeTypeEnum {
   AudioXMsWma = 'AUDIO_X_MS_WMA',
   /** audio/x-realaudio mime type. */
   AudioXRealaudio = 'AUDIO_X_REALAUDIO',
+  /** image/avif mime type. */
+  ImageAvif = 'IMAGE_AVIF',
   /** image/bmp mime type. */
   ImageBmp = 'IMAGE_BMP',
   /** image/gif mime type. */
@@ -21127,7 +21129,7 @@ export enum TaxClassEnum {
   InheritCart = 'INHERIT_CART',
   /** Standard Tax rate */
   Standard = 'STANDARD',
-  C = '_',
+  t = '_',
 }
 
 /** a tax line object */
@@ -24494,6 +24496,21 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type CategoriesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CategoriesQuery = {
+  __typename?: 'RootQuery';
+  productCategories?: {
+    __typename?: 'RootQueryToProductCategoryConnection';
+    nodes: Array<{
+      __typename?: 'ProductCategory';
+      name?: string | null;
+      id: number;
+      parentId?: number | null;
+    }>;
+  } | null;
+};
+
 export type GetAllVariableProductsQueryVariables = Exact<{
   stockStatus?: InputMaybe<
     Array<InputMaybe<StockStatusEnum>> | InputMaybe<StockStatusEnum>
@@ -24546,6 +24563,50 @@ export type GetAllVariableProductsQuery = {
   } | null;
 };
 
+export const CategoriesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Categories' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'productCategories' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        alias: { kind: 'Name', value: 'id' },
+                        name: { kind: 'Name', value: 'databaseId' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      {
+                        kind: 'Field',
+                        alias: { kind: 'Name', value: 'parentId' },
+                        name: { kind: 'Name', value: 'parentDatabaseId' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CategoriesQuery, CategoriesQueryVariables>;
 export const GetAllVariableProductsDocument = {
   kind: 'Document',
   definitions: [

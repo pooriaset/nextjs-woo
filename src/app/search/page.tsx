@@ -6,14 +6,16 @@ import ProductsCount from '@/components/ProductsCount/ProductsCount';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import SortRow from '@/components/SortRow/SortRow';
 import {
+  CategoriesQuery,
   GetAllVariableProductsQuery,
   OrderEnum,
   ProductsOrderByEnum,
   StockStatusEnum,
 } from '@/gql/graphql';
+import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
 import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import { useAppContext } from '@/hooks/useAppContext';
-import { useSuspenseQuery } from '@apollo/client';
+import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Box, Container } from '@mui/material';
 
 const Page = () => {
@@ -30,10 +32,14 @@ const Page = () => {
     },
   );
 
+  const { data: categories } = useQuery<CategoriesQuery>(
+    GET_ALL_CATEGORIES_QUERY,
+  );
+
   if (isMobile) {
     return (
       <>
-        <InlineFilters />
+        <InlineFilters options={categories?.productCategories?.nodes} />
 
         <Container sx={{ mt: 2 }}>
           <ProductsList items={data.products} />
@@ -57,7 +63,7 @@ const Page = () => {
             width: 300,
           }}
         >
-          <ColumnFilters />
+          <ColumnFilters options={categories?.productCategories?.nodes} />
         </Box>
         <Box sx={{ flexGrow: 1 }}>
           <Box
