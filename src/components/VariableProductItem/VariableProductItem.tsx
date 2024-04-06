@@ -39,7 +39,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
   return (
     <Card
       component={Link}
-      href={`/products/2546/title`}
+      href={`/products/${data.databaseId}/${data.slug}`}
       sx={{
         display: 'block',
         height: '100%',
