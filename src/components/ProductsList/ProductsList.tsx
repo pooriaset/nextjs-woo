@@ -1,4 +1,4 @@
-import { GetAllVariableProductsQuery } from '@/gql/graphql';
+import { GetAllVariableProductsQuery } from '@/graphql/types/graphql';
 import { Grid } from '@mui/material';
 import { FC } from 'react';
 import { VariableProductItem } from '../VariableProductItem';

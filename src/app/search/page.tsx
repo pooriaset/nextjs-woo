@@ -11,7 +11,7 @@ import {
   OrderEnum,
   ProductsOrderByEnum,
   StockStatusEnum,
-} from '@/gql/graphql';
+} from '@/graphql/types/graphql';
 import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
 import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import { useAppContext } from '@/hooks/useAppContext';

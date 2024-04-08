@@ -1,4 +1,4 @@
-import { CategoriesQuery } from '@/gql/graphql';
+import { CategoriesQuery } from '@/graphql/types/graphql';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Card,

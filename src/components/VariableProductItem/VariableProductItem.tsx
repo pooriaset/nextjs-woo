@@ -12,7 +12,7 @@ import {
   getMinOfRangePrice,
   getProfitPercentage,
 } from '@/utils/price';
-import { GetAllVariableProductsQuery } from '@/gql/graphql';
+import { GetAllVariableProductsQuery } from '@/graphql/types/graphql';
 
 type ExtractVariableProduct<T> = T extends { __typename?: 'VariableProduct' }
   ? T

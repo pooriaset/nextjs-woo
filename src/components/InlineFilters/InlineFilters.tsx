@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoriesQuery } from '@/gql/graphql';
+import { CategoriesQuery } from '@/graphql/types/graphql';
 import { SortOutlined } from '@mui/icons-material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, Button } from '@mui/material';
