@@ -1,4 +1,3 @@
-import { CategoriesQuery } from '@/graphql/types/graphql';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Card,
@@ -6,26 +5,15 @@ import {
   Collapse,
   Divider,
   List,
-  ListItemButton,
   ListItemText,
   Switch,
-  styled,
 } from '@mui/material';
 import { FC, useState } from 'react';
+import Categories from './components/Categories';
+import { ListItem } from './components/ListItem';
+import { Title } from './components/Title';
+import { Options } from './types';
 
-const ListItem = styled(ListItemButton)(({ theme }) => ({
-  '&:hover': {
-    backgroundColor: 'transparent',
-  },
-  py: 1,
-}));
-
-const Title = styled('span')(({ theme }) => ({
-  fontSize: theme.typography.body2.fontSize,
-  fontWeight: 700,
-}));
-
-type Options = NonNullable<CategoriesQuery['productCategories']>['nodes'];
 export interface ColumnFiltersProps {
   options?: Options;
 }
@@ -34,34 +22,6 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
 
   const handleClick = () => {
     setOpen(!open);
-  };
-
-  const renderCategories = (options: Options, parentId: null | number) => {
-    const _options =
-      options?.filter((option) => option.parentId === parentId) ?? [];
-
-    if (!_options.length) {
-      return null;
-    }
-    return _options.map((option) => {
-      return (
-        <List
-          dense
-          component="div"
-          key={option.id}
-          sx={{
-            pl: parentId === null ? 0 : 2,
-          }}
-          disablePadding
-        >
-          <ListItem dense disableRipple>
-            <ListItemText primary={<Title>{option.name}</Title>} />
-          </ListItem>
-
-          {renderCategories(options, option.id)}
-        </List>
-      );
-    });
   };
 
   return (
@@ -87,7 +47,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
                 overflow: 'auto',
               }}
             >
-              {renderCategories(options, null)}
+              <Categories options={options} parentId={null} />
             </Collapse>
           )}
 
