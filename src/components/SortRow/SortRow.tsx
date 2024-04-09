@@ -1,27 +1,16 @@
-import { SortOutlined } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
-import { useState } from "react";
-
-const sortOptions = [
-  {
-    label: "جدیدترین",
-  },
-  {
-    label: "پربازدیدترین",
-  },
-  {
-    label: "پرفروش‌ترین",
-  },
-];
+import { SortOutlined } from '@mui/icons-material';
+import { Box, Button, Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import { useState } from 'react';
+import { options } from './static/options';
 
 const SortRow = () => {
   const [selectedSort, setSelectedSort] = useState(0);
   return (
     <Box
       sx={{
-        display: "flex",
-        alignItems: "center",
+        display: 'flex',
+        alignItems: 'center',
         gap: 1,
         pb: 0.5,
       }}
@@ -35,7 +24,7 @@ const SortRow = () => {
       >
         مرتب سازی:
       </Typography>
-      {sortOptions.map((option, index) => {
+      {options.map((option, index) => {
         return (
           <Button
             key={option.label}
