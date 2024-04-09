@@ -1,14 +1,17 @@
-"use client";
+'use client';
 
-import { Box } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
+import { Box } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useState, FC } from 'react';
 
-function SizeSelector() {
-  const [size, setSize] = useState("42");
+export interface SizeSelectorProps {
+  items: number[];
+}
+const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
+  const [size, setSize] = useState('42');
 
   const handleChange = (event: SelectChangeEvent) => {
     setSize(event.target.value);
@@ -17,8 +20,8 @@ function SizeSelector() {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 2,
       }}
     >
@@ -31,7 +34,7 @@ function SizeSelector() {
           label="سایز"
           onChange={handleChange}
         >
-          {[42, 43, 45, 46, 47].map((size) => {
+          {items.map((size) => {
             return (
               <MenuItem key={size} value={size}>
                 {size}
@@ -42,6 +45,6 @@ function SizeSelector() {
       </FormControl>
     </Box>
   );
-}
+};
 
 export default SizeSelector;

@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import { BuyBox } from "@/components/BuyBox";
-import { ProductImages } from "@/components/ProductImages";
-import SizeSelector from "@/components/SizeSelector/SizeSelector";
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
+import { BuyBox } from '@/components/BuyBox';
+import { ProductImages } from '@/components/ProductImages';
+import SizeSelector from '@/components/SizeSelector/SizeSelector';
 import {
   Button,
   Card,
@@ -12,23 +12,23 @@ import {
   Divider,
   Grid,
   Typography,
-} from "@mui/material";
-import { grey } from "@mui/material/colors";
-import type { Metadata } from "next";
-import { headers } from "next/headers";
+} from '@mui/material';
+import { grey } from '@mui/material/colors';
+import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 
 type PageProps = {
   params: { id: string };
 };
 
-const title = "محصول تست فروشگاه مدل تستی رنگ مشکی";
+const title = 'محصول تست فروشگاه مدل تستی رنگ مشکی';
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const id = params.id;
-  const url = new URL(headers().get("x-url")!);
-  const slug = title.replaceAll(" ", "-");
+  const url = new URL(headers().get('x-url')!);
+  const slug = title.replaceAll(' ', '-');
 
   return {
     title,
@@ -52,7 +52,7 @@ const Page: FC<PageProps> = ({ params }) => {
             sx={{
               fontWeight: 700,
               lineHeight: 2.1,
-              fontSize: "1rem",
+              fontSize: '1rem',
             }}
           >
             {title}
@@ -66,14 +66,14 @@ const Page: FC<PageProps> = ({ params }) => {
             }}
           >
             <Grid item xs={6} md={4} lg={3}>
-              <SizeSelector />
+              <SizeSelector items={[41, 42, 43, 44]} />
             </Grid>
             <Grid item xs={6} md={4} lg={3}>
               <Button
                 fullWidth
                 variant="outlined"
                 sx={{
-                  height: "100%",
+                  height: '100%',
                 }}
               >
                 سایز من چنده؟
