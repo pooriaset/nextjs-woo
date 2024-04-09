@@ -1,26 +1,18 @@
 import { Box, Card, CardContent, Typography } from '@mui/material';
 
 import { useAppContext } from '@/hooks/useAppContext';
-import Link from 'next/link';
-import DiscountPercentage from '../common/DiscountPercentage';
-import Image from '../common/Image';
-import OldPrice from '../common/OldPrice';
-import PriceLabel from '../common/PriceLabel';
-import { FC } from 'react';
 import {
   extractNumbers,
   getMinOfRangePrice,
   getProfitPercentage,
 } from '@/utils/price';
-import { GetAllVariableProductsQuery } from '@/graphql/types/graphql';
-
-type ExtractVariableProduct<T> = T extends { __typename?: 'VariableProduct' }
-  ? T
-  : never;
-
-export type VariableProduct = ExtractVariableProduct<
-  NonNullable<GetAllVariableProductsQuery['products']>['nodes'][number]
->;
+import Link from 'next/link';
+import { FC } from 'react';
+import DiscountPercentage from '../common/DiscountPercentage';
+import Image from '../common/Image';
+import OldPrice from '../common/OldPrice';
+import PriceLabel from '../common/PriceLabel';
+import { VariableProduct } from './types';
 
 export interface ProductItemProps {
   data: VariableProduct;
