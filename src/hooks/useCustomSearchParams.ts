@@ -1,5 +1,6 @@
 'use client';
 
+import { sortOptions } from '@/static/sortOptions';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
@@ -38,7 +39,7 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
     router.push(`/search?${params}`);
   };
 
-  const sort = searchParams.get(SearchPageParams.Sort);
+  const sort = searchParams.get(SearchPageParams.Sort) ?? sortOptions[0].key;
   const q = searchParams.get(SearchPageParams.Q);
   const inStock = searchParams.get(SearchPageParams.InStock) === 'true';
   const categoryId = searchParams.get(SearchPageParams.CategoryId);

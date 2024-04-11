@@ -5,7 +5,7 @@ import { SortOutlined } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { MouseEventHandler } from 'react';
-import { options } from './static/options';
+import { sortOptions } from '@/static/sortOptions';
 
 const SortRow = () => {
   const { sort, navigate } = useCustomSearchParams();
@@ -35,7 +35,7 @@ const SortRow = () => {
       >
         مرتب سازی:
       </Typography>
-      {options.map((option, index) => {
+      {sortOptions.map((option, index) => {
         return (
           <Button
             onClick={handleClickOnItem(option.key)}

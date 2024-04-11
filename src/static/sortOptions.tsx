@@ -1,6 +1,6 @@
-import { IOptions } from '../types';
+import { ISortOptions } from './types/sort';
 
-export const options: IOptions[] = [
+export const sortOptions: ISortOptions[] = [
   {
     key: 'newest',
     label: 'جدیدترین',
