@@ -1,11 +1,24 @@
+'use client';
+
+import useCustomSearchParams, {
+  SearchPageParams,
+} from '@/hooks/useCustomSearchParams';
 import { SortOutlined } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { useState } from 'react';
+import { MouseEventHandler } from 'react';
 import { options } from './static/options';
 
 const SortRow = () => {
-  const [selectedSort, setSelectedSort] = useState(0);
+  const { sort, navigate } = useCustomSearchParams();
+
+  const handleClickOnItem = (value: string | number) => {
+    const func: MouseEventHandler<HTMLButtonElement> = (event) => {
+      navigate(SearchPageParams.Sort, value);
+    };
+    return func;
+  };
+
   return (
     <Box
       sx={{
@@ -27,11 +40,12 @@ const SortRow = () => {
       {options.map((option, index) => {
         return (
           <Button
+            onClick={handleClickOnItem(option.key)}
             key={option.label}
             size="small"
             sx={{
               color: (theme) =>
-                index === selectedSort ? theme.palette.primary.main : grey[600],
+                option.key === sort ? theme.palette.primary.main : grey[600],
             }}
           >
             {option.label}

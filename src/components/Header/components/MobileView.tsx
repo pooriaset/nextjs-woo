@@ -1,15 +1,15 @@
-import { SearchOutlined } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import SearchDialog from "./SearchDialog";
-import SearchSection from "./SearchSection";
+import useCustomSearchParams, {
+  SearchPageParams,
+} from '@/hooks/useCustomSearchParams';
+import { SearchOutlined } from '@mui/icons-material';
+import { Box, Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import { useState } from 'react';
+import SearchDialog from './SearchDialog';
+import SearchSection from './SearchSection';
 
 const MobileView = () => {
-  const router = useRouter();
-  const params = useSearchParams();
-  const q = params.get("q");
+  const { navigate, q } = useCustomSearchParams();
 
   const [open, setOpen] = useState(false);
 
@@ -18,9 +18,7 @@ const MobileView = () => {
   };
 
   const onClickOnSearch = (q: string) => {
-    const params = new URLSearchParams();
-    params.set("q", q);
-    router.push(`/search?${params}`);
+    navigate(SearchPageParams.Q, q);
     setOpen(false);
   };
 
@@ -31,12 +29,12 @@ const MobileView = () => {
         sx={{
           my: 1,
           backgroundColor: grey[200],
-          width: "100%",
+          width: '100%',
           borderRadius: (theme) => theme.shape.borderRadius / 8,
           height: 44,
-          display: "flex",
-          alignItems: "center",
-          cursor: "pointer",
+          display: 'flex',
+          alignItems: 'center',
+          cursor: 'pointer',
         }}
       >
         <SearchOutlined
@@ -53,14 +51,14 @@ const MobileView = () => {
             pl: 1,
           }}
         >
-          {q ? q : "جستجو در"}
+          {q ? q : 'جستجو در'}
         </Typography>
         {!q && (
           <Typography
             variant="body1"
             sx={{
               color: (theme) => theme.palette.primary.main,
-              fontWeight: "bold",
+              fontWeight: 'bold',
               pl: 0.5,
             }}
           >

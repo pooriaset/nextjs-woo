@@ -1,30 +1,32 @@
-import useInputFiller from "@/hooks/useInputFiller";
+import useCustomSearchParams, {
+  SearchPageParams,
+} from '@/hooks/useCustomSearchParams';
+import useInputFiller from '@/hooks/useInputFiller';
 import {
   AccountCircleOutlined,
   SearchOutlined,
   ShoppingBasketOutlined,
-} from "@mui/icons-material";
-import { Divider, Link, TextField } from "@mui/material";
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Toolbar from "@mui/material/Toolbar";
-import { alpha, styled } from "@mui/material/styles";
-import Image from "next/image";
-import NextLink from "next/link";
-import { useRouter } from "next/navigation";
-import { DOMAttributes, FC, useState } from "react";
+} from '@mui/icons-material';
+import { Divider, Link, TextField } from '@mui/material';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import { alpha, styled } from '@mui/material/styles';
+import Image from 'next/image';
+import NextLink from 'next/link';
+import { DOMAttributes, FC, useState } from 'react';
 
-const Form = styled("form")(({ theme }) => ({
-  position: "relative",
+const Form = styled('form')(({ theme }) => ({
+  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
+  '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  width: "100%",
+  width: '100%',
   marginRight: theme.spacing(2),
   marginLeft: theme.spacing(3),
 }));
@@ -42,29 +44,29 @@ const TopSection: FC = () => {
     setAnchorEl(null);
   };
 
-  const router = useRouter();
-  const handleSubmitSearch: DOMAttributes<HTMLFormElement>["onSubmit"] = (
-    event
+  const { navigate } = useCustomSearchParams();
+  const handleSubmitSearch: DOMAttributes<HTMLFormElement>['onSubmit'] = (
+    event,
   ) => {
     event.preventDefault();
     const q = event.currentTarget.q.value;
-    router.push(`/search?q=${q}`);
+    navigate(SearchPageParams.Q, q);
   };
 
-  const menuId = "primary-search-account-menu";
+  const menuId = 'primary-search-account-menu';
 
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "center",
-        horizontal: "left",
+        vertical: 'center',
+        horizontal: 'left',
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: 'bottom',
+        horizontal: 'right',
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -81,8 +83,8 @@ const TopSection: FC = () => {
           component={NextLink}
           href="/"
           sx={{
-            display: "flex",
-            userSelect: "none",
+            display: 'flex',
+            userSelect: 'none',
           }}
         >
           <Image
@@ -101,7 +103,7 @@ const TopSection: FC = () => {
             name="q"
             fullWidth
             placeholder="جستجو..."
-            inputProps={{ "aria-label": "search" }}
+            inputProps={{ 'aria-label': 'search' }}
             InputProps={{
               startAdornment: (
                 <IconButton disableRipple type="submit">
@@ -115,13 +117,13 @@ const TopSection: FC = () => {
           />
         </Form>
         <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: 'flex' }}>
           <NextLink href="/cart">
             <IconButton size="large" aria-label="show 3 cart items">
               <Badge
                 anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
+                  vertical: 'top',
+                  horizontal: 'left',
                 }}
                 badgeContent={3}
                 color="error"
