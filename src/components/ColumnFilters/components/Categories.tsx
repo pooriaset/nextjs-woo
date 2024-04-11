@@ -1,5 +1,6 @@
+import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Collapse, List, ListItemText } from '@mui/material';
+import { Collapse, IconButton, List, ListItemText } from '@mui/material';
 import { FC, MouseEventHandler, useState } from 'react';
 import { Options } from '../types';
 import { ListItem } from './ListItem';
@@ -16,8 +17,8 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
 
   const [open, setOpen] = useState<Record<number, boolean>>({});
 
-  const handleClickOnItem = (id: number) => {
-    const func: MouseEventHandler<HTMLDivElement> = (event) => {
+  const handleClickOnIcon = (id: number) => {
+    const func: MouseEventHandler<HTMLButtonElement> = (event) => {
       setOpen((prevState) => {
         const status = !prevState[id];
         return {
@@ -29,9 +30,19 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
     return func;
   };
 
+  const { navigate, categoryId } = useCustomSearchParams();
+
+  const handleClickOnItem = (id: number) => {
+    const func: MouseEventHandler<HTMLDivElement> = (event) => {
+      navigate('CategoryId', id);
+    };
+    return func;
+  };
+
   if (!_options.length) {
     return null;
   }
+
   return _options.map((option) => {
     const hasChildren = options?.some((child) => child.parentId === option.id);
     return (
@@ -44,10 +55,21 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
         }}
         disablePadding
       >
-        <ListItem dense disableRipple onClick={handleClickOnItem(option.id)}>
-          <ListItemText primary={<Title>{option.name}</Title>} />
+        <ListItem dense disableRipple>
+          <ListItemText
+            primary={<Title>{option.name}</Title>}
+            onClick={handleClickOnItem(option.id)}
+            sx={{
+              color: (theme) =>
+                option.id.toString() === categoryId
+                  ? theme.palette.primary.main
+                  : undefined,
+            }}
+          />
           {hasChildren && (
-            <>{open[option.id] ? <ExpandLess /> : <ExpandMore />}</>
+            <IconButton size="small" onClick={handleClickOnIcon(option.id)}>
+              {open[option.id] ? <ExpandLess /> : <ExpandMore />}
+            </IconButton>
           )}
         </ListItem>
         <Collapse timeout="auto" in={open[option.id] ?? false} unmountOnExit>

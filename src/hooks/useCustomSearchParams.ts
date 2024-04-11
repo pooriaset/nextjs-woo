@@ -7,12 +7,14 @@ enum SearchPageParams {
   Sort = 'sort',
   Q = 'q',
   InStock = 'inStock',
+  CategoryId = 'categoryId',
 }
 
 export interface ReturnTypeOfUseCustomSearchParams {
   sort: string | null;
   q: string | null;
   inStock: boolean;
+  categoryId: string | null;
   navigate: (
     key: keyof typeof SearchPageParams,
     value: string | number | boolean,
@@ -39,8 +41,9 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
   const sort = searchParams.get(SearchPageParams.Sort);
   const q = searchParams.get(SearchPageParams.Q);
   const inStock = searchParams.get(SearchPageParams.InStock) === 'true';
+  const categoryId = searchParams.get(SearchPageParams.CategoryId);
 
-  return { q, inStock, sort, navigate };
+  return { q, inStock, sort, navigate, categoryId };
 };
 
 export default useCustomSearchParams;
