@@ -1,6 +1,4 @@
-import useCustomSearchParams, {
-  SearchPageParams,
-} from '@/hooks/useCustomSearchParams';
+import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
 import {
   AccountCircleOutlined,
@@ -50,7 +48,7 @@ const TopSection: FC = () => {
   ) => {
     event.preventDefault();
     const q = event.currentTarget.q.value;
-    navigate(SearchPageParams.Q, q);
+    navigate('Q', q);
   };
 
   const menuId = 'primary-search-account-menu';

@@ -1,6 +1,4 @@
-import useCustomSearchParams, {
-  SearchPageParams,
-} from '@/hooks/useCustomSearchParams';
+import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { SearchOutlined } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
@@ -18,7 +16,7 @@ const MobileView = () => {
   };
 
   const onClickOnSearch = (q: string) => {
-    navigate(SearchPageParams.Q, q);
+    navigate('Q', q);
     setOpen(false);
   };
 

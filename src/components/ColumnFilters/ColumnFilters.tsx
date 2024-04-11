@@ -1,3 +1,4 @@
+import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Card,
@@ -22,6 +23,11 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const { navigate, inStock } = useCustomSearchParams();
+  const handleClickOnInStock = () => {
+    navigate('InStock', !inStock);
   };
 
   return (
@@ -53,9 +59,9 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
 
           <Divider />
 
-          <ListItem disableGutters disableRipple>
+          <ListItem disableGutters disableRipple onClick={handleClickOnInStock}>
             <ListItemText primary={<Title>فقط کالاهای موجود</Title>} />
-            <Switch />
+            <Switch checked={inStock} />
           </ListItem>
         </List>
       </CardContent>

@@ -3,33 +3,44 @@
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-export enum SearchPageParams {
+enum SearchPageParams {
   Sort = 'sort',
   Q = 'q',
+  InStock = 'inStock',
+}
+
+export interface ReturnTypeOfUseCustomSearchParams {
+  sort: string | null;
+  q: string | null;
+  inStock: boolean;
+  navigate: (
+    key: keyof typeof SearchPageParams,
+    value: string | number | boolean,
+  ) => void;
 }
 
 export interface IUseCustomSearchParams {
-  (): {
-    sort: string | null;
-    q: string | null;
-    navigate: (key: SearchPageParams, value: string | number) => void;
-  };
+  (): ReturnTypeOfUseCustomSearchParams;
 }
 
 const useCustomSearchParams: IUseCustomSearchParams = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const navigate = (key: SearchPageParams, value: string | number) => {
+  const navigate: ReturnTypeOfUseCustomSearchParams['navigate'] = (
+    key,
+    value,
+  ) => {
     const params = new URLSearchParams(searchParams);
-    params.set(key, value.toString());
+    params.set(SearchPageParams[key], value.toString());
     router.push(`/search?${params}`);
   };
 
   const sort = searchParams.get(SearchPageParams.Sort);
   const q = searchParams.get(SearchPageParams.Q);
+  const inStock = searchParams.get(SearchPageParams.InStock) === 'true';
 
-  return { sort, q, navigate };
+  return { q, inStock, sort, navigate };
 };
 
 export default useCustomSearchParams;

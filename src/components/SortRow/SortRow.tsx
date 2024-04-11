@@ -1,8 +1,6 @@
 'use client';
 
-import useCustomSearchParams, {
-  SearchPageParams,
-} from '@/hooks/useCustomSearchParams';
+import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { SortOutlined } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
@@ -14,7 +12,7 @@ const SortRow = () => {
 
   const handleClickOnItem = (value: string | number) => {
     const func: MouseEventHandler<HTMLButtonElement> = (event) => {
-      navigate(SearchPageParams.Sort, value);
+      navigate('Sort', value);
     };
     return func;
   };
