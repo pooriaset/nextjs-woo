@@ -7,9 +7,9 @@ import { Box, Button } from '@mui/material';
 import { FC } from 'react';
 
 export interface InlineFiltersProps {
-  options?: NonNullable<CategoriesQuery['productCategories']>['nodes'];
+  categories?: NonNullable<CategoriesQuery['productCategories']>['nodes'];
 }
-const InlineFilters: FC<InlineFiltersProps> = () => {
+const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
   return (
     <Box
       py={1}

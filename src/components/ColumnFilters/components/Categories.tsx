@@ -2,20 +2,42 @@ import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, IconButton, List, ListItemText } from '@mui/material';
 import { FC, MouseEventHandler, useState } from 'react';
-import { Options } from '../types';
+import { ProductCategoryOptions } from '../types';
 import { ListItem } from './ListItem';
 import { Title } from './Title';
 
 export interface CategoriesProps {
-  options: Options;
-  parentId: null | number;
+  options: ProductCategoryOptions;
+  parentId?: null | number;
 }
 
-const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
+const allItemId = -1;
+
+const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
   const _options =
     options?.filter((option) => option.parentId === parentId) ?? [];
 
-  const [open, setOpen] = useState<Record<number, boolean>>({});
+  const getAllParentsOfItem = (
+    options: ProductCategoryOptions,
+    id: string | number | null | undefined,
+    value: Record<number, boolean>,
+  ) => {
+    const parentId = options.find((item) => item.id === id)?.parentId;
+    if (parentId) {
+      value[parentId] = true;
+      getAllParentsOfItem(options, parentId, value);
+    }
+
+    return value;
+  };
+
+  const { navigate, categoryId } = useCustomSearchParams();
+
+  const [open, setOpen] = useState<Record<number | string, boolean>>({
+    ...getAllParentsOfItem(options, categoryId, {
+      [-1]: true,
+    }),
+  });
 
   const handleClickOnIcon = (id: number) => {
     const func: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -30,8 +52,6 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
     return func;
   };
 
-  const { navigate, categoryId } = useCustomSearchParams();
-
   const handleClickOnItem = (id: number) => {
     const func: MouseEventHandler<HTMLDivElement> = (event) => {
       navigate('CategoryId', id);
@@ -45,13 +65,18 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
 
   return _options.map((option) => {
     const hasChildren = options?.some((child) => child.parentId === option.id);
+
+    const isActive =
+      (categoryId === null && option?.id === allItemId) ||
+      option?.id === categoryId;
+
     return (
       <List
         dense
         component="div"
         key={option.id}
         sx={{
-          pl: parentId === null ? 0 : 2,
+          pl: parentId === -1 ? 0 : 2,
         }}
         disablePadding
       >
@@ -61,9 +86,7 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
             onClick={handleClickOnItem(option.id)}
             sx={{
               color: (theme) =>
-                option.id.toString() === categoryId
-                  ? theme.palette.primary.main
-                  : undefined,
+                isActive ? theme.palette.primary.main : undefined,
             }}
           />
           {hasChildren && (
@@ -73,7 +96,10 @@ const Categories: FC<CategoriesProps> = ({ options, parentId }) => {
           )}
         </ListItem>
         <Collapse timeout="auto" in={open[option.id] ?? false} unmountOnExit>
-          <Categories options={options} parentId={option.id} />
+          <Categories
+            options={options}
+            parentId={option.id > 0 ? option.id : null}
+          />
         </Collapse>
       </List>
     );

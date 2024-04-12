@@ -1,5 +1,5 @@
 import { CategoriesQuery } from '@/graphql/types/graphql';
 
-export type Options = NonNullable<
+export type ProductCategoryOptions = NonNullable<
   CategoriesQuery['productCategories']
 >['nodes'];

@@ -15,10 +15,10 @@ export interface ReturnTypeOfUseCustomSearchParams {
   sort: string | null;
   q: string | null;
   inStock: boolean;
-  categoryId: string | null;
+  categoryId: number | null;
   navigate: (
     key: keyof typeof SearchPageParams,
-    value: string | number | boolean,
+    value: string | number | boolean | null,
   ) => void;
 }
 
@@ -35,7 +35,11 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
     value,
   ) => {
     const params = new URLSearchParams(searchParams);
-    params.set(SearchPageParams[key], value.toString());
+    if (!value || +value < 0) {
+      params.delete(SearchPageParams[key]);
+    } else {
+      params.set(SearchPageParams[key], value.toString());
+    }
     router.push(`/search?${params}`);
   };
 
@@ -44,7 +48,13 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
   const inStock = searchParams.get(SearchPageParams.InStock) === 'true';
   const categoryId = searchParams.get(SearchPageParams.CategoryId);
 
-  return { q, inStock, sort, navigate, categoryId };
+  return {
+    q,
+    inStock,
+    sort,
+    navigate,
+    categoryId: categoryId ? +categoryId : null,
+  };
 };
 
 export default useCustomSearchParams;

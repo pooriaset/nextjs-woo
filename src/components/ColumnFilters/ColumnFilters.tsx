@@ -14,12 +14,12 @@ import { FC, useState } from 'react';
 import Categories from './components/Categories';
 import { ListItem } from './components/ListItem';
 import { Title } from './components/Title';
-import { Options } from './types';
+import { ProductCategoryOptions } from './types';
 
 export interface ColumnFiltersProps {
-  options?: Options;
+  categories?: ProductCategoryOptions;
 }
-const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
+const ColumnFilters: FC<ColumnFiltersProps> = ({ categories }) => {
   const [open, setOpen] = useState(true);
 
   const handleClick = () => {
@@ -47,7 +47,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
               {open ? <ExpandLess /> : <ExpandMore />}
             </IconButton>
           </ListItem>
-          {options && (
+          {categories && categories.length > 1 && (
             <Collapse
               in={open}
               timeout="auto"
@@ -57,7 +57,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
                 overflow: 'auto',
               }}
             >
-              <Categories options={options} parentId={null} />
+              <Categories options={categories} />
             </Collapse>
           )}
 

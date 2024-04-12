@@ -8,12 +8,14 @@ export const GET_ALL_VARIABLE_PRODUCTS_QUERY = gql`
     $stockStatus: [StockStatusEnum]
     $field: ProductsOrderByEnum!
     $order: OrderEnum
+    $categoryIdIn: [Int]
   ) {
     products(
       first: 10
       where: {
         stockStatus: $stockStatus
         orderby: { field: $field, order: $order }
+        categoryIdIn: $categoryIdIn
       }
     ) {
       pageInfo {

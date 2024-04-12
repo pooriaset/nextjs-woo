@@ -22,7 +22,7 @@ import { Box, Container } from '@mui/material';
 const Page = () => {
   const { isMobile } = useAppContext();
 
-  const { inStock } = useCustomSearchParams();
+  const { inStock, categoryId } = useCustomSearchParams();
 
   const { data } = useSuspenseQuery<GetAllVariableProductsQuery>(
     GET_ALL_VARIABLE_PRODUCTS_QUERY,
@@ -32,18 +32,24 @@ const Page = () => {
         field: ProductsOrderByEnum.Date,
         order: OrderEnum.Desc,
         stockStatus: inStock ? StockStatusEnum.InStock : null,
+        categoryIdIn: categoryId ? [+categoryId] : null,
       },
     },
   );
 
-  const { data: categories } = useQuery<CategoriesQuery>(
+  const { data: categoriesData } = useQuery<CategoriesQuery>(
     GET_ALL_CATEGORIES_QUERY,
   );
+
+  const categories = [
+    { id: -1, parentId: -1, name: 'همه' },
+    ...(categoriesData?.productCategories?.nodes ?? []),
+  ];
 
   if (isMobile) {
     return (
       <>
-        <InlineFilters options={categories?.productCategories?.nodes} />
+        <InlineFilters categories={categories} />
 
         <Container sx={{ mt: 2 }}>
           <ProductsList items={data.products} />
@@ -67,7 +73,7 @@ const Page = () => {
             width: 300,
           }}
         >
-          <ColumnFilters options={categories?.productCategories?.nodes} />
+          <ColumnFilters categories={categories} />
         </Box>
         <Box sx={{ flexGrow: 1 }}>
           <Box
