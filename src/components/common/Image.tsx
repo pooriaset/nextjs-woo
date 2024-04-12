@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Skeleton from "@mui/material/Skeleton";
-import NextImage, { ImageProps } from "next/image";
-import { FC, useState } from "react";
+import Skeleton from '@mui/material/Skeleton';
+import NextImage, { ImageProps } from 'next/image';
+import { FC, useState } from 'react';
 
 const Image: FC<ImageProps> = ({ width, height, ...props }) => {
   const [loaded, setLoaded] = useState(false);
@@ -19,7 +19,7 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
           width={width}
           height={height}
           sx={{
-            maxWidth: "100%",
+            maxWidth: '100%',
           }}
         />
       )}
@@ -29,11 +29,11 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
         {...props}
         onLoad={handleOnLoad}
         style={{
-          maxWidth: "100%",
-          objectFit: "contain",
+          maxWidth: '100%',
+          objectFit: 'contain',
           ...props.style,
-          visibility: loaded ? "visible" : "hidden",
-          height: loaded ? "auto" : 0,
+          visibility: loaded ? 'visible' : 'hidden',
+          height: loaded ? undefined : 0,
         }}
       />
     </>

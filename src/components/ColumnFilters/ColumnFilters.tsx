@@ -5,6 +5,7 @@ import {
   CardContent,
   Collapse,
   Divider,
+  IconButton,
   List,
   ListItemText,
   Switch,
@@ -41,7 +42,10 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ options }) => {
         <List>
           <ListItem disableGutters onClick={handleClick} disableRipple>
             <ListItemText primary={<Title>دسته‌بندی</Title>} />
-            {open ? <ExpandLess /> : <ExpandMore />}
+
+            <IconButton size="small">
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </IconButton>
           </ListItem>
           {options && (
             <Collapse

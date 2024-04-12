@@ -5,6 +5,8 @@ import { InlineFilters } from '@/components/InlineFilters';
 import ProductsCount from '@/components/ProductsCount/ProductsCount';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import SortRow from '@/components/SortRow/SortRow';
+import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
+import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import {
   CategoriesQuery,
   GetAllVariableProductsQuery,
@@ -12,22 +14,24 @@ import {
   ProductsOrderByEnum,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
-import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
-import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import { useAppContext } from '@/hooks/useAppContext';
+import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Box, Container } from '@mui/material';
 
 const Page = () => {
   const { isMobile } = useAppContext();
 
+  const { inStock } = useCustomSearchParams();
+
   const { data } = useSuspenseQuery<GetAllVariableProductsQuery>(
     GET_ALL_VARIABLE_PRODUCTS_QUERY,
     {
+      queryKey: ['GET_SEARCH_PAGE_PRODUCTS'],
       variables: {
         field: ProductsOrderByEnum.Date,
         order: OrderEnum.Desc,
-        stockStatus: StockStatusEnum.InStock,
+        stockStatus: inStock ? StockStatusEnum.InStock : null,
       },
     },
   );

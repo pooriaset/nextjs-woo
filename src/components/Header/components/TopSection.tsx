@@ -1,3 +1,4 @@
+import Logo from '@/components/common/Logo';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
 import {
@@ -13,7 +14,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { DOMAttributes, FC, useState } from 'react';
 
@@ -85,13 +85,7 @@ const TopSection: FC = () => {
             userSelect: 'none',
           }}
         >
-          <Image
-            draggable={false}
-            src="/assets/images/logo.svg"
-            alt="Logo"
-            width={176}
-            height={26}
-          />
+          <Logo />
         </Link>
         <Form onSubmit={handleSubmitSearch}>
           <TextField
