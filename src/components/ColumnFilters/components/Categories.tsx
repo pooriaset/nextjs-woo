@@ -1,7 +1,7 @@
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, IconButton, List, ListItemText } from '@mui/material';
-import { FC, MouseEventHandler, useState } from 'react';
+import { FC, MouseEventHandler, useMemo, useState } from 'react';
 import { ProductCategoryOptions } from '../types';
 import { ListItem } from './ListItem';
 import { Title } from './Title';
@@ -14,8 +14,9 @@ export interface CategoriesProps {
 const allItemId = -1;
 
 const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
-  const _options =
-    options?.filter((option) => option.parentId === parentId) ?? [];
+  const _options = useMemo(() => {
+    return options?.filter((option) => option.parentId === parentId) ?? [];
+  }, [options, parentId]);
 
   const getAllParentsOfItem = (
     options: ProductCategoryOptions,

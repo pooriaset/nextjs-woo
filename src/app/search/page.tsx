@@ -52,7 +52,7 @@ const Page = () => {
         <InlineFilters categories={categories} />
 
         <Container sx={{ mt: 2 }}>
-          <ProductsList items={data.products} />
+          <ProductsList items={data.products?.nodes} />
         </Container>
       </>
     );
@@ -89,7 +89,7 @@ const Page = () => {
             <SortRow />
             <ProductsCount value={data.products?.pageInfo.total} />
           </Box>
-          <ProductsList items={data.products} />
+          <ProductsList items={data.products?.nodes} />
         </Box>
       </Box>
     </Container>
