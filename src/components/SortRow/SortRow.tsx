@@ -10,7 +10,7 @@ import { sortOptions } from '@/static/sortOptions';
 const SortRow = () => {
   const { sort, navigate } = useCustomSearchParams();
 
-  const handleClickOnItem = (value: string | number) => {
+  const handleClickOnItem = (value: number) => {
     const func: MouseEventHandler<HTMLButtonElement> = (event) => {
       navigate('Sort', value);
     };

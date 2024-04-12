@@ -1,8 +1,7 @@
 'use client';
 
 import { sortOptions } from '@/static/sortOptions';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 enum SearchPageParams {
   Sort = 'sort',
@@ -12,7 +11,7 @@ enum SearchPageParams {
 }
 
 export interface ReturnTypeOfUseCustomSearchParams {
-  sort: string | null;
+  sort: number | null;
   q: string | null;
   inStock: boolean;
   categoryId: number | null;
@@ -43,7 +42,9 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
     router.push(`/search?${params}`);
   };
 
-  const sort = searchParams.get(SearchPageParams.Sort) ?? sortOptions[0].key;
+  const sortParam = searchParams.get(SearchPageParams.Sort);
+  const sort = sortParam ? +sortParam : sortOptions[0].key;
+
   const q = searchParams.get(SearchPageParams.Q);
   const inStock = searchParams.get(SearchPageParams.InStock) === 'true';
   const categoryId = searchParams.get(SearchPageParams.CategoryId);

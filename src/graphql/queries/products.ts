@@ -4,10 +4,9 @@ import { gql } from '@apollo/client';
  * Fetch Woocommerce products from GraphQL
  */
 export const GET_ALL_VARIABLE_PRODUCTS_QUERY = gql`
-  query GetAllVariableProducts(
+  query GetAllProducts(
     $stockStatus: [StockStatusEnum]
-    $field: ProductsOrderByEnum!
-    $order: OrderEnum
+    $orderBy: [ProductsOrderbyInput]
     $categoryIdIn: [Int]
     $q: String
   ) {
@@ -15,7 +14,7 @@ export const GET_ALL_VARIABLE_PRODUCTS_QUERY = gql`
       first: 10
       where: {
         stockStatus: $stockStatus
-        orderby: { field: $field, order: $order }
+        orderby: $orderBy
         categoryIdIn: $categoryIdIn
         search: $q
       }
@@ -40,13 +39,7 @@ export const GET_ALL_VARIABLE_PRODUCTS_QUERY = gql`
           price
           regularPrice
           salePrice
-          variations {
-            nodes {
-              price
-              regularPrice
-              salePrice
-            }
-          }
+          stockStatus
         }
       }
     }

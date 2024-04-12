@@ -9,31 +9,29 @@ import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
 import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import {
   CategoriesQuery,
-  GetAllVariableProductsQuery,
-  OrderEnum,
-  ProductsOrderByEnum,
+  GetAllProductsQuery,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
 import { useAppContext } from '@/hooks/useAppContext';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import { sortOptions } from '@/static/sortOptions';
 import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Box, Container } from '@mui/material';
 
 const Page = () => {
   const { isMobile } = useAppContext();
 
-  const { inStock, categoryId, q } = useCustomSearchParams();
+  const { inStock, categoryId, q, sort } = useCustomSearchParams();
 
-  const { data } = useSuspenseQuery<GetAllVariableProductsQuery>(
+  const { data } = useSuspenseQuery<GetAllProductsQuery>(
     GET_ALL_VARIABLE_PRODUCTS_QUERY,
     {
-      queryKey: ['GET_SEARCH_PAGE_PRODUCTS'],
+      queryKey: ['GET_SEARCH_2_PAGE_PRODUCTS'],
       variables: {
-        field: ProductsOrderByEnum.Date,
-        order: OrderEnum.Desc,
         stockStatus: inStock ? StockStatusEnum.InStock : null,
         categoryIdIn: categoryId ? [+categoryId] : null,
         q,
+        orderBy: [sortOptions.find((item) => item.key === sort)?.props],
       },
     },
   );

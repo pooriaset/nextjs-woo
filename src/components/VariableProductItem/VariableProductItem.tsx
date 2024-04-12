@@ -13,6 +13,8 @@ import Image from '../common/Image';
 import OldPrice from '../common/OldPrice';
 import PriceLabel from '../common/PriceLabel';
 import { VariableProduct } from './types';
+import { StockStatusEnum } from '@/graphql/types/graphql';
+import OutOfStock from '../common/OutOfStock';
 
 export interface ProductItemProps {
   data: VariableProduct;
@@ -27,6 +29,8 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
     extractNumbers(getMinOfRangePrice(data.price)),
     extractNumbers(data.regularPrice),
   );
+
+  const outOfStock = data.stockStatus === StockStatusEnum.OutOfStock;
 
   return (
     <Card
@@ -93,16 +97,22 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
                 mt: 1,
               }}
             >
-              {data.onSale && (
-                <DiscountPercentage value={profitMarginPercentage} />
-              )}
+              {outOfStock ? (
+                <OutOfStock />
+              ) : (
+                <>
+                  {data.onSale && (
+                    <DiscountPercentage value={profitMarginPercentage} />
+                  )}
 
-              <Box>
-                <PriceLabel value={data.price} />
-                {data.regularPrice !== data.price && (
-                  <OldPrice value={data.regularPrice} />
-                )}
-              </Box>
+                  <Box>
+                    <PriceLabel value={data.price} />
+                    {data.regularPrice !== data.price && (
+                      <OldPrice value={data.regularPrice} />
+                    )}
+                  </Box>
+                </>
+              )}
             </Box>
           </Box>
         </Box>
