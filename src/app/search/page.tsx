@@ -22,7 +22,7 @@ import { Box, Container } from '@mui/material';
 const Page = () => {
   const { isMobile } = useAppContext();
 
-  const { inStock, categoryId } = useCustomSearchParams();
+  const { inStock, categoryId, q } = useCustomSearchParams();
 
   const { data } = useSuspenseQuery<GetAllVariableProductsQuery>(
     GET_ALL_VARIABLE_PRODUCTS_QUERY,
@@ -33,6 +33,7 @@ const Page = () => {
         order: OrderEnum.Desc,
         stockStatus: inStock ? StockStatusEnum.InStock : null,
         categoryIdIn: categoryId ? [+categoryId] : null,
+        q,
       },
     },
   );
