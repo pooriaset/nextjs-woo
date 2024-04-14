@@ -5,19 +5,24 @@ import { globalStyles, theme } from '@/config/theme';
 import { AppProvider, ApolloProvider } from '@/providers';
 import { Box, CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material';
 import type { Metadata } from 'next';
+import { PropsWithChildren } from 'react';
+
+export type WithChildren<T = unknown> = T & { children: React.ReactNode };
+
+export type LocaleLayoutParams = { params: { locale: string } };
+type LocaleLayoutProperties = PropsWithChildren<LocaleLayoutParams>;
 
 export const metadata: Metadata = {
   title: 'Shop app',
   description: 'Shop app',
 };
 
-export default function RootLayout({
+export default function LocaleLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params: { locale },
+}: WithChildren<LocaleLayoutProperties>) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang={locale} dir="rtl">
       <body>
         <ThemeProvider theme={theme}>
           <CssBaseline />
