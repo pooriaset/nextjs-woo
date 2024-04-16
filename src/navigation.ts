@@ -13,15 +13,15 @@ import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
 // Default locale for the application.
 // export const defaultLocale = "en-us";
-export const defaultLocale = 'fa-ir' as const;
+export const defaultLocale = 'fa' as const;
 
 // Supported locales.
-export const locales = ['en-us', 'fa-ir'] as const;
+export const locales = ['en', 'fa'] as const;
 
 // Labels for each supported locale, used for displaying human-readable names.
 export const labels = {
-  'en-us': 'English',
-  'fa-ir': 'Persian',
+  en: 'English',
+  fa: 'Persian',
 } as const;
 
 // Type representing valid locale strings.

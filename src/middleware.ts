@@ -6,7 +6,6 @@ import { locales, defaultLocale } from '@/navigation';
 const intlMiddleware = (request: NextRequest) =>
   Promise.resolve(
     nextIntlMiddleware({
-      localePrefix: 'as-needed',
       defaultLocale,
       locales,
     })(request),
