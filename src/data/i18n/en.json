@@ -15,5 +15,12 @@
       "promotions": "Promotions",
       "bestSelling": "Best Selling"
     }
+  },
+  "footer": {
+    "links": {
+      "aboutUs": "About Us",
+      "contactUs": "Contact Us"
+    },
+    "text": "All rights reserved for this website, and the publication of content is only allowed with proper attribution."
   }
 }
