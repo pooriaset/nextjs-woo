@@ -14,13 +14,28 @@
       "categories": "دسته‌بندی‌ها",
       "promotions": "تخفیف‌ها و پیشنهادها",
       "bestSelling": "پرفروش‌ترین‌ها"
+    },
+    "search": {
+      "placeholder": "جستجو..."
     }
+  },
+  "buttons": {
+    "return": "بازگشت"
   },
   "footer": {
     "links": {
       "aboutUs": "درباره ما",
       "contactUs": "تماس با ما"
     },
+    "navigation": {
+      "myAccount": "حساب من",
+      "cart": "سبد خرید",
+      "categories": "دسته‌بندی‌ها",
+      "home": "خانه"
+    },
     "text": "تمامی حقوق این سایت محفوظ است و انتشار مطالب فقط با منبع مجاز است."
+  },
+  "units": {
+    "price": "تومان"
   }
 }

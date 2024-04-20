@@ -1,9 +1,14 @@
-import Transition from "@/components/common/Transition";
-import { ChevronLeft } from "@mui/icons-material";
-import { Box, Button, Dialog, DialogContent, DialogProps } from "@mui/material";
-import React, { FC } from "react";
+import Transition from '@/components/common/Transition';
+import { Locale, languages } from '@/navigation';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { Box, Button, Dialog, DialogContent, DialogProps } from '@mui/material';
+import { useLocale, useTranslations } from 'next-intl';
+import { FC } from 'react';
 
 const SearchDialog: FC<DialogProps> = (props) => {
+  const locale = useLocale();
+  const t = useTranslations();
+
   return (
     <Dialog
       TransitionComponent={Transition}
@@ -19,7 +24,7 @@ const SearchDialog: FC<DialogProps> = (props) => {
         {props.children}
         <Box
           sx={{
-            position: "fixed",
+            position: 'fixed',
             bottom: (theme) => theme.spacing(2.5),
             left: (theme) => theme.spacing(3),
             right: (theme) => theme.spacing(3),
@@ -29,10 +34,16 @@ const SearchDialog: FC<DialogProps> = (props) => {
             size="large"
             fullWidth
             variant="outlined"
-            endIcon={<ChevronLeft />}
-            onClick={(event) => props?.onClose?.(event, "escapeKeyDown")}
+            endIcon={
+              languages[locale as Locale].direction === 'rtl' ? (
+                <ChevronLeft />
+              ) : (
+                <ChevronRight />
+              )
+            }
+            onClick={(event) => props?.onClose?.(event, 'escapeKeyDown')}
           >
-            بازگشت
+            {t('buttons.return')}
           </Button>
         </Box>
       </DialogContent>

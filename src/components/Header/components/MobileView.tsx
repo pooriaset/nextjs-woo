@@ -5,6 +5,7 @@ import { grey } from '@mui/material/colors';
 import { useState } from 'react';
 import SearchDialog from './SearchDialog';
 import SearchSection from './SearchSection';
+import { useTranslations } from 'next-intl';
 
 const MobileView = () => {
   const { navigate, q } = useCustomSearchParams();
@@ -20,6 +21,7 @@ const MobileView = () => {
     setOpen(false);
   };
 
+  const t = useTranslations();
   return (
     <>
       <Box
@@ -49,21 +51,8 @@ const MobileView = () => {
             pl: 1,
           }}
         >
-          {q ? q : 'جستجو در'}
+          {q ? q : t('header.search.placeholder')}
         </Typography>
-        {!q && (
-          <Typography
-            variant="body1"
-            sx={{
-              color: (theme) => theme.palette.primary.main,
-              fontWeight: 'bold',
-              pl: 0.5,
-            }}
-          >
-            {/* Your custom logo */}
-            شاپ
-          </Typography>
-        )}
       </Box>
       <SearchDialog open={open} onClose={handleToggleDialog}>
         <SearchSection

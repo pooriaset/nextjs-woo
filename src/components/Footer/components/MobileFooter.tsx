@@ -1,17 +1,18 @@
-"use client";
+'use client';
 
 import {
   AccountCircleOutlined,
   CategoryOutlined,
   HomeOutlined,
   ShoppingBasketOutlined,
-} from "@mui/icons-material";
-import MuiBottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import Box from "@mui/material/Box";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+} from '@mui/icons-material';
+import MuiBottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Box from '@mui/material/Box';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
 
 interface Page {
   label: string;
@@ -19,37 +20,38 @@ interface Page {
   icon: ReactNode;
 }
 
-const pages: Page[] = [
-  {
-    label: "خانه",
-    href: "/",
-    icon: <HomeOutlined />,
-  },
-  {
-    label: "دسته‌بندی‌ها",
-    href: "/categories",
-    icon: <CategoryOutlined />,
-  },
-  {
-    label: "سبد خرید",
-    href: "/cart",
-    icon: <ShoppingBasketOutlined />,
-  },
-  {
-    label: "حساب من",
-    href: "/account",
-    icon: <AccountCircleOutlined />,
-  },
-];
-
 const MobileFooter = () => {
   const pathname = usePathname();
+  const t = useTranslations();
+
+  const pages: Page[] = [
+    {
+      label: t('footer.navigation.home'),
+      href: '/',
+      icon: <HomeOutlined />,
+    },
+    {
+      label: t('footer.navigation.categories'),
+      href: '/categories',
+      icon: <CategoryOutlined />,
+    },
+    {
+      label: t('footer.navigation.cart'),
+      href: '/cart',
+      icon: <ShoppingBasketOutlined />,
+    },
+    {
+      label: t('footer.navigation.myAccount'),
+      href: '/account',
+      icon: <AccountCircleOutlined />,
+    },
+  ];
 
   return (
     <Box
       sx={{
-        width: "100%",
-        position: "fixed",
+        width: '100%',
+        position: 'fixed',
         bottom: 0,
         boxShadow: (theme) => theme.shadows[3],
       }}

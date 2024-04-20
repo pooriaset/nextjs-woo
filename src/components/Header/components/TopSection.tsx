@@ -14,6 +14,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
+import { useTranslations } from 'next-intl';
 import NextLink from 'next/link';
 import { DOMAttributes, FC, useState } from 'react';
 
@@ -74,6 +75,7 @@ const TopSection: FC = () => {
     </Menu>
   );
 
+  const t = useTranslations();
   return (
     <>
       <Toolbar disableGutters>
@@ -94,7 +96,7 @@ const TopSection: FC = () => {
             inputRef={inputRef}
             name="q"
             fullWidth
-            placeholder="جستجو..."
+            placeholder={t('header.search.placeholder')}
             inputProps={{ 'aria-label': 'search' }}
             InputProps={{
               startAdornment: (

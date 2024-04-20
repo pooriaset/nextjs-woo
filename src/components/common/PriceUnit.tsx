@@ -1,12 +1,16 @@
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
+import { FC } from 'react';
 
-const PriceUnit = ({ title = "تومان" }) => {
+export interface PriceUnitProps {
+  title: string;
+}
+const PriceUnit: FC<PriceUnitProps> = ({ title }) => {
   return (
     <Typography
       sx={{
         fontSize: 10,
         fontWeight: 400,
-        userSelect: "none",
+        userSelect: 'none',
         paddingLeft: 0.5,
       }}
     >

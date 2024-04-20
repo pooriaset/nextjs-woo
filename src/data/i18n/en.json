@@ -14,13 +14,28 @@
       "categories": "Categories",
       "promotions": "Promotions",
       "bestSelling": "Best Selling"
+    },
+    "search": {
+      "placeholder": "Search..."
     }
+  },
+  "buttons": {
+    "return": "Return"
   },
   "footer": {
     "links": {
       "aboutUs": "About Us",
       "contactUs": "Contact Us"
     },
+    "navigation": {
+      "myAccount": "My Account",
+      "cart": "Cart",
+      "categories": "Categories",
+      "home": "Home"
+    },
     "text": "All rights reserved for this website, and the publication of content is only allowed with proper attribution."
+  },
+  "units": {
+    "price": "T"
   }
 }
