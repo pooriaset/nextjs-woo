@@ -9,6 +9,7 @@ const intlMiddleware = (request: NextRequest) =>
       localePrefix: 'as-needed',
       defaultLocale,
       locales,
+      localeDetection: false,
     })(request),
   );
 
