@@ -6,6 +6,7 @@ import { Locale, languages } from '@/navigation';
 import { AppProvider, ApolloProvider } from '@/providers';
 import { Box, CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material';
 import type { Metadata } from 'next';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { PropsWithChildren } from 'react';
 
 export type WithChildren<T = unknown> = T & { children: React.ReactNode };
@@ -22,6 +23,8 @@ export default function LocaleLayout({
   children,
   params: { locale },
 }: WithChildren<LocaleLayoutProperties>) {
+  const messages = useMessages();
+
   return (
     <html lang={locale} dir={languages?.[locale]?.direction ?? 'ltr'}>
       <body>
@@ -29,17 +32,19 @@ export default function LocaleLayout({
           <CssBaseline />
           <GlobalStyles styles={globalStyles} />
           <RTLProvider locale={locale}>
-            <AppProvider>
-              <Header />
-              <Box
-                sx={{
-                  pb: { xs: '56px', md: 0 },
-                }}
-              >
-                <ApolloProvider>{children}</ApolloProvider>
-              </Box>
-              <Footer />
-            </AppProvider>
+            <NextIntlClientProvider messages={messages} locale={locale}>
+              <AppProvider>
+                <Header />
+                <Box
+                  sx={{
+                    pb: { xs: '56px', md: 0 },
+                  }}
+                >
+                  <ApolloProvider>{children}</ApolloProvider>
+                </Box>
+                <Footer />
+              </AppProvider>
+            </NextIntlClientProvider>
           </RTLProvider>
         </ThemeProvider>
       </body>

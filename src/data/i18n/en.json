@@ -4,5 +4,16 @@
     "cart": {
       "isEmpty": "Cart is empty!"
     }
+  },
+  "categories": {
+    "all": "All"
+  },
+  "header": {
+    "navigation": {
+      "products": "Products",
+      "categories": "Categories",
+      "promotions": "Promotions",
+      "bestSelling": "Best Selling"
+    }
   }
 }

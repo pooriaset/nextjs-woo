@@ -4,5 +4,16 @@
     "cart": {
       "isEmpty": "سبد خرید خالی است"
     }
+  },
+  "categories": {
+    "all": "همه"
+  },
+  "header": {
+    "navigation": {
+      "products": "محصولات",
+      "categories": "دسته‌بندی‌ها",
+      "promotions": "تخفیف‌ها و پیشنهادها",
+      "bestSelling": "پرفروش‌ترین‌ها"
+    }
   }
 }

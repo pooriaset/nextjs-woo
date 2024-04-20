@@ -17,8 +17,10 @@ import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import { sortOptions } from '@/static/sortOptions';
 import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Box, Container } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 const Page = () => {
+  const t = useTranslations();
   const { isMobile } = useAppContext();
 
   const { inStock, categoryId, q, sort } = useCustomSearchParams();
@@ -41,7 +43,7 @@ const Page = () => {
   );
 
   const categories = [
-    { id: -1, parentId: -1, name: 'همه' },
+    { id: -1, parentId: -1, name: t('categories.all') },
     ...(categoriesData?.productCategories?.nodes ?? []),
   ];
 

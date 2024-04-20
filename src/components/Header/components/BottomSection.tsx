@@ -1,20 +1,22 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Link from "next/link";
-
-const pages = [
-  { label: "محصولات", href: "/search" },
-  { label: "دسته‌بندی کالاها", href: "/categories" },
-  { label: "پرفروش‌ترین‌ها", href: "/best-selling" },
-  { label: "تخفیف‌ها و پیشنهادها", href: "/promotion-center" },
-];
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 const BottomSection = () => {
+  const t = useTranslations();
+  const pages = [
+    { label: t('header.navigation.products'), href: '/search' },
+    { label: t('header.navigation.categories'), href: '/categories' },
+    { label: t('header.navigation.promotions'), href: '/best-selling' },
+    { label: t('header.navigation.bestSelling'), href: '/promotion-center' },
+  ];
+
   return (
     <Box
       sx={{
         py: 1,
-        display: "flex",
+        display: 'flex',
       }}
     >
       {pages.map((page) => (
