@@ -6,7 +6,7 @@ import en from '@/data/i18n/en.json';
 import fa from '@/data/i18n/fa.json';
 import { Locale } from './navigation';
 
-const localeMessages: Record<Locale, any> = {
+const localeMessages: Partial<Record<Locale, any>> = {
   en,
   fa,
 };

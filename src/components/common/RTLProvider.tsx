@@ -1,18 +1,35 @@
-"use client";
+'use client';
 
-import createCache from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
-import { FC, ReactNode } from "react";
-import { prefixer } from "stylis";
-import rtlPlugin from "stylis-plugin-rtl";
+import { Locale, languages } from '@/navigation';
+import createCache, { EmotionCache } from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { Direction } from '@mui/material';
+import { FC, ReactNode } from 'react';
+import { prefixer } from 'stylis';
+import rtlPlugin from 'stylis-plugin-rtl';
 
-const cacheRtl = createCache({
-  key: "muirtl",
+const ltrCache = createCache({
+  key: 'mui',
+});
+
+const rtlCache = createCache({
+  key: 'muirtl',
   stylisPlugins: [prefixer, rtlPlugin],
 });
 
-const RTLProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-  return <CacheProvider value={cacheRtl}>{children}</CacheProvider>;
+const caches: Record<Direction, EmotionCache> = {
+  ltr: ltrCache,
+  rtl: rtlCache,
+};
+const RTLProvider: FC<{ children?: ReactNode; locale: Locale }> = ({
+  children,
+  locale,
+}) => {
+  return (
+    <CacheProvider value={caches[languages[locale]?.direction ?? 'ltr']}>
+      {children}
+    </CacheProvider>
+  );
 };
 
 export default RTLProvider;
