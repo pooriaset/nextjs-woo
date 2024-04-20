@@ -7997,16 +7997,16 @@ __metadata:
   linkType: hard
 
 "next-intl@npm:^3.11.1":
-  version: 3.11.1
-  resolution: "next-intl@npm:3.11.1"
+  version: 3.11.3
+  resolution: "next-intl@npm:3.11.3"
   dependencies:
     "@formatjs/intl-localematcher": "npm:^0.2.32"
     negotiator: "npm:^0.6.3"
-    use-intl: "npm:^3.11.1"
+    use-intl: "npm:^3.11.3"
   peerDependencies:
     next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/20aeba3488d9a5bb29ce56e06b8b0aeb33a57ca9857f49a34b3d3098ffbdb4243402edb26b1c452c81a6b8cb3920ce45b6e773bb09fe5a2b5155d700b781096c
+  checksum: 10c0/c5260276efde2b578c4cabf451beaf5be7d5b75e0d5ce6ff2746fbe34a6abd9428e484811ad71e9b1c839e81bcc8fef1c30a183bd416834a275c5a8a27832473
   languageName: node
   linkType: hard
 
@@ -10534,15 +10534,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-intl@npm:^3.11.1":
-  version: 3.11.1
-  resolution: "use-intl@npm:3.11.1"
+"use-intl@npm:^3.11.3":
+  version: 3.11.3
+  resolution: "use-intl@npm:3.11.3"
   dependencies:
     "@formatjs/ecma402-abstract": "npm:^1.11.4"
     intl-messageformat: "npm:^9.3.18"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/c1dde23e2c9727cc80d7c65a441eeca12d18612a30c369506a9c4d59bd3ddf0f4a5480334898281525473e0cf67cb32afb21dc236cdc9b4efb78439817820d2a
+  checksum: 10c0/b339a3be7bf14fe230d48ba71fdabf56a2bbbf6e8e05456df84caf068fe11c7ff04fe2e969a171076f24801b06abcaca2392a272aa51fda117d4bc2e80e1f8ef
   languageName: node
   linkType: hard
 
