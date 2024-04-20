@@ -4,7 +4,7 @@ import { ISortOptions } from './types/sort';
 export const sortOptions: ISortOptions[] = [
   {
     key: 0,
-    label: 'جدیدترین',
+    label: 'products.sort.items.newest',
     props: {
       field: ProductsOrderByEnum.Date,
       order: OrderEnum.Desc,
@@ -12,7 +12,7 @@ export const sortOptions: ISortOptions[] = [
   },
   {
     key: 1,
-    label: 'پرفروش‌ترین',
+    label: 'products.sort.items.bestSelling',
     props: {
       field: ProductsOrderByEnum.TotalSales,
       order: OrderEnum.Desc,
@@ -20,7 +20,7 @@ export const sortOptions: ISortOptions[] = [
   },
   {
     key: 2,
-    label: 'محبوب‌‌ترین',
+    label: 'products.sort.items.popularity',
     props: {
       field: ProductsOrderByEnum.Rating,
       order: OrderEnum.Desc,
@@ -28,7 +28,7 @@ export const sortOptions: ISortOptions[] = [
   },
   {
     key: 3,
-    label: 'ارزان‌ترین',
+    label: 'products.sort.items.minimumPrice',
     props: {
       field: ProductsOrderByEnum.Price,
       order: OrderEnum.Asc,
@@ -36,7 +36,7 @@ export const sortOptions: ISortOptions[] = [
   },
   {
     key: 4,
-    label: 'گران‌ترین',
+    label: 'products.sort.items.maximumPrice',
     props: {
       field: ProductsOrderByEnum.Price,
       order: OrderEnum.Desc,

@@ -37,5 +37,22 @@
   },
   "units": {
     "price": "تومان"
+  },
+  "products": {
+    "outOfStock": "نا موجود",
+    "filters": {
+      "categories": "دسته‌بندی‌ها",
+      "justInStock": "فقط کالاهای موجود"
+    },
+    "sort": {
+      "title": "مرتب‌سازی",
+      "items": {
+        "newest": "جدیدترین",
+        "bestSelling": "بیشترین فروش",
+        "popularity": "محبوبیت",
+        "minimumPrice": "ارزانترین",
+        "maximumPrice": "گرانترین"
+      }
+    }
   }
 }

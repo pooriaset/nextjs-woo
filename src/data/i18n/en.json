@@ -37,5 +37,22 @@
   },
   "units": {
     "price": "T"
+  },
+  "products": {
+    "outOfStock": "Out of stock",
+    "filters": {
+      "categories": "Categories",
+      "justInStock": "Just in stock"
+    },
+    "sort": {
+      "title": "Sort",
+      "items": {
+        "newest": "Newest",
+        "bestSelling": "Best Selling",
+        "popularity": "Popularity",
+        "minimumPrice": "Minimum Price",
+        "maximumPrice": "Maximum Price"
+      }
+    }
   }
 }

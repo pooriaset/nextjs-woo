@@ -6,9 +6,12 @@ import { Box, Button, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { MouseEventHandler } from 'react';
 import { sortOptions } from '@/static/sortOptions';
+import { useTranslations } from 'next-intl';
 
 const SortRow = () => {
   const { sort, navigate } = useCustomSearchParams();
+
+  const t = useTranslations();
 
   const handleClickOnItem = (value: number) => {
     const func: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -33,7 +36,7 @@ const SortRow = () => {
           fontWeight: 600,
         }}
       >
-        مرتب سازی:
+        {t('products.sort.title')}:
       </Typography>
       {sortOptions.map((option, index) => {
         return (
@@ -46,7 +49,7 @@ const SortRow = () => {
                 option.key === sort ? theme.palette.primary.main : grey[600],
             }}
           >
-            {option.label}
+            {t(option.label)}
           </Button>
         );
       })}

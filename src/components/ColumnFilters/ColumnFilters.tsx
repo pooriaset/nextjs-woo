@@ -15,6 +15,7 @@ import Categories from './components/Categories';
 import { ListItem } from './components/ListItem';
 import { Title } from './components/Title';
 import { ProductCategoryOptions } from './types';
+import { useTranslations } from 'next-intl';
 
 export interface ColumnFiltersProps {
   categories?: ProductCategoryOptions;
@@ -31,6 +32,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ categories }) => {
     navigate('InStock', !inStock);
   };
 
+  const t = useTranslations();
   return (
     <Card
       sx={{
@@ -41,7 +43,9 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ categories }) => {
       <CardContent>
         <List>
           <ListItem disableGutters onClick={handleClick} disableRipple>
-            <ListItemText primary={<Title>دسته‌بندی</Title>} />
+            <ListItemText
+              primary={<Title>{t('products.filters.categories')}</Title>}
+            />
 
             <IconButton size="small">
               {open ? <ExpandLess /> : <ExpandMore />}
@@ -64,7 +68,9 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ categories }) => {
           <Divider />
 
           <ListItem disableGutters disableRipple onClick={handleClickOnInStock}>
-            <ListItemText primary={<Title>فقط کالاهای موجود</Title>} />
+            <ListItemText
+              primary={<Title>{t('products.filters.justInStock')}</Title>}
+            />
             <Switch checked={inStock} />
           </ListItem>
         </List>
