@@ -39,6 +39,11 @@
     "price": "T"
   },
   "products": {
+    "notFound": {
+      "title": "We did not find a product with these filters",
+      "message": "We suggest you change the filters"
+    },
+    "count": "Product(s)",
     "outOfStock": "Out of stock",
     "filters": {
       "categories": "Categories",

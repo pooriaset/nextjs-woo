@@ -1,11 +1,13 @@
 import { Warning } from '@mui/icons-material';
 import { Alert, AlertTitle } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 const NotFoundItem = () => {
+  const t = useTranslations();
   return (
     <Alert variant="outlined" color="warning" icon={<Warning />}>
-      <AlertTitle>کالایی با این مشخصات پیدا نکردیم</AlertTitle>
-      پیشنهاد می‌کنیم فیلترها را تغییر دهید
+      <AlertTitle>{t('products.notFound.title')}</AlertTitle>
+      {t('products.notFound.message')}
     </Alert>
   );
 };
