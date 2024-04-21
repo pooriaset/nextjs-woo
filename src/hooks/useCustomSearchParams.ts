@@ -35,7 +35,7 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
     value,
   ) => {
     const params = new URLSearchParams(searchParams);
-    if (!value || +value < 0) {
+    if (value === undefined || value === null || +value < 0) {
       params.delete(SearchPageParams[key]);
     } else {
       params.set(SearchPageParams[key], value.toString());
@@ -47,7 +47,9 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
   const sort = sortParam ? +sortParam : sortOptions[0].key;
 
   const q = searchParams.get(SearchPageParams.Q);
-  const inStock = searchParams.get(SearchPageParams.InStock) === 'true';
+  const inStock = searchParams.has(SearchPageParams.InStock)
+    ? searchParams.get(SearchPageParams.InStock) === 'true'
+    : true;
   const categoryId = searchParams.get(SearchPageParams.CategoryId);
 
   return {

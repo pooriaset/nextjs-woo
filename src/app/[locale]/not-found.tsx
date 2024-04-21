@@ -1,5 +1,4 @@
 'use client';
-import { ChevronLeft } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { Link as NextLink } from '@/navigation';
 import { useTranslations } from 'next-intl';

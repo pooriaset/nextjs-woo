@@ -25,7 +25,9 @@ const caches: Record<Direction, EmotionCache> = {
 const RTLProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const locale = useLocale();
   return (
-    <CacheProvider value={caches[languages[locale]?.direction ?? 'ltr']}>
+    <CacheProvider
+      value={caches[languages[locale as Locale]?.direction ?? 'ltr']}
+    >
       {children}
     </CacheProvider>
   );
