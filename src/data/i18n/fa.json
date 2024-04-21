@@ -25,7 +25,8 @@
   },
   "buttons": {
     "return": "بازگشت",
-    "products": "محصولات"
+    "products": "محصولات",
+    "homepage": "صفحه اصلی"
   },
   "footer": {
     "links": {
@@ -63,6 +64,11 @@
         "minimumPrice": "ارزانترین",
         "maximumPrice": "گرانترین"
       }
+    }
+  },
+  "pages": {
+    "notfound": {
+      "message": "به نظر آدرس را اشتباه وارد کرده‌اید"
     }
   }
 }

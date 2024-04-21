@@ -25,7 +25,8 @@
   },
   "buttons": {
     "return": "Return",
-    "products": "Products"
+    "products": "Products",
+    "homepage": "Home Page"
   },
   "footer": {
     "links": {
@@ -63,6 +64,11 @@
         "minimumPrice": "Minimum Price",
         "maximumPrice": "Maximum Price"
       }
+    }
+  },
+  "pages": {
+    "notfound": {
+      "message": "The page not found!"
     }
   }
 }

@@ -2,8 +2,10 @@
 import { ChevronLeft } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { Link as NextLink } from '@/navigation';
+import { useTranslations } from 'next-intl';
 
 const NotFound = () => {
+  const t = useTranslations();
   return (
     <Box
       sx={{
@@ -25,15 +27,10 @@ const NotFound = () => {
       >
         404
       </Typography>
-      <Typography variant="h6">به نظر آدرس را اشتباه وارد کرده‌اید.</Typography>
+      <Typography variant="h6">{t('pages.notfound.message')}</Typography>
 
-      <Button
-        variant="outlined"
-        endIcon={<ChevronLeft />}
-        component={NextLink}
-        href="/"
-      >
-        صفحهٔ اول
+      <Button variant="outlined" component={NextLink} href="/">
+        {t('buttons.homepage')}
       </Button>
     </Box>
   );
