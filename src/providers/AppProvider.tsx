@@ -1,15 +1,23 @@
-"use client";
+'use client';
 
-import { appContext } from "@/contexts/appContext";
-import useIsMobile from "@/hooks/useIsMobile";
-import { FC, PropsWithChildren } from "react";
+import { appContext } from '@/contexts/appContext';
+import { Theme, useMediaQuery } from '@mui/material';
+import { FC, PropsWithChildren } from 'react';
+export interface AppProviderProps {
+  userAgent: any;
+}
+const AppProvider: FC<PropsWithChildren<AppProviderProps>> = ({
+  children,
+  userAgent,
+}) => {
+  const inMobileView = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md'),
+  );
 
-const AppProvider: FC<PropsWithChildren> = ({ children }) => {
-  const isMobile = useIsMobile();
   return (
     <appContext.Provider
       value={{
-        isMobile,
+        isMobile: userAgent.device.type === 'mobile' || inMobileView,
       }}
     >
       {children}
