@@ -17,7 +17,6 @@ import {
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import { useTranslations } from 'next-intl';
 
 type PageProps = {
@@ -30,13 +29,11 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const id = params.id;
-  const url = new URL(headers().get('x-url')!);
-  const slug = title.replaceAll(' ', '-');
 
   return {
     title,
     alternates: {
-      canonical: `${url.origin}/products/${id}/${slug}`,
+      canonical: '',
     },
   };
 }
