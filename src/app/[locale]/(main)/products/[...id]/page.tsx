@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
-import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs, {
+  BreadcrumbItem,
+} from '@/components/Breadcrumbs/Breadcrumbs';
 import { BuyBox } from '@/components/BuyBox';
 import { ProductImages } from '@/components/ProductImages';
 import SizeSelector from '@/components/SizeSelector/SizeSelector';
@@ -41,6 +43,16 @@ export async function generateMetadata({
 
 const Page: FC<PageProps> = () => {
   const t = useTranslations();
+  const breadcrumbItems: BreadcrumbItem[] = [
+    {
+      id: 1,
+      title: 'Main Category',
+    },
+    {
+      id: 2,
+      title: 'Sub Category',
+    },
+  ];
   return (
     <Container maxWidth="xl" sx={{ mt: 3 }}>
       <Grid container spacing={2}>
@@ -48,7 +60,7 @@ const Page: FC<PageProps> = () => {
           <ProductImages />
         </Grid>
         <Grid item md={5} xs={12}>
-          <Breadcrumbs />
+          <Breadcrumbs items={breadcrumbItems} />
           <Typography
             variant="h1"
             sx={{

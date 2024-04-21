@@ -15,7 +15,13 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
       spacing={2}
     >
       <Grid item xs={12} md={6} lg={5} xl={3}>
-        {children}
+        <Box
+          sx={{
+            p: 2,
+          }}
+        >
+          {children}
+        </Box>
       </Grid>
     </Grid>
   );

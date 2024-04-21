@@ -1,11 +1,8 @@
-import { Footer } from '@/components/Footer';
-import { Header } from '@/components/Header';
 import RTLProvider from '@/components/common/RTLProvider';
 import { defaultTheme, globalStyles, persianTheme } from '@/config/theme';
 import { Locale, languages } from '@/navigation';
 import { ApolloProvider, AppProvider } from '@/providers';
 import {
-  Box,
   CssBaseline,
   GlobalStyles,
   ThemeOptions,

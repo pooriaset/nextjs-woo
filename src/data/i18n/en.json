@@ -71,6 +71,15 @@
   "pages": {
     "notfound": {
       "message": "The page not found!"
+    },
+    "login": {
+      "title": "Login | Register",
+      "hello": "Hello!",
+      "message": "Please enter your phone number",
+      "buttons": {
+        "login": "Login"
+      },
+      "phoneNumber": "Phone Number"
     }
   },
   "fields": {
