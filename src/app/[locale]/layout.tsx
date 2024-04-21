@@ -45,15 +45,7 @@ export default function LocaleLayout({
           <RTLProvider>
             <NextIntlClientProvider messages={messages} locale={locale}>
               <AppProvider>
-                <Header />
-                <Box
-                  sx={{
-                    pb: { xs: '56px', md: 0 },
-                  }}
-                >
-                  <ApolloProvider>{children}</ApolloProvider>
-                </Box>
-                <Footer />
+                <ApolloProvider>{children}</ApolloProvider>
               </AppProvider>
             </NextIntlClientProvider>
           </RTLProvider>
