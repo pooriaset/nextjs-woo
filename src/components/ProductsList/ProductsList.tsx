@@ -1,11 +1,11 @@
-import { GetAllVariableProductsQuery } from '@/graphql/types/graphql';
+import { GetAllProductsQuery } from '@/graphql/types/graphql';
 import { Grid } from '@mui/material';
 import { FC } from 'react';
 import { VariableProductItem } from '../VariableProductItem';
 import NotFoundItem from '../common/NotFoundItem';
 
 export interface ProductsListProps {
-  items?: NonNullable<GetAllVariableProductsQuery['products']>['nodes'];
+  items?: NonNullable<GetAllProductsQuery['products']>['nodes'];
 }
 const ProductsList: FC<ProductsListProps> = ({ items }) => {
   if (!items?.length) {
