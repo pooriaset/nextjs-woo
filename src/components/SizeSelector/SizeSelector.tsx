@@ -26,6 +26,7 @@ const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
+        minWidth: 150,
       }}
     >
       <FormControl fullWidth size="small">

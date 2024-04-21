@@ -76,15 +76,16 @@ const Page: FC<PageProps> = () => {
               mt: 2,
             }}
           >
-            <Grid item xs={6} md={4} lg={3}>
+            <Grid item>
               <SizeSelector items={[41, 42, 43, 44]} />
             </Grid>
-            <Grid item xs={6} md={4} lg={3}>
+            <Grid item>
               <Button
                 fullWidth
                 variant="outlined"
                 sx={{
                   height: '100%',
+                  minWidth: 'fit-content',
                 }}
               >
                 {t('buttons.findYourSize')}
