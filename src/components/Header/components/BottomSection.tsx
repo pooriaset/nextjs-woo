@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link as NextLink } from '@/navigation';
 
 const BottomSection = () => {
   const t = useTranslations();
@@ -20,7 +20,7 @@ const BottomSection = () => {
       }}
     >
       {pages.map((page) => (
-        <Button LinkComponent={Link} href={page.href} key={page.label}>
+        <Button LinkComponent={NextLink} href={page.href} key={page.label}>
           {page.label}
         </Button>
       ))}

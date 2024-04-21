@@ -42,7 +42,7 @@ export default function LocaleLayout({
         <ThemeProvider theme={themes[locale] ?? defaultTheme}>
           <CssBaseline />
           <GlobalStyles styles={globalStyles} />
-          <RTLProvider locale={locale}>
+          <RTLProvider>
             <NextIntlClientProvider messages={messages} locale={locale}>
               <AppProvider>
                 <Header />

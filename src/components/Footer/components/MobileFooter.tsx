@@ -10,7 +10,7 @@ import MuiBottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link as NextLink } from '@/navigation';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
@@ -64,7 +64,7 @@ const MobileFooter = () => {
           return (
             <BottomNavigationAction
               key={page.label}
-              LinkComponent={Link}
+              LinkComponent={NextLink}
               href={page.href}
               label={page.label}
               icon={page.icon}

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link as NextLink } from '@/navigation';
 
 const Page = () => {
   const t = useTranslations();
@@ -32,9 +32,9 @@ const Page = () => {
         />
       </Box>
       <Typography variant="h6">{t('messages.cart.isEmpty')}</Typography>
-      <Button component={Link} href="/search" variant="outlined">
-        محصولات
-      </Button>
+      <NextLink href="/search">
+        <Button variant="outlined">{t('buttons.products')}</Button>
+      </NextLink>
     </Box>
   );
 };

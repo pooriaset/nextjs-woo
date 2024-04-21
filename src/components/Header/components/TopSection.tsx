@@ -15,8 +15,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
 import { useTranslations } from 'next-intl';
-import NextLink from 'next/link';
 import { DOMAttributes, FC, useState } from 'react';
+import { Link as NextLink } from '@/navigation';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -31,6 +31,7 @@ const Form = styled('form')(({ theme }) => ({
 }));
 
 const TopSection: FC = () => {
+  const t = useTranslations();
   const { inputRef } = useInputFiller();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -54,28 +55,6 @@ const TopSection: FC = () => {
 
   const menuId = 'primary-search-account-menu';
 
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'center',
-        horizontal: 'left',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>پروفایل</MenuItem>
-      <MenuItem onClick={handleMenuClose}>حساب من</MenuItem>
-    </Menu>
-  );
-
-  const t = useTranslations();
   return (
     <>
       <Toolbar disableGutters>
@@ -139,7 +118,28 @@ const TopSection: FC = () => {
           </IconButton>
         </Box>
       </Toolbar>
-      {renderMenu}
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'left',
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>
+          {t('header.user.profile')}
+        </MenuItem>
+        <MenuItem onClick={handleMenuClose}>
+          {t('header.user.myAccount')}
+        </MenuItem>
+      </Menu>
     </>
   );
 };

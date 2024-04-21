@@ -17,10 +17,15 @@
     },
     "search": {
       "placeholder": "Search..."
+    },
+    "user": {
+      "myAccount": "My Account",
+      "profile": "Profile"
     }
   },
   "buttons": {
-    "return": "Return"
+    "return": "Return",
+    "products": "Products"
   },
   "footer": {
     "links": {

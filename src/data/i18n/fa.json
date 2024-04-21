@@ -17,10 +17,15 @@
     },
     "search": {
       "placeholder": "جستجو..."
+    },
+    "user": {
+      "myAccount": "حساب من",
+      "profile": "پروفایل"
     }
   },
   "buttons": {
-    "return": "بازگشت"
+    "return": "بازگشت",
+    "products": "محصولات"
   },
   "footer": {
     "links": {

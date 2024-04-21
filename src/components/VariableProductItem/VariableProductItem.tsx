@@ -6,7 +6,7 @@ import {
   getMinOfRangePrice,
   getProfitPercentage,
 } from '@/utils/price';
-import Link from 'next/link';
+import { Link as NextLink } from '@/navigation';
 import { FC } from 'react';
 import DiscountPercentage from '../common/DiscountPercentage';
 import Image from '../common/Image';
@@ -34,7 +34,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
 
   return (
     <Card
-      component={Link}
+      component={NextLink}
       href={`/products/${data.databaseId}/${data.slug}`}
       sx={{
         display: 'block',

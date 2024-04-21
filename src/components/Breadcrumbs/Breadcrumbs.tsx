@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
-import NextLink from "next/link";
-import * as React from "react";
+import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import { Link as NextLink } from '@/navigation';
+import * as React from 'react';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
