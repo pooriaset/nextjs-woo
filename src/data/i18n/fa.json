@@ -26,7 +26,9 @@
   "buttons": {
     "return": "بازگشت",
     "products": "محصولات",
-    "homepage": "صفحه اصلی"
+    "homepage": "صفحه اصلی",
+    "findYourSize": "سایز من چنده؟",
+    "addToCart": "افزودن به سبد"
   },
   "footer": {
     "links": {
@@ -70,5 +72,8 @@
     "notfound": {
       "message": "به نظر آدرس را اشتباه وارد کرده‌اید"
     }
+  },
+  "fields": {
+    "size": "سایز"
   }
 }

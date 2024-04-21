@@ -16,12 +16,13 @@ import {
 import { grey } from '@mui/material/colors';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
+import { useTranslations } from 'next-intl';
 
 type PageProps = {
   params: { id: string };
 };
 
-const title = 'محصول تست فروشگاه مدل تستی رنگ مشکی';
+const title = 'test_title';
 
 export async function generateMetadata({
   params,
@@ -38,7 +39,8 @@ export async function generateMetadata({
   };
 }
 
-const Page: FC<PageProps> = ({ params }) => {
+const Page: FC<PageProps> = () => {
+  const t = useTranslations();
   return (
     <Container maxWidth="xl" sx={{ mt: 3 }}>
       <Grid container spacing={2}>
@@ -76,7 +78,7 @@ const Page: FC<PageProps> = ({ params }) => {
                   height: '100%',
                 }}
               >
-                سایز من چنده؟
+                {t('buttons.findYourSize')}
               </Button>
             </Grid>
           </Grid>

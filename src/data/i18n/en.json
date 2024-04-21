@@ -26,7 +26,9 @@
   "buttons": {
     "return": "Return",
     "products": "Products",
-    "homepage": "Home Page"
+    "homepage": "Home Page",
+    "findYourSize": "Find Your Size",
+    "addToCart": "Add To Cart"
   },
   "footer": {
     "links": {
@@ -70,5 +72,8 @@
     "notfound": {
       "message": "The page not found!"
     }
+  },
+  "fields": {
+    "size": "Size"
   }
 }

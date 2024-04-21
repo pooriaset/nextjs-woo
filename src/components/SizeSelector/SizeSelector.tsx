@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useTranslations } from 'next-intl';
 import { useState, FC } from 'react';
 
 export interface SizeSelectorProps {
@@ -17,6 +18,8 @@ const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
     setSize(event.target.value);
   };
 
+  const t = useTranslations();
+
   return (
     <Box
       sx={{
@@ -26,12 +29,12 @@ const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
       }}
     >
       <FormControl fullWidth size="small">
-        <InputLabel id="size-select-label">سایز</InputLabel>
+        <InputLabel id="size-select-label">{t('fields.size')}</InputLabel>
         <Select
           labelId="size-select-label"
           id="size-select"
           value={size}
-          label="سایز"
+          label={t('fields.size')}
           onChange={handleChange}
         >
           {items.map((size) => {

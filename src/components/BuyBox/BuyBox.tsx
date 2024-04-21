@@ -1,39 +1,41 @@
-"use client";
+'use client';
 
 import {
   AccountBalanceWalletOutlined,
   LocalShippingOutlined,
-} from "@mui/icons-material";
-import { Box, Button, Divider } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { grey } from "@mui/material/colors";
-import DiscountPercentage from "../common/DiscountPercentage";
-import OldPrice from "../common/OldPrice";
-import PriceLabel from "../common/PriceLabel";
-import { useAppContext } from "@/hooks/useAppContext";
+} from '@mui/icons-material';
+import { Box, Button, Divider } from '@mui/material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import { grey } from '@mui/material/colors';
+import DiscountPercentage from '../common/DiscountPercentage';
+import OldPrice from '../common/OldPrice';
+import PriceLabel from '../common/PriceLabel';
+import { useAppContext } from '@/hooks/useAppContext';
+import { useTranslations } from 'next-intl';
 
 const listItems = [
   {
-    text: "ارسال از دو روز کاری دیگر",
+    text: 'ارسال از دو روز کاری دیگر',
     icon: <LocalShippingOutlined />,
   },
   {
-    text: "5% بازگشت به اعتبار",
+    text: '5% بازگشت به اعتبار',
     icon: <AccountBalanceWalletOutlined />,
   },
 ];
 
 const BuyBox = () => {
   const { isMobile } = useAppContext();
+  const t = useTranslations();
   return (
     <Box
       sx={{
-        display: "flex",
+        display: 'flex',
         gap: 2,
-        flexDirection: "column",
+        flexDirection: 'column',
       }}
     >
       <List>
@@ -70,26 +72,26 @@ const BuyBox = () => {
 
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "end",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'end',
           gap: 1,
         }}
       >
         <Box
           sx={{
-            display: "flex",
+            display: 'flex',
             gap: 0.5,
           }}
         >
-          <OldPrice value={"2560000"} />
+          <OldPrice value={'2560000'} />
           <DiscountPercentage value={37} />
         </Box>
-        <PriceLabel value={"1556400"} />
+        <PriceLabel value={'1556400'} />
       </Box>
       <Box>
         <Button fullWidth variant="contained" color="error" size="large">
-          افزودن به سبد خرید
+          {t('buttons.addToCart')}
         </Button>
       </Box>
     </Box>
