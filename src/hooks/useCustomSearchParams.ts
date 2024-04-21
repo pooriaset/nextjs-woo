@@ -1,7 +1,8 @@
 'use client';
 
+import { useRouter } from '@/navigation';
 import { sortOptions } from '@/static/sortOptions';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 enum SearchPageParams {
   Sort = 'sort',
