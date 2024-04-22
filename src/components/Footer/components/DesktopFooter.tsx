@@ -36,13 +36,9 @@ const Footer = () => {
           align="center"
           sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
         >
-          <Link component={NextLink} href="#">
-            {t('footer.links.aboutUs')}
-          </Link>
+          <Link href="#">{t('footer.links.aboutUs')}</Link>
 
-          <Link component={NextLink} href="#">
-            {t('footer.links.contactUs')}
-          </Link>
+          <Link href="#">{t('footer.links.contactUs')}</Link>
         </Typography>
       </Container>
     </Box>

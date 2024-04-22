@@ -1,6 +1,5 @@
 'use client';
 
-import { Link as NextLink } from '@/navigation';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import type { FC } from 'react';
@@ -23,13 +22,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
         {items.map((item) => {
           const href = '';
           return (
-            <Link
-              key={item.id}
-              variant="body2"
-              component={NextLink}
-              underline="hover"
-              href={href}
-            >
+            <Link key={item.id} variant="body2" underline="hover" href={href}>
               {item.title}
             </Link>
           );

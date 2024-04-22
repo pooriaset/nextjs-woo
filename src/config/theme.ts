@@ -1,6 +1,11 @@
 'use client';
 
-import { createTheme, type GlobalStylesProps } from '@mui/material';
+import { Link } from '@/navigation';
+import {
+  ThemeOptions,
+  createTheme,
+  type GlobalStylesProps,
+} from '@mui/material';
 import { green, grey } from '@mui/material/colors';
 
 export const globalStyles: GlobalStylesProps['styles'] = {
@@ -9,7 +14,7 @@ export const globalStyles: GlobalStylesProps['styles'] = {
   },
 };
 
-const themeOptions = {
+const themeOptions: ThemeOptions = {
   palette: {
     primary: {
       main: green[500],
@@ -19,6 +24,16 @@ const themeOptions = {
     borderRadius: 8,
   },
   components: {
+    MuiLink: {
+      defaultProps: {
+        component: Link,
+      },
+    },
+    MuiBottomNavigationAction: {
+      defaultProps: {
+        component: Link,
+      },
+    },
     MuiCard: {
       defaultProps: {
         elevation: 0,

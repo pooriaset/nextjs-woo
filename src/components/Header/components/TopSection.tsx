@@ -59,7 +59,6 @@ const TopSection: FC = () => {
     <>
       <Toolbar disableGutters>
         <Link
-          component={NextLink}
           href="/"
           sx={{
             display: 'flex',
