@@ -13,13 +13,14 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 type LocaleLayoutProperties = PropsWithChildren<LocaleLayoutParams>;
 
 export const metadata: Metadata = {
-  title: 'Shop app',
-  description: 'Shop app',
+  title: 'NextJs Woo',
+  description: 'NextJs Woo',
 };
 
 export default async function LocaleLayout({
@@ -36,17 +37,19 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={languages?.[locale]?.direction}>
       <body>
-        <ThemeProvider theme={themes[locale] ?? defaultTheme}>
-          <AppProvider userAgent={reqUserAgent}>
-            <CssBaseline />
-            <GlobalStyles styles={globalStyles} />
-            <RTLProvider>
-              <I18nProvider locale={locale}>
-                <ApolloProvider>{children}</ApolloProvider>
-              </I18nProvider>
-            </RTLProvider>
-          </AppProvider>
-        </ThemeProvider>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={themes[locale] ?? defaultTheme}>
+            <AppProvider userAgent={reqUserAgent}>
+              <CssBaseline />
+              <GlobalStyles styles={globalStyles} />
+              <RTLProvider>
+                <I18nProvider locale={locale}>
+                  <ApolloProvider>{children}</ApolloProvider>
+                </I18nProvider>
+              </RTLProvider>
+            </AppProvider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
