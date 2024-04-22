@@ -2,9 +2,10 @@
 
 import { appContext } from '@/contexts/appContext';
 import { Theme, useMediaQuery } from '@mui/material';
+import { userAgent } from 'next/server';
 import { FC, PropsWithChildren } from 'react';
 export interface AppProviderProps {
-  userAgent: any;
+  userAgent: ReturnType<typeof userAgent>;
 }
 const AppProvider: FC<PropsWithChildren<AppProviderProps>> = ({
   children,
