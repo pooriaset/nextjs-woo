@@ -1,6 +1,5 @@
 import { Box, Container, Link, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { Link as NextLink } from '@/navigation';
 
 const Footer = () => {
   const t = useTranslations();
