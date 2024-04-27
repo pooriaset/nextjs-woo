@@ -1,7 +1,10 @@
 'use client';
 
 import Logo from '@/components/common/Logo';
+import { useAppContext } from '@/hooks/useAppContext';
+import { Link } from '@/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Edit, HourglassTopOutlined } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -12,16 +15,14 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useTranslations } from 'next-intl';
-import React, { useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import OtpInput from 'react-otp-input';
 import { grey, red } from '@mui/material/colors';
 import { digitsFaToEn } from '@persian-tools/persian-tools';
-import { Edit } from '@mui/icons-material';
-import { Link } from '@/navigation';
-import { useAppContext } from '@/hooks/useAppContext';
+import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import Countdown from 'react-countdown';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import OtpInput from 'react-otp-input';
+import * as yup from 'yup';
 
 type FieldNames = Partial<Record<'code', any>>;
 
@@ -63,6 +64,8 @@ const Page = () => {
       handleSubmit(onSubmit)();
     }
   }, [code, handleSubmit]);
+
+  const handleClickOnSendAgain = () => {};
 
   return (
     <Card
@@ -113,7 +116,7 @@ const Page = () => {
                   <OtpInput
                     containerStyle={{
                       direction: 'ltr',
-                      justifyContent: 'center',
+                      justifyContent: 'space-between',
                     }}
                     inputStyle={{
                       width: 40,
@@ -145,14 +148,29 @@ const Page = () => {
             }}
           />
           <Stack justifyContent="space-between" direction="row">
-            <Button variant="text" size="small" color="warning">
-              {t('pages.confirm.buttons.sendAgain')}
-            </Button>
+            <Countdown
+              date={Date.now() + 5 * 1000}
+              renderer={(props) => {
+                return (
+                  <Button
+                    color="warning"
+                    variant="outlined"
+                    startIcon={<HourglassTopOutlined />}
+                    disabled={!props.completed}
+                    onClick={handleClickOnSendAgain}
+                  >
+                    {props.completed
+                      ? t('pages.confirm.buttons.sendAgain')
+                      : `${props.minutes}:${props.seconds}`}
+                  </Button>
+                );
+              }}
+            />
+
             <Button
               LinkComponent={Link}
               href="/login"
-              variant="text"
-              size="small"
+              variant="outlined"
               color="warning"
               startIcon={<Edit />}
             >

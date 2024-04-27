@@ -8170,6 +8170,7 @@ __metadata:
     next-intl: "npm:^3.11.1"
     postcss: "npm:^8"
     react: "npm:^18"
+    react-countdown: "npm:^2.3.5"
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.51.3"
     react-otp-input: "npm:^3.1.1"
@@ -9047,6 +9048,18 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: 10c0/900a93d3cdae3acd7d16f642c29a642aea32c2026446151f0778c62ac089d4b8e6c986811076e1ae180a694cedf077d453a11b58ff0a865629a4f82ab558e102
+  languageName: node
+  linkType: hard
+
+"react-countdown@npm:^2.3.5":
+  version: 2.3.5
+  resolution: "react-countdown@npm:2.3.5"
+  dependencies:
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    react: ">= 15"
+    react-dom: ">= 15"
+  checksum: 10c0/894383a2f6d99717b32bc3d52ab6c8c7f01c41105b05bda9aa829f13fc9a3285caec4bf6769ce821f7e6c78a19ed58bb14fb285dd3b5c62487cbcd759bd304cb
   languageName: node
   linkType: hard
 

@@ -84,7 +84,7 @@
     },
     "confirm": {
       "title": "Confirm Code",
-      "enterCodeMessage": "Enter code message {{name}}",
+      "enterCodeMessage": "Enter code message {phoneNumber}",
       "buttons": {
         "edit": "Edit",
         "sendAgain": "Send Again"
