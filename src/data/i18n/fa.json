@@ -77,9 +77,24 @@
       "hello": "سلام!",
       "message": "لطفا شماره موبایل خود را وارد نمایید.",
       "buttons": {
-        "login": "ورود"
+        "login": "ورود",
+        "getTheCode": "دریافت کد"
       },
       "phoneNumber": "شماره موبایل"
+    },
+    "confirm": {
+      "title": "تایید کد",
+      "enterCodeMessage": "کد ارسال شده به شماره موبایل {phoneNumber} را وارد نمایید",
+      "buttons": {
+        "edit": "ویرایش",
+        "sendAgain": "ارسال مجدد"
+      },
+      "messages": {
+        "onlyNumberIsValid": "فقط وارد کردن اعداد مجاز است."
+      },
+      "fields": {
+        "code": "کد"
+      }
     }
   },
   "fields": {

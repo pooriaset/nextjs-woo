@@ -18,6 +18,7 @@ const themeOptions: ThemeOptions = {
   palette: {
     primary: {
       main: green[500],
+      contrastText: '#fff',
     },
   },
   shape: {

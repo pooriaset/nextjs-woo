@@ -2703,6 +2703,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@persian-tools/persian-tools@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "@persian-tools/persian-tools@npm:3.5.2"
+  dependencies:
+    fastest-levenshtein: "npm:^1.0.16"
+  checksum: 10c0/c114ed3011b59856a23134f1c5c5fa0e384d9d98ec6eead1eb80ecbc6643e70976d563bd8ee646b28cc918fd07998686a1f12d35270f1684919f2f03dbe6430c
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -5409,6 +5418,13 @@ __metadata:
   dependencies:
     punycode: "npm:^1.3.2"
   checksum: 10c0/d85c5c409cf0215417380f98a2d29c23a95004d93ff0d8bdf1af5f1a9d1fc608ac89ac6ffe863783d2c73efb3850dd35390feb1de3296f49877bfee0392eb5d3
+  languageName: node
+  linkType: hard
+
+"fastest-levenshtein@npm:^1.0.16":
+  version: 1.0.16
+  resolution: "fastest-levenshtein@npm:1.0.16"
+  checksum: 10c0/7e3d8ae812a7f4fdf8cad18e9cde436a39addf266a5986f653ea0d81e0de0900f50c0f27c6d5aff3f686bcb48acbd45be115ae2216f36a6a13a7dbbf5cad878b
   languageName: node
   linkType: hard
 
@@ -8134,6 +8150,7 @@ __metadata:
     "@mui/icons-material": "npm:^5.15.14"
     "@mui/material": "npm:^5.15.14"
     "@mui/material-nextjs": "npm:^5.15.11"
+    "@persian-tools/persian-tools": "npm:^3.5.2"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -8155,6 +8172,7 @@ __metadata:
     react: "npm:^18"
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.51.3"
+    react-otp-input: "npm:^3.1.1"
     stylis: "npm:^4.3.1"
     stylis-plugin-rtl: "npm:^2.1.1"
     tailwindcss: "npm:^3.3.0"
@@ -9064,6 +9082,16 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: 10c0/6eb5e4b28028c23e2bfcf73371e72cd4162e4ac7ab445ddae2afe24e347a37d6dc22fae6e1748632cd43c6d4f9b8f86dcf26bf9275e1874f436d129952528ae0
+  languageName: node
+  linkType: hard
+
+"react-otp-input@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "react-otp-input@npm:3.1.1"
+  peerDependencies:
+    react: ">=16.8.6 || ^17.0.0 || ^18.0.0"
+    react-dom: ">=16.8.6 || ^17.0.0 || ^18.0.0"
+  checksum: 10c0/0b8c7a1a9c49225c75ed3a91be71512c39761bcd1a6d1e6fdd3afadecade1e3b75dac53717dc72b513fcf4881686e6d498d4b6c1412472f8741c46da01d5a804
   languageName: node
   linkType: hard
 

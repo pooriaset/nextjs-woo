@@ -92,7 +92,7 @@ const Page = () => {
           color="primary"
           size="large"
         >
-          {t('pages.login.buttons.login')}
+          {t('pages.login.buttons.getTheCode')}
         </Button>
       </CardActions>
     </Card>

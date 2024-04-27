@@ -77,9 +77,24 @@
       "hello": "Hello!",
       "message": "Please enter your phone number",
       "buttons": {
-        "login": "Login"
+        "login": "Login",
+        "getTheCode": "Get The Code"
       },
       "phoneNumber": "Phone Number"
+    },
+    "confirm": {
+      "title": "Confirm Code",
+      "enterCodeMessage": "Enter code message {{name}}",
+      "buttons": {
+        "edit": "Edit",
+        "sendAgain": "Send Again"
+      },
+      "messages": {
+        "onlyNumberIsValid": "Only number is valid!"
+      },
+      "fields": {
+        "code": "Code"
+      }
     }
   },
   "fields": {
