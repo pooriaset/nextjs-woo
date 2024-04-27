@@ -1,24 +1,46 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
-import { Box, Stack, TextField, Typography } from '@mui/material';
-import { useTranslations } from 'next-intl';
+'use client';
+
 import Logo from '@/components/common/Logo';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Box, Stack, TextField, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import { useTranslations } from 'next-intl';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+type FieldNames = Partial<Record<'mobileNumber', any>>;
 
 const Page = () => {
   const t = useTranslations();
 
-  const onSubmit = () => {};
+  const labels: Record<keyof FieldNames, string> = {
+    mobileNumber: t('pages.login.phoneNumber'),
+  };
+  const resolveSchema: yup.ObjectSchema<FieldNames> = yup.object({
+    mobileNumber: yup.string().nullable().required().label(labels.mobileNumber),
+  });
+
+  const methods = useForm<FieldNames>({
+    resolver: yupResolver(resolveSchema),
+  });
+
+  const { control, handleSubmit } = methods;
+
+  const onSubmit: SubmitHandler<FieldNames> = (data) => console.log(data);
+
   return (
     <Card
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
       variant="outlined"
       sx={{
         p: 2,
       }}
     >
-      <CardContent component="form" onSubmit={onSubmit}>
+      <CardContent>
         <Stack spacing={1}>
           <Stack spacing={3} justifyContent="center" alignItems="center">
             <Box
@@ -41,11 +63,24 @@ const Page = () => {
             <Typography variant="body2">{t('pages.login.hello')}</Typography>
             <Typography variant="body2">{t('pages.login.message')}</Typography>
           </Stack>
-          <TextField
-            variant="outlined"
-            fullWidth
-            dir="ltr"
-            placeholder={t('pages.login.phoneNumber')}
+
+          <Controller
+            control={control}
+            name="mobileNumber"
+            render={({ field: { name, value }, fieldState: { error } }) => {
+              return (
+                <TextField
+                  name={name}
+                  value={value}
+                  variant="outlined"
+                  fullWidth
+                  dir="ltr"
+                  placeholder={t('pages.login.phoneNumber')}
+                  error={!!error?.message}
+                  helperText={error?.message?.toString()}
+                />
+              );
+            }}
           />
         </Stack>
       </CardContent>
