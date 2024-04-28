@@ -94,7 +94,9 @@
       },
       "fields": {
         "code": "کد"
-      }
+      },
+      "sendAgainText": "تا ارسال مجدد",
+      "seconds": "ثانیه"
     }
   },
   "fields": {

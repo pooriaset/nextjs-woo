@@ -94,7 +94,9 @@
       },
       "fields": {
         "code": "Code"
-      }
+      },
+      "sendAgainText": "to send again",
+      "seconds": "s"
     }
   },
   "fields": {

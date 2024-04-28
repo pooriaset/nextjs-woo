@@ -149,7 +149,7 @@ const Page = () => {
           />
           <Stack justifyContent="space-between" direction="row">
             <Countdown
-              date={Date.now() + 5 * 1000}
+              date={Date.now() + 60 * 1000}
               renderer={(props) => {
                 return (
                   <Button
@@ -158,10 +158,15 @@ const Page = () => {
                     startIcon={<HourglassTopOutlined />}
                     disabled={!props.completed}
                     onClick={handleClickOnSendAgain}
+                    sx={{
+                      width: 'fit-content',
+                    }}
                   >
                     {props.completed
                       ? t('pages.confirm.buttons.sendAgain')
-                      : `${props.minutes}:${props.seconds}`}
+                      : `${props.total / 1000} ${t(
+                          'pages.confirm.seconds',
+                        )} ${t('pages.confirm.sendAgainText')}`}
                   </Button>
                 );
               }}
