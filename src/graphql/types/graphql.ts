@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
@@ -2176,6 +2175,12 @@ export enum ContentTypesOfShippingClassEnum {
   Product = 'PRODUCT'
 }
 
+/** Allowed Content Types of the SliderCategory taxonomy. */
+export enum ContentTypesOfSliderCategoryEnum {
+  /** The Type of Content object */
+  Slider = 'SLIDER'
+}
+
 /** Allowed Content Types of the Tag taxonomy. */
 export enum ContentTypesOfTagEnum {
   /** The Type of Content object */
@@ -3592,6 +3597,31 @@ export type CreateShippingClassPayload = {
   shippingClass?: Maybe<ShippingClass>;
 };
 
+/** Input for the createSliderCategory mutation. */
+export type CreateSliderCategoryInput = {
+  /** The slug that the slider-section will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']['input']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The description of the slider-section object */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The name of the slider-section object to mutate */
+  name: Scalars['String']['input'];
+  /** The ID of the slider-section that should be set as the parent */
+  parentId?: InputMaybe<Scalars['ID']['input']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createSliderCategory mutation. */
+export type CreateSliderCategoryPayload = {
+  __typename?: 'CreateSliderCategoryPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The created slider-section */
+  sliderCategory?: Maybe<SliderCategory>;
+};
+
 /** Input for the createSlider mutation. */
 export type CreateSliderInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -3606,6 +3636,8 @@ export type CreateSliderInput = {
   parentId?: InputMaybe<Scalars['ID']['input']>;
   /** The password used to protect the content of the object */
   password?: InputMaybe<Scalars['String']['input']>;
+  /** Set connections between the slider and sliderCategories */
+  sliderCategories?: InputMaybe<SliderSliderCategoriesInput>;
   /** The slug of the object */
   slug?: InputMaybe<Scalars['String']['input']>;
   /** The status of the object */
@@ -4821,6 +4853,25 @@ export type DeleteShippingClassPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The deleted term object */
   shippingClass?: Maybe<ShippingClass>;
+};
+
+/** Input for the deleteSliderCategory mutation. */
+export type DeleteSliderCategoryInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the sliderCategory to delete */
+  id: Scalars['ID']['input'];
+};
+
+/** The payload for the deleteSliderCategory mutation. */
+export type DeleteSliderCategoryPayload = {
+  __typename?: 'DeleteSliderCategoryPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The deleted term object */
+  sliderCategory?: Maybe<SliderCategory>;
 };
 
 /** Input for the deleteSlider mutation. */
@@ -7681,7 +7732,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Category | Page | Post | ProductCategory | ProductTag | Slider | Tag;
+export type MenuItemObjectUnion = Category | Page | Post | ProductCategory | ProductTag | Slider | SliderCategory | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -15504,6 +15555,8 @@ export type RootMutation = {
   createShippingClass?: Maybe<CreateShippingClassPayload>;
   /** The createSlider mutation */
   createSlider?: Maybe<CreateSliderPayload>;
+  /** The createSliderCategory mutation */
+  createSliderCategory?: Maybe<CreateSliderCategoryPayload>;
   /** The createTag mutation */
   createTag?: Maybe<CreateTagPayload>;
   /** The createUser mutation */
@@ -15546,6 +15599,8 @@ export type RootMutation = {
   deleteShippingClass?: Maybe<DeleteShippingClassPayload>;
   /** The deleteSlider mutation */
   deleteSlider?: Maybe<DeleteSliderPayload>;
+  /** The deleteSliderCategory mutation */
+  deleteSliderCategory?: Maybe<DeleteSliderCategoryPayload>;
   /** The deleteTag mutation */
   deleteTag?: Maybe<DeleteTagPayload>;
   /** The deleteUser mutation */
@@ -15624,6 +15679,8 @@ export type RootMutation = {
   updateShippingMethod?: Maybe<UpdateShippingMethodPayload>;
   /** The updateSlider mutation */
   updateSlider?: Maybe<UpdateSliderPayload>;
+  /** The updateSliderCategory mutation */
+  updateSliderCategory?: Maybe<UpdateSliderCategoryPayload>;
   /** The updateTag mutation */
   updateTag?: Maybe<UpdateTagPayload>;
   /** The updateUser mutation */
@@ -15756,6 +15813,12 @@ export type RootMutationCreateSliderArgs = {
 
 
 /** The root mutation */
+export type RootMutationCreateSliderCategoryArgs = {
+  input: CreateSliderCategoryInput;
+};
+
+
+/** The root mutation */
 export type RootMutationCreateTagArgs = {
   input: CreateTagInput;
 };
@@ -15878,6 +15941,12 @@ export type RootMutationDeleteShippingClassArgs = {
 /** The root mutation */
 export type RootMutationDeleteSliderArgs = {
   input: DeleteSliderInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteSliderCategoryArgs = {
+  input: DeleteSliderCategoryInput;
 };
 
 
@@ -16116,6 +16185,12 @@ export type RootMutationUpdateSliderArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateSliderCategoryArgs = {
+  input: UpdateSliderCategoryInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateTagArgs = {
   input: UpdateTagInput;
 };
@@ -16302,6 +16377,10 @@ export type RootQuery = {
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   sliderBy?: Maybe<Slider>;
+  /** Connection between the RootQuery type and the sliderCategory type */
+  sliderCategories?: Maybe<RootQueryToSliderCategoryConnection>;
+  /** A 0bject */
+  sliderCategory?: Maybe<SliderCategory>;
   /** Connection between the RootQuery type and the slider type */
   sliders?: Maybe<RootQueryToSliderConnection>;
   /** A 0bject */
@@ -16875,6 +16954,23 @@ export type RootQuerySliderByArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   sliderId?: InputMaybe<Scalars['Int']['input']>;
   uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQuerySliderCategoriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToSliderCategoryConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQuerySliderCategoryArgs = {
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<SliderCategoryIdType>;
 };
 
 
@@ -18744,6 +18840,86 @@ export type RootQueryToShippingMethodConnectionPageInfo = PageInfo & ShippingMet
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
   total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Connection between the RootQuery type and the sliderCategory type */
+export type RootQueryToSliderCategoryConnection = Connection & SliderCategoryConnection & {
+  __typename?: 'RootQueryToSliderCategoryConnection';
+  /** Edges for the RootQueryToSliderCategoryConnection connection */
+  edges: Array<RootQueryToSliderCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<SliderCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToSliderCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToSliderCategoryConnectionEdge = Edge & SliderCategoryConnectionEdge & {
+  __typename?: 'RootQueryToSliderCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: SliderCategory;
+};
+
+/** Page Info on the &quot;RootQueryToSliderCategoryConnection&quot; */
+export type RootQueryToSliderCategoryConnectionPageInfo = PageInfo & SliderCategoryConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToSliderCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToSliderCategoryConnection connection */
+export type RootQueryToSliderCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Connection between the RootQuery type and the slider type */
@@ -20792,6 +20968,8 @@ export type Slider = ContentNode & DatabaseIdentifier & HierarchicalContentNode 
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** Whether the object is a node in the preview state */
   previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** Connection between the Slider type and the sliderCategory type */
+  sliderCategories?: Maybe<SliderToSliderCategoryConnection>;
   /**
    * The id field matches the WP_Post-&gt;ID field.
    * @deprecated Deprecated in favor of the databaseId field
@@ -20803,6 +20981,8 @@ export type Slider = ContentNode & DatabaseIdentifier & HierarchicalContentNode 
   status?: Maybe<Scalars['String']['output']>;
   /** The template assigned to a node of content */
   template?: Maybe<ContentTemplate>;
+  /** Connection between the Slider type and the TermNode type */
+  terms?: Maybe<SliderToTermNodeConnection>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']['output']>;
   /** The unique resource identifier path */
@@ -20855,8 +21035,466 @@ export type SliderEnqueuedStylesheetsArgs = {
 
 
 /** The slider type */
+export type SliderSliderCategoriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SliderToSliderCategoryConnectionWhereArgs>;
+};
+
+
+/** The slider type */
+export type SliderTermsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SliderToTermNodeConnectionWhereArgs>;
+};
+
+
+/** The slider type */
 export type SliderTitleArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** The sliderCategory type */
+export type SliderCategory = DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
+  __typename?: 'SliderCategory';
+  /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
+  ancestors?: Maybe<SliderCategoryToAncestorsSliderCategoryConnection>;
+  /** Connection between the sliderCategory type and its children sliderCategories. */
+  children?: Maybe<SliderCategoryToSliderCategoryConnection>;
+  /** Connection between the SliderCategory type and the ContentNode type */
+  contentNodes?: Maybe<SliderCategoryToContentNodeConnection>;
+  /** The number of objects connected to the object */
+  count?: Maybe<Scalars['Int']['output']>;
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** The description of the object */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Connection between the TermNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+  /** Connection between the TermNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+  /** The globally unique ID for the object */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The link to the term */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The human friendly name of the object. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** Connection between the sliderCategory type and its parent sliderCategory. */
+  parent?: Maybe<SliderCategoryToParentSliderCategoryConnectionEdge>;
+  /** Database id of the parent node */
+  parentDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** The globally unique identifier of the parent node. */
+  parentId?: Maybe<Scalars['ID']['output']>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of databaseId
+   */
+  sliderCategoryId?: Maybe<Scalars['Int']['output']>;
+  /** Connection between the SliderCategory type and the slider type */
+  sliders?: Maybe<SliderCategoryToSliderConnection>;
+  /** An alphanumeric identifier for the object unique to its type. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** Connection between the SliderCategory type and the Taxonomy type */
+  taxonomy?: Maybe<SliderCategoryToTaxonomyConnectionEdge>;
+  /** The name of the taxonomy that the object is associated with */
+  taxonomyName?: Maybe<Scalars['String']['output']>;
+  /** The ID of the term group that this term object belongs to */
+  termGroupId?: Maybe<Scalars['Int']['output']>;
+  /** The taxonomy ID that the object is associated with */
+  termTaxonomyId?: Maybe<Scalars['Int']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The sliderCategory type */
+export type SliderCategoryAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The sliderCategory type */
+export type SliderCategoryChildrenArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SliderCategoryToSliderCategoryConnectionWhereArgs>;
+};
+
+
+/** The sliderCategory type */
+export type SliderCategoryContentNodesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SliderCategoryToContentNodeConnectionWhereArgs>;
+};
+
+
+/** The sliderCategory type */
+export type SliderCategoryEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The sliderCategory type */
+export type SliderCategoryEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The sliderCategory type */
+export type SliderCategorySlidersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SliderCategoryToSliderConnectionWhereArgs>;
+};
+
+/** Connection to sliderCategory Nodes */
+export type SliderCategoryConnection = {
+  /** A list of edges (relational context) between RootQuery and connected sliderCategory Nodes */
+  edges: Array<SliderCategoryConnectionEdge>;
+  /** A list of connected sliderCategory Nodes */
+  nodes: Array<SliderCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderCategoryConnectionPageInfo;
+};
+
+/** Edge between a Node and a connected sliderCategory */
+export type SliderCategoryConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected sliderCategory Node */
+  node: SliderCategory;
+};
+
+/** Page Info on the connected SliderCategoryConnectionEdge */
+export type SliderCategoryConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum SliderCategoryIdType {
+  /** The Database ID for the node */
+  DatabaseId = 'DATABASE_ID',
+  /** The hashed Global ID */
+  Id = 'ID',
+  /** The name of the node */
+  Name = 'NAME',
+  /** Url friendly name of the node */
+  Slug = 'SLUG',
+  /** The URI for the node */
+  Uri = 'URI'
+}
+
+/** Connection between the SliderCategory type and the sliderCategory type */
+export type SliderCategoryToAncestorsSliderCategoryConnection = Connection & SliderCategoryConnection & {
+  __typename?: 'SliderCategoryToAncestorsSliderCategoryConnection';
+  /** Edges for the SliderCategoryToAncestorsSliderCategoryConnection connection */
+  edges: Array<SliderCategoryToAncestorsSliderCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<SliderCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderCategoryToAncestorsSliderCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type SliderCategoryToAncestorsSliderCategoryConnectionEdge = Edge & SliderCategoryConnectionEdge & {
+  __typename?: 'SliderCategoryToAncestorsSliderCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: SliderCategory;
+};
+
+/** Page Info on the &quot;SliderCategoryToAncestorsSliderCategoryConnection&quot; */
+export type SliderCategoryToAncestorsSliderCategoryConnectionPageInfo = PageInfo & SliderCategoryConnectionPageInfo & WpPageInfo & {
+  __typename?: 'SliderCategoryToAncestorsSliderCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Connection between the SliderCategory type and the ContentNode type */
+export type SliderCategoryToContentNodeConnection = Connection & ContentNodeConnection & {
+  __typename?: 'SliderCategoryToContentNodeConnection';
+  /** Edges for the SliderCategoryToContentNodeConnection connection */
+  edges: Array<SliderCategoryToContentNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<ContentNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderCategoryToContentNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type SliderCategoryToContentNodeConnectionEdge = ContentNodeConnectionEdge & Edge & {
+  __typename?: 'SliderCategoryToContentNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: ContentNode;
+};
+
+/** Page Info on the &quot;SliderCategoryToContentNodeConnection&quot; */
+export type SliderCategoryToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'SliderCategoryToContentNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Arguments for filtering the SliderCategoryToContentNodeConnection connection */
+export type SliderCategoryToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: InputMaybe<Array<InputMaybe<ContentTypesOfSliderCategoryEnum>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the SliderCategory type and the sliderCategory type */
+export type SliderCategoryToParentSliderCategoryConnectionEdge = Edge & OneToOneConnection & SliderCategoryConnectionEdge & {
+  __typename?: 'SliderCategoryToParentSliderCategoryConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: SliderCategory;
+};
+
+/** Connection between the SliderCategory type and the sliderCategory type */
+export type SliderCategoryToSliderCategoryConnection = Connection & SliderCategoryConnection & {
+  __typename?: 'SliderCategoryToSliderCategoryConnection';
+  /** Edges for the SliderCategoryToSliderCategoryConnection connection */
+  edges: Array<SliderCategoryToSliderCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<SliderCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderCategoryToSliderCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type SliderCategoryToSliderCategoryConnectionEdge = Edge & SliderCategoryConnectionEdge & {
+  __typename?: 'SliderCategoryToSliderCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: SliderCategory;
+};
+
+/** Page Info on the &quot;SliderCategoryToSliderCategoryConnection&quot; */
+export type SliderCategoryToSliderCategoryConnectionPageInfo = PageInfo & SliderCategoryConnectionPageInfo & WpPageInfo & {
+  __typename?: 'SliderCategoryToSliderCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Arguments for filtering the SliderCategoryToSliderCategoryConnection connection */
+export type SliderCategoryToSliderCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the SliderCategory type and the slider type */
+export type SliderCategoryToSliderConnection = Connection & SliderConnection & {
+  __typename?: 'SliderCategoryToSliderConnection';
+  /** Edges for the SliderCategoryToSliderConnection connection */
+  edges: Array<SliderCategoryToSliderConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Slider>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderCategoryToSliderConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type SliderCategoryToSliderConnectionEdge = Edge & SliderConnectionEdge & {
+  __typename?: 'SliderCategoryToSliderConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Slider;
+};
+
+/** Page Info on the &quot;SliderCategoryToSliderConnection&quot; */
+export type SliderCategoryToSliderConnectionPageInfo = PageInfo & SliderConnectionPageInfo & WpPageInfo & {
+  __typename?: 'SliderCategoryToSliderConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Arguments for filtering the SliderCategoryToSliderConnection connection */
+export type SliderCategoryToSliderConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Connection between the SliderCategory type and the Taxonomy type */
+export type SliderCategoryToTaxonomyConnectionEdge = Edge & OneToOneConnection & TaxonomyConnectionEdge & {
+  __typename?: 'SliderCategoryToTaxonomyConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Taxonomy;
 };
 
 /** Connection to slider Nodes */
@@ -20900,6 +21538,26 @@ export enum SliderIdType {
   Uri = 'URI'
 }
 
+/** Set relationships between the slider to sliderCategories */
+export type SliderSliderCategoriesInput = {
+  /** If true, this will append the sliderCategory to existing related sliderCategories. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<SliderSliderCategoriesNodeInput>>>;
+};
+
+/** List of sliderCategories to connect the slider to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type SliderSliderCategoriesNodeInput = {
+  /** The description of the sliderCategory. This field is used to set a description of the sliderCategory if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the sliderCategory. If present, this will be used to connect to the slider. If no existing sliderCategory exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** The name of the sliderCategory. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the sliderCategory. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** Connection between the Slider type and the slider type */
 export type SliderToPreviewConnectionEdge = Edge & OneToOneConnection & SliderConnectionEdge & {
   __typename?: 'SliderToPreviewConnectionEdge';
@@ -20907,6 +21565,168 @@ export type SliderToPreviewConnectionEdge = Edge & OneToOneConnection & SliderCo
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: Slider;
+};
+
+/** Connection between the Slider type and the sliderCategory type */
+export type SliderToSliderCategoryConnection = Connection & SliderCategoryConnection & {
+  __typename?: 'SliderToSliderCategoryConnection';
+  /** Edges for the SliderToSliderCategoryConnection connection */
+  edges: Array<SliderToSliderCategoryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<SliderCategory>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderToSliderCategoryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type SliderToSliderCategoryConnectionEdge = Edge & SliderCategoryConnectionEdge & {
+  __typename?: 'SliderToSliderCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: SliderCategory;
+};
+
+/** Page Info on the &quot;SliderToSliderCategoryConnection&quot; */
+export type SliderToSliderCategoryConnectionPageInfo = PageInfo & SliderCategoryConnectionPageInfo & WpPageInfo & {
+  __typename?: 'SliderToSliderCategoryConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Arguments for filtering the SliderToSliderCategoryConnection connection */
+export type SliderToSliderCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Connection between the Slider type and the TermNode type */
+export type SliderToTermNodeConnection = Connection & TermNodeConnection & {
+  __typename?: 'SliderToTermNodeConnection';
+  /** Edges for the SliderToTermNodeConnection connection */
+  edges: Array<SliderToTermNodeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<TermNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: SliderToTermNodeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type SliderToTermNodeConnectionEdge = Edge & TermNodeConnectionEdge & {
+  __typename?: 'SliderToTermNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: TermNode;
+};
+
+/** Page Info on the &quot;SliderToTermNodeConnection&quot; */
+export type SliderToTermNodeConnectionPageInfo = PageInfo & TermNodeConnectionPageInfo & WpPageInfo & {
+  __typename?: 'SliderToTermNodeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Arguments for filtering the SliderToTermNodeConnection connection */
+export type SliderToTermNodeConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']['input']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']['input']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']['input']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']['input']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** The Taxonomy to filter terms by */
+  taxonomies?: InputMaybe<Array<InputMaybe<TaxonomyEnum>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomyId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Single stock status count */
@@ -21512,6 +22332,8 @@ export enum TaxonomyEnum {
   Producttype = 'PRODUCTTYPE',
   /** Taxonomy enum product_shipping_class */
   Shippingclass = 'SHIPPINGCLASS',
+  /** Taxonomy enum slider-section */
+  Slidercategory = 'SLIDERCATEGORY',
   /** Taxonomy enum post_tag */
   Tag = 'TAG',
   /** Taxonomy enum product_visibility */
@@ -22590,6 +23412,33 @@ export type UpdateShippingMethodPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
 };
 
+/** Input for the updateSliderCategory mutation. */
+export type UpdateSliderCategoryInput = {
+  /** The slug that the slider-section will be an alias of */
+  aliasOf?: InputMaybe<Scalars['String']['input']>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The description of the slider-section object */
+  description?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the sliderCategory object to update */
+  id: Scalars['ID']['input'];
+  /** The name of the slider-section object to mutate */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the slider-section that should be set as the parent */
+  parentId?: InputMaybe<Scalars['ID']['input']>;
+  /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateSliderCategory mutation. */
+export type UpdateSliderCategoryPayload = {
+  __typename?: 'UpdateSliderCategoryPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The created slider-section */
+  sliderCategory?: Maybe<SliderCategory>;
+};
+
 /** Input for the updateSlider mutation. */
 export type UpdateSliderInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -22608,6 +23457,8 @@ export type UpdateSliderInput = {
   parentId?: InputMaybe<Scalars['ID']['input']>;
   /** The password used to protect the content of the object */
   password?: InputMaybe<Scalars['String']['input']>;
+  /** Set connections between the slider and sliderCategories */
+  sliderCategories?: InputMaybe<SliderSliderCategoriesInput>;
   /** The slug of the object */
   slug?: InputMaybe<Scalars['String']['input']>;
   /** The status of the object */
@@ -24609,12 +25460,12 @@ export type GetAllProductsQueryVariables = Exact<{
 
 export type GetAllProductsQuery = { __typename?: 'RootQuery', products?: { __typename?: 'RootQueryToProductUnionConnection', pageInfo: { __typename?: 'RootQueryToProductUnionConnectionPageInfo', total?: number | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes: Array<{ __typename: 'ExternalProduct' } | { __typename: 'GroupProduct' } | { __typename: 'SimpleProduct' } | { __typename: 'SimpleProductVariation' } | { __typename: 'VariableProduct', databaseId: number, name?: string | null, onSale?: boolean | null, type?: ProductTypesEnum | null, averageRating?: number | null, slug?: string | null, price?: string | null, regularPrice?: string | null, salePrice?: string | null, stockStatus?: StockStatusEnum | null, image?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null }> } | null };
 
-export type GetSlidersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetHomePageSlidersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSlidersQuery = { __typename?: 'RootQuery', sliders?: { __typename?: 'RootQueryToSliderConnection', edges: Array<{ __typename?: 'RootQueryToSliderConnectionEdge', node: { __typename?: 'Slider', title?: string | null, id: number, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', id: number, url?: string | null } } | null } }> } | null };
+export type GetHomePageSlidersQuery = { __typename?: 'RootQuery', sliderCategories?: { __typename?: 'RootQueryToSliderCategoryConnection', nodes: Array<{ __typename?: 'SliderCategory', sliders?: { __typename?: 'SliderCategoryToSliderConnection', edges: Array<{ __typename?: 'SliderCategoryToSliderConnectionEdge', node: { __typename?: 'Slider', title?: string | null, id: number, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node: { __typename?: 'MediaItem', id: number, url?: string | null } } | null } }> } | null }> } | null };
 
 
 export const CategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","alias":{"kind":"Name","value":"parentId"},"name":{"kind":"Name","value":"parentDatabaseId"}}]}}]}}]}}]} as unknown as DocumentNode<CategoriesQuery, CategoriesQueryVariables>;
 export const GetAllProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllProducts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stockStatus"}},"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"StockStatusEnum"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ProductsOrderbyInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"categoryIdIn"}},"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"q"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"products"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"stockStatus"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stockStatus"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"orderby"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"categoryIdIn"},"value":{"kind":"Variable","name":{"kind":"Name","value":"categoryIdIn"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"q"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"VariableProduct"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"onSale"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"averageRating"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"salePrice"}},{"kind":"Field","name":{"kind":"Name","value":"stockStatus"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllProductsQuery, GetAllProductsQueryVariables>;
-export const GetSlidersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSliders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sliders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","alias":{"kind":"Name","value":"url"},"name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSlidersQuery, GetSlidersQueryVariables>;
+export const GetHomePageSlidersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetHomePageSliders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sliderCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"StringValue","value":"homepage","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sliders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","alias":{"kind":"Name","value":"url"},"name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetHomePageSlidersQuery, GetHomePageSlidersQueryVariables>;

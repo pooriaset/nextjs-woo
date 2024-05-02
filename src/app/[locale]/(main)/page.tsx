@@ -1,23 +1,29 @@
 import { Carousel } from '@/components/Carousel';
 import { ICarouselItem } from '@/components/Carousel/Carousel';
 import { getClient } from '@/graphql/clients/serverSideClient';
-import { GET_ALL_SLIDER_ITEMS_QUERY } from '@/graphql/queries/sliders';
-import { GetSlidersQuery } from '@/graphql/types/graphql';
+import { GET_HOMEPAGE_SLIDERS } from '@/graphql/queries/sliders';
+import { GetHomePageSlidersQuery } from '@/graphql/types/graphql';
 import { Container, Grid } from '@mui/material';
 
 const getSliders = async () => {
-  const { data } = await getClient().query<GetSlidersQuery>({
-    query: GET_ALL_SLIDER_ITEMS_QUERY,
+  const { data } = await getClient().query<GetHomePageSlidersQuery>({
+    query: GET_HOMEPAGE_SLIDERS,
   });
 
-  const items =
-    data.sliders?.edges?.map((item) => {
-      return {
-        id: item.node.id,
-        title: item.node.title,
-        imageUrl: item.node.featuredImage?.node.url,
-      } as ICarouselItem;
-    }) ?? [];
+  const items: ICarouselItem[] = [];
+  data?.sliderCategories?.nodes?.map((item) => {
+    item.sliders?.edges.forEach((edge) => {
+      if (edge.node.featuredImage?.node.url) {
+        const item: ICarouselItem = {
+          id: edge.node.id,
+          title: edge.node.title || '',
+          imageUrl: edge.node.featuredImage.node.url,
+        };
+        items.push(item);
+      }
+    });
+  });
+
   return items;
 };
 
