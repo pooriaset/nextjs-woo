@@ -4081,6 +4081,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.2.5":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
+  languageName: node
+  linkType: hard
+
 "clean-stack@npm:^2.0.0":
   version: 2.2.0
   resolution: "clean-stack@npm:2.2.0"
@@ -8174,8 +8181,10 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.51.3"
     react-otp-input: "npm:^3.1.1"
+    react-responsive-carousel: "npm:^3.2.23"
     stylis: "npm:^4.3.1"
     stylis-plugin-rtl: "npm:^2.1.1"
+    swiper: "npm:^11.1.1"
     tailwindcss: "npm:^3.3.0"
     ts-jest: "npm:^29.1.2"
     typescript: "npm:5.4"
@@ -8989,7 +8998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.8, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -9075,6 +9084,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-easy-swipe@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "react-easy-swipe@npm:0.0.21"
+  dependencies:
+    prop-types: "npm:^15.5.8"
+  checksum: 10c0/f1831df379dfb5074b546de48f42db270bc1e97367342d07bb3fce07f4799a8d33d5e5a605b1b12243087d0eb0ab0fecc1fa0ade49c487b8504217824f3f2ad0
+  languageName: node
+  linkType: hard
+
 "react-hook-form@npm:^7.51.3":
   version: 7.51.3
   resolution: "react-hook-form@npm:7.51.3"
@@ -9105,6 +9123,17 @@ __metadata:
     react: ">=16.8.6 || ^17.0.0 || ^18.0.0"
     react-dom: ">=16.8.6 || ^17.0.0 || ^18.0.0"
   checksum: 10c0/0b8c7a1a9c49225c75ed3a91be71512c39761bcd1a6d1e6fdd3afadecade1e3b75dac53717dc72b513fcf4881686e6d498d4b6c1412472f8741c46da01d5a804
+  languageName: node
+  linkType: hard
+
+"react-responsive-carousel@npm:^3.2.23":
+  version: 3.2.23
+  resolution: "react-responsive-carousel@npm:3.2.23"
+  dependencies:
+    classnames: "npm:^2.2.5"
+    prop-types: "npm:^15.5.8"
+    react-easy-swipe: "npm:^0.0.21"
+  checksum: 10c0/47957d48898f550cfc7e3517ad755a4dd94ce78630480310db58ec5896de6d6f3c1ed253347432bee889860036a15e32b508cb19b121c4cdd634e78e6fe83064
   languageName: node
   linkType: hard
 
@@ -10165,6 +10194,13 @@ __metadata:
   dependencies:
     tslib: "npm:^2.0.3"
   checksum: 10c0/6a47c1926e06395ead750905e103be388aeec8c9697f20b14bc3e1e86fcb4fc78e5033197afe6cc8bbed80f0a4ee1f184b0fa22eec7f4a767bdfd278683d52eb
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "swiper@npm:11.1.1"
+  checksum: 10c0/02ded86e5033dbac47bbaa5e5592e15e945be990235f244236ddb2b8d6299cf6e66f1a45ad67277b1a133295daa5c7bad38e9c725b6d00b72d33431603202288
   languageName: node
   linkType: hard
 

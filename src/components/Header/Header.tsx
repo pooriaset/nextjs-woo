@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { AppBar, Container } from "@mui/material";
-import { DesktopView, MobileView } from "./components";
-import { Suspense } from "react";
-import { useAppContext } from "@/hooks/useAppContext";
+import { AppBar, Container } from '@mui/material';
+import { DesktopView, MobileView } from './components';
+import { Suspense } from 'react';
+import { useAppContext } from '@/hooks/useAppContext';
 
 const Header = () => {
   const { isMobile } = useAppContext();
@@ -12,12 +12,13 @@ const Header = () => {
       elevation={0}
       position="static"
       sx={{
-        borderBottom: "2px solid",
+        borderBottom: '2px solid',
         borderColor: (theme) => theme.palette.divider,
-        position: "sticky",
+        position: 'sticky',
         top: 0,
         zIndex: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
+        mb: 2,
       }}
     >
       <Container maxWidth="xl">
