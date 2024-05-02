@@ -11,3 +11,20 @@ export const GET_ALL_CATEGORIES_QUERY = gql`
     }
   }
 `;
+
+export const GET_MAIN_CATEGORIES = gql`
+  query GetMainCategories {
+    productCategories(where: { parent: null, orderby: TERM_ORDER }) {
+      edges {
+        node {
+          id: databaseId
+          name
+          image {
+            id: databaseId
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
