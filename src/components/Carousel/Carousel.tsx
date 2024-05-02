@@ -21,7 +21,16 @@ const ImageWithDimensions: FC<ImageProps> = ({ alt, ...props }) => {
   );
 };
 
-const Carousel = () => {
+export interface ICarouselItem {
+  id: number | string;
+  title: string;
+  imageUrl: string;
+}
+export interface CarouselProps {
+  items: ICarouselItem[];
+}
+
+const Carousel: FC<CarouselProps> = ({ items }) => {
   return (
     <Box
       sx={{
@@ -36,13 +45,14 @@ const Carousel = () => {
         showStatus={false}
         className="react-carousel"
       >
-        {new Array(5).fill(1).map((image, index) => {
+        {items.map((item) => {
+          const key = `Image ${item.id}`;
           return (
             <Box
-              key={index.toString()}
+              key={key}
               component={ImageWithDimensions}
-              src="https://via.placeholder.com/2880x600"
-              alt={index.toString()}
+              src={item.imageUrl}
+              alt={item.title || key}
               sx={{
                 borderRadius: 1,
               }}
