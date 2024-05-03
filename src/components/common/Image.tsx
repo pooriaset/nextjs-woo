@@ -19,6 +19,7 @@ const Image: FC<ImageProps> = ({ width, height, ...props }) => {
           width={width}
           height={height}
           sx={{
+            minWidth: width,
             maxWidth: '100%',
           }}
         />

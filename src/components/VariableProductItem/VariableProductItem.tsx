@@ -9,7 +9,7 @@ import {
 import { Link as NextLink } from '@/navigation';
 import { FC } from 'react';
 import DiscountPercentage from '../common/DiscountPercentage';
-import Image from '../common/Image';
+import Image from 'next/image';
 import OldPrice from '../common/OldPrice';
 import PriceLabel from '../common/PriceLabel';
 import { VariableProduct } from './types';
@@ -60,11 +60,10 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
           <Image
             height={size}
             width={size}
-            src={data.image?.sourceUrl as string}
+            src={data.image?.sourceUrl!}
             alt="Product Image"
             style={{
               objectFit: 'contain',
-              display: 'block',
               width: isMobile ? 120 : '100%',
             }}
           />
@@ -82,7 +81,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
             <Typography
               variant="body2"
               sx={{
-                whiteSpace: 'nowrap',
+                whiteSpace: !isMobile ? 'nowrap' : null,
                 textOverflow: 'ellipsis',
                 overflow: 'hidden',
               }}

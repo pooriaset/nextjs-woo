@@ -42,6 +42,14 @@ const Carousel: FC<CarouselProps> = ({ items }) => {
           left: '50%',
           transform: 'translateX(-50%)',
           width: 'fit-content',
+          transition: 'all 200ms ease',
+        },
+        '& .dot': {
+          margin: (theme) => `${theme.spacing(0, 1 / 2)} !important`,
+        },
+        '& .dot.selected': {
+          width: 16,
+          borderRadius: 1,
         },
       }}
     >

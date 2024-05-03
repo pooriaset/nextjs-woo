@@ -56,7 +56,7 @@ export default async function Home() {
 
   return (
     <main>
-      <Container>
+      <Container maxWidth="xl">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Carousel items={sliders} />

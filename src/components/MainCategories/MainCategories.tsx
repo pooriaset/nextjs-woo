@@ -22,7 +22,7 @@ const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
         params.set('categoryId', item.id.toString());
 
         return (
-          <Grid key={item.id} item xs={12} md={4} lg={3} xl={3}>
+          <Grid key={item.id} item xs={12} md={3}>
             <Link href={`/search?${params.toString()}`}>
               <Stack spacing={1} alignItems="end">
                 <Box
