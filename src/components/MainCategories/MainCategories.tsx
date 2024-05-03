@@ -18,9 +18,12 @@ const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
   return (
     <Grid container spacing={2} justifyContent="center">
       {items.map((item) => {
+        const params = new URLSearchParams();
+        params.set('categoryId', item.id.toString());
+
         return (
           <Grid key={item.id} item xs={12} md={4} lg={3} xl={3}>
-            <Link href={`/category/${item.id}`}>
+            <Link href={`/search?${params.toString()}`}>
               <Stack spacing={1} alignItems="end">
                 <Box
                   width="100%"
