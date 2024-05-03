@@ -3,15 +3,16 @@ import { gql } from '@apollo/client';
 /**
  * Fetch Woocommerce products from GraphQL
  */
-export const GET_ALL_VARIABLE_PRODUCTS_QUERY = gql`
+export const GET_VARIABLE_PRODUCTS_QUERY = gql`
   query GetAllProducts(
     $stockStatus: [StockStatusEnum]
     $orderBy: [ProductsOrderbyInput]
     $categoryIdIn: [Int]
     $q: String
+    $first: Int
   ) {
     products(
-      first: 10
+      first: $first
       where: {
         stockStatus: $stockStatus
         orderby: $orderBy

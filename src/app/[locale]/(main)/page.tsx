@@ -1,13 +1,18 @@
+import BestSellingProducts from '@/components/BestSellingProducts/BestSellingProducts';
 import { Carousel } from '@/components/Carousel';
 import { ICarouselItem } from '@/components/Carousel/Carousel';
 import { MainCategories } from '@/components/MainCategories';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
+import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import { GET_HOMEPAGE_SLIDERS } from '@/graphql/queries/sliders';
 import {
+  GetAllProductsQuery,
   GetHomePageSlidersQuery,
   GetMainCategoriesQuery,
+  StockStatusEnum,
 } from '@/graphql/types/graphql';
+import { bestSellingSortOption } from '@/static/sortOptions';
 import { Container, Grid } from '@mui/material';
 
 const getSliders = async () => {
@@ -50,9 +55,25 @@ const getCategories = async () => {
   return items;
 };
 
+const getBestSellingProducts = async () => {
+  const { data } = await getClient().query<GetAllProductsQuery>({
+    query: GET_VARIABLE_PRODUCTS_QUERY,
+    variables: {
+      q: null,
+      stockStatus: StockStatusEnum.InStock,
+      categoryIdIn: null,
+      orderBy: [bestSellingSortOption.props],
+      first: 10,
+    },
+  });
+
+  return data.products?.nodes;
+};
+
 export default async function Home() {
   const sliders = await getSliders();
   const categories = await getCategories();
+  const bestSellingProducts = await getBestSellingProducts();
 
   return (
     <main>
@@ -63,6 +84,9 @@ export default async function Home() {
           </Grid>
           <Grid item xs={12}>
             <MainCategories items={categories} />
+          </Grid>
+          <Grid item xs={12}>
+            <BestSellingProducts items={bestSellingProducts} />
           </Grid>
         </Grid>
       </Container>

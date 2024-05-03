@@ -6,7 +6,7 @@ import ProductsCount from '@/components/ProductsCount/ProductsCount';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import SortRow from '@/components/SortRow/SortRow';
 import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
-import { GET_ALL_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
+import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import {
   CategoriesQuery,
   GetAllProductsQuery,
@@ -26,14 +26,15 @@ const Page = () => {
   const { inStock, categoryId, q, sort } = useCustomSearchParams();
 
   const { data } = useSuspenseQuery<GetAllProductsQuery>(
-    GET_ALL_VARIABLE_PRODUCTS_QUERY,
+    GET_VARIABLE_PRODUCTS_QUERY,
     {
-      queryKey: ['GET_SEARCH_2_PAGE_PRODUCTS'],
+      queryKey: ['GET_SEARCH_PAGE_PRODUCTS'],
       variables: {
         stockStatus: inStock ? StockStatusEnum.InStock : null,
         categoryIdIn: categoryId ? [+categoryId] : null,
         q,
         orderBy: [sortOptions.find((item) => item.key === sort)?.props],
+        first: 10,
       },
     },
   );
