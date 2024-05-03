@@ -1,7 +1,8 @@
 import BestSellingProducts from '@/components/BestSellingProducts/BestSellingProducts';
 import { Carousel } from '@/components/Carousel';
-import { ICarouselItem } from '@/components/Carousel/Carousel';
 import { MainCategories } from '@/components/MainCategories';
+import { SliderItem } from '@/components/SliderItem';
+import { ISliderItem } from '@/components/SliderItem/SliderItem';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
@@ -20,11 +21,11 @@ const getSliders = async () => {
     query: GET_HOMEPAGE_SLIDERS,
   });
 
-  const items: ICarouselItem[] = [];
+  const items: ISliderItem[] = [];
   data?.sliderCategories?.nodes?.map((item) => {
     item.sliders?.edges.forEach((edge) => {
       if (edge.node.featuredImage?.node.url) {
-        const item: ICarouselItem = {
+        const item: ISliderItem = {
           id: edge.node.id,
           title: edge.node.title || '',
           imageUrl: edge.node.featuredImage.node.url,
@@ -80,7 +81,18 @@ export default async function Home() {
       <Container maxWidth="xl">
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Carousel items={sliders} />
+            <Carousel
+              CarouselProps={{
+                autoPlay: true,
+                infiniteLoop: true,
+                showStatus: false,
+                showThumbs: false,
+              }}
+            >
+              {sliders.map((item) => {
+                return <SliderItem key={item.id.toString()} item={item} />;
+              })}
+            </Carousel>
           </Grid>
           <Grid item xs={12}>
             <MainCategories items={categories} />
