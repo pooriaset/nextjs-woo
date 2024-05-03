@@ -8,11 +8,36 @@ import {
 } from '@mui/material';
 import { green, grey } from '@mui/material/colors';
 
-export const globalStyles: GlobalStylesProps['styles'] = {
+export const globalStyles: GlobalStylesProps['styles'] = (theme) => ({
   a: {
     textDecoration: 'none !important',
   },
-};
+  ':root': {
+    '--swiper-pagination-color': '#fff',
+    '--swiper-navigation-color': '#fff',
+    '--swiper-navigation-size': 28,
+  },
+  '.swiper-button-next,.swiper-button-prev': {
+    '--swiper-navigation-top-offset': '90%',
+    textShadow: '0px 0px 4px ' + grey[500],
+    backgroundColor: '#fff',
+    color: grey[700],
+    borderRadius: '50%',
+    width: 36,
+    height: 36,
+    transform: 'translate(0, -50%)',
+  },
+  '.swiper-pagination': {
+    left: '50% !important',
+    transform: 'translateX(-50%)',
+    width: 'fit-content !important',
+    transition: 'all 200ms ease',
+  },
+  '.swiper-pagination-bullet.swiper-pagination-bullet-active': {
+    width: 16,
+    borderRadius: 8,
+  },
+});
 
 const themeOptions: ThemeOptions = {
   palette: {

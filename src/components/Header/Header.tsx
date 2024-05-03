@@ -16,7 +16,7 @@ const Header = () => {
         borderColor: (theme) => theme.palette.divider,
         position: 'sticky',
         top: 0,
-        zIndex: 1,
+        zIndex: 10,
         backgroundColor: '#ffffff',
         mb: 2,
       }}
