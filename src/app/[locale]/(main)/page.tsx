@@ -1,7 +1,7 @@
 import BestSellingProducts from '@/components/BestSellingProducts/BestSellingProducts';
 import { HomePageSlider } from '@/components/HomePageSlider';
-import { MainCategories } from '@/components/MainCategories';
 import { IHomePageSliderItem } from '@/components/HomePageSlider/types';
+import { MainCategories } from '@/components/MainCategories';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
@@ -14,6 +14,10 @@ import {
 } from '@/graphql/types/graphql';
 import { bestSellingSortOption } from '@/static/sortOptions';
 import { Container, Grid } from '@mui/material';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const getSliders = async () => {
   const { data } = await getClient().query<GetHomePageSlidersQuery>({

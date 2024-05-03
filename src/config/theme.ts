@@ -18,8 +18,9 @@ export const globalStyles: GlobalStylesProps['styles'] = (theme) => ({
     '--swiper-navigation-size': 28,
   },
   '.swiper-button-next,.swiper-button-prev': {
-    '--swiper-navigation-top-offset': '90%',
     textShadow: '0px 0px 4px ' + grey[500],
+    border: '1px solid',
+    borderColor: theme.palette.divider,
     backgroundColor: '#fff',
     color: grey[700],
     borderRadius: '50%',

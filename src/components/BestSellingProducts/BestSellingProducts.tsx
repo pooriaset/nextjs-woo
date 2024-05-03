@@ -1,26 +1,28 @@
 'use client';
 
 import { GetAllProductsQuery } from '@/graphql/types/graphql';
-import { Grid } from '@mui/material';
+import { Card, CardContent, CardHeader } from '@mui/material';
 import { FC } from 'react';
-import { VariableProductItem } from '../VariableProductItem';
+import Slider from './components/Slider';
+import { useTranslations } from 'next-intl';
 
 export interface BestSellingProductsProps {
   items?: NonNullable<GetAllProductsQuery['products']>['nodes'];
 }
 const BestSellingProducts: FC<BestSellingProductsProps> = ({ items }) => {
+  const t = useTranslations();
   return (
-    <Grid container spacing={1}>
-      {items?.map((product) => {
-        if (product.__typename === 'VariableProduct') {
-          return (
-            <Grid key={product.databaseId} item xs={12} md={6} lg={3} xl={2}>
-              <VariableProductItem data={product} />
-            </Grid>
-          );
-        }
-      })}
-    </Grid>
+    <Card variant="outlined">
+      <CardHeader
+        title={t('header.navigation.bestSelling')}
+        sx={{
+          textAlign: 'center',
+        }}
+      />
+      <CardContent>
+        <Slider items={items} />
+      </CardContent>
+    </Card>
   );
 };
 
