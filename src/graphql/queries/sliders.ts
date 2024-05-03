@@ -12,6 +12,7 @@ export const GET_HOMEPAGE_SLIDERS = gql`
             node {
               id: databaseId
               title
+              url
               featuredImage {
                 node {
                   id: databaseId

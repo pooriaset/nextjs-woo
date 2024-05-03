@@ -1,10 +1,10 @@
 'use client';
 
-import React, { FC } from 'react';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
-import { Carousel as ReactCarousel } from 'react-responsive-carousel';
+import { Box, Link } from '@mui/material';
 import Image, { ImageProps } from 'next/image';
-import { Box } from '@mui/material';
+import { FC } from 'react';
+import { Carousel as ReactCarousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
 const ImageWithDimensions: FC<ImageProps> = ({ alt, ...props }) => {
   return (
@@ -25,6 +25,7 @@ export interface ICarouselItem {
   id: number | string;
   title: string;
   imageUrl: string;
+  url?: string | null;
 }
 export interface CarouselProps {
   items: ICarouselItem[];
@@ -37,26 +38,40 @@ const Carousel: FC<CarouselProps> = ({ items }) => {
         '& .react-carousel': {
           direction: 'initial',
         },
+        '& .control-dots': {
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 'fit-content',
+        },
       }}
     >
       <ReactCarousel
         autoPlay
         infiniteLoop
         showStatus={false}
+        showThumbs={false}
         className="react-carousel"
       >
         {items.map((item) => {
           const key = `Image ${item.id}`;
+
           return (
-            <Box
+            <Link
               key={key}
-              component={ImageWithDimensions}
-              src={item.imageUrl}
-              alt={item.title || key}
+              href={item.url || '#'}
               sx={{
-                borderRadius: 1,
+                display: 'block',
               }}
-            />
+            >
+              <Box
+                component={ImageWithDimensions}
+                src={item.imageUrl}
+                alt={item.title || key}
+                sx={{
+                  borderRadius: 1,
+                }}
+              />
+            </Link>
           );
         })}
       </ReactCarousel>

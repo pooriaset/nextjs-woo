@@ -23,6 +23,7 @@ const getSliders = async () => {
           id: edge.node.id,
           title: edge.node.title || '',
           imageUrl: edge.node.featuredImage.node.url,
+          url: edge.node.url,
         };
         items.push(item);
       }
