@@ -31,6 +31,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
     "react-otp-input": "^3.1.1",
+    "sharp": "^0.33.3",
     "stylis": "^4.3.1",
     "stylis-plugin-rtl": "^2.1.1",
     "swiper": "^11.1.1",

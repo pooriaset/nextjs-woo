@@ -16,6 +16,7 @@ const SliderItem: FC<IHomePageSliderItem> = (props) => {
       }}
     >
       <Image
+        priority
         width={2800}
         height={300}
         src={props.imageUrl}
