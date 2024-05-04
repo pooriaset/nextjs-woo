@@ -1,3 +1,5 @@
+'use client';
+
 import { Warning } from '@mui/icons-material';
 import { Alert, AlertTitle } from '@mui/material';
 import { useTranslations } from 'next-intl';

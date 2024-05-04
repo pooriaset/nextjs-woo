@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Card, CardContent, Typography } from '@mui/material';
 
 import { useAppContext } from '@/hooks/useAppContext';

@@ -1,3 +1,5 @@
+'use client';
+
 import { Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useTranslations } from 'next-intl';

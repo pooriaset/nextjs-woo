@@ -1,9 +1,9 @@
-import { ApolloLink, HttpLink } from "@apollo/client";
+import { ApolloLink, HttpLink } from '@apollo/client';
 import {
   NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
-} from "@apollo/experimental-nextjs-app-support/ssr";
+} from '@apollo/experimental-nextjs-app-support/ssr';
 
 export const makeClient = () => {
   const httpLink = new HttpLink({
@@ -11,9 +11,10 @@ export const makeClient = () => {
   });
 
   return new NextSSRApolloClient({
+    connectToDevTools: true,
     cache: new NextSSRInMemoryCache(),
     link:
-      typeof window === "undefined"
+      typeof window === 'undefined'
         ? ApolloLink.from([
             new SSRMultipartLink({
               stripDefer: true,

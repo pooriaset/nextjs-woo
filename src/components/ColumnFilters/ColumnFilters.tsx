@@ -1,4 +1,9 @@
+'use client';
+
+import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
+import { CategoriesQuery } from '@/graphql/types/graphql';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import { useQuery } from '@apollo/client';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Card,
@@ -10,17 +15,26 @@ import {
   ListItemText,
   Switch,
 } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { FC, useState } from 'react';
 import Categories from './components/Categories';
 import { ListItem } from './components/ListItem';
 import { Title } from './components/Title';
-import { ProductCategoryOptions } from './types';
-import { useTranslations } from 'next-intl';
 
-export interface ColumnFiltersProps {
-  categories?: ProductCategoryOptions;
-}
-const ColumnFilters: FC<ColumnFiltersProps> = ({ categories }) => {
+export interface ColumnFiltersProps {}
+
+const ColumnFilters: FC<ColumnFiltersProps> = () => {
+  const t = useTranslations();
+
+  const { data: categoriesData } = useQuery<CategoriesQuery>(
+    GET_ALL_CATEGORIES_QUERY,
+  );
+
+  const categories = [
+    { id: -1, parentId: -1, name: t('categories.all') },
+    ...(categoriesData?.productCategories?.nodes ?? []),
+  ];
+
   const [open, setOpen] = useState(true);
 
   const handleClick = () => {
@@ -32,7 +46,6 @@ const ColumnFilters: FC<ColumnFiltersProps> = ({ categories }) => {
     navigate('InStock', !inStock);
   };
 
-  const t = useTranslations();
   return (
     <Card
       sx={{

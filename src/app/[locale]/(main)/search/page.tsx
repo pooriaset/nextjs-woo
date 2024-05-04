@@ -1,100 +1,73 @@
-'use client';
-
+import SortRow from '@/app/[locale]/(main)/search/components/SortRow';
+import DesktopView from '@/components/App/DesktopView';
+import MobileView from '@/components/App/MobileView';
 import { ColumnFilters } from '@/components/ColumnFilters';
 import { InlineFilters } from '@/components/InlineFilters';
 import ProductsCount from '@/components/ProductsCount/ProductsCount';
 import ProductsList from '@/components/ProductsList/ProductsList';
-import SortRow from '@/components/SortRow/SortRow';
-import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
+import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
-import {
-  CategoriesQuery,
-  GetAllProductsQuery,
-  StockStatusEnum,
-} from '@/graphql/types/graphql';
-import { useAppContext } from '@/hooks/useAppContext';
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import { GetAllProductsQuery, StockStatusEnum } from '@/graphql/types/graphql';
 import { sortOptions } from '@/static/sortOptions';
-import { useQuery, useSuspenseQuery } from '@apollo/client';
+import { getSearchPageParams } from '@/utils/params';
 import { Box, Container } from '@mui/material';
-import { useTranslations } from 'next-intl';
+import SortWrapper from './components/SortWrapper';
 
-const Page = () => {
-  const t = useTranslations();
-  const { isMobile } = useAppContext();
+const Page = async (props: { searchParams: Record<string, unknown> }) => {
+  const { inStock, categoryId, sort, q } = getSearchPageParams(
+    props.searchParams,
+  );
 
-  const { inStock, categoryId, q, sort } = useCustomSearchParams();
-
-  const { data } = useSuspenseQuery<GetAllProductsQuery>(
-    GET_VARIABLE_PRODUCTS_QUERY,
-    {
-      queryKey: ['GET_SEARCH_PAGE_PRODUCTS'],
-      variables: {
-        stockStatus: inStock ? StockStatusEnum.InStock : null,
-        categoryIdIn: categoryId ? [+categoryId] : null,
-        q,
-        orderBy: [sortOptions.find((item) => item.key === sort)?.props],
-        first: 10,
-      },
+  const { data } = await getClient().query<GetAllProductsQuery>({
+    query: GET_VARIABLE_PRODUCTS_QUERY,
+    variables: {
+      stockStatus: inStock ? StockStatusEnum.InStock : null,
+      categoryIdIn: categoryId ? [+categoryId] : null,
+      q,
+      orderBy: [sortOptions.find((item) => item.key === sort)?.props],
+      first: 10,
     },
-  );
+  });
 
-  const { data: categoriesData } = useQuery<CategoriesQuery>(
-    GET_ALL_CATEGORIES_QUERY,
-  );
-
-  const categories = [
-    { id: -1, parentId: -1, name: t('categories.all') },
-    ...(categoriesData?.productCategories?.nodes ?? []),
-  ];
-
-  if (isMobile) {
-    return (
-      <>
-        <InlineFilters categories={categories} />
+  return (
+    <>
+      <MobileView>
+        <InlineFilters />
 
         <Container sx={{ mt: 2 }}>
           <ProductsList items={data.products?.nodes} />
         </Container>
-      </>
-    );
-  }
+      </MobileView>
 
-  return (
-    <Container maxWidth="xl" sx={{ mt: 2 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 1,
-          position: 'relative',
-        }}
-      >
-        <Box
-          sx={{
-            minWidth: 270,
-            width: 300,
-          }}
-        >
-          <ColumnFilters categories={categories} />
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
+      <DesktopView>
+        <Container maxWidth="xl" sx={{ mt: 2 }}>
           <Box
             sx={{
               display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              mb: 1,
-              borderBottom: '1px solid',
-              borderColor: (theme) => theme.palette.divider,
+              gap: 1,
+              position: 'relative',
             }}
           >
-            <SortRow />
-            <ProductsCount value={data.products?.pageInfo.total} />
+            <Box
+              sx={{
+                minWidth: 270,
+                width: 300,
+              }}
+            >
+              <ColumnFilters />
+            </Box>
+            <Box sx={{ flexGrow: 1 }}>
+              <SortWrapper>
+                <SortRow />
+                <ProductsCount value={data.products?.pageInfo.total} />
+              </SortWrapper>
+
+              <ProductsList items={data.products?.nodes} />
+            </Box>
           </Box>
-          <ProductsList items={data.products?.nodes} />
-        </Box>
-      </Box>
-    </Container>
+        </Container>
+      </DesktopView>
+    </>
   );
 };
 

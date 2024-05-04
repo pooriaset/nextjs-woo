@@ -1,63 +1,42 @@
 'use client';
 
 import { useRouter } from '@/navigation';
-import { sortOptions } from '@/static/sortOptions';
+import {
+  SearchPageParamsKeys,
+  SearchPagesParams,
+  getSearchPageParams,
+} from '@/utils/params';
 import { useSearchParams } from 'next/navigation';
 
-enum SearchPageParams {
-  Sort = 'sort',
-  Q = 'q',
-  InStock = 'inStock',
-  CategoryId = 'categoryId',
-}
-
-export interface ReturnTypeOfUseCustomSearchParams {
-  sort: number | null;
-  q: string | null;
-  inStock: boolean;
-  categoryId: number | null;
-  navigate: (
-    key: keyof typeof SearchPageParams,
-    value: string | number | boolean | null,
-  ) => void;
-}
-
 export interface IUseCustomSearchParams {
-  (): ReturnTypeOfUseCustomSearchParams;
+  (): {
+    navigate: (
+      key: keyof typeof SearchPageParamsKeys,
+      value: string | number | boolean | null,
+    ) => void;
+  } & SearchPagesParams;
 }
 
 const useCustomSearchParams: IUseCustomSearchParams = () => {
-  const searchParams = useSearchParams();
+  const params = useSearchParams();
   const router = useRouter();
 
-  const navigate: ReturnTypeOfUseCustomSearchParams['navigate'] = (
+  const navigate: ReturnType<IUseCustomSearchParams>['navigate'] = (
     key,
     value,
   ) => {
-    const params = new URLSearchParams(searchParams);
+    const newParams = new URLSearchParams(params);
     if (value === undefined || value === null || +value < 0) {
-      params.delete(SearchPageParams[key]);
+      newParams.delete(SearchPageParamsKeys[key]);
     } else {
-      params.set(SearchPageParams[key], value.toString());
+      newParams.set(SearchPageParamsKeys[key], value.toString());
     }
-    router.push(`/search?${params}`);
+    router.push(`/search?${newParams}`);
   };
 
-  const sortParam = searchParams.get(SearchPageParams.Sort);
-  const sort = sortParam ? +sortParam : sortOptions[0].key;
-
-  const q = searchParams.get(SearchPageParams.Q);
-  const inStock = searchParams.has(SearchPageParams.InStock)
-    ? searchParams.get(SearchPageParams.InStock) === 'true'
-    : true;
-  const categoryId = searchParams.get(SearchPageParams.CategoryId);
-
   return {
-    q,
-    inStock,
-    sort,
     navigate,
-    categoryId: categoryId ? +categoryId : null,
+    ...getSearchPageParams(params),
   };
 };
 
