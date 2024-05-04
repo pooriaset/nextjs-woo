@@ -6,10 +6,10 @@ import { useTheme } from '@mui/material';
 import { FC } from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { SliderItem } from './components/SliderItem';
-import { IHomePageSliderItem } from './types';
+import { ISliderItem } from './types';
 
 export interface CarouselProps {
-  items?: IHomePageSliderItem[];
+  items?: ISliderItem[];
 }
 
 const MySwiper: FC<CarouselProps> = ({ items }) => {

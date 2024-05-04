@@ -1,6 +1,6 @@
 import BestSellingProducts from '@/components/BestSellingProducts/BestSellingProducts';
 import { HomePageSlider } from '@/components/HomePageSlider';
-import { IHomePageSliderItem } from '@/components/HomePageSlider/types';
+import { ISliderItem } from '@/components/HomePageSlider/types';
 import { MainCategories } from '@/components/MainCategories';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
@@ -24,11 +24,11 @@ const getSliders = async () => {
     query: GET_HOMEPAGE_SLIDERS,
   });
 
-  const items: IHomePageSliderItem[] = [];
+  const items: ISliderItem[] = [];
   data?.sliderCategories?.nodes?.map((item) => {
     item.sliders?.edges.forEach((edge) => {
       if (edge.node.featuredImage?.node.url) {
-        const item: IHomePageSliderItem = {
+        const item: ISliderItem = {
           id: edge.node.id,
           title: edge.node.title || '',
           imageUrl: edge.node.featuredImage.node.url,

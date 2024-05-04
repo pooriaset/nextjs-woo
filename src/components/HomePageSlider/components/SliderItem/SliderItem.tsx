@@ -3,9 +3,9 @@
 import { Link } from '@mui/material';
 import Image from 'next/image';
 import { FC } from 'react';
-import { IHomePageSliderItem } from '../../types';
+import { ISliderItem } from '../../types';
 
-const SliderItem: FC<IHomePageSliderItem> = (props) => {
+const SliderItem: FC<ISliderItem> = (props) => {
   return (
     <Link
       href={props.url || '#'}

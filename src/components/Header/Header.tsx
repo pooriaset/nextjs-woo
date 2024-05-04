@@ -1,12 +1,18 @@
 'use client';
 
 import { AppBar, Container } from '@mui/material';
-import { Suspense } from 'react';
+import { FC, Suspense } from 'react';
 import DesktopView from '../App/DesktopView';
 import MobileView from '../App/MobileView';
 import { DesktopHeader } from './components';
+import TopBanner, {
+  TopBannerProps,
+} from '@/app/[locale]/(main)/components/TopBanner/TopBanner';
 
-const Header = () => {
+export interface HeaderProps {
+  topBanner: TopBannerProps['data'];
+}
+const Header: FC<HeaderProps> = ({ topBanner }) => {
   return (
     <AppBar
       elevation={0}
@@ -20,6 +26,7 @@ const Header = () => {
         backgroundColor: '#ffffff',
       }}
     >
+      <TopBanner data={topBanner} />
       <Container maxWidth="xl">
         <DesktopView>
           <DesktopHeader />

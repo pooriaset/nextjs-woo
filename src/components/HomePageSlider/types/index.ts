@@ -1,6 +1,6 @@
-export interface IHomePageSliderItem {
+export interface ISliderItem {
   id: number | string;
-  title: string;
+  title?: string;
   imageUrl: string;
   url?: string | null;
 }
