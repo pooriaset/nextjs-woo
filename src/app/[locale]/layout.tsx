@@ -14,19 +14,30 @@ import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { getClient } from '@/graphql/clients/serverSideClient';
+import { GET_GENERAL_SETTINGS } from '@/graphql/queries/general';
+import { GetGeneralSettingsQuery } from '@/graphql/types/graphql';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
-type LocaleLayoutProperties = PropsWithChildren<LocaleLayoutParams>;
 
-export const metadata: Metadata = {
-  title: 'NextJs Woo',
-  description: 'NextJs Woo',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await getClient().query<GetGeneralSettingsQuery>({
+    query: GET_GENERAL_SETTINGS,
+  });
+
+  return {
+    title: {
+      template: `%s | ${data.generalSettings?.title!}`,
+      default: data.generalSettings?.title!,
+    },
+    description: data.generalSettings?.description!,
+  };
+}
 
 export default async function LocaleLayout({
   children,
   params: { locale },
-}: PropsWithChildren<LocaleLayoutProperties>) {
+}: PropsWithChildren<LocaleLayoutParams>) {
   const reqUserAgent = userAgent({ headers: headers() });
 
   const themes: Record<Locale, ThemeOptions> = {
