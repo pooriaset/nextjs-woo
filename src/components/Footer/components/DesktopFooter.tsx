@@ -1,3 +1,5 @@
+'use client';
+
 import { IPageListItem } from '@/app/[locale]/(main)/layout';
 import { Box, Container, Link, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';

@@ -1,12 +1,12 @@
 'use client';
 
 import { AppBar, Container } from '@mui/material';
-import { DesktopView, MobileView } from './components';
 import { Suspense } from 'react';
-import { useAppContext } from '@/hooks/useAppContext';
+import DesktopView from '../App/DesktopView';
+import MobileView from '../App/MobileView';
+import { DesktopHeader } from './components';
 
 const Header = () => {
-  const { isMobile } = useAppContext();
   return (
     <AppBar
       elevation={0}
@@ -21,13 +21,14 @@ const Header = () => {
       }}
     >
       <Container maxWidth="xl">
-        {isMobile ? (
+        <DesktopView>
+          <DesktopHeader />
+        </DesktopView>
+        <MobileView>
           <Suspense>
             <MobileView />
           </Suspense>
-        ) : (
-          <DesktopView />
-        )}
+        </MobileView>
       </Container>
     </AppBar>
   );

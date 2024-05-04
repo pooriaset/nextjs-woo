@@ -7,7 +7,7 @@ import SearchDialog from './SearchDialog';
 import SearchSection from './SearchSection';
 import { useTranslations } from 'next-intl';
 
-const MobileView = () => {
+const MobileHeader = () => {
   const { navigate, q } = useCustomSearchParams();
 
   const [open, setOpen] = useState(false);
@@ -64,4 +64,4 @@ const MobileView = () => {
   );
 };
 
-export default MobileView;
+export default MobileHeader;
