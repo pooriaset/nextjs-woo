@@ -18,7 +18,6 @@ const Header = () => {
         top: 0,
         zIndex: 10,
         backgroundColor: '#ffffff',
-        mb: 2,
       }}
     >
       <Container maxWidth="xl">
