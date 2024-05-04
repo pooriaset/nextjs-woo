@@ -1,8 +1,14 @@
+import { IPageListItem } from '@/app/[locale]/(main)/layout';
 import { Box, Container, Link, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { FC } from 'react';
 
-const Footer = () => {
+export interface FooterProps {
+  pages: IPageListItem[];
+}
+const Footer: FC<FooterProps> = ({ pages }) => {
   const t = useTranslations();
+
   return (
     <Box
       component="footer"
@@ -35,6 +41,14 @@ const Footer = () => {
           align="center"
           sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
         >
+          {pages.map((page) => {
+            return (
+              <Link key={page.title} href={`/pages/${page.slug}`}>
+                {page.title}
+              </Link>
+            );
+          })}
+
           <Link href="#">{t('footer.links.aboutUs')}</Link>
 
           <Link href="#">{t('footer.links.contactUs')}</Link>

@@ -12,3 +12,16 @@ export const GET_PAGE = gql`
     }
   }
 `;
+
+export const GET_PUBLISHED_PAGES_LIST = gql`
+  query GetPublishedPagesList {
+    pages(where: { status: PUBLISH }) {
+      edges {
+        node {
+          title
+          slug
+        }
+      }
+    }
+  }
+`;
