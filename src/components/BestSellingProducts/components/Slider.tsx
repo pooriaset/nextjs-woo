@@ -38,11 +38,19 @@ const Slider: FC<SliderProps> = ({ items }) => {
         },
       }}
       spaceBetween={16}
+      style={{
+        paddingBottom: 2,
+      }}
     >
       {items?.map((product) => {
         if (product.__typename === 'VariableProduct') {
           return (
-            <SwiperSlide key={product.databaseId}>
+            <SwiperSlide
+              key={product.databaseId}
+              style={{
+                height: 'auto',
+              }}
+            >
               <VariableProductItem data={product} />
             </SwiperSlide>
           );

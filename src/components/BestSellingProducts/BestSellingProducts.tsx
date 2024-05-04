@@ -2,9 +2,9 @@
 
 import { GetAllProductsQuery } from '@/graphql/types/graphql';
 import { Card, CardContent, CardHeader } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import Slider from './components/Slider';
-import { useTranslations } from 'next-intl';
 
 export interface BestSellingProductsProps {
   items?: NonNullable<GetAllProductsQuery['products']>['nodes'];
