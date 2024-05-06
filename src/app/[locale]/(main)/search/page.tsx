@@ -1,6 +1,6 @@
 import SortRow from '@/app/[locale]/(main)/search/components/SortRow';
-import DesktopView from '@/components/App/DesktopView';
-import MobileView from '@/components/App/MobileView';
+import DesktopView from '@/components/ResponsiveDesign/components/DesktopView';
+import MobileView from '@/components/ResponsiveDesign/components/MobileView';
 import { ColumnFilters } from '@/components/ColumnFilters';
 import { InlineFilters } from '@/components/InlineFilters';
 import ProductsCount from '@/components/ProductsCount/ProductsCount';

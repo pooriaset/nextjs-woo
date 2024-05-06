@@ -2,8 +2,8 @@
 
 import { AppBar, Container } from '@mui/material';
 import { FC, Suspense } from 'react';
-import DesktopView from '../App/DesktopView';
-import MobileView from '../App/MobileView';
+import DesktopView from '../ResponsiveDesign/components/DesktopView';
+import MobileView from '../ResponsiveDesign/components/MobileView';
 import { DesktopHeader, MobileHeader } from './components';
 import TopBanner, {
   TopBannerProps,
