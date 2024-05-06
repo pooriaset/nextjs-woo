@@ -4,13 +4,13 @@ import { AppBar, Container } from '@mui/material';
 import { FC, Suspense } from 'react';
 import DesktopView from '../App/DesktopView';
 import MobileView from '../App/MobileView';
-import { DesktopHeader } from './components';
+import { DesktopHeader, MobileHeader } from './components';
 import TopBanner, {
   TopBannerProps,
 } from '@/app/[locale]/(main)/components/TopBanner/TopBanner';
 
 export interface HeaderProps {
-  topBanner: TopBannerProps['data'];
+  topBanner?: TopBannerProps['data'];
 }
 const Header: FC<HeaderProps> = ({ topBanner }) => {
   return (
@@ -26,14 +26,14 @@ const Header: FC<HeaderProps> = ({ topBanner }) => {
         backgroundColor: '#ffffff',
       }}
     >
-      <TopBanner data={topBanner} />
+      {topBanner && <TopBanner data={topBanner} />}
       <Container maxWidth="xl">
         <DesktopView>
           <DesktopHeader />
         </DesktopView>
         <MobileView>
           <Suspense>
-            <MobileView />
+            <MobileHeader />
           </Suspense>
         </MobileView>
       </Container>

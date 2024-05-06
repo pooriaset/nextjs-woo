@@ -97,6 +97,12 @@
       },
       "sendAgainText": "to send again",
       "seconds": "s"
+    },
+    "error": {
+      "message": "Oops, Something went wrong!",
+      "buttons": {
+        "reset": "ُTry again!"
+      }
     }
   },
   "fields": {

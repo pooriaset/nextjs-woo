@@ -97,6 +97,12 @@
       },
       "sendAgainText": "تا ارسال مجدد",
       "seconds": "ثانیه"
+    },
+    "error": {
+      "message": "متاسفانه خطایی رخ داده است.",
+      "buttons": {
+        "reset": "تلاش دوباره!"
+      }
     }
   },
   "fields": {
