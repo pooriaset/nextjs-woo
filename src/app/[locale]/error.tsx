@@ -1,7 +1,7 @@
 'use client';
 
 import { Header } from '@/components/Header';
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { FC, useEffect } from 'react';
