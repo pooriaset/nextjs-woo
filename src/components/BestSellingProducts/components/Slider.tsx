@@ -37,10 +37,7 @@ const Slider: FC<SliderProps> = ({ items }) => {
           spaceBetween: 16,
         },
       }}
-      spaceBetween={16}
-      style={{
-        paddingBottom: 2,
-      }}
+      spaceBetween={theme.spacing(2)}
     >
       {items?.map((product) => {
         if (product.__typename === 'VariableProduct') {
@@ -49,6 +46,7 @@ const Slider: FC<SliderProps> = ({ items }) => {
               key={product.databaseId}
               style={{
                 height: 'auto',
+                boxSizing: 'border-box',
               }}
             >
               <VariableProductItem data={product} />
