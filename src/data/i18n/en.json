@@ -9,6 +9,10 @@
     "all": "All"
   },
   "header": {
+    "auth": {
+      "login": "Login",
+      "register": "Register"
+    },
     "navigation": {
       "products": "Products",
       "categories": "Categories",

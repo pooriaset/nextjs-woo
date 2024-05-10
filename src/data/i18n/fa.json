@@ -9,6 +9,10 @@
     "all": "همه"
   },
   "header": {
+    "auth": {
+      "register": "ثبت نام",
+      "login": "ورود"
+    },
     "navigation": {
       "products": "محصولات",
       "categories": "دسته‌بندی‌ها",

@@ -1,14 +1,14 @@
 import Logo from '@/components/common/Logo';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
+import { Link as NextLink } from '@/navigation';
 import {
   AccountCircleOutlined,
   SearchOutlined,
   ShoppingBasketOutlined,
 } from '@mui/icons-material';
-import { Divider, Link, TextField } from '@mui/material';
+import { Button, Link, Stack, TextField } from '@mui/material';
 import Badge from '@mui/material/Badge';
-import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,7 +16,6 @@ import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC, useState } from 'react';
-import { Link as NextLink } from '@/navigation';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -54,6 +53,7 @@ const TopSection: FC = () => {
   };
 
   const menuId = 'primary-search-account-menu';
+  const isLoggedIn = true;
 
   return (
     <>
@@ -88,8 +88,35 @@ const TopSection: FC = () => {
             }}
           />
         </Form>
-        <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: 'flex' }}>
+
+        <Stack spacing={1} direction="row" alignItems="center" color="black">
+          {isLoggedIn ? (
+            <Button
+              variant="outlined"
+              color="inherit"
+              sx={{
+                minWidth: 150,
+              }}
+            >
+              <Stack direction="row" spacing={1}>
+                <span>{t('header.auth.login')}</span>
+                <span>|</span>
+                <span>{t('header.auth.register')}</span>
+              </Stack>
+            </Button>
+          ) : (
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+            >
+              <AccountCircleOutlined />
+            </IconButton>
+          )}
+
           <NextLink href="/cart">
             <IconButton size="large" aria-label="show 3 cart items">
               <Badge
@@ -104,18 +131,7 @@ const TopSection: FC = () => {
               </Badge>
             </IconButton>
           </NextLink>
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-          >
-            <AccountCircleOutlined />
-          </IconButton>
-        </Box>
+        </Stack>
       </Toolbar>
       <Menu
         anchorEl={anchorEl}

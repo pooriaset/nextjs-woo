@@ -56,6 +56,7 @@ const MainLayout: FC<MainLayoutProps> = async ({ children }) => {
       <Box
         sx={{
           pb: { xs: '56px', md: 0 },
+          minHeight: '70vh',
         }}
       >
         {children}
