@@ -92,6 +92,8 @@ const TopSection: FC = () => {
         <Stack spacing={1} direction="row" alignItems="center" color="black">
           {isLoggedIn ? (
             <Button
+              component={Link}
+              href="/login"
               variant="outlined"
               color="inherit"
               sx={{
