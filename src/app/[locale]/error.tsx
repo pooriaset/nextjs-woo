@@ -6,12 +6,12 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { FC, useEffect } from 'react';
 
-export interface ErrorProps {
+export interface ErrorPageProps {
   error: Error & { digest?: string };
   reset: () => void;
 }
 
-const Error: FC<ErrorProps> = ({ error, reset }) => {
+const ErrorPage: FC<ErrorPageProps> = ({ error, reset }) => {
   const t = useTranslations();
 
   useEffect(() => {
@@ -57,4 +57,4 @@ const Error: FC<ErrorProps> = ({ error, reset }) => {
   );
 };
 
-export default Error;
+export default ErrorPage;
