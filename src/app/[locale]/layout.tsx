@@ -18,6 +18,10 @@ import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_GENERAL_SETTINGS } from '@/graphql/queries/general';
 import { GetGeneralSettingsQuery } from '@/graphql/types/graphql';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
 export async function generateMetadata(): Promise<Metadata> {

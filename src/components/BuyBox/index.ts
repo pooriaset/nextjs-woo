@@ -1,1 +1,1 @@
-export { default as BuyBox } from "./BuyBox";
+export { default as BuyBox } from './BuyBox';

@@ -48,6 +48,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = () => {
 
   return (
     <Card
+      variant="outlined"
       sx={{
         position: 'sticky',
         top: 130,

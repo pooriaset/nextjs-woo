@@ -36,6 +36,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
 
   return (
     <Card
+      variant="outlined"
       component={NextLink}
       href={`/products/${data.databaseId}/${data.slug}`}
       sx={{

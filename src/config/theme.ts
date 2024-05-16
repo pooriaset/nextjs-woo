@@ -61,16 +61,6 @@ const themeOptions: ThemeOptions = {
         component: Link,
       },
     },
-    MuiCard: {
-      defaultProps: {
-        elevation: 0,
-      },
-      styleOverrides: {
-        root: {
-          border: `1px solid ${grey[300]}`,
-        },
-      },
-    },
     MuiCssBaseline: {
       styleOverrides: `
     @font-face {

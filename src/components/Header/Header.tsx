@@ -17,13 +17,13 @@ const Header: FC<HeaderProps> = ({ topBanner }) => {
     <AppBar
       elevation={0}
       position="static"
+      color="inherit"
       sx={{
         borderBottom: '2px solid',
         borderColor: (theme) => theme.palette.divider,
         position: 'sticky',
         top: 0,
         zIndex: 10,
-        backgroundColor: '#ffffff',
       }}
     >
       {topBanner && <TopBanner data={topBanner} />}

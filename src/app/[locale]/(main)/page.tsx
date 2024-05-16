@@ -15,10 +15,6 @@ import {
 import { bestSellingSortOption } from '@/static/sortOptions';
 import { Container, Grid } from '@mui/material';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
 const getSliders = async () => {
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
     query: GET_HOMEPAGE_SLIDERS,

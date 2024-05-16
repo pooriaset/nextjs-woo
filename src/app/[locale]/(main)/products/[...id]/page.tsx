@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import { BuyBox } from '@/components/BuyBox';
-import { ProductImages } from '@/components/ProductImages';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_SINGLE_VARIABLE_PRODUCT_QUERY } from '@/graphql/queries/products';
 import { GetSingleProductQuery } from '@/graphql/types/graphql';
@@ -14,9 +13,10 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import { grey } from '@mui/material/colors';
 import type { Metadata } from 'next';
 import SizeSelector from './components/SizeSelector';
+import ProductImage from './components/ProductImage';
+import ProductGallery from './components/ProductGallery';
 
 type PageProps = {
   params: { id: string };
@@ -65,7 +65,14 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
     <Container maxWidth="xl" sx={{ mt: 3 }}>
       <Grid container spacing={2}>
         <Grid item md={4} xs={12}>
-          <ProductImages />
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <ProductImage value={product.image} />
+            </Grid>
+            <Grid item xs={12}>
+              <ProductGallery value={product?.galleryImages?.nodes} />
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item md={5} xs={12}>
           <Breadcrumbs items={breadcrumbItems} />
@@ -77,7 +84,7 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
               fontSize: '1rem',
             }}
           >
-            {title}
+            {product?.title}
           </Typography>
           <Divider />
           <Grid
@@ -94,12 +101,8 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
           </Grid>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card>
-            <CardContent
-              sx={{
-                backgroundColor: grey[100],
-              }}
-            >
+          <Card variant="outlined">
+            <CardContent>
               <BuyBox />
             </CardContent>
           </Card>

@@ -2,15 +2,12 @@
 
 import { VariantSelector } from '@/components/VariantSelector';
 import { VariantSelectorProps } from '@/components/VariantSelector/VariantSelector';
-import { GetSingleProductQuery } from '@/graphql/types/graphql';
 import { useTranslations } from 'next-intl';
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
+import { Product } from '../../types/common';
 
 export interface SizeSelectorProps {
-  items: Extract<
-    NonNullable<GetSingleProductQuery['product']>,
-    { __typename?: 'VariableProduct' }
-  >['variations'];
+  items: Extract<Product, { __typename?: 'VariableProduct' }>['variations'];
 }
 
 const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {

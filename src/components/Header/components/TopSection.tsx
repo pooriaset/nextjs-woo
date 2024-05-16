@@ -89,7 +89,7 @@ const TopSection: FC = () => {
           />
         </Form>
 
-        <Stack spacing={1} direction="row" alignItems="center" color="black">
+        <Stack spacing={1} direction="row" alignItems="center">
           {isLoggedIn ? (
             <Button
               component={Link}

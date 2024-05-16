@@ -53,11 +53,23 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
 export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
   query GetSingleProduct($id: ID!) {
     product(id: $id, idType: DATABASE_ID) {
+      image {
+        id: databaseId
+        sourceUrl
+        altText
+      }
       productCategories {
         nodes {
           id: databaseId
           name
           slug
+        }
+      }
+      galleryImages {
+        nodes {
+          id
+          sourceUrl
+          altText
         }
       }
       ... on VariableProduct {
@@ -67,12 +79,6 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         content
         commentCount
         title
-        galleryImages {
-          nodes {
-            id
-            sourceUrl
-          }
-        }
         stockStatus
         slug
         averageRating

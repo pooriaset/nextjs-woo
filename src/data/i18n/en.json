@@ -73,6 +73,9 @@
     }
   },
   "pages": {
+    "product": {
+      "galleryDialogTitle": "Gallery"
+    },
     "notfound": {
       "message": "The page not found!"
     },

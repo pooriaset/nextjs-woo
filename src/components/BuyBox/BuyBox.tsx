@@ -1,5 +1,6 @@
 'use client';
 
+import { useAppContext } from '@/hooks/useAppContext';
 import {
   AccountBalanceWalletOutlined,
   LocalShippingOutlined,
@@ -9,12 +10,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { grey } from '@mui/material/colors';
+import { useTranslations } from 'next-intl';
 import DiscountPercentage from '../common/DiscountPercentage';
 import OldPrice from '../common/OldPrice';
 import PriceLabel from '../common/PriceLabel';
-import { useAppContext } from '@/hooks/useAppContext';
-import { useTranslations } from 'next-intl';
 
 const listItems = [
   {
@@ -59,7 +58,6 @@ const BuyBox = () => {
                 <ListItemText
                   primary={item.text}
                   primaryTypographyProps={{
-                    color: grey[700],
                     fontSize: (theme) => theme.typography.caption.fontSize,
                   }}
                 />

@@ -73,6 +73,9 @@
     }
   },
   "pages": {
+    "product": {
+      "galleryDialogTitle": "گالری تصاویر محصول"
+    },
     "notfound": {
       "message": "به نظر آدرس را اشتباه وارد کرده‌اید"
     },
