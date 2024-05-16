@@ -74,7 +74,12 @@
   },
   "pages": {
     "product": {
-      "galleryDialogTitle": "Gallery"
+      "galleryDialogTitle": "Gallery",
+      "tabs": {
+        "introduction": "Introduction",
+        "comments": "Comments",
+        "specifications": "Specifications"
+      }
     },
     "notfound": {
       "message": "The page not found!"

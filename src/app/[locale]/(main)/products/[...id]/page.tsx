@@ -17,6 +17,7 @@ import type { Metadata } from 'next';
 import SizeSelector from './components/SizeSelector';
 import ProductImage from './components/ProductImage';
 import ProductGallery from './components/ProductGallery';
+import ProductTabs from './components/ProductTabs';
 
 type PageProps = {
   params: { id: string };
@@ -106,6 +107,9 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
               <BuyBox />
             </CardContent>
           </Card>
+        </Grid>
+        <Grid item xs={12}>
+          <ProductTabs content={product.content} />
         </Grid>
       </Grid>
     </Container>

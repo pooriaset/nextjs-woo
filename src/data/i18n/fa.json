@@ -74,7 +74,12 @@
   },
   "pages": {
     "product": {
-      "galleryDialogTitle": "گالری تصاویر محصول"
+      "galleryDialogTitle": "گالری تصاویر محصول",
+      "tabs": {
+        "introduction": "معرفی",
+        "comments": "نظرات",
+        "specifications": "ویژگی‌ها"
+      }
     },
     "notfound": {
       "message": "به نظر آدرس را اشتباه وارد کرده‌اید"

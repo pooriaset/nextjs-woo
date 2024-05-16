@@ -53,6 +53,9 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
 export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
   query GetSingleProduct($id: ID!) {
     product(id: $id, idType: DATABASE_ID) {
+      description
+      content
+      commentCount
       image {
         id: databaseId
         sourceUrl
@@ -75,9 +78,6 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
       ... on VariableProduct {
         id: databaseId
         name
-        description
-        content
-        commentCount
         title
         stockStatus
         slug
