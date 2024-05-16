@@ -46,3 +46,56 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
     }
   }
 `;
+
+/**
+ * Fetch Woocommerce single product with variants
+ */
+export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
+  query GetSingleProduct($id: ID!) {
+    product(id: $id, idType: DATABASE_ID) {
+      productCategories {
+        nodes {
+          id: databaseId
+          name
+          slug
+        }
+      }
+      ... on VariableProduct {
+        id: databaseId
+        name
+        description
+        content
+        commentCount
+        title
+        galleryImages {
+          nodes {
+            id
+            sourceUrl
+          }
+        }
+        stockStatus
+        slug
+        averageRating
+        variations(where: { stockStatus: IN_STOCK }) {
+          nodes {
+            id
+            price
+            salePrice
+            regularPrice
+            attributes {
+              nodes {
+                id
+                value
+                name
+              }
+            }
+            image {
+              id
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;

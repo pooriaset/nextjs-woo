@@ -1,13 +1,12 @@
 import { FC } from 'react';
 
-import Breadcrumbs, {
-  BreadcrumbItem,
-} from '@/components/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import { BuyBox } from '@/components/BuyBox';
 import { ProductImages } from '@/components/ProductImages';
-import SizeSelector from '@/components/SizeSelector/SizeSelector';
+import { getClient } from '@/graphql/clients/serverSideClient';
+import { GET_SINGLE_VARIABLE_PRODUCT_QUERY } from '@/graphql/queries/products';
+import { GetSingleProductQuery } from '@/graphql/types/graphql';
 import {
-  Button,
   Card,
   CardContent,
   Container,
@@ -17,7 +16,7 @@ import {
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import type { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
+import SizeSelector from './components/SizeSelector';
 
 type PageProps = {
   params: { id: string };
@@ -38,18 +37,30 @@ export async function generateMetadata({
   };
 }
 
-const Page: FC<PageProps> = () => {
-  const t = useTranslations();
-  const breadcrumbItems: BreadcrumbItem[] = [
-    {
-      id: 1,
-      title: 'Main Category',
+const getProduct = async ({ id }: { id: number }) => {
+  const { data } = await getClient().query<GetSingleProductQuery>({
+    query: GET_SINGLE_VARIABLE_PRODUCT_QUERY,
+    variables: {
+      id,
     },
-    {
-      id: 2,
-      title: 'Sub Category',
-    },
-  ];
+  });
+  return data.product;
+};
+
+const Page: FC<PageProps> = async ({ params: { id } }) => {
+  const product = await getProduct({ id: +id[0] });
+
+  if (product?.__typename !== 'VariableProduct') {
+    return null;
+  }
+
+  const breadcrumbItems = product?.productCategories?.nodes.map((item) => {
+    return {
+      id: item.id,
+      name: item.name ?? '',
+    };
+  })!;
+
   return (
     <Container maxWidth="xl" sx={{ mt: 3 }}>
       <Grid container spacing={2}>
@@ -77,20 +88,9 @@ const Page: FC<PageProps> = () => {
             }}
           >
             <Grid item>
-              <SizeSelector items={[41, 42, 43, 44]} />
+              <SizeSelector items={product.variations} />
             </Grid>
-            <Grid item>
-              <Button
-                fullWidth
-                variant="outlined"
-                sx={{
-                  height: '100%',
-                  minWidth: 'fit-content',
-                }}
-              >
-                {t('buttons.findYourSize')}
-              </Button>
-            </Grid>
+            <Grid item></Grid>
           </Grid>
         </Grid>
         <Grid item md={3} xs={12}>

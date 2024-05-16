@@ -5,20 +5,18 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useTranslations } from 'next-intl';
-import { useState, FC } from 'react';
+import { FC, useState } from 'react';
 
-export interface SizeSelectorProps {
-  items: number[];
+export interface VariantSelectorProps {
+  items: { id: number | string; value: any; name: string }[];
+  label: string;
 }
-const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
+const VariantSelector: FC<VariantSelectorProps> = ({ items, label }) => {
   const [size, setSize] = useState('42');
 
   const handleChange = (event: SelectChangeEvent) => {
     setSize(event.target.value);
   };
-
-  const t = useTranslations();
 
   return (
     <Box
@@ -30,18 +28,18 @@ const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
       }}
     >
       <FormControl fullWidth size="small">
-        <InputLabel id="size-select-label">{t('fields.size')}</InputLabel>
+        <InputLabel id="size-select-label">{label}</InputLabel>
         <Select
           labelId="size-select-label"
           id="size-select"
           value={size}
-          label={t('fields.size')}
+          label={label}
           onChange={handleChange}
         >
-          {items.map((size) => {
+          {items.map((item) => {
             return (
-              <MenuItem key={size} value={size}>
-                {size}
+              <MenuItem key={item.id} value={item.value}>
+                {item.name}
               </MenuItem>
             );
           })}
@@ -51,4 +49,4 @@ const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
   );
 };
 
-export default SizeSelector;
+export default VariantSelector;

@@ -6,8 +6,9 @@ import type { FC } from 'react';
 
 export interface BreadcrumbItem {
   id: number | string;
-  title: string;
+  name: string;
 }
+
 export interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
@@ -20,10 +21,13 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
     <div role="presentation" onClick={handleClick}>
       <MuiBreadcrumbs aria-label="breadcrumb">
         {items.map((item) => {
-          const href = '';
+          const params = new URLSearchParams();
+          params.set('categoryId', item.id.toString());
+          const href = `/search?${params.toString()}`;
+
           return (
             <Link key={item.id} variant="body2" underline="hover" href={href}>
-              {item.title}
+              {item.name}
             </Link>
           );
         })}
