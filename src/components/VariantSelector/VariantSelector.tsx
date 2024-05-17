@@ -35,6 +35,9 @@ const VariantSelector: FC<VariantSelectorProps> = ({ items, label }) => {
           value={size}
           label={label}
           onChange={handleChange}
+          MenuProps={{
+            disableScrollLock: true,
+          }}
         >
           {items.map((item) => {
             return (
