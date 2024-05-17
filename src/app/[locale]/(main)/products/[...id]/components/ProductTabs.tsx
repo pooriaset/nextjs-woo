@@ -6,7 +6,6 @@ import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, SyntheticEvent, useState } from 'react';
 import { Product } from '../../types/common';
-import Section from './Section';
 
 export interface ProductTabsProps {
   content?: string | null;
@@ -58,26 +57,20 @@ const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
       </Box>
 
       <TabPanel value={activeTab} index={0}>
-        <Section label={t('pages.product.tabs.introduction')}>
-          <Typography
-            component="div"
-            sx={{
-              lineHeight: 2,
-            }}
-            dangerouslySetInnerHTML={{ __html: content! }}
-          />
-        </Section>
+        <Typography
+          component="div"
+          sx={{
+            lineHeight: 2,
+          }}
+          dangerouslySetInnerHTML={{ __html: content! }}
+        />
       </TabPanel>
 
       <TabPanel value={activeTab} index={1}>
-        <Section label={t('pages.product.tabs.specifications')}>
-          <KeyValueViewer items={items} />
-        </Section>
+        <KeyValueViewer items={items} />
       </TabPanel>
 
-      <TabPanel value={activeTab} index={2}>
-        <Section label={t('pages.product.tabs.comments')}></Section>
-      </TabPanel>
+      <TabPanel value={activeTab} index={2}></TabPanel>
     </>
   );
 };
