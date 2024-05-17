@@ -3,12 +3,14 @@
 import KeyValueViewer from '@/components/KeyValueViewer/KeyValueViewer';
 import { Box, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { FC, useState } from 'react';
+import { FC, SyntheticEvent, useState } from 'react';
 import Section from './Section';
 
 export interface ProductTabsProps {
   content?: string | null;
 }
+
+const offset = 118 + 60 + 48;
 
 const CustomDivider = <Divider sx={{ borderWidth: 2, borderRadius: 1 }} />;
 const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
@@ -16,8 +18,23 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
 
   const [id, setId] = useState('introduction');
 
-  const handleChangeIntersection = (id: string) => {
-    setId(id);
+  const handleChangeIntersection = (
+    inView: boolean,
+    entry: IntersectionObserverEntry,
+  ) => {
+    if (inView) {
+      setId(entry.target.id);
+    }
+  };
+
+  const handleChangeTab = (event: SyntheticEvent, value: string) => {
+    const item = document.getElementById(value)!;
+    const count = item.offsetTop - document.body.offsetTop - offset;
+
+    window.scrollTo({
+      top: count,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -25,10 +42,11 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
       <Box
         sx={{
           position: 'sticky',
-          top: 116 + 60,
+          top: 118 + 60,
           borderBottom: 1,
           borderColor: 'divider',
           backgroundColor: (theme) => theme.palette.background.default,
+          zIndex: 1000,
         }}
       >
         <Tabs
@@ -36,11 +54,7 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
           textColor="primary"
           indicatorColor="primary"
           aria-label="secondary tabs example"
-          onChange={(event, value) => {
-            document
-              .getElementById(value)
-              ?.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onChange={handleChangeTab}
         >
           <Tab
             value="introduction"
@@ -54,6 +68,7 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
         </Tabs>
       </Box>
       <Grid
+        id="wrapper"
         container
         spacing={3}
         sx={{
@@ -62,9 +77,9 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
       >
         <Grid item xs={12}>
           <Section
+            onChangeIntersection={handleChangeIntersection}
             id="introduction"
             label={t('pages.product.tabs.introduction')}
-            onChange={handleChangeIntersection}
           >
             <Typography
               component="div"
@@ -82,12 +97,61 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
 
         <Grid item xs={12}>
           <Section
+            onChangeIntersection={handleChangeIntersection}
             id="specifications"
             label={t('pages.product.tabs.specifications')}
-            onChange={handleChangeIntersection}
           >
             <KeyValueViewer
               items={[
+                {
+                  key: 'کد محصول',
+                  value: 'A025',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
+                {
+                  key: 'test',
+                  value: 'test',
+                },
                 {
                   key: 'test',
                   value: 'test',
@@ -115,9 +179,9 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
 
         <Grid item xs={12}>
           <Section
+            onChangeIntersection={handleChangeIntersection}
             id="comments"
             label={t('pages.product.tabs.comments')}
-            onChange={handleChangeIntersection}
           ></Section>
         </Grid>
       </Grid>

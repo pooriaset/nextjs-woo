@@ -5,7 +5,7 @@ import {
   ListItemProps,
   ListItemText,
   Typography,
-  lighten,
+  darken,
 } from '@mui/material';
 import { FC } from 'react';
 import { IKeyValueItem } from '../types';
@@ -32,18 +32,29 @@ const Item: FC<ItemProps> = ({ item, index, ...props }) => {
 
   const _position = item.position || item.value?.length > 46 ? 'bottom' : 'top';
 
+  const isOdd = index % 2 === 1;
+
   return (
-    <>
-      <ListItem
-        sx={{
-          bgcolor: (theme) =>
-            index % 2 === 1 ? lighten(theme.palette.primary.light, 0.95) : null,
-        }}
-        secondaryAction={_position === 'top' && action}
-        {...props}
-      >
-        <ListItemText
-          primary={
+    <ListItem
+      sx={{
+        ...(isOdd
+          ? {
+              bgcolor: (theme) =>
+                darken(theme.palette.background.default, 0.02),
+              borderRadius: 1,
+            }
+          : {}),
+      }}
+      {...props}
+    >
+      <ListItemText
+        primary={
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '256px 1fr',
+            }}
+          >
             <Typography
               sx={{
                 fontWeight: 600,
@@ -52,13 +63,13 @@ const Item: FC<ItemProps> = ({ item, index, ...props }) => {
             >
               {item.key}
             </Typography>
-          }
-          secondary={
-            _position === 'bottom' && <Box sx={{ mt: 1 }}>{action}</Box>
-          }
-        />
-      </ListItem>
-    </>
+
+            {_position === 'top' && action}
+          </Box>
+        }
+        secondary={_position === 'bottom' && <Box sx={{ mt: 1 }}>{action}</Box>}
+      />
+    </ListItem>
   );
 };
 

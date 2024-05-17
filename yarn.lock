@@ -7842,13 +7842,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.debounce@npm:^4.0.8":
-  version: 4.0.8
-  resolution: "lodash.debounce@npm:4.0.8"
-  checksum: 10c0/762998a63e095412b6099b8290903e0a8ddcb353ac6e2e0f2d7e7d03abd4275fe3c689d88960eb90b0dde4f177554d51a690f22a343932ecbc50a5d111849987
-  languageName: node
-  linkType: hard
-
 "lodash.isplainobject@npm:^4.0.6":
   version: 4.0.6
   resolution: "lodash.isplainobject@npm:4.0.6"
@@ -8433,6 +8426,7 @@ __metadata:
     react-countdown: "npm:^2.3.5"
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.51.3"
+    react-intersection-observer: "npm:^9.10.2"
     react-otp-input: "npm:^3.1.1"
     react-swipeable-views: "npm:^0.14.0"
     sharp: "npm:^0.33.3"
@@ -8442,7 +8436,6 @@ __metadata:
     tailwindcss: "npm:^3.3.0"
     ts-jest: "npm:^29.1.2"
     typescript: "npm:5.4"
-    usehooks-ts: "npm:^3.1.0"
     yup: "npm:^1.4.0"
   languageName: unknown
   linkType: soft
@@ -9358,6 +9351,19 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
   checksum: 10c0/dd7dfc8514df19a13b7647b3faebdcb1329723afb52454626496eeaa657323d42bab12dc85e6b77d758a166c6427fa87f13c5bd9f5f78666c682e8263117e297
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.10.2":
+  version: 9.10.2
+  resolution: "react-intersection-observer@npm:9.10.2"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 10c0/e2224de16ed5617a7e75f0644abebd5668f4ccc78e9a210ae4b0307d8f306719fce8a7e3e1a4aec0f815b954934028e6a9d14cd70e50f11a603e392dce0450a4
   languageName: node
   linkType: hard
 
@@ -11106,17 +11112,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/2686e88c95bb8bf3d509cc88b95a031e6df71a551c55f9f9ed97597fdc3e582d8770870325ca090f21371d1cbc03eb7543e8a2681fb509a9375fb104c3604e2c
-  languageName: node
-  linkType: hard
-
-"usehooks-ts@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "usehooks-ts@npm:3.1.0"
-  dependencies:
-    lodash.debounce: "npm:^4.0.8"
-  peerDependencies:
-    react: ^16.8.0  || ^17 || ^18
-  checksum: 10c0/2204d8c95109302bdaaa51a66bf216f3dba750f1d2795c20ecba75ba1c44a070a253935d537ef536514ab6e363bcc02ccc78b5ad63576ff8d880d577cf3fc48f
   languageName: node
   linkType: hard
 
