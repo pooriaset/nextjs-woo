@@ -1,11 +1,2 @@
-export { CategoriesDocument } from './graphql';
-export { GetMainCategoriesDocument } from './graphql';
-export { GetGeneralSettingsDocument } from './graphql';
-export { GetPageDocument } from './graphql';
-export { GetPublishedPagesListDocument } from './graphql';
-export { GetAllProductsDocument } from './graphql';
-export { GetSingleProductDocument } from './graphql';
-export { GetHomePageSlidersDocument } from './graphql';
-export { GetTopBannerDocument } from './graphql';
 export * from "./fragment-masking";
 export * from "./gql";

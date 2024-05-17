@@ -61,11 +61,21 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         sourceUrl
         altText
       }
+      customAttributes {
+        nodes {
+          id
+          label
+          name
+          optionNames
+          variation
+        }
+      }
       productCategories {
         nodes {
           id: databaseId
           name
           slug
+          menuOrder
         }
       }
       galleryImages {

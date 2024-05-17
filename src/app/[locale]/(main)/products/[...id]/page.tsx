@@ -109,7 +109,10 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
           </Card>
         </Grid>
         <Grid item xs={12}>
-          <ProductTabs content={product.content} />
+          <ProductTabs
+            content={product.content}
+            attributes={product.customAttributes?.nodes}
+          />
         </Grid>
       </Grid>
     </Container>

@@ -5,15 +5,17 @@ import { Box, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, SyntheticEvent, useState } from 'react';
 import Section from './Section';
+import { Product } from '../../types/common';
 
 export interface ProductTabsProps {
   content?: string | null;
+  attributes?: NonNullable<Product['customAttributes']>['nodes'];
 }
 
 const offset = 118 + 60 + 48;
 
 const CustomDivider = <Divider sx={{ borderWidth: 2, borderRadius: 1 }} />;
-const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
+const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
   const t = useTranslations();
 
   const [id, setId] = useState('introduction');
@@ -35,7 +37,21 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
       top: count,
       behavior: 'smooth',
     });
+    if (id !== value) {
+      setId(value);
+    }
   };
+
+  const items =
+    attributes
+      ?.filter((item) => !item.variation)
+      .map((item) => {
+        const value = item.optionNames?.join(`${t('stringSeparator')} `) ?? '';
+        return {
+          key: item.label ?? '',
+          value,
+        };
+      }) ?? [];
 
   return (
     <>
@@ -101,75 +117,7 @@ const ProductTabs: FC<ProductTabsProps> = ({ content }) => {
             id="specifications"
             label={t('pages.product.tabs.specifications')}
           >
-            <KeyValueViewer
-              items={[
-                {
-                  key: 'کد محصول',
-                  value: 'A025',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-                {
-                  key: 'test',
-                  value: 'test',
-                },
-              ]}
-            />
+            <KeyValueViewer items={items} />
           </Section>
         </Grid>
 

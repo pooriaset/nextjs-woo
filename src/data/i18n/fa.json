@@ -5,6 +5,7 @@
       "isEmpty": "سبد خرید خالی است"
     }
   },
+  "stringSeparator": "،",
   "categories": {
     "all": "همه"
   },
@@ -49,6 +50,10 @@
   },
   "units": {
     "price": "تومان"
+  },
+  "breadcrumbs": {
+    "home": "خانه",
+    "products": "محصولات"
   },
   "products": {
     "notFound": {
