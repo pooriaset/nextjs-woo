@@ -1,45 +1,24 @@
 'use client';
 
 import KeyValueViewer from '@/components/KeyValueViewer/KeyValueViewer';
-import { Box, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
+import TabPanel from '@/components/common/TabPanel';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, SyntheticEvent, useState } from 'react';
-import Section from './Section';
 import { Product } from '../../types/common';
+import Section from './Section';
 
 export interface ProductTabsProps {
   content?: string | null;
   attributes?: NonNullable<Product['customAttributes']>['nodes'];
 }
 
-const offset = 118 + 60 + 48;
-
-const CustomDivider = <Divider sx={{ borderWidth: 2, borderRadius: 1 }} />;
 const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
   const t = useTranslations();
 
-  const [id, setId] = useState('introduction');
-
-  const handleChangeIntersection = (
-    inView: boolean,
-    entry: IntersectionObserverEntry,
-  ) => {
-    if (inView) {
-      setId(entry.target.id);
-    }
-  };
-
+  const [activeTab, setActiveTab] = useState(0);
   const handleChangeTab = (event: SyntheticEvent, value: string) => {
-    const item = document.getElementById(value)!;
-    const count = item.offsetTop - document.body.offsetTop - offset;
-
-    window.scrollTo({
-      top: count,
-      behavior: 'smooth',
-    });
-    if (id !== value) {
-      setId(value);
-    }
+    setActiveTab(+value);
   };
 
   const items =
@@ -66,73 +45,39 @@ const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
         }}
       >
         <Tabs
-          value={id}
+          value={activeTab}
           textColor="primary"
           indicatorColor="primary"
           aria-label="secondary tabs example"
           onChange={handleChangeTab}
         >
-          <Tab
-            value="introduction"
-            label={t('pages.product.tabs.introduction')}
-          />
-          <Tab
-            value="specifications"
-            label={t('pages.product.tabs.specifications')}
-          />
-          <Tab value="comments" label={t('pages.product.tabs.comments')} />
+          <Tab value={0} label={t('pages.product.tabs.introduction')} />
+          <Tab value={1} label={t('pages.product.tabs.specifications')} />
+          <Tab value={2} label={t('pages.product.tabs.comments')} />
         </Tabs>
       </Box>
-      <Grid
-        id="wrapper"
-        container
-        spacing={3}
-        sx={{
-          mt: 2,
-        }}
-      >
-        <Grid item xs={12}>
-          <Section
-            onChangeIntersection={handleChangeIntersection}
-            id="introduction"
-            label={t('pages.product.tabs.introduction')}
-          >
-            <Typography
-              component="div"
-              sx={{
-                lineHeight: 2,
-              }}
-              dangerouslySetInnerHTML={{ __html: content! }}
-            />
-          </Section>
-        </Grid>
 
-        <Grid item xs={12}>
-          {CustomDivider}
-        </Grid>
+      <TabPanel value={activeTab} index={0}>
+        <Section label={t('pages.product.tabs.introduction')}>
+          <Typography
+            component="div"
+            sx={{
+              lineHeight: 2,
+            }}
+            dangerouslySetInnerHTML={{ __html: content! }}
+          />
+        </Section>
+      </TabPanel>
 
-        <Grid item xs={12}>
-          <Section
-            onChangeIntersection={handleChangeIntersection}
-            id="specifications"
-            label={t('pages.product.tabs.specifications')}
-          >
-            <KeyValueViewer items={items} />
-          </Section>
-        </Grid>
+      <TabPanel value={activeTab} index={1}>
+        <Section label={t('pages.product.tabs.specifications')}>
+          <KeyValueViewer items={items} />
+        </Section>
+      </TabPanel>
 
-        <Grid item xs={12}>
-          {CustomDivider}
-        </Grid>
-
-        <Grid item xs={12}>
-          <Section
-            onChangeIntersection={handleChangeIntersection}
-            id="comments"
-            label={t('pages.product.tabs.comments')}
-          ></Section>
-        </Grid>
-      </Grid>
+      <TabPanel value={activeTab} index={2}>
+        <Section label={t('pages.product.tabs.comments')}></Section>
+      </TabPanel>
     </>
   );
 };
