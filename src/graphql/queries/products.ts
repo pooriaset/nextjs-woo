@@ -70,12 +70,13 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
           variation
         }
       }
-      productCategories {
+      productCategories(where: { order: ASC, orderby: TERM_ORDER }) {
         nodes {
           id: databaseId
           name
           slug
           menuOrder
+          parentId
         }
       }
       galleryImages {
@@ -94,7 +95,7 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         averageRating
         variations(where: { stockStatus: IN_STOCK }) {
           nodes {
-            id
+            id: databaseId
             price
             salePrice
             regularPrice

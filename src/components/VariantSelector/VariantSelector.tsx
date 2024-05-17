@@ -5,17 +5,22 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 export interface VariantSelectorProps {
   items: { id: number | string; value: any; name: string }[];
   label: string;
+  value: any;
+  onChange: (value: any) => void;
 }
-const VariantSelector: FC<VariantSelectorProps> = ({ items, label }) => {
-  const [size, setSize] = useState('42');
-
+const VariantSelector: FC<VariantSelectorProps> = ({
+  items,
+  label,
+  value,
+  onChange,
+}) => {
   const handleChange = (event: SelectChangeEvent) => {
-    setSize(event.target.value);
+    onChange(event.target.value);
   };
 
   return (
@@ -28,21 +33,24 @@ const VariantSelector: FC<VariantSelectorProps> = ({ items, label }) => {
       }}
     >
       <FormControl fullWidth size="small">
-        <InputLabel id="size-select-label">{label}</InputLabel>
+        <InputLabel id="variant-select-label">{label}</InputLabel>
         <Select
-          labelId="size-select-label"
-          id="size-select"
-          value={size}
+          labelId="variant-select-label"
+          id="variant-select"
+          value={value}
           label={label}
           onChange={handleChange}
           MenuProps={{
             disableScrollLock: true,
+            sx: {
+              zIndex: 10,
+            },
           }}
         >
           {items.map((item) => {
             return (
               <MenuItem key={item.id} value={item.value}>
-                {item.name}
+                {item.name.toUpperCase()}
               </MenuItem>
             );
           })}

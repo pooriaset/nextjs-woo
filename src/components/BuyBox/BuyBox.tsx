@@ -14,6 +14,14 @@ import { useTranslations } from 'next-intl';
 import DiscountPercentage from '../common/DiscountPercentage';
 import OldPrice from '../common/OldPrice';
 import PriceLabel from '../common/PriceLabel';
+import { FC } from 'react';
+import { Variations } from '@/app/[locale]/(main)/products/types/common';
+import { useProductContext } from '@/app/[locale]/(main)/products/[...id]/hooks/useProductContext';
+import {
+  extractNumbers,
+  getMinOfRangePrice,
+  getProfitPercentage,
+} from '@/utils/price';
 
 const listItems = [
   {
@@ -26,9 +34,25 @@ const listItems = [
   },
 ];
 
-const BuyBox = () => {
+export interface BuyBoxProps {
+  variations: Variations;
+}
+
+const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
   const { isMobile } = useAppContext();
   const t = useTranslations();
+
+  const { selectedVariantId } = useProductContext();
+
+  const variant = variations?.nodes.find(
+    (item) => item.id === selectedVariantId,
+  );
+
+  const profitMarginPercentage = getProfitPercentage(
+    extractNumbers(getMinOfRangePrice(variant?.price)),
+    extractNumbers(variant?.regularPrice),
+  );
+
   return (
     <Box
       sx={{
@@ -82,10 +106,26 @@ const BuyBox = () => {
             gap: 0.5,
           }}
         >
-          <OldPrice value={'2560000'} />
-          <DiscountPercentage value={37} />
+          {variant?.price !== variant?.regularPrice && (
+            <>
+              <OldPrice
+                value={variant?.regularPrice}
+                TypographyProps={{
+                  variant: 'body1',
+                }}
+              />
+
+              <DiscountPercentage value={profitMarginPercentage} />
+            </>
+          )}
         </Box>
-        <PriceLabel value={'1556400'} />
+        <PriceLabel
+          TypographyProps={{
+            variant: 'h6',
+            fontWeight: 600,
+          }}
+          value={variant?.salePrice}
+        />
       </Box>
       <Box>
         <Button fullWidth variant="contained" color="error" size="large">

@@ -23,7 +23,7 @@ const Header: FC<HeaderProps> = ({ topBanner }) => {
         borderColor: (theme) => theme.palette.divider,
         position: 'sticky',
         top: 0,
-        zIndex: 10000,
+        zIndex: 1299,
       }}
     >
       {topBanner && <TopBanner data={topBanner} />}

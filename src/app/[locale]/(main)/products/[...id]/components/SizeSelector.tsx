@@ -4,24 +4,25 @@ import { VariantSelector } from '@/components/VariantSelector';
 import { VariantSelectorProps } from '@/components/VariantSelector/VariantSelector';
 import { useTranslations } from 'next-intl';
 import { FC, useMemo } from 'react';
-import { Product } from '../../types/common';
+import { Variations } from '../../types/common';
+import { useProductContext } from '../hooks/useProductContext';
 
 export interface SizeSelectorProps {
-  items: Extract<Product, { __typename?: 'VariableProduct' }>['variations'];
+  variations: Variations;
 }
 
-const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
+const SizeSelector: FC<SizeSelectorProps> = ({ variations }) => {
   const t = useTranslations();
 
   const _items = useMemo(() => {
     const _items: VariantSelectorProps['items'] = [];
 
-    items?.nodes.forEach((item) => {
-      item.attributes?.nodes.forEach((item) => {
+    variations?.nodes.forEach((variant) => {
+      variant.attributes?.nodes.forEach((attribute) => {
         _items.push({
-          id: item.value!,
-          name: item.value!,
-          value: item.value,
+          id: variant.id!,
+          name: attribute.value!,
+          value: variant.id,
         });
       });
     });
@@ -29,7 +30,17 @@ const SizeSelector: FC<SizeSelectorProps> = ({ items }) => {
     return _items;
   }, []);
 
-  return <VariantSelector items={_items} label={t('fields.size')} />;
+  const { selectedVariantId, handleChangeSelectedVariantId } =
+    useProductContext();
+
+  return (
+    <VariantSelector
+      items={_items}
+      label={t('fields.size')}
+      value={selectedVariantId}
+      onChange={handleChangeSelectedVariantId}
+    />
+  );
 };
 
 export default SizeSelector;

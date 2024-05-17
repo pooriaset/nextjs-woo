@@ -16,6 +16,7 @@ const ProductImage: FC<ProductImageProps> = ({ value }) => {
       style={{
         userSelect: 'none',
         width: '100%',
+        borderRadius: 8,
       }}
     />
   );

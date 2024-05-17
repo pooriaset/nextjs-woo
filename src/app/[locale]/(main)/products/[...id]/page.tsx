@@ -14,10 +14,12 @@ import {
   Typography,
 } from '@mui/material';
 import type { Metadata } from 'next';
-import SizeSelector from './components/SizeSelector';
-import ProductImage from './components/ProductImage';
+import FindYourSize from './components/FindYourSize';
 import ProductGallery from './components/ProductGallery';
+import ProductImage from './components/ProductImage';
 import ProductTabs from './components/ProductTabs';
+import SizeSelector from './components/SizeSelector';
+import ProductProvider from './providers/ProductProvider';
 
 type PageProps = {
   params: { id: string };
@@ -64,57 +66,65 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 3 }}>
-      <Grid container spacing={2}>
-        <Grid item md={4} xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <ProductImage value={product.image} />
-            </Grid>
-            <Grid item xs={12}>
-              <ProductGallery value={product?.galleryImages?.nodes} />
+      <ProductProvider
+        value={{
+          selectedVariantId: product.variations?.nodes[0]?.id ?? null,
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item md={4} xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <ProductImage value={product.image} />
+              </Grid>
+              <Grid item xs={12}>
+                <ProductGallery value={product?.galleryImages?.nodes} />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item md={5} xs={12}>
-          <Breadcrumbs items={breadcrumbItems} />
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: 700,
-              lineHeight: 2.1,
-              fontSize: '1rem',
-            }}
-          >
-            {product?.title}
-          </Typography>
-          <Divider />
-          <Grid
-            container
-            spacing={1}
-            sx={{
-              mt: 2,
-            }}
-          >
-            <Grid item>
-              <SizeSelector items={product.variations} />
+          <Grid item md={5} xs={12}>
+            <Breadcrumbs items={breadcrumbItems} />
+            <Typography
+              variant="h1"
+              sx={{
+                fontWeight: 700,
+                lineHeight: 2.1,
+                fontSize: '1rem',
+              }}
+            >
+              {product?.title}
+            </Typography>
+            <Divider />
+            <Grid
+              container
+              spacing={1}
+              sx={{
+                mt: 2,
+              }}
+            >
+              <Grid item>
+                <SizeSelector variations={product.variations} />
+              </Grid>
+              <Grid item>
+                <FindYourSize />
+              </Grid>
             </Grid>
-            <Grid item></Grid>
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <Card variant="outlined">
+              <CardContent>
+                <BuyBox variations={product.variations} />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <ProductTabs
+              content={product.content}
+              attributes={product.customAttributes?.nodes}
+            />
           </Grid>
         </Grid>
-        <Grid item md={3} xs={12}>
-          <Card variant="outlined">
-            <CardContent>
-              <BuyBox />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12}>
-          <ProductTabs
-            content={product.content}
-            attributes={product.customAttributes?.nodes}
-          />
-        </Grid>
-      </Grid>
+      </ProductProvider>
     </Container>
   );
 };
