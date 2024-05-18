@@ -84,6 +84,9 @@
         "introduction": "Introduction",
         "comments": "Comments",
         "specifications": "Specifications"
+      },
+      "tooltips": {
+        "fullScreen": "Full Screen"
       }
     },
     "notfound": {
