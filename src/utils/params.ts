@@ -14,17 +14,19 @@ export interface SearchPagesParams {
   categoryId: number | null;
 }
 
-export const getSearchPageParams = (params: any): SearchPagesParams => {
-  const _params = params.get ? params : new Map(Object.entries(params));
-
-  const sortParam = _params.get(SearchPageParamsKeys.Sort);
+export const getSearchPageParams = (
+  params: Map<string, unknown>,
+): SearchPagesParams => {
+  const sortParam = params.get(SearchPageParamsKeys.Sort);
   const sort = sortParam ? +sortParam : sortOptions[0].key;
-  const q = _params.get(SearchPageParamsKeys.Q);
-  const inStock = _params.has(SearchPageParamsKeys.InStock)
-    ? _params.get(SearchPageParamsKeys.InStock) === 'true'
+  const q = params.has(SearchPageParamsKeys.Q)
+    ? (params.get(SearchPageParamsKeys.Q) as string)
+    : null;
+  const inStock = params.has(SearchPageParamsKeys.InStock)
+    ? params.get(SearchPageParamsKeys.InStock) === 'true'
     : true;
-  const categoryId = _params.has(SearchPageParamsKeys.CategoryId)
-    ? +_params.get(SearchPageParamsKeys.CategoryId)
+  const categoryId = params.has(SearchPageParamsKeys.CategoryId)
+    ? +params.get(SearchPageParamsKeys.CategoryId)!
     : null;
 
   return {

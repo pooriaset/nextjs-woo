@@ -15,7 +15,7 @@ import SortWrapper from './components/SortWrapper';
 
 const Page = async (props: { searchParams: Record<string, unknown> }) => {
   const { inStock, categoryId, sort, q } = getSearchPageParams(
-    props.searchParams,
+    new Map(Object.entries(props.searchParams)),
   );
 
   const { data } = await getClient().query<GetAllProductsQuery>({
