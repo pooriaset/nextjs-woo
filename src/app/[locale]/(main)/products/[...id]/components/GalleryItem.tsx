@@ -6,14 +6,23 @@ export interface GalleryItemProps {
   onClick: () => void;
   alt: string | undefined | null;
   src: string | undefined | null;
+  isActive?: boolean;
 }
-const GalleryItem: FC<GalleryItemProps> = ({ onClick, alt, src }) => {
+const GalleryItem: FC<GalleryItemProps> = ({
+  onClick,
+  alt,
+  src,
+  isActive = false,
+}) => {
   return (
     <Box
       sx={{
         p: 0.5,
         border: '1px solid',
-        borderColor: (theme) => theme.palette.divider,
+        borderColor: isActive
+          ? (theme) => theme.palette.primary.main
+          : 'divider',
+        transition: 'all 200ms ease',
         borderRadius: 1,
         width: 72,
         height: 72,

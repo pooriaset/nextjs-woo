@@ -75,6 +75,7 @@ const ProductImages: FC<ProductImagesProps> = ({
               alt={item?.altText}
               src={item?.sourceUrl}
               key={item?.id}
+              isActive={item?.sourceUrl === selected.src}
             />
           );
         })}
