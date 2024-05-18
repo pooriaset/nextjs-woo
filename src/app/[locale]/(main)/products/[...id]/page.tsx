@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import type { Metadata } from 'next';
 import FindYourSize from './components/FindYourSize';
-import ProductImages from './components/ProductGallery';
+import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
 import SizeSelector from './components/SizeSelector';
 import ProductProvider from './providers/ProductProvider';
@@ -71,17 +71,13 @@ const Page: FC<PageProps> = async ({ params: { id } }) => {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item md={4} xs={12}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <ProductImages
-                  thumbnail={product.image}
-                  galleryImages={product?.galleryImages?.nodes}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item md={5} xs={12}>
+            <ProductGallery
+              thumbnail={product.image}
+              galleryImages={product?.galleryImages?.nodes}
+            />
+          </Grid>
+          <Grid item md={4} xs={12}>
             <Breadcrumbs items={breadcrumbItems} />
             <Typography
               variant="h1"

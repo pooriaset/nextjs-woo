@@ -7,11 +7,15 @@ export interface GalleryItemProps {
   alt: string | undefined | null;
   src: string | undefined | null;
   isActive?: boolean;
+  width: number;
+  height: number;
 }
 const GalleryItem: FC<GalleryItemProps> = ({
   onClick,
   alt,
   src,
+  width,
+  height,
   isActive = false,
 }) => {
   return (
@@ -24,16 +28,16 @@ const GalleryItem: FC<GalleryItemProps> = ({
           : 'divider',
         transition: 'all 200ms ease',
         borderRadius: 1,
-        width: 72,
-        height: 72,
+        width: width,
+        height: height,
         position: 'relative',
       }}
     >
       <Image
         onClick={onClick}
         draggable={false}
-        width={72}
-        height={72}
+        width={width}
+        height={height}
         alt={alt}
         src={src}
         style={{
