@@ -23,9 +23,7 @@ export interface ProductItemProps {
 }
 
 const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
-  const { isMobile } = useAppContext();
-
-  const size = isMobile ? 120 : 240;
+  const { isMobile, variantImageSize } = useAppContext();
 
   const profitMarginPercentage = getProfitPercentage(
     extractNumbers(getMinOfRangePrice(data.price)),
@@ -61,8 +59,8 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
           }}
         >
           <Image
-            height={size}
-            width={size}
+            height={variantImageSize}
+            width={variantImageSize}
             src={data.image?.sourceUrl!}
             alt="Product Image"
             style={{
