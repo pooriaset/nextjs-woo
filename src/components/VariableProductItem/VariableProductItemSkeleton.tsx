@@ -27,7 +27,11 @@ const VariableProductItemSkeleton = () => {
             gap: 1,
           }}
         >
-          <Skeleton height={variantImageSize} width="100%" />
+          <Skeleton
+            variant="rectangular"
+            height={variantImageSize}
+            width="100%"
+          />
           {!isMobile && <Box mt={3} />}
 
           <Box

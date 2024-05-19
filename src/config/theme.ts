@@ -168,6 +168,13 @@ const themeOptions: ThemeOptions = {
     }
     `,
     },
+    MuiSkeleton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 4,
+        },
+      },
+    },
   },
 };
 
