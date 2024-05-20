@@ -7,7 +7,7 @@ import MobileView from '../ResponsiveDesign/components/MobileView';
 import { DesktopHeader, MobileHeader } from './components';
 import TopBanner, {
   TopBannerProps,
-} from '@/app/[locale]/(main)/components/TopBanner/TopBanner';
+} from '@/components/Header/components/TopBanner';
 
 export interface HeaderProps {
   topBanner?: TopBannerProps['data'];

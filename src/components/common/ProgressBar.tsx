@@ -5,17 +5,16 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { useEffect, useState } from 'react';
 
 const ProgressBar = () => {
-  const [progress, setProgress] = useState(10);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress >= 90) {
-          return 90;
+          return prevProgress;
         }
 
-        prevProgress += 15;
-
+        prevProgress += 13;
         return prevProgress;
       });
     }, 600);
