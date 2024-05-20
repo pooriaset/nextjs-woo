@@ -1,10 +1,10 @@
 import SortRow from '@/app/[locale]/(main)/search/components/SortRow';
-import DesktopView from '@/components/ResponsiveDesign/components/DesktopView';
-import MobileView from '@/components/ResponsiveDesign/components/MobileView';
 import { ColumnFilters } from '@/components/ColumnFilters';
 import { InlineFilters } from '@/components/InlineFilters';
 import ProductsCount from '@/components/ProductsCount/ProductsCount';
 import ProductsList from '@/components/ProductsList/ProductsList';
+import DesktopView from '@/components/ResponsiveDesign/components/DesktopView';
+import MobileView from '@/components/ResponsiveDesign/components/MobileView';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import { GetAllProductsQuery, StockStatusEnum } from '@/graphql/types/graphql';
@@ -12,14 +12,11 @@ import { sortOptions } from '@/static/sortOptions';
 import { getSearchPageParams } from '@/utils/params';
 import { Box, Container } from '@mui/material';
 import SortWrapper from './components/SortWrapper';
-import { Sleep } from '@/services/common';
 
 const Page = async (props: { searchParams: Record<string, unknown> }) => {
   const { inStock, categoryId, sort, q } = getSearchPageParams(
     new Map(Object.entries(props.searchParams)),
   );
-
-  await Sleep(1000);
 
   const { data } = await getClient().query<GetAllProductsQuery>({
     query: GET_VARIABLE_PRODUCTS_QUERY,

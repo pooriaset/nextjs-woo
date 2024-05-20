@@ -1,7 +1,9 @@
 import { Card, CardContent, Container } from '@mui/material';
 import Header from './components/Header';
+import { Sleep } from '@/services/common';
 
-const page = () => {
+const page = async () => {
+  await Sleep(115000);
   return (
     <>
       <Header />

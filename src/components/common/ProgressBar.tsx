@@ -1,0 +1,42 @@
+'use client';
+
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
+import { useEffect, useState } from 'react';
+
+const ProgressBar = () => {
+  const [progress, setProgress] = useState(10);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 90) {
+          return 90;
+        }
+
+        prevProgress += 15;
+
+        return prevProgress;
+      });
+    }, 600);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1300,
+      }}
+    >
+      <LinearProgress variant="determinate" value={progress} />
+    </Box>
+  );
+};
+export default ProgressBar;
