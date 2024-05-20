@@ -3,7 +3,7 @@ import Header from './components/Header';
 import { Sleep } from '@/services/common';
 
 const page = async () => {
-  await Sleep(115000);
+  await Sleep(200);
   return (
     <>
       <Header />
