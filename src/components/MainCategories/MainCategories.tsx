@@ -16,7 +16,7 @@ export interface MainCategoriesProps {
 }
 const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <Grid container spacing={2}>
       {items.map((item) => {
         const params = new URLSearchParams();
         params.set('categoryId', item.id.toString());
