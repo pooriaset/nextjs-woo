@@ -1,6 +1,7 @@
 'use client';
 
 import Logo from '@/components/common/Logo';
+import { Link } from '@/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -48,7 +49,9 @@ const Page = () => {
                 pt: 2,
               }}
             >
-              <Logo />
+              <Link href="/">
+                <Logo />
+              </Link>
             </Box>
             <Typography
               sx={{
