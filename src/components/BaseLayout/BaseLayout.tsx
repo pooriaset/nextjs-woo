@@ -4,6 +4,7 @@ import { ISliderItem } from '@/components/HomePageSlider/types';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_PUBLISHED_PAGES_LIST } from '@/graphql/queries/pages';
 import { GET_TOP_BANNER } from '@/graphql/queries/sliders';
+import { IPageListItem } from '@/graphql/types/common';
 import {
   GetPublishedPagesListQuery,
   GetTopBannerQuery,
@@ -13,10 +14,6 @@ import { FC, ReactNode } from 'react';
 export interface BaseLayoutProps {
   children: ReactNode;
 }
-
-export type IPageListItem = NonNullable<
-  GetPublishedPagesListQuery['pages']
->['edges'][number]['node'];
 
 const getPagesList = async (): Promise<IPageListItem[]> => {
   const { data } = await getClient().query<GetPublishedPagesListQuery>({

@@ -1,6 +1,6 @@
 'use client';
 
-import { IPageListItem } from '@/app/[locale]/(container)/layout';
+import { IPageListItem } from '@/graphql/types/common';
 import { Box, Container, Link, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
