@@ -15,7 +15,7 @@ export interface SearchPagesParams {
 }
 
 export const getSearchPageParams = (
-  params: Map<string, unknown>,
+  params: URLSearchParams,
 ): SearchPagesParams => {
   const sortParam = params.get(SearchPageParamsKeys.Sort);
   const sort = sortParam ? +sortParam : sortOptions[0].key;

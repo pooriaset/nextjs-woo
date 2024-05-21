@@ -15,8 +15,8 @@ const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
   const t = useTranslations();
   return (
     <Box
-      py={1}
       sx={{
+        pb: 1,
         borderBottom: '1px solid',
         borderColor: (theme) => theme.palette.divider,
         position: 'sticky',
@@ -26,7 +26,7 @@ const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
         maxWidth: '100%',
         overflowX: 'auto',
         gap: 1,
-        px: (theme) => theme.spacing(3),
+        mb: 1,
       }}
     >
       <Button variant="outlined" size="small" endIcon={<SortOutlined />}>

@@ -1,4 +1,4 @@
-import { IPageListItem } from '@/app/[locale]/(main)/layout';
+import { IPageListItem } from '@/app/[locale]/(container)/layout';
 import { Box } from '@mui/material';
 import { FC } from 'react';
 import DesktopView from '../ResponsiveDesign/components/DesktopView';

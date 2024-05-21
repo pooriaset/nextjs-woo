@@ -2,9 +2,9 @@ import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_PAGE } from '@/graphql/queries/pages';
 import { GetPageQuery } from '@/graphql/types/graphql';
 import { Locale } from '@/navigation';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 type IPage = NonNullable<GetPageQuery['pages']>['edges'][number]['node'];
 
@@ -47,7 +47,7 @@ const page: FC<PageProps> = async ({ params }) => {
   }
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 10 }}>
+    <>
       <Typography
         component="h1"
         variant="h5"
@@ -68,7 +68,7 @@ const page: FC<PageProps> = async ({ params }) => {
           __html: page.content,
         }}
       />
-    </Container>
+    </>
   );
 };
 

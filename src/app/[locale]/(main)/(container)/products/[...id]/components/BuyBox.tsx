@@ -11,17 +11,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
-import DiscountPercentage from '../common/DiscountPercentage';
-import OldPrice from '../common/OldPrice';
-import PriceLabel from '../common/PriceLabel';
+import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
+import OldPrice from '../../../../../../../components/common/OldPrice';
+import PriceLabel from '../../../../../../../components/common/PriceLabel';
 import { FC } from 'react';
-import { Variations } from '@/app/[locale]/(main)/products/types/common';
-import { useProductContext } from '@/app/[locale]/(main)/products/[...id]/hooks/useProductContext';
 import {
   extractNumbers,
   getMinOfRangePrice,
   getProfitPercentage,
 } from '@/utils/price';
+import { Variations } from '@/app/[locale]/(main)/(container)/products/types/common';
+import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...id]/hooks/useProductContext';
 
 const listItems = [
   {

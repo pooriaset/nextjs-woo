@@ -14,7 +14,7 @@ const LoadingComponent = () => {
   return (
     <>
       <ProgressBar />
-      <Dialog open={false} maxWidth="sm">
+      <Dialog open maxWidth="sm">
         <DialogTitle sx={{ textAlign: 'center' }}>
           <Logo />
         </DialogTitle>

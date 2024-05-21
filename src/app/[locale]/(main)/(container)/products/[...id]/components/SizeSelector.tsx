@@ -28,7 +28,7 @@ const SizeSelector: FC<SizeSelectorProps> = ({ variations }) => {
     });
 
     return _items;
-  }, []);
+  }, [variations?.nodes]);
 
   const { selectedVariantId, handleChangeSelectedVariantId } =
     useProductContext();

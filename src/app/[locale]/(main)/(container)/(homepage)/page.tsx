@@ -12,10 +12,12 @@ import {
   GetMainCategoriesQuery,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
+import { Sleep } from '@/services/common';
 import { bestSellingSortOption } from '@/static/sortOptions';
-import { Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 const getSliders = async () => {
+  await Sleep(5000);
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
     query: GET_HOMEPAGE_SLIDERS,
   });
@@ -66,8 +68,7 @@ const getBestSellingProducts = async () => {
       first: 10,
     },
   });
-
-  return data.products?.nodes;
+  return data?.products?.nodes;
 };
 
 export default async function Home() {
@@ -76,20 +77,16 @@ export default async function Home() {
   const bestSellingProducts = await getBestSellingProducts();
 
   return (
-    <main>
-      <Container maxWidth="xl" sx={{ mt: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <HomePageSlider items={sliders} />
-          </Grid>
-          <Grid item xs={12}>
-            <MainCategories items={categories} />
-          </Grid>
-          <Grid item xs={12}>
-            <BestSellingProducts items={bestSellingProducts} />
-          </Grid>
-        </Grid>
-      </Container>
-    </main>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <HomePageSlider items={sliders} />
+      </Grid>
+      <Grid item xs={12}>
+        <MainCategories items={categories} />
+      </Grid>
+      <Grid item xs={12}>
+        <BestSellingProducts items={bestSellingProducts} />
+      </Grid>
+    </Grid>
   );
 }
