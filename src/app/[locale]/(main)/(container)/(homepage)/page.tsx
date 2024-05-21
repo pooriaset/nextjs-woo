@@ -17,7 +17,7 @@ import { bestSellingSortOption } from '@/static/sortOptions';
 import { Grid } from '@mui/material';
 
 const getSliders = async () => {
-  await Sleep(5000);
+  await Sleep(51111000);
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
     query: GET_HOMEPAGE_SLIDERS,
   });
