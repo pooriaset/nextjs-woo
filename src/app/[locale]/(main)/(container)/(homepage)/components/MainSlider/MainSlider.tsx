@@ -8,11 +8,11 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { SliderItem } from './components/SliderItem';
 import { ISliderItem } from './types';
 
-export interface CarouselProps {
+export interface MainSliderProps {
   items?: ISliderItem[];
 }
 
-const MySwiper: FC<CarouselProps> = ({ items }) => {
+const MainSlider: FC<MainSliderProps> = ({ items }) => {
   const theme = useTheme();
   return (
     <Swiper
@@ -43,4 +43,4 @@ const MySwiper: FC<CarouselProps> = ({ items }) => {
   );
 };
 
-export default MySwiper;
+export default MainSlider;

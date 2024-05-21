@@ -1,7 +1,3 @@
-import BestSellingProducts from '@/components/BestSellingProducts/BestSellingProducts';
-import { HomePageSlider } from '@/components/HomePageSlider';
-import { ISliderItem } from '@/components/HomePageSlider/types';
-import { MainCategories } from '@/components/MainCategories';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
@@ -15,9 +11,13 @@ import {
 import { Sleep } from '@/services/common';
 import { bestSellingSortOption } from '@/static/sortOptions';
 import { Grid } from '@mui/material';
+import { MainSlider } from './components/MainSlider';
+import MainCategories from './components/MainCategories';
+import BestSellingProducts from './components/BestSellingProducts';
+import { ISliderItem } from './components/MainSlider/types';
 
 const getSliders = async () => {
-  await Sleep(51111000);
+  await Sleep(2000);
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
     query: GET_HOMEPAGE_SLIDERS,
   });
@@ -79,7 +79,7 @@ export default async function Home() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <HomePageSlider items={sliders} />
+        <MainSlider items={sliders} />
       </Grid>
       <Grid item xs={12}>
         <MainCategories items={categories} />

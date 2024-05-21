@@ -1,6 +1,6 @@
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
-import { ISliderItem } from '@/components/HomePageSlider/types';
+import { ISliderItem } from '@/app/[locale]/(main)/(container)/(homepage)/components/MainSlider/types';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_PUBLISHED_PAGES_LIST } from '@/graphql/queries/pages';
 import { GET_TOP_BANNER } from '@/graphql/queries/sliders';

@@ -4,7 +4,7 @@ import { ChevronLeft } from '@mui/icons-material';
 import { Box, Grid, Link, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import React, { FC } from 'react';
-import Image from '../common/Image';
+import Image from '../../../../../../components/common/Image';
 
 export interface IMainCategory {
   id: number | string;
