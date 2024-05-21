@@ -32,7 +32,7 @@ const getTopBanner = async () => {
     query: GET_TOP_BANNER,
   });
 
-  const _item = data?.sliderCategories?.nodes?.[0].sliders?.edges?.[0]?.node;
+  const _item = data?.sliderCategories?.nodes?.[0]?.sliders?.edges?.[0]?.node;
   if (_item && _item?.featuredImage?.node.url) {
     const data: ISliderItem = {
       id: _item.id,
