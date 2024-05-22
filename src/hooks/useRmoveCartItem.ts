@@ -1,15 +1,7 @@
 import { REMOVE_ITEMS_FROM_CART_MUTATION } from '@/graphql/queries/cart';
-import { getFragmentData } from '@/graphql/types';
-import {
-  CartContentFragmentDoc,
-  CartItemContentFragmentDoc,
-  GetCartQuery,
-  ProductVariationContentSliceFragmentDoc,
-  RemoveItemsFromCartMutation,
-} from '@/graphql/types/graphql';
-import { ICartAtom, cartAtom } from '@/store/atoms';
+import { RemoveItemsFromCartMutation } from '@/graphql/types/graphql';
 import { useMutation } from '@apollo/client';
-import { useAtom } from 'jotai';
+import useCartUtils from './useCartUtils';
 
 export interface RemoveCartItemMutate {
   (values: { variationId: number }): Promise<any>;
@@ -23,31 +15,7 @@ export interface IUseRemoveCartItem {
 }
 
 const useRemoveCartItem: IUseRemoveCartItem = () => {
-  const [cart, setCart] = useAtom(cartAtom);
-
-  const findInCart = ({ variationId }: { variationId: number }) => {
-    cart?.contents?.nodes.find((item) => {
-      const { variation } = getFragmentData(CartItemContentFragmentDoc, item);
-      const productContent = getFragmentData(
-        ProductVariationContentSliceFragmentDoc,
-        variation?.node,
-      )!;
-      return productContent?.databaseId == variationId;
-    });
-
-    return { quantity: 0, key: 0 };
-  };
-
-  const setCartAtom = (value: GetCartQuery['cart']) => {
-    const _value: ICartAtom = {
-      ...value,
-      productsCount:
-        getFragmentData(CartContentFragmentDoc, value)?.contents?.nodes
-          ?.length ?? 0,
-    };
-
-    setCart(_value);
-  };
+  const { findInCart, setCartAtom } = useCartUtils();
 
   const [removeCartItem, { loading }] =
     useMutation<RemoveItemsFromCartMutation>(REMOVE_ITEMS_FROM_CART_MUTATION, {

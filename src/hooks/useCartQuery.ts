@@ -1,19 +1,14 @@
 import { GET_CART_QUERY } from '@/graphql/queries/cart';
-import { getFragmentData } from '@/graphql/types';
-import { CartContentFragmentDoc, GetCartQuery } from '@/graphql/types/graphql';
-import { cartAtom } from '@/store/atoms';
+import { GetCartQuery } from '@/graphql/types/graphql';
 import { useQuery } from '@apollo/client';
-import { useSetAtom } from 'jotai';
+import useCartUtils from './useCartUtils';
 
 const useCartQuery = () => {
-  const setCart = useSetAtom(cartAtom);
+  const { setCartAtom } = useCartUtils();
+
   return useQuery<GetCartQuery>(GET_CART_QUERY, {
     onCompleted: (data) => {
-      const cart = getFragmentData(CartContentFragmentDoc, data.cart);
-      setCart({
-        ...cart,
-        productsCount: cart?.contents?.nodes.length ?? 0,
-      });
+      setCartAtom(data.cart);
     },
     fetchPolicy: 'network-only',
   });
