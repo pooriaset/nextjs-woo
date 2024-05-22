@@ -8237,7 +8237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-ui-confirm@npm:^3.0.15":
+"material-ui-confirm@npm:^3.0.7":
   version: 3.0.15
   resolution: "material-ui-confirm@npm:3.0.15"
   peerDependencies:
@@ -8607,7 +8607,7 @@ __metadata:
     husky: "npm:^9.0.11"
     jest: "npm:^29.7.0"
     jotai: "npm:^2.8.1"
-    material-ui-confirm: "npm:^3.0.15"
+    material-ui-confirm: "npm:^3.0.7"
     next: "npm:^14.2.3"
     next-intl: "npm:^3.11.1"
     postcss: "npm:^8"

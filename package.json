@@ -26,7 +26,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^7.0.1",
     "jotai": "^2.8.1",
-    "material-ui-confirm": "^3.0.15",
+    "material-ui-confirm": "^3.0.7",
     "next": "^14.2.3",
     "next-intl": "^3.11.1",
     "react": "^18",

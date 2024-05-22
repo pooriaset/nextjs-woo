@@ -12,7 +12,6 @@ import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
 import SizeSelector from './components/SizeSelector';
 import ProductProvider from './providers/ProductProvider';
-import { Sleep } from '@/services/common';
 
 type PageProps = {
   params: { params: string[] };
@@ -32,7 +31,6 @@ export async function generateMetadata({
 }
 
 const getProduct = async ({ id }: { id: number }) => {
-  await Sleep(2000);
   const { data } = await getClient().query<GetSingleProductQuery>({
     query: GET_SINGLE_VARIABLE_PRODUCT_QUERY,
     variables: {

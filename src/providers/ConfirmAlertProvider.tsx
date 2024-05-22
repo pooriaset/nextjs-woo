@@ -1,34 +1,37 @@
 'use client';
 
-import { ConfirmProvider } from 'material-ui-confirm';
+import { ConfirmProvider, ConfirmProviderProps } from 'material-ui-confirm';
 import { useTranslations } from 'next-intl';
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, memo, useMemo } from 'react';
 
 const ConfirmAlertProvider: FC<PropsWithChildren> = ({ children }) => {
   const t = useTranslations();
-  return (
-    <ConfirmProvider
-      defaultOptions={{
-        confirmationButtonProps: {
-          variant: 'contained',
-          color: 'error',
-        },
-        cancellationButtonProps: {
-          variant: 'outlined',
-          color: 'primary',
-        },
-        cancellationText: t('buttons.return'),
-        confirmationText: t('buttons.yes'),
 
-        contentProps: {
-          dividers: true,
-        },
-        title: t('confirmAlert.title'),
-      }}
-    >
+  const defaultOptions = useMemo(() => {
+    const defaultOptions: ConfirmProviderProps['defaultOptions'] = {
+      confirmationButtonProps: {
+        variant: 'contained',
+        color: 'error',
+      },
+      cancellationButtonProps: {
+        variant: 'outlined',
+        color: 'primary',
+      },
+      cancellationText: t('buttons.return'),
+      confirmationText: t('buttons.yes'),
+      contentProps: {
+        dividers: true,
+      },
+      title: t('confirmAlert.title'),
+    };
+    return defaultOptions;
+  }, [t]);
+
+  return (
+    <ConfirmProvider defaultOptions={defaultOptions}>
       {children}
     </ConfirmProvider>
   );
 };
 
-export default ConfirmAlertProvider;
+export default memo(ConfirmAlertProvider);

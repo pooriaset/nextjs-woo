@@ -8,16 +8,14 @@ import {
   GetMainCategoriesQuery,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
-import { Sleep } from '@/services/common';
 import { bestSellingSortOption } from '@/static/sortOptions';
 import { Grid } from '@mui/material';
-import { MainSlider } from './components/MainSlider';
-import MainCategories from './components/MainCategories';
 import BestSellingProducts from './components/BestSellingProducts';
+import MainCategories from './components/MainCategories';
+import { MainSlider } from './components/MainSlider';
 import { ISliderItem } from './components/MainSlider/types';
 
 const getSliders = async () => {
-  await Sleep(4000);
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
     query: GET_HOMEPAGE_SLIDERS,
   });

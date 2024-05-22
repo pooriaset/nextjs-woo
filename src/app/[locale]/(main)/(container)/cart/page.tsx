@@ -1,59 +1,27 @@
 'use client';
 
 import useCartQuery from '@/hooks/useCartQuery';
-import useEmptyCart from '@/hooks/useEmptyCart';
 import { Link as NextLink } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
-import { DeleteOutline, MoreVert } from '@mui/icons-material';
 import {
   Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
   Grid,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
   Skeleton,
   Typography,
 } from '@mui/material';
 import { useAtomValue } from 'jotai';
-import { useConfirm } from 'material-ui-confirm';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useState } from 'react';
+import Header from './components/Header';
 
 const Page = () => {
   const t = useTranslations();
   const { loading } = useCartQuery();
 
   const cart = useAtomValue(cartAtom);
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = !!anchorEl;
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const { emptyCartLoading, emptyCartMutate } = useEmptyCart();
-
-  const confirm = useConfirm();
-  const handleClickOnRemoveAll = () => {
-    confirm({
-      title: t('pages.cart.confirm.removeAllTitle'),
-      description: t('pages.cart.confirm.removeAllDescription'),
-      confirmationText: t('buttons.removeAll'),
-    }).then(async () => {
-      await emptyCartMutate();
-    });
-  };
 
   if (loading) {
     return <Skeleton />;
@@ -96,32 +64,8 @@ const Page = () => {
     <>
       <Grid container>
         <Grid item lg={9} md={6} xs={12}>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            <MenuItem onClick={handleClickOnRemoveAll}>
-              <ListItemIcon>
-                <DeleteOutline fontSize="small" />
-              </ListItemIcon>
-              <ListItemText>حذف همه</ListItemText>
-            </MenuItem>
-          </Menu>
           <Card variant="outlined">
-            <CardHeader
-              action={
-                <IconButton onClick={handleClick} aria-label="more options">
-                  <MoreVert />
-                </IconButton>
-              }
-              title="سبد خرید شما"
-              subheader={`${cart.productsCount} کالا`}
-            />
+            <Header />
             <CardContent></CardContent>
           </Card>
         </Grid>
