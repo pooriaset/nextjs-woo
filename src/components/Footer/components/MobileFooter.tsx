@@ -7,7 +7,7 @@ import {
   HomeOutlined,
   ShoppingBasketOutlined,
 } from '@mui/icons-material';
-import { Badge } from '@mui/material';
+import { Badge, BadgeProps, styled } from '@mui/material';
 import MuiBottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
@@ -21,6 +21,13 @@ interface Page {
   href: string;
   icon: ReactNode;
 }
+
+const StyledBadge = styled(Badge)<BadgeProps>(() => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 12,
+  },
+}));
 
 const MobileFooter = () => {
   const pathname = usePathname();
@@ -42,9 +49,9 @@ const MobileFooter = () => {
       label: t('footer.navigation.cart'),
       href: '/cart',
       icon: (
-        <Badge badgeContent={cart?.productsCount} color="error">
+        <StyledBadge badgeContent={cart?.productsCount} color="error">
           <ShoppingBasketOutlined />
-        </Badge>
+        </StyledBadge>
       ),
     },
     {
