@@ -1,5 +1,8 @@
 {
   "title": "Title",
+  "confirmAlert": {
+    "title": "Are you sure?"
+  },
   "messages": {
     "cart": {
       "isEmpty": "Cart is empty!"
@@ -37,7 +40,10 @@
     "products": "Products",
     "homepage": "Home Page",
     "findYourSize": "Find Your Size",
-    "addToCart": "Add To Cart"
+    "addToCart": "Add To Cart",
+    "yes": "Yes",
+    "no": "No",
+    "removeAll": "Remove All"
   },
   "footer": {
     "links": {
@@ -78,6 +84,12 @@
     }
   },
   "pages": {
+    "cart": {
+      "confirm": {
+        "removeAllTitle": "Remove all cart items",
+        "removeAllDescription": "Are you removing all items from the cart?"
+      }
+    },
     "product": {
       "galleryDialogTitle": "Gallery",
       "tabs": {

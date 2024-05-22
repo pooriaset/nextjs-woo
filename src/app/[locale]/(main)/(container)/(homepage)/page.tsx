@@ -17,7 +17,7 @@ import BestSellingProducts from './components/BestSellingProducts';
 import { ISliderItem } from './components/MainSlider/types';
 
 const getSliders = async () => {
-  await Sleep(2000);
+  await Sleep(4000);
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
     query: GET_HOMEPAGE_SLIDERS,
   });

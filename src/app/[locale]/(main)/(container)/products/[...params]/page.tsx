@@ -15,7 +15,7 @@ import ProductProvider from './providers/ProductProvider';
 import { Sleep } from '@/services/common';
 
 type PageProps = {
-  params: { id: string };
+  params: { params: string[] };
 };
 
 const title = 'test_title';
@@ -23,8 +23,6 @@ const title = 'test_title';
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const id = params.id;
-
   return {
     title,
     alternates: {
@@ -44,8 +42,8 @@ const getProduct = async ({ id }: { id: number }) => {
   return data.product;
 };
 
-const Page: FC<PageProps> = async ({ params: { id } }) => {
-  const product = await getProduct({ id: +id[0] });
+const Page: FC<PageProps> = async ({ params: { params } }) => {
+  const product = await getProduct({ id: +params[0] });
 
   if (product?.__typename !== 'VariableProduct') {
     return null;

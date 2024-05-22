@@ -1,27 +1,30 @@
 'use client';
 
+import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...params]/hooks/useProductContext';
+import { Variations } from '@/app/[locale]/(main)/(container)/products/types/common';
+import ButtonWithLoading from '@/components/common/ButtonWithLoading';
+import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import { useAppContext } from '@/hooks/useAppContext';
-import {
-  AccountBalanceWalletOutlined,
-  LocalShippingOutlined,
-} from '@mui/icons-material';
-import { Box, Button, Divider } from '@mui/material';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { useTranslations } from 'next-intl';
-import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
-import OldPrice from '../../../../../../../components/common/OldPrice';
-import PriceLabel from '../../../../../../../components/common/PriceLabel';
-import { FC } from 'react';
 import {
   extractNumbers,
   getMinOfRangePrice,
   getProfitPercentage,
 } from '@/utils/price';
-import { Variations } from '@/app/[locale]/(main)/(container)/products/types/common';
-import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...id]/hooks/useProductContext';
+import {
+  AccountBalanceWalletOutlined,
+  LocalShippingOutlined,
+} from '@mui/icons-material';
+import { Box, Divider } from '@mui/material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
+import { FC } from 'react';
+import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
+import OldPrice from '../../../../../../../components/common/OldPrice';
+import PriceLabel from '../../../../../../../components/common/PriceLabel';
 
 const listItems = [
   {
@@ -39,6 +42,8 @@ export interface BuyBoxProps {
 }
 
 const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
+  const { params } = useParams();
+
   const { isMobile } = useAppContext();
   const t = useTranslations();
 
@@ -52,6 +57,17 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
     extractNumbers(getMinOfRangePrice(variant?.price)),
     extractNumbers(variant?.regularPrice),
   );
+
+  const { addOrUpdateCartItemMutate, addOrUpdateCartItemLoading } =
+    useAddOrUpdateCartItem();
+
+  const handleClickOnAdd = () => {
+    addOrUpdateCartItemMutate({
+      quantity: 1,
+      productId: +params[0],
+      variationId: selectedVariantId!,
+    });
+  };
 
   return (
     <Box
@@ -128,9 +144,16 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
         />
       </Box>
       <Box>
-        <Button fullWidth variant="contained" color="error" size="large">
+        <ButtonWithLoading
+          isLoading={addOrUpdateCartItemLoading}
+          fullWidth
+          variant="contained"
+          color="error"
+          size="large"
+          onClick={handleClickOnAdd}
+        >
           {t('buttons.addToCart')}
-        </Button>
+        </ButtonWithLoading>
       </Box>
     </Box>
   );

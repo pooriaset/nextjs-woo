@@ -1,5 +1,8 @@
 {
   "title": "عنوان",
+  "confirmAlert": {
+    "title": "Are you sure?"
+  },
   "messages": {
     "cart": {
       "isEmpty": "سبد خرید خالی است"
@@ -33,7 +36,10 @@
     "products": "محصولات",
     "homepage": "صفحه اصلی",
     "findYourSize": "سایز من چنده؟",
-    "addToCart": "افزودن به سبد"
+    "addToCart": "افزودن به سبد",
+    "yes": "بله",
+    "no": "خیر",
+    "removeAll": "حذف همه"
   },
   "footer": {
     "links": {
@@ -78,6 +84,12 @@
     }
   },
   "pages": {
+    "cart": {
+      "confirm": {
+        "removeAllTitle": "حذف همه کالاها از سبد",
+        "removeAllDescription": "همه کالاها را از سبد حذف می‌کنید؟"
+      }
+    },
     "product": {
       "galleryDialogTitle": "گالری تصاویر محصول",
       "tabs": {

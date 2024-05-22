@@ -1,5 +1,8 @@
 import RTLProvider from '@/components/common/RTLProvider';
 import { defaultTheme, globalStyles, persianTheme } from '@/config/theme';
+import { getClient } from '@/graphql/clients/serverSideClient';
+import { GET_GENERAL_SETTINGS } from '@/graphql/queries/general';
+import { GetGeneralSettingsQuery } from '@/graphql/types/graphql';
 import { Locale, languages } from '@/navigation';
 import { ApolloProvider, AppProvider } from '@/providers';
 import I18nProvider from '@/providers/I18nProvider';
@@ -9,15 +12,13 @@ import {
   ThemeOptions,
   ThemeProvider,
 } from '@mui/material';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import { getClient } from '@/graphql/clients/serverSideClient';
-import { GET_GENERAL_SETTINGS } from '@/graphql/queries/general';
-import { GetGeneralSettingsQuery } from '@/graphql/types/graphql';
 
+import ConfirmAlertProvider from '@/providers/ConfirmAlertProvider';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -60,15 +61,17 @@ export default async function LocaleLayout({
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={themes[locale] ?? defaultTheme}>
-            <AppProvider userAgent={reqUserAgent}>
-              <CssBaseline />
-              <GlobalStyles styles={globalStyles} />
-              <RTLProvider>
-                <I18nProvider locale={locale}>
-                  <ApolloProvider>{children}</ApolloProvider>
-                </I18nProvider>
-              </RTLProvider>
-            </AppProvider>
+            <ApolloProvider>
+              <AppProvider userAgent={reqUserAgent}>
+                <CssBaseline />
+                <GlobalStyles styles={globalStyles} />
+                <RTLProvider>
+                  <I18nProvider locale={locale}>
+                    <ConfirmAlertProvider>{children}</ConfirmAlertProvider>
+                  </I18nProvider>
+                </RTLProvider>
+              </AppProvider>
+            </ApolloProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

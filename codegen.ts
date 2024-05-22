@@ -6,6 +6,9 @@ const config: CodegenConfig = {
   generates: {
     './src/graphql/types/': {
       preset: 'client',
+      presetConfig: {
+        fragmentMasking: { unmaskFunctionName: 'getFragmentData' },
+      },
     },
   },
   overwrite: true,

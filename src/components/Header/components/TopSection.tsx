@@ -2,6 +2,7 @@ import Logo from '@/components/common/Logo';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
 import { Link as NextLink } from '@/navigation';
+import { cartAtom } from '@/store/atoms';
 import {
   AccountCircleOutlined,
   SearchOutlined,
@@ -14,6 +15,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
+import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC, useState } from 'react';
 
@@ -51,6 +53,8 @@ const TopSection: FC = () => {
     const q = event.currentTarget.q.value;
     navigate('Q', q);
   };
+
+  const cart = useAtomValue(cartAtom);
 
   const menuId = 'primary-search-account-menu';
   const isLoggedIn = true;
@@ -120,13 +124,13 @@ const TopSection: FC = () => {
           )}
 
           <NextLink href="/cart">
-            <IconButton size="large" aria-label="show 3 cart items">
+            <IconButton size="large" aria-label="show cart items count">
               <Badge
                 anchorOrigin={{
                   vertical: 'top',
                   horizontal: 'left',
                 }}
-                badgeContent={3}
+                badgeContent={cart?.productsCount}
                 color="error"
               >
                 <ShoppingBasketOutlined />
