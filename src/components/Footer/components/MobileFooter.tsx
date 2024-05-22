@@ -1,14 +1,17 @@
 'use client';
 
+import { cartAtom } from '@/store/atoms';
 import {
   AccountCircleOutlined,
   CategoryOutlined,
   HomeOutlined,
   ShoppingBasketOutlined,
 } from '@mui/icons-material';
+import { Badge } from '@mui/material';
 import MuiBottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
+import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
@@ -22,6 +25,7 @@ interface Page {
 const MobileFooter = () => {
   const pathname = usePathname();
   const t = useTranslations();
+  const cart = useAtomValue(cartAtom);
 
   const pages: Page[] = [
     {
@@ -37,7 +41,11 @@ const MobileFooter = () => {
     {
       label: t('footer.navigation.cart'),
       href: '/cart',
-      icon: <ShoppingBasketOutlined />,
+      icon: (
+        <Badge badgeContent={cart?.productsCount} color="error">
+          <ShoppingBasketOutlined />
+        </Badge>
+      ),
     },
     {
       label: t('footer.navigation.myAccount'),
