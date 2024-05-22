@@ -1,5 +1,6 @@
 import { getFragmentData } from '@/graphql/types';
 import {
+  CartItemContentFragment,
   CartItemContentFragmentDoc,
   GetCartQuery,
   ProductVariationContentSliceFragmentDoc,
@@ -8,10 +9,7 @@ import { ICartAtom, cartAtom } from '@/store/atoms';
 import { useAtom } from 'jotai';
 
 export interface ReturnTypeOfUseCartUtils {
-  findInCart: (args: { variationId: number }) => {
-    quantity: number;
-    key: string;
-  };
+  findInCart: (args: { variationId: number }) => CartItemContentFragment | null;
   setCartAtom: (value: GetCartQuery['cart']) => void;
 }
 
@@ -25,7 +23,7 @@ const useCartUtils: IUseCartUtils = () => {
   const findInCart: ReturnTypeOfUseCartUtils['findInCart'] = ({
     variationId,
   }) => {
-    cart?.contents?.nodes.find((item) => {
+    const item = cart?.contents?.nodes.find((item) => {
       const { variation } = getFragmentData(CartItemContentFragmentDoc, item);
       const productContent = getFragmentData(
         ProductVariationContentSliceFragmentDoc,
@@ -34,7 +32,11 @@ const useCartUtils: IUseCartUtils = () => {
       return productContent?.databaseId == variationId;
     });
 
-    return { quantity: 0, key: '' };
+    if (!item) {
+      return null;
+    }
+
+    return getFragmentData(CartItemContentFragmentDoc, item);
   };
 
   const setCartAtom: ReturnTypeOfUseCartUtils['setCartAtom'] = (value) => {

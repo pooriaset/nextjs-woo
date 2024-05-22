@@ -130,7 +130,7 @@ const TopSection: FC = () => {
                   vertical: 'top',
                   horizontal: 'left',
                 }}
-                badgeContent={cart?.productsCount}
+                badgeContent={cart?.contents?.itemCount}
                 color="error"
               >
                 <ShoppingBasketOutlined />

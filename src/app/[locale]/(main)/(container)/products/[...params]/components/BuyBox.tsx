@@ -5,6 +5,7 @@ import { Variations } from '@/app/[locale]/(main)/(container)/products/types/com
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import { useAppContext } from '@/hooks/useAppContext';
+import useCartUtils from '@/hooks/useCartUtils';
 import {
   extractNumbers,
   getMinOfRangePrice,
@@ -64,8 +65,12 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
 
   const [addToCartDialog, setAddToCartDialog] = useState(false);
 
-  const handleToggleAddToCartDialog = (): void => {
-    setAddToCartDialog((prevState) => !prevState);
+  const handleOpenAddToCartDialog = () => {
+    setAddToCartDialog(true);
+  };
+
+  const handleCloseAddToCartDialog = () => {
+    setAddToCartDialog(false);
   };
 
   const handleClickOnAdd = async () => {
@@ -74,18 +79,24 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
       productId: +params[0],
       variationId: selectedVariantId!,
     });
-    handleToggleAddToCartDialog();
+    handleOpenAddToCartDialog();
 
     setTimeout(() => {
-      handleToggleAddToCartDialog();
-    }, 15000);
+      handleCloseAddToCartDialog();
+    }, 5000);
   };
+
+  const { findInCart } = useCartUtils();
+
+  const itemInCart = findInCart({
+    variationId: selectedVariantId!,
+  });
 
   return (
     <>
       <AddToCartDialog
         open={addToCartDialog}
-        onClose={handleToggleAddToCartDialog}
+        onClose={handleCloseAddToCartDialog}
         data={variant!}
       />
 
@@ -163,16 +174,19 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
           />
         </Box>
         <Box>
-          <ButtonWithLoading
-            isLoading={addOrUpdateCartItemLoading}
-            fullWidth
-            variant="contained"
-            color="error"
-            size="large"
-            onClick={handleClickOnAdd}
-          >
-            {t('buttons.addToCart')}
-          </ButtonWithLoading>
+          {/* TODO: Handle out of stock state */}
+          {!itemInCart && (
+            <ButtonWithLoading
+              isLoading={addOrUpdateCartItemLoading}
+              fullWidth
+              variant="contained"
+              color="error"
+              size="large"
+              onClick={handleClickOnAdd}
+            >
+              {t('buttons.addToCart')}
+            </ButtonWithLoading>
+          )}
         </Box>
       </Box>
     </>

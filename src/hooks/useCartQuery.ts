@@ -10,7 +10,7 @@ const useCartQuery = () => {
     onCompleted: (data) => {
       setCartAtom(data.cart);
     },
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
   });
 };
 
