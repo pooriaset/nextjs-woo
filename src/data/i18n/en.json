@@ -92,7 +92,8 @@
       "addToCartDialog": {
         "title": "This product added to cart!",
         "buttonTitle": "Go to Cart"
-      }
+      },
+      "title": "Your Cart"
     },
     "product": {
       "galleryDialogTitle": "Gallery",

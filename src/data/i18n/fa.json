@@ -92,7 +92,8 @@
       "addToCartDialog": {
         "title": "این کالا به سبد خرید اضافه شد!",
         "buttonTitle": "برو به سبد خرید!"
-      }
+      },
+      "title": "سبد خرید شما"
     },
     "product": {
       "galleryDialogTitle": "گالری تصاویر محصول",

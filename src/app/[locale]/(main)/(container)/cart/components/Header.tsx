@@ -55,7 +55,7 @@ const Header = () => {
           <ListItemIcon>
             <DeleteOutline fontSize="small" />
           </ListItemIcon>
-          <ListItemText>حذف همه</ListItemText>
+          <ListItemText>{t('buttons.removeAll')}</ListItemText>
         </MenuItem>
       </Menu>
       <CardHeader
@@ -64,8 +64,8 @@ const Header = () => {
             <MoreVert />
           </IconButton>
         }
-        title="سبد خرید شما"
-        subheader={`${cart?.contents?.itemCount} کالا`}
+        title={t('pages.cart.title')}
+        subheader={`${cart?.contents?.itemCount} ${t('products.count')}`}
       />
     </>
   );
