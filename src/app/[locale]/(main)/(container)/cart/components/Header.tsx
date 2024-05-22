@@ -65,7 +65,7 @@ const Header = () => {
           </IconButton>
         }
         title="سبد خرید شما"
-        subheader={`${cart?.productsCount} کالا`}
+        subheader={`${cart?.contents?.itemCount} کالا`}
       />
     </>
   );

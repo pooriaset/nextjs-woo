@@ -36,6 +36,7 @@ const SizeSelector: FC<SizeSelectorProps> = ({ variations }) => {
   return (
     <VariantSelector
       items={_items}
+      // TODO: Get variant title from backend!
       label={t('fields.size')}
       value={selectedVariantId}
       onChange={handleChangeSelectedVariantId}

@@ -88,6 +88,10 @@
       "confirm": {
         "removeAllTitle": "حذف همه کالاها از سبد",
         "removeAllDescription": "همه کالاها را از سبد حذف می‌کنید؟"
+      },
+      "addToCartDialog": {
+        "title": "این کالا به سبد خرید اضافه شد!",
+        "buttonTitle": "برو به سبد خرید!"
       }
     },
     "product": {

@@ -21,10 +21,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
+import AddToCartDialog from './AddToCartDialog';
 
 const listItems = [
   {
@@ -61,101 +62,120 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
   const { addOrUpdateCartItemMutate, addOrUpdateCartItemLoading } =
     useAddOrUpdateCartItem();
 
-  const handleClickOnAdd = () => {
-    addOrUpdateCartItemMutate({
+  const [addToCartDialog, setAddToCartDialog] = useState(false);
+
+  const handleToggleAddToCartDialog = (): void => {
+    setAddToCartDialog((prevState) => !prevState);
+  };
+
+  const handleClickOnAdd = async () => {
+    await addOrUpdateCartItemMutate({
       quantity: 1,
       productId: +params[0],
       variationId: selectedVariantId!,
     });
+    handleToggleAddToCartDialog();
+
+    setTimeout(() => {
+      handleToggleAddToCartDialog();
+    }, 15000);
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        gap: 2,
-        flexDirection: 'column',
-      }}
-    >
-      <List>
-        {listItems.map((item) => {
-          return (
-            <>
-              <ListItem
-                disablePadding
-                sx={{
-                  py: 1,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: 1,
-                  }}
-                >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  primaryTypographyProps={{
-                    fontSize: (theme) => theme.typography.caption.fontSize,
-                  }}
-                />
-              </ListItem>
-              <Divider />
-            </>
-          );
-        })}
-      </List>
+    <>
+      <AddToCartDialog
+        open={addToCartDialog}
+        onClose={handleToggleAddToCartDialog}
+        data={variant!}
+      />
 
       <Box
         sx={{
           display: 'flex',
+          gap: 2,
           flexDirection: 'column',
-          alignItems: 'end',
-          gap: 1,
         }}
       >
+        <List>
+          {listItems.map((item) => {
+            return (
+              <>
+                <ListItem
+                  disablePadding
+                  sx={{
+                    py: 1,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: 1,
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    primaryTypographyProps={{
+                      fontSize: (theme) => theme.typography.caption.fontSize,
+                    }}
+                  />
+                </ListItem>
+                <Divider />
+              </>
+            );
+          })}
+        </List>
+
         <Box
           sx={{
             display: 'flex',
-            gap: 0.5,
+            flexDirection: 'column',
+            alignItems: 'end',
+            gap: 1,
           }}
         >
-          {variant?.price !== variant?.regularPrice && (
-            <>
-              <OldPrice
-                value={variant?.regularPrice}
-                TypographyProps={{
-                  variant: 'body1',
-                }}
-              />
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 0.5,
+            }}
+          >
+            {variant?.price !== variant?.regularPrice && (
+              <>
+                <OldPrice
+                  value={variant?.regularPrice}
+                  TypographyProps={{
+                    variant: 'body1',
+                  }}
+                />
 
-              <DiscountPercentage value={profitMarginPercentage} />
-            </>
-          )}
+                <DiscountPercentage value={profitMarginPercentage} />
+              </>
+            )}
+          </Box>
+          <PriceLabel
+            TypographyProps={{
+              variant: 'h6',
+              fontWeight: 600,
+            }}
+            value={variant?.salePrice}
+          />
         </Box>
-        <PriceLabel
-          TypographyProps={{
-            variant: 'h6',
-            fontWeight: 600,
-          }}
-          value={variant?.salePrice}
-        />
+        <Box>
+          <ButtonWithLoading
+            isLoading={addOrUpdateCartItemLoading}
+            fullWidth
+            variant="contained"
+            color="error"
+            size="large"
+            onClick={handleClickOnAdd}
+          >
+            {t('buttons.addToCart')}
+          </ButtonWithLoading>
+        </Box>
       </Box>
-      <Box>
-        <ButtonWithLoading
-          isLoading={addOrUpdateCartItemLoading}
-          fullWidth
-          variant="contained"
-          color="error"
-          size="large"
-          onClick={handleClickOnAdd}
-        >
-          {t('buttons.addToCart')}
-        </ButtonWithLoading>
-      </Box>
-    </Box>
+    </>
   );
 };
 

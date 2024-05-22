@@ -1,6 +1,5 @@
 import { getFragmentData } from '@/graphql/types';
 import {
-  CartContentFragmentDoc,
   CartItemContentFragmentDoc,
   GetCartQuery,
   ProductVariationContentSliceFragmentDoc,
@@ -41,9 +40,6 @@ const useCartUtils: IUseCartUtils = () => {
   const setCartAtom: ReturnTypeOfUseCartUtils['setCartAtom'] = (value) => {
     const _value: ICartAtom = {
       ...value,
-      productsCount:
-        getFragmentData(CartContentFragmentDoc, value)?.contents?.nodes
-          ?.length ?? 0,
     };
 
     setCart(_value);

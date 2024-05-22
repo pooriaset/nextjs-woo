@@ -49,7 +49,7 @@ const MobileFooter = () => {
       label: t('footer.navigation.cart'),
       href: '/cart',
       icon: (
-        <StyledBadge badgeContent={cart?.productsCount} color="error">
+        <StyledBadge badgeContent={cart?.contents?.itemCount} color="error">
           <ShoppingBasketOutlined />
         </StyledBadge>
       ),
@@ -68,6 +68,7 @@ const MobileFooter = () => {
         position: 'fixed',
         bottom: 0,
         boxShadow: (theme) => theme.shadows[3],
+        zIndex: 2000,
       }}
     >
       <MuiBottomNavigation

@@ -88,6 +88,10 @@
       "confirm": {
         "removeAllTitle": "Remove all cart items",
         "removeAllDescription": "Are you removing all items from the cart?"
+      },
+      "addToCartDialog": {
+        "title": "This product added to cart!",
+        "buttonTitle": "Go to Cart"
       }
     },
     "product": {

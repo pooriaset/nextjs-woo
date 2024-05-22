@@ -16,6 +16,7 @@ export const globalStyles: GlobalStylesProps['styles'] = (theme) => ({
     '--swiper-pagination-color': '#fff',
     '--swiper-navigation-color': '#fff',
     '--swiper-navigation-size': 28,
+    '--color-icon-low-emphasis': theme.palette.grey[500],
   },
   '.swiper-button-next,.swiper-button-prev': {
     textShadow: '0px 0px 4px ' + grey[500],

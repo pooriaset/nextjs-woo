@@ -26,7 +26,7 @@ const Page = () => {
   if (loading) {
     return <Skeleton />;
   }
-  if (!cart?.productsCount) {
+  if (!cart?.contents?.itemCount) {
     return (
       <Box
         sx={{

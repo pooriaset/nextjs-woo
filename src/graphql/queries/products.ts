@@ -96,6 +96,7 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         variations(where: { stockStatus: IN_STOCK }) {
           nodes {
             id: databaseId
+            name
             price
             salePrice
             regularPrice

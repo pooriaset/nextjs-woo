@@ -61,6 +61,7 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
       }
 
       const { key } = item;
+
       return updateQuantity({ variables: { items: [{ key, quantity }] } });
     } else {
       return addToCart({
