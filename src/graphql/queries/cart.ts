@@ -39,6 +39,14 @@ export const ProductVariationContentSlice = gql`
     databaseId
     name
     slug
+    attributes {
+      nodes {
+        id
+        label
+        value
+        name
+      }
+    }
     image {
       id
       sourceUrl(size: WOOCOMMERCE_THUMBNAIL)
@@ -46,6 +54,7 @@ export const ProductVariationContentSlice = gql`
     }
     price
     regularPrice
+    salePrice
   }
 `;
 

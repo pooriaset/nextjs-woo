@@ -1,5 +1,10 @@
 'use client';
 
+import { getFragmentData } from '@/graphql/types';
+import {
+  CartItemContentFragmentDoc,
+  ProductVariationContentSliceFragmentDoc,
+} from '@/graphql/types/graphql';
 import useCartQuery from '@/hooks/useCartQuery';
 import { Link as NextLink } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
@@ -16,6 +21,7 @@ import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Header from './components/Header';
+import CartItem from '@/components/CartItem/CartItem';
 
 const Page = () => {
   const t = useTranslations();
@@ -66,7 +72,18 @@ const Page = () => {
         <Grid item lg={9} md={6} xs={12}>
           <Card variant="outlined">
             <Header />
-            <CardContent></CardContent>
+            <CardContent>
+              {cart?.contents?.nodes?.map((item) => {
+                const _item = getFragmentData(CartItemContentFragmentDoc, item);
+
+                const variant = getFragmentData(
+                  ProductVariationContentSliceFragmentDoc,
+                  _item.variation?.node,
+                )!;
+
+                return <CartItem key={_item?.key} value={variant} />;
+              })}
+            </CardContent>
           </Card>
         </Grid>
         <Grid item lg={3} md={6} xs={12}></Grid>

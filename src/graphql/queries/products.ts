@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { ProductVariationContentSlice } from './cart';
 
 /**
  * Fetch Woocommerce products from GraphQL
@@ -95,25 +96,11 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         averageRating
         variations(where: { stockStatus: IN_STOCK }) {
           nodes {
-            id: databaseId
-            name
-            price
-            salePrice
-            regularPrice
-            attributes {
-              nodes {
-                id
-                value
-                name
-              }
-            }
-            image {
-              id
-              sourceUrl
-            }
+            ...ProductVariationContentSlice
           }
         }
       }
     }
   }
+  ${ProductVariationContentSlice}
 `;

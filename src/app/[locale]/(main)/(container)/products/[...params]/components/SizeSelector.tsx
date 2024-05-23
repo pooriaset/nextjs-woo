@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl';
 import { FC, useMemo } from 'react';
 import { Variations } from '../../types/common';
 import { useProductContext } from '../hooks/useProductContext';
+import { getFragmentData } from '@/graphql/types';
+import { ProductVariationContentSliceFragmentDoc } from '@/graphql/types/graphql';
 
 export interface SizeSelectorProps {
   variations: Variations;
@@ -18,11 +20,16 @@ const SizeSelector: FC<SizeSelectorProps> = ({ variations }) => {
     const _items: VariantSelectorProps['items'] = [];
 
     variations?.nodes.forEach((variant) => {
-      variant.attributes?.nodes.forEach((attribute) => {
+      const _variant = getFragmentData(
+        ProductVariationContentSliceFragmentDoc,
+        variant,
+      );
+
+      _variant.attributes?.nodes.forEach((attribute) => {
         _items.push({
-          id: variant.id!,
+          id: _variant.id!,
           name: attribute.value!,
-          value: variant.id,
+          value: _variant.databaseId,
         });
       });
     });

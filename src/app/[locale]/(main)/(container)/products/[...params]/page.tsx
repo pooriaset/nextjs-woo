@@ -36,6 +36,7 @@ const getProduct = async ({ id }: { id: number }) => {
     variables: {
       id,
     },
+    fetchPolicy: 'no-cache',
   });
   return data.product;
 };
@@ -57,7 +58,7 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
   return (
     <ProductProvider
       value={{
-        selectedVariantId: product.variations?.nodes[0]?.id ?? null,
+        selectedVariantId: null,
       }}
     >
       <Grid container spacing={2}>

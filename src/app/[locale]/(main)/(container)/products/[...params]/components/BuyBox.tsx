@@ -29,6 +29,8 @@ import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
 import CartItemController from './CartItemController';
+import { getFragmentData } from '@/graphql/types';
+import { ProductVariationContentSliceFragmentDoc } from '@/graphql/types/graphql';
 
 const listItems = [
   {
@@ -53,8 +55,17 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
 
   const { selectedVariantId } = useProductContext();
 
-  const variant = variations?.nodes.find(
-    (item) => item.id === selectedVariantId,
+  const _variant = variations?.nodes.find((item) => {
+    const fragment = getFragmentData(
+      ProductVariationContentSliceFragmentDoc,
+      item,
+    );
+    return fragment.databaseId === selectedVariantId;
+  });
+
+  const variant = getFragmentData(
+    ProductVariationContentSliceFragmentDoc,
+    _variant,
   );
 
   const profitMarginPercentage = getProfitPercentage(
@@ -89,7 +100,7 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
       <AddToCartDialog
         open={open}
         onClose={handleCloseDialog}
-        data={variant!}
+        value={variant!}
       />
 
       <Box
