@@ -39,6 +39,15 @@ const AddToCartDialog: FC<AddToCartDialogProps> = ({ open, onClose, data }) => {
           fullWidth: true,
           size: 'large',
         },
+        {
+          id: 'resume-buying',
+          onClick: onClose,
+          color: 'inherit',
+          variant: 'outlined',
+          children: t('pages.cart.addToCartDialog.resume'),
+          fullWidth: true,
+          size: 'large',
+        },
       ]}
       dialogContentProps={{
         dividers: true,

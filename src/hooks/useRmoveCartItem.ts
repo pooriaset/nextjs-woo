@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import useCartUtils from './useCartUtils';
 
 export interface RemoveCartItemMutate {
-  (values: { variationId: number }): Promise<any>;
+  (values: { variationId: number | undefined }): Promise<any>;
 }
 
 export interface IUseRemoveCartItem {
@@ -29,6 +29,10 @@ const useRemoveCartItem: IUseRemoveCartItem = () => {
   const removeCartItemMutate: RemoveCartItemMutate = async ({
     variationId,
   }) => {
+    if (!variationId) {
+      throw new Error('Variation  id is undefined.');
+    }
+
     const quantityFound = findInCart({ variationId })?.quantity || 0;
 
     if (!quantityFound) {

@@ -27,6 +27,7 @@ import DiscountPercentage from '../../../../../../../components/common/DiscountP
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
+import CartItemController from './CartItemController';
 
 const listItems = [
   {
@@ -80,10 +81,6 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
       variationId: selectedVariantId!,
     });
     handleOpenAddToCartDialog();
-
-    setTimeout(() => {
-      handleCloseAddToCartDialog();
-    }, 5000);
   };
 
   const { findInCart } = useCartUtils();
@@ -91,6 +88,8 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
   const itemInCart = findInCart({
     variationId: selectedVariantId!,
   });
+
+  const height = 55;
 
   return (
     <>
@@ -180,12 +179,17 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
               isLoading={addOrUpdateCartItemLoading}
               fullWidth
               variant="contained"
-              color="error"
+              color="primary"
               size="large"
               onClick={handleClickOnAdd}
+              sx={{ minHeight: height }}
             >
               {t('buttons.addToCart')}
             </ButtonWithLoading>
+          )}
+
+          {itemInCart && (
+            <CartItemController item={itemInCart} height={height} />
           )}
         </Box>
       </Box>

@@ -91,7 +91,8 @@
       },
       "addToCartDialog": {
         "title": "این کالا به سبد خرید اضافه شد!",
-        "buttonTitle": "برو به سبد خرید!"
+        "buttonTitle": "برو به سبد خرید!",
+        "resume": "ادامه خرید"
       },
       "title": "سبد خرید شما"
     },
@@ -104,6 +105,10 @@
       },
       "tooltips": {
         "fullScreen": "بزرگنمایی"
+      },
+      "buyBox": {
+        "inYourCart": "در سبد شما",
+        "viewCart": "مشاهده سبد خرید"
       }
     },
     "notfound": {

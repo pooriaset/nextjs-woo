@@ -13,7 +13,7 @@ export interface MutateCartFunction {
   (values: {
     quantity: number;
     productId: number;
-    variationId: number;
+    variationId: number | undefined;
     extraData?: any;
   }): Promise<any>;
 }
@@ -51,6 +51,10 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
 
   const addOrUpdateCartItemMutate: MutateCartFunction = async (values) => {
     const { quantity, variationId, productId, extraData } = values;
+    if (!variationId) {
+      throw new Error('Variation id is undefined.');
+    }
+
     const quantityFound = findInCart({ variationId })?.quantity || 0;
 
     if (quantityFound) {

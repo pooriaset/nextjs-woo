@@ -91,7 +91,8 @@
       },
       "addToCartDialog": {
         "title": "This product added to cart!",
-        "buttonTitle": "Go to Cart"
+        "buttonTitle": "Go to Cart",
+        "resume": "Resume"
       },
       "title": "Your Cart"
     },
@@ -104,6 +105,10 @@
       },
       "tooltips": {
         "fullScreen": "Full Screen"
+      },
+      "buyBox": {
+        "inYourCart": "In your cart",
+        "viewCart": "ٰView Cart"
       }
     },
     "notfound": {
