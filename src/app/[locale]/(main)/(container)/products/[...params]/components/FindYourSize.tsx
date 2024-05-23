@@ -1,6 +1,6 @@
 'use client';
 
-import Dialog from '@/components/Dialog';
+import Dialog from '@/components/Dialog/Dialog';
 import { Button } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';

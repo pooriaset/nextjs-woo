@@ -8,8 +8,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { FC } from 'react';
 import ButtonWithLoading, {
   type ButtonWithLoadingProps,
-} from './common/ButtonWithLoading';
-import DialogTransition from './common/DialogTransition';
+} from '../common/ButtonWithLoading';
+import DialogTransition from '../common/DialogTransition';
 
 export interface DialogProps extends MuiDialogProps {
   dialogContentProps?: DialogContentProps;

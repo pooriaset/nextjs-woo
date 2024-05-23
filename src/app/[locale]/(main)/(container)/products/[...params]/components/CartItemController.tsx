@@ -120,14 +120,16 @@ const CartItemController: FC<CartItemControllerProps> = ({ item, height }) => {
             <Remove />
           </IconButton>
         )}
-        <IconButton
-          onClick={handleClickOnRemove}
-          size="large"
-          disabled={isLoading}
-          color="error"
-        >
-          <DeleteOutline />
-        </IconButton>
+        {item.quantity === 1 && (
+          <IconButton
+            onClick={handleClickOnRemove}
+            size="large"
+            disabled={isLoading}
+            color="error"
+          >
+            <DeleteOutline />
+          </IconButton>
+        )}
       </Stack>
       <Collapse appear in={true}>
         <Stack direction="row" justifyContent="center" spacing={1}>

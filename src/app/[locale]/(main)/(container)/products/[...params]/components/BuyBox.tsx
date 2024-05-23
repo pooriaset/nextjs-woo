@@ -2,6 +2,7 @@
 
 import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...params]/hooks/useProductContext';
 import { Variations } from '@/app/[locale]/(main)/(container)/products/types/common';
+import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import { useAppContext } from '@/hooks/useAppContext';
@@ -22,7 +23,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
@@ -64,15 +65,7 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
   const { addOrUpdateCartItemMutate, addOrUpdateCartItemLoading } =
     useAddOrUpdateCartItem();
 
-  const [addToCartDialog, setAddToCartDialog] = useState(false);
-
-  const handleOpenAddToCartDialog = () => {
-    setAddToCartDialog(true);
-  };
-
-  const handleCloseAddToCartDialog = () => {
-    setAddToCartDialog(false);
-  };
+  const { handleCloseDialog, handleOpenDialog, open } = useNewDialog();
 
   const handleClickOnAdd = async () => {
     await addOrUpdateCartItemMutate({
@@ -80,7 +73,7 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
       productId: +params[0],
       variationId: selectedVariantId!,
     });
-    handleOpenAddToCartDialog();
+    handleOpenDialog();
   };
 
   const { findInCart } = useCartUtils();
@@ -94,8 +87,8 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
   return (
     <>
       <AddToCartDialog
-        open={addToCartDialog}
-        onClose={handleCloseAddToCartDialog}
+        open={open}
+        onClose={handleCloseDialog}
         data={variant!}
       />
 

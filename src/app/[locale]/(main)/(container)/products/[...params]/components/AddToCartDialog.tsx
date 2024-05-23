@@ -1,4 +1,4 @@
-import Dialog from '@/components/Dialog';
+import Dialog from '@/components/Dialog/Dialog';
 import RulerIcon from '@/components/Icons/RulerIcon';
 import Image from '@/components/common/Image';
 import { Box, Stack, Typography } from '@mui/material';
