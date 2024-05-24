@@ -55,6 +55,8 @@ export const ProductVariationContentSlice = gql`
     price
     regularPrice
     salePrice
+    discountAmount
+    discountPercentage
     stockStatus
   }
 `;

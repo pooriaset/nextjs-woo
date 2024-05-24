@@ -238,6 +238,16 @@ const Page = () => {
                               }}
                             />
                           )}
+                          {!isOutOfStock && (
+                            <PriceLabel
+                              value={_item.total}
+                              TypographyProps={{
+                                sx: {
+                                  fontWeight: 600,
+                                },
+                              }}
+                            />
+                          )}
                         </Stack>
                         {!isLast && <Divider />}
                       </Stack>

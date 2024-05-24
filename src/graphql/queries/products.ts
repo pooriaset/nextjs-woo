@@ -42,6 +42,8 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
           regularPrice
           salePrice
           stockStatus
+          discountAmount
+          discountPercentage
         }
       }
     }
@@ -94,6 +96,11 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         stockStatus
         slug
         averageRating
+        price
+        regularPrice
+        salePrice
+        discountPercentage
+        discountAmount
         variations(where: { stockStatus: IN_STOCK }) {
           nodes {
             ...ProductVariationContentSlice

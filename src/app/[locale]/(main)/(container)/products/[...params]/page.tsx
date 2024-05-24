@@ -99,10 +99,7 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
         <Grid item md={3} xs={12}>
           <Card variant="outlined">
             <CardContent>
-              <BuyBox
-                stockStatus={product.stockStatus}
-                variations={product.variations}
-              />
+              <BuyBox product={product} />
             </CardContent>
           </Card>
         </Grid>

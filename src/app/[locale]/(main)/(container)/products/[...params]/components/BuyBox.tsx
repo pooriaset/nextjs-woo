@@ -1,12 +1,12 @@
 'use client';
 
 import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...params]/hooks/useProductContext';
-import { Variations } from '@/app/[locale]/(main)/(container)/products/types/common';
 import CartItemController from '@/components/CartItemController/CartItemController';
 import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import { getFragmentData } from '@/graphql/types';
 import {
+  GetSingleProductQuery,
   ProductVariationContentSliceFragmentDoc,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
@@ -48,11 +48,13 @@ const listItems = [
 ];
 
 export interface BuyBoxProps {
-  variations: Variations;
-  stockStatus: StockStatusEnum | null | undefined;
+  product: Extract<
+    NonNullable<GetSingleProductQuery['product']>,
+    { __typename?: 'VariableProduct' }
+  >;
 }
 
-const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
+const BuyBox: FC<BuyBoxProps> = ({ product }) => {
   const { params } = useParams();
 
   const { isMobile } = useAppContext();
@@ -60,22 +62,12 @@ const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
 
   const { selectedVariantId } = useProductContext();
 
-  const sortBySalePriceVariations = variations?.nodes.sort((a, b) => {
-    const first = getFragmentData(ProductVariationContentSliceFragmentDoc, a);
-    const second = getFragmentData(ProductVariationContentSliceFragmentDoc, b);
-
-    return (
-      (extractNumbers(first?.salePrice) ?? 0) -
-      (extractNumbers(second?.salePrice) ?? 0)
-    );
-  });
-
   const _variant = useMemo(() => {
     if (!selectedVariantId) {
-      return sortBySalePriceVariations?.[0];
+      return null;
     }
 
-    return variations?.nodes.find((item) => {
+    return product.variations?.nodes.find((item) => {
       const fragment = getFragmentData(
         ProductVariationContentSliceFragmentDoc,
         item,
@@ -119,7 +111,11 @@ const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
 
   const height = 55;
 
-  const outOfStock = stockStatus === StockStatusEnum.OutOfStock;
+  const isOutOfStock = product.stockStatus === StockStatusEnum.OutOfStock;
+
+  const discountPercentage =
+    (variant === null && product?.discountPercentage) ||
+    (variant !== null && variant?.discountPercentage);
 
   return (
     <>
@@ -129,7 +125,7 @@ const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
         value={variant!}
       />
 
-      {outOfStock ? (
+      {isOutOfStock ? (
         <Typography
           color="error"
           variant="h6"
@@ -192,16 +188,24 @@ const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
                 gap: 0.5,
               }}
             >
-              {variant?.price !== variant?.regularPrice && (
+              {!!discountPercentage && (
                 <>
                   <OldPrice
-                    value={variant?.regularPrice}
+                    value={
+                      variant ? variant?.regularPrice : product.regularPrice
+                    }
                     TypographyProps={{
                       variant: 'body1',
                     }}
                   />
 
-                  <DiscountPercentage value={profitMarginPercentage} />
+                  <DiscountPercentage
+                    value={
+                      variant
+                        ? variant.discountPercentage
+                        : product.discountPercentage
+                    }
+                  />
                 </>
               )}
             </Box>
@@ -210,7 +214,7 @@ const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
                 variant: 'h6',
                 fontWeight: 600,
               }}
-              value={variant?.salePrice}
+              value={variant ? variant.price : product.price}
             />
           </Box>
 

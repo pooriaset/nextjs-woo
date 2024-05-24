@@ -2,21 +2,16 @@
 
 import { Box, Card, CardContent, Typography } from '@mui/material';
 
+import { StockStatusEnum } from '@/graphql/types/graphql';
 import { useAppContext } from '@/hooks/useAppContext';
-import {
-  extractNumbers,
-  getMinOfRangePrice,
-  getProfitPercentage,
-} from '@/utils/price';
 import { Link as NextLink } from '@/navigation';
+import Image from 'next/image';
 import { FC } from 'react';
 import DiscountPercentage from '../common/DiscountPercentage';
-import Image from 'next/image';
 import OldPrice from '../common/OldPrice';
+import OutOfStock from '../common/OutOfStock';
 import PriceLabel from '../common/PriceLabel';
 import { VariableProduct } from './types';
-import { StockStatusEnum } from '@/graphql/types/graphql';
-import OutOfStock from '../common/OutOfStock';
 
 export interface ProductItemProps {
   data: VariableProduct;
@@ -24,11 +19,6 @@ export interface ProductItemProps {
 
 const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
   const { isMobile, variantImageSize } = useAppContext();
-
-  const profitMarginPercentage = getProfitPercentage(
-    extractNumbers(getMinOfRangePrice(data.price)),
-    extractNumbers(data.regularPrice),
-  );
 
   const outOfStock = data.stockStatus === StockStatusEnum.OutOfStock;
 
@@ -102,7 +92,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
               ) : (
                 <>
                   {data.onSale && (
-                    <DiscountPercentage value={profitMarginPercentage} />
+                    <DiscountPercentage value={data.discountPercentage ?? 0} />
                   )}
 
                   <Box>
