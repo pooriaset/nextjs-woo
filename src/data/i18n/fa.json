@@ -86,6 +86,9 @@
       }
     }
   },
+  "discounts": {
+    "off": "تخفیف"
+  },
   "pages": {
     "cart": {
       "confirm": {
@@ -100,6 +103,11 @@
       "title": "سبد خرید شما",
       "buttons": {
         "registerAndNextStep": "ثبت و مرحله بعد"
+      },
+      "box": {
+        "yourProfit": "سود شما از خرید",
+        "total": "جمع سبد خرید",
+        "subTotal": "قیمت کالاها"
       }
     },
     "product": {

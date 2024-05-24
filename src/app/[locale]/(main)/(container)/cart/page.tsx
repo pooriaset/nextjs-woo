@@ -1,7 +1,10 @@
 'use client';
 
 import CartItem from '@/components/CartItem/CartItem';
+import CartItemSkeleton from '@/components/CartItem/components/CartItemSkeleton';
 import CartItemController from '@/components/CartItemController/CartItemController';
+import OutOfStock from '@/components/common/OutOfStock';
+import PriceLabel from '@/components/common/PriceLabel';
 import { getFragmentData } from '@/graphql/types';
 import {
   CartItemContentFragmentDoc,
@@ -27,11 +30,8 @@ import {
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import Header from './components/Header';
-import CartItemSkeleton from '@/components/CartItem/components/CartItemSkeleton';
-import OutOfStock from '@/components/common/OutOfStock';
 import CheckoutBox, { CheckoutBoxProps } from './components/CheckoutBox';
-import PriceLabel from '@/components/common/PriceLabel';
+import Header from './components/Header';
 
 const Page = () => {
   const t = useTranslations();
@@ -67,7 +67,22 @@ const Page = () => {
           <Stack spacing={2}>
             <Card variant="outlined">
               <CardContent>
-                <Skeleton variant="rectangular" height={400} />
+                <Stack spacing={1}>
+                  {new Array(3).fill(1).map((item, index) => {
+                    return (
+                      <Stack
+                        key={index}
+                        direction="row"
+                        spacing={1}
+                        justifyContent="space-between"
+                      >
+                        <Skeleton variant="text" width={80} />
+                        <Skeleton variant="text" width={80} />
+                      </Stack>
+                    );
+                  })}
+                  <Skeleton variant="rectangular" height={45} />
+                </Stack>
               </CardContent>
             </Card>
           </Stack>
@@ -141,7 +156,7 @@ const Page = () => {
     {
       key: (
         <Typography variant="body2" color="gray" sx={{ fontWeight: 600 }}>
-          قیمت کالاها ({cart?.contents?.itemCount})
+          {t('pages.cart.box.subTotal')} ({cart?.contents?.itemCount})
         </Typography>
       ),
       value: (
@@ -157,7 +172,7 @@ const Page = () => {
     {
       key: (
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
-          جمع سبد خرید
+          {t('pages.cart.box.total')}
         </Typography>
       ),
       value: (
@@ -172,7 +187,7 @@ const Page = () => {
     {
       key: (
         <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
-          سود شما از خرید
+          {t('pages.cart.box.yourProfit')}
         </Typography>
       ),
       value: (
@@ -189,7 +204,7 @@ const Page = () => {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} position="relative">
         <Grid item lg={9} md={6} xs={12}>
           <Card variant="outlined">
             <Header />
@@ -238,15 +253,37 @@ const Page = () => {
                               }}
                             />
                           )}
+
                           {!isOutOfStock && (
-                            <PriceLabel
-                              value={_item.total}
-                              TypographyProps={{
-                                sx: {
-                                  fontWeight: 600,
-                                },
-                              }}
-                            />
+                            <Stack justifyContent="end">
+                              {!!_item.totalOnSaleDiscount && (
+                                <PriceLabel
+                                  value={_item.totalOnSaleDiscount}
+                                  TypographyProps={{
+                                    fontWeight: 600,
+                                    color: 'error',
+                                  }}
+                                  suffix={
+                                    <Typography
+                                      variant="caption"
+                                      color="error"
+                                      fontWeight={600}
+                                    >
+                                      {t('discounts.off')}
+                                    </Typography>
+                                  }
+                                />
+                              )}
+
+                              <PriceLabel
+                                value={_item.total}
+                                TypographyProps={{
+                                  sx: {
+                                    fontWeight: 600,
+                                  },
+                                }}
+                              />
+                            </Stack>
                           )}
                         </Stack>
                         {!isLast && <Divider />}
@@ -260,7 +297,14 @@ const Page = () => {
         </Grid>
 
         <Grid item lg={3} md={6} xs={12}>
-          <Stack spacing={2}>
+          <Stack
+            spacing={2}
+            sx={{
+              position: 'sticky',
+              top: 196,
+              zIndex: 1299,
+            }}
+          >
             <Card variant="outlined">
               <CardContent>
                 <CheckoutBox items={checkoutBoxItems} />

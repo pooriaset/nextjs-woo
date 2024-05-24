@@ -86,6 +86,9 @@
       }
     }
   },
+  "discounts": {
+    "off": "Off"
+  },
   "pages": {
     "cart": {
       "confirm": {
@@ -100,6 +103,11 @@
       "title": "Your Cart",
       "buttons": {
         "registerAndNextStep": "Register and Next"
+      },
+      "box": {
+        "yourProfit": "Your profit",
+        "total": "Total",
+        "subTotal": "Subtotal"
       }
     },
     "product": {

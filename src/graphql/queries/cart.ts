@@ -78,6 +78,7 @@ export const CartItemContent = gql`
     total
     subtotal
     subtotalTax
+    totalOnSaleDiscount
     extraData {
       key
       value

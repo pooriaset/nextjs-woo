@@ -1,13 +1,15 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
-import PriceUnit from './PriceUnit';
-import { Box, Typography, TypographyProps } from '@mui/material';
 import { extractNumbers, getMinOfRangePrice } from '@/utils/price';
+import { Stack, Typography, TypographyProps } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import PriceUnit from './PriceUnit';
 
 export interface PriceLabelProps {
   value?: string | number | null;
   TypographyProps?: Partial<TypographyProps>;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
 }
 
 const PriceLabel: FC<PriceLabelProps> = ({
@@ -17,6 +19,8 @@ const PriceLabel: FC<PriceLabelProps> = ({
       fontWeight: 300,
     },
   },
+  suffix,
+  prefix,
 }) => {
   const t = useTranslations();
 
@@ -26,10 +30,12 @@ const PriceLabel: FC<PriceLabelProps> = ({
       : value;
 
   return (
-    <Box display="flex" alignItems="center">
+    <Stack alignItems="center" spacing={0.25} direction="row">
+      {prefix}
       <Typography {...TypographyProps}>{_value?.toLocaleString()}</Typography>
       <PriceUnit title={t('units.price')} TypographyProps={TypographyProps} />
-    </Box>
+      {suffix}
+    </Stack>
   );
 };
 
