@@ -10,6 +10,7 @@ import ButtonWithLoading, {
   type ButtonWithLoadingProps,
 } from '../common/ButtonWithLoading';
 import DialogTransition from '../common/DialogTransition';
+import { useAppContext } from '@/hooks/useAppContext';
 
 export interface DialogProps extends MuiDialogProps {
   dialogContentProps?: DialogContentProps;
@@ -23,8 +24,44 @@ const Dialog: FC<DialogProps> = ({
   closeButtonDisabled = false,
   ...props
 }) => {
+  const { isMobile } = useAppContext();
   return (
-    <MuiDialog TransitionComponent={DialogTransition} {...props}>
+    <MuiDialog
+      TransitionComponent={DialogTransition}
+      {...props}
+      PaperProps={{
+        ...props.PaperProps,
+        sx: {
+          ...props?.PaperProps?.sx,
+          ...(isMobile
+            ? {
+                margin: 0,
+                width: '100%',
+                maxWidth: '100%',
+              }
+            : {}),
+        },
+      }}
+      slotProps={{
+        root: isMobile
+          ? {
+              style: {
+                zIndex: 2000,
+              },
+            }
+          : {},
+      }}
+      sx={{
+        ...props.sx,
+        ...(isMobile
+          ? {
+              '& .MuiDialog-container': {
+                alignItems: 'flex-end',
+              },
+            }
+          : {}),
+      }}
+    >
       <DialogTitle
         sx={{
           display: 'flex',
