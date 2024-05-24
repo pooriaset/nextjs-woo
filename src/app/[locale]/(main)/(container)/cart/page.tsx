@@ -5,6 +5,7 @@ import CartItemController from '@/components/CartItemController/CartItemControll
 import { getFragmentData } from '@/graphql/types';
 import {
   CartItemContentFragmentDoc,
+  ProductContentSliceFragmentDoc,
   ProductVariationContentSliceFragmentDoc,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
@@ -153,13 +154,22 @@ const Page = () => {
                     ProductVariationContentSliceFragmentDoc,
                     _item.variation?.node,
                   )!;
+
+                  const product = getFragmentData(
+                    ProductContentSliceFragmentDoc,
+                    _item.product?.node,
+                  );
+
                   const isOutOfStock =
                     variant.stockStatus === StockStatusEnum.OutOfStock;
 
                   return (
                     <Grid item xs={12} key={_item?.key}>
                       <Stack spacing={2}>
-                        <CartItem value={variant} />
+                        <CartItem
+                          value={variant}
+                          href={`/products/${product?.databaseId}`}
+                        />
                         <Stack direction="row" spacing={1}>
                           <Box width={200}>
                             <CartItemController
