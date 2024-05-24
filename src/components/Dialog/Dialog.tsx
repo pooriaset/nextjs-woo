@@ -14,9 +14,15 @@ import DialogTransition from '../common/DialogTransition';
 export interface DialogProps extends MuiDialogProps {
   dialogContentProps?: DialogContentProps;
   buttons?: ButtonWithLoadingProps[];
+  closeButtonDisabled?: boolean;
 }
 
-const Dialog: FC<DialogProps> = ({ title, buttons = [], ...props }) => {
+const Dialog: FC<DialogProps> = ({
+  title,
+  buttons = [],
+  closeButtonDisabled = false,
+  ...props
+}) => {
   return (
     <MuiDialog TransitionComponent={DialogTransition} {...props}>
       <DialogTitle
@@ -27,14 +33,16 @@ const Dialog: FC<DialogProps> = ({ title, buttons = [], ...props }) => {
         }}
       >
         {title}
-        <IconButton
-          aria-label="close-dialog"
-          onClick={() => {
-            props.onClose?.({}, 'escapeKeyDown');
-          }}
-        >
-          <Close />
-        </IconButton>
+        {!closeButtonDisabled && (
+          <IconButton
+            aria-label="close-dialog"
+            onClick={() => {
+              props.onClose?.({}, 'escapeKeyDown');
+            }}
+          >
+            <Close />
+          </IconButton>
+        )}
       </DialogTitle>
       <DialogContent {...props.dialogContentProps}>
         <Box mt={1}>{props.children}</Box>

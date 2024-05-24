@@ -1,3 +1,5 @@
+import Dialog, { DialogProps } from '@/components/Dialog/Dialog';
+import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import useEmptyCart from '@/hooks/useEmptyCart';
 import { cartAtom } from '@/store/atoms';
 import { DeleteOutline, MoreVert } from '@mui/icons-material';
@@ -10,7 +12,6 @@ import {
   MenuItem,
 } from '@mui/material';
 import { useAtomValue } from 'jotai';
-import { useConfirm } from 'material-ui-confirm';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
@@ -29,19 +30,47 @@ const Header = () => {
 
   const { emptyCartLoading, emptyCartMutate } = useEmptyCart();
 
-  const confirm = useConfirm();
-  const handleClickOnRemoveAll = () => {
-    confirm({
-      title: t('pages.cart.confirm.removeAllTitle'),
-      description: t('pages.cart.confirm.removeAllDescription'),
-      confirmationText: t('buttons.removeAll'),
-    }).then(async () => {
-      await emptyCartMutate();
-    });
+  const { open, handleCloseDialog, handleOpenDialog, returnButton } =
+    useNewDialog();
+
+  const handleClickOnConfirm = async () => {
+    await emptyCartMutate();
+  };
+
+  const onCloseDialog: DialogProps['onClose'] = (event, reason) => {
+    if (!emptyCartLoading) {
+      handleCloseDialog();
+    }
   };
 
   return (
     <>
+      <Dialog
+        title={t('pages.cart.confirm.removeAllTitle')}
+        open={open}
+        closeButtonDisabled={emptyCartLoading}
+        onClose={onCloseDialog}
+        PaperProps={{
+          sx: {
+            width: 500,
+          },
+        }}
+        dialogContentProps={{
+          dividers: true,
+        }}
+        buttons={[
+          returnButton,
+          {
+            children: t('buttons.removeAll'),
+            onClick: handleClickOnConfirm,
+            isLoading: emptyCartLoading,
+            variant: 'contained',
+            color: 'primary',
+          },
+        ]}
+      >
+        {t('pages.cart.confirm.removeAllDescription')}
+      </Dialog>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -51,7 +80,7 @@ const Header = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClickOnRemoveAll}>
+        <MenuItem onClick={handleOpenDialog}>
           <ListItemIcon>
             <DeleteOutline fontSize="small" />
           </ListItemIcon>

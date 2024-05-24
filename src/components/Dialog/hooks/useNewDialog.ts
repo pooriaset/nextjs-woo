@@ -1,3 +1,5 @@
+import { ButtonWithLoadingProps } from '@/components/common/ButtonWithLoading';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export interface IUseNewDialog {
@@ -5,6 +7,7 @@ export interface IUseNewDialog {
     open: boolean;
     handleOpenDialog: () => void;
     handleCloseDialog: () => void;
+    returnButton: ButtonWithLoadingProps;
   };
 }
 const useNewDialog: IUseNewDialog = () => {
@@ -17,7 +20,17 @@ const useNewDialog: IUseNewDialog = () => {
   const handleCloseDialog = () => {
     setOpen(false);
   };
-  return { open, handleOpenDialog, handleCloseDialog };
+
+  const t = useTranslations();
+
+  const returnButton: ButtonWithLoadingProps = {
+    children: t('buttons.return'),
+    variant: 'outlined',
+    color: 'inherit',
+    onClick: handleCloseDialog,
+  };
+
+  return { open, handleOpenDialog, handleCloseDialog, returnButton };
 };
 
 export default useNewDialog;

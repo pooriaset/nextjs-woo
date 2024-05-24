@@ -11,7 +11,7 @@ const ConfirmAlertProvider: FC<PropsWithChildren> = ({ children }) => {
     const defaultOptions: ConfirmProviderProps['defaultOptions'] = {
       confirmationButtonProps: {
         variant: 'contained',
-        color: 'error',
+        color: 'primary',
       },
       cancellationButtonProps: {
         variant: 'outlined',
