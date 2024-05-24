@@ -30,7 +30,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
@@ -60,13 +60,30 @@ const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
 
   const { selectedVariantId } = useProductContext();
 
-  const _variant = variations?.nodes.find((item) => {
-    const fragment = getFragmentData(
-      ProductVariationContentSliceFragmentDoc,
-      item,
+  const sortBySalePriceVariations = variations?.nodes.sort((a, b) => {
+    const first = getFragmentData(ProductVariationContentSliceFragmentDoc, a);
+    const second = getFragmentData(ProductVariationContentSliceFragmentDoc, b);
+
+    return (
+      (extractNumbers(first?.salePrice) ?? 0) -
+      (extractNumbers(second?.salePrice) ?? 0)
     );
-    return fragment.databaseId === selectedVariantId;
   });
+
+  const _variant = useMemo(() => {
+    if (!selectedVariantId) {
+      return sortBySalePriceVariations?.[0];
+    }
+
+    return variations?.nodes.find((item) => {
+      const fragment = getFragmentData(
+        ProductVariationContentSliceFragmentDoc,
+        item,
+      );
+
+      return fragment.databaseId === selectedVariantId;
+    });
+  }, [selectedVariantId]);
 
   const variant = getFragmentData(
     ProductVariationContentSliceFragmentDoc,
