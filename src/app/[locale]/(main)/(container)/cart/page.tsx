@@ -180,6 +180,7 @@ const Page = () => {
           value={cart.discountTotal}
           TypographyProps={{
             fontWeight: 600,
+            color: 'error',
           }}
         />
       ),

@@ -28,7 +28,7 @@ const PriceLabel: FC<PriceLabelProps> = ({
   return (
     <Box display="flex" alignItems="center">
       <Typography {...TypographyProps}>{_value?.toLocaleString()}</Typography>
-      <PriceUnit title={t('units.price')} />
+      <PriceUnit title={t('units.price')} TypographyProps={TypographyProps} />
     </Box>
   );
 };
