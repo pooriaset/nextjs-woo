@@ -30,6 +30,8 @@ import Image from 'next/image';
 import Header from './components/Header';
 import CartItemSkeleton from '@/components/CartItem/components/CartItemSkeleton';
 import OutOfStock from '@/components/common/OutOfStock';
+import CheckoutBox, { CheckoutBoxProps } from './components/CheckoutBox';
+import PriceLabel from '@/components/common/PriceLabel';
 
 const Page = () => {
   const t = useTranslations();
@@ -135,6 +137,55 @@ const Page = () => {
     );
   }
 
+  const checkoutBoxItems: CheckoutBoxProps['items'] = [
+    {
+      key: (
+        <Typography variant="body2" color="gray" sx={{ fontWeight: 600 }}>
+          قیمت کالاها ({cart?.contents?.itemCount})
+        </Typography>
+      ),
+      value: (
+        <PriceLabel
+          value={cart.subtotal}
+          TypographyProps={{
+            fontWeight: 600,
+            color: 'gray',
+          }}
+        />
+      ),
+    },
+    {
+      key: (
+        <Typography variant="body2" sx={{ fontWeight: 600 }}>
+          جمع سبد خرید
+        </Typography>
+      ),
+      value: (
+        <PriceLabel
+          value={cart.total}
+          TypographyProps={{
+            fontWeight: 600,
+          }}
+        />
+      ),
+    },
+    {
+      key: (
+        <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
+          سود شما از خرید
+        </Typography>
+      ),
+      value: (
+        <PriceLabel
+          value={cart.discountTotal}
+          TypographyProps={{
+            fontWeight: 600,
+          }}
+        />
+      ),
+    },
+  ];
+
   return (
     <>
       <Grid container spacing={2}>
@@ -200,7 +251,9 @@ const Page = () => {
         <Grid item lg={3} md={6} xs={12}>
           <Stack spacing={2}>
             <Card variant="outlined">
-              <CardContent></CardContent>
+              <CardContent>
+                <CheckoutBox items={checkoutBoxItems} />
+              </CardContent>
               <CardActions>
                 <Button
                   fullWidth

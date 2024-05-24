@@ -6,7 +6,7 @@ import { extractNumbers, getMinOfRangePrice } from '@/utils/price';
 import { useTranslations } from 'next-intl';
 
 export interface PriceLabelProps {
-  value?: string | null;
+  value?: string | number | null;
   TypographyProps?: Partial<TypographyProps>;
 }
 
@@ -19,11 +19,15 @@ const PriceLabel: FC<PriceLabelProps> = ({
   },
 }) => {
   const t = useTranslations();
+
+  const _value =
+    typeof value === 'string'
+      ? extractNumbers(getMinOfRangePrice(value))
+      : value;
+
   return (
     <Box display="flex" alignItems="center">
-      <Typography {...TypographyProps}>
-        {extractNumbers(getMinOfRangePrice(value))?.toLocaleString()}
-      </Typography>
+      <Typography {...TypographyProps}>{_value?.toLocaleString()}</Typography>
       <PriceUnit title={t('units.price')} />
     </Box>
   );
