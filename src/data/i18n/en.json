@@ -5,7 +5,10 @@
   },
   "messages": {
     "cart": {
-      "isEmpty": "Cart is empty!"
+      "isEmpty": "Cart is empty!",
+      "shortDescription": "You can find your desired product in the below links:",
+      "selectYourSize": "Please select your size.",
+      "reserveMessage": "Adding a product to the shopping cart does not mean reserving it, please register your cart and complete the purchase."
     }
   },
   "categories": {

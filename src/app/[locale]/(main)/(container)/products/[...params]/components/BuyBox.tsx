@@ -16,7 +16,7 @@ import {
   AccountBalanceWalletOutlined,
   LocalShippingOutlined,
 } from '@mui/icons-material';
-import { Box, Divider } from '@mui/material';
+import { Box, Collapse, Divider, Stack, Typography } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -28,9 +28,10 @@ import DiscountPercentage from '../../../../../../../components/common/DiscountP
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
-import CartItemController from './CartItemController';
+import CartItemController from '@/components/CartItemController/CartItemController';
 import { getFragmentData } from '@/graphql/types';
 import { ProductVariationContentSliceFragmentDoc } from '@/graphql/types/graphql';
+import { Link } from '@/navigation';
 
 const listItems = [
   {
@@ -79,12 +80,14 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
   const { handleCloseDialog, handleOpenDialog, open } = useNewDialog();
 
   const handleClickOnAdd = async () => {
-    await addOrUpdateCartItemMutate({
+    const data = await addOrUpdateCartItemMutate({
       quantity: 1,
       productId: +params[0],
       variationId: selectedVariantId!,
     });
-    handleOpenDialog();
+    if (data) {
+      handleOpenDialog();
+    }
   };
 
   const { findInCart } = useCartUtils();
@@ -176,6 +179,7 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
             value={variant?.salePrice}
           />
         </Box>
+
         <Box>
           {/* TODO: Handle out of stock state */}
           {!itemInCart && (
@@ -193,7 +197,23 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
           )}
 
           {itemInCart && (
-            <CartItemController item={itemInCart} height={height} />
+            <>
+              <Box height={height}>
+                <CartItemController item={itemInCart} />
+              </Box>
+              <Collapse appear in={true}>
+                <Stack direction="row" justifyContent="center" spacing={1}>
+                  <Typography variant="body2">
+                    {t('pages.product.buyBox.inYourCart')}
+                  </Typography>
+                  <Link href="/cart">
+                    <Typography color="primary" variant="body2">
+                      {t('pages.product.buyBox.viewCart')}
+                    </Typography>
+                  </Link>
+                </Stack>
+              </Collapse>
+            </>
           )}
         </Box>
       </Box>

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ADD_TO_CART_MUTATION,
   UPDATE_CART_ITEMS_QUANTITIES_MUTATION,
@@ -8,6 +10,8 @@ import {
 } from '@/graphql/types/graphql';
 import { useMutation } from '@apollo/client';
 import useCartUtils from './useCartUtils';
+import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 export interface MutateCartFunction {
   (values: {
@@ -15,7 +19,7 @@ export interface MutateCartFunction {
     productId: number;
     variationId: number | undefined;
     extraData?: any;
-  }): Promise<any>;
+  }): Promise<any> | null;
 }
 
 export interface IUseAddOrUpdateCartItem {
@@ -26,6 +30,7 @@ export interface IUseAddOrUpdateCartItem {
 }
 
 const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
+  const t = useTranslations();
   const { findInCart, setCartAtom } = useCartUtils();
 
   const [addToCart, { loading: addToCartLoading }] =
@@ -52,7 +57,10 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
   const addOrUpdateCartItemMutate: MutateCartFunction = async (values) => {
     const { quantity, variationId, productId, extraData } = values;
     if (!variationId) {
-      throw new Error('Variation id is undefined.');
+      toast.error(t('messages.cart.selectYourSize'), {
+        toastId: 'variant-is-not-exist',
+      });
+      return null;
     }
 
     const quantityFound = findInCart({ variationId })?.quantity || 0;

@@ -13,8 +13,10 @@ import {
   Button,
   Card,
   CardContent,
+  Divider,
   Grid,
   Skeleton,
+  Stack,
   Typography,
 } from '@mui/material';
 import { useAtomValue } from 'jotai';
@@ -22,6 +24,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Header from './components/Header';
 import CartItem from '@/components/CartItem/CartItem';
+import CartItemController from '@/components/CartItemController/CartItemController';
 
 const Page = () => {
   const t = useTranslations();
@@ -33,6 +36,21 @@ const Page = () => {
     return <Skeleton />;
   }
   if (!cart?.contents?.itemCount) {
+    const links = [
+      {
+        title: t('buttons.products'),
+        href: '/search',
+      },
+      {
+        title: t('header.navigation.bestSelling'),
+        href: '/best-selling',
+      },
+      {
+        title: t('header.navigation.categories'),
+        href: '/categories',
+      },
+    ];
+
     return (
       <Box
         sx={{
@@ -41,8 +59,11 @@ const Page = () => {
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          mt: 5,
           gap: 2,
+          border: '1px solid',
+          borderColor: 'divider',
+          borderRadius: 1,
+          p: 2,
         }}
       >
         <Box
@@ -59,9 +80,18 @@ const Page = () => {
           />
         </Box>
         <Typography variant="h6">{t('messages.cart.isEmpty')}</Typography>
-        <NextLink href="/search">
-          <Button variant="outlined">{t('buttons.products')}</Button>
-        </NextLink>
+        <Typography variant="caption">
+          {t('messages.cart.shortDescription')}
+        </Typography>
+        <Stack spacing={2} direction="row">
+          {links.map((link) => {
+            return (
+              <NextLink href={link.href} key={link.href}>
+                <Button variant="outlined">{link.title}</Button>
+              </NextLink>
+            );
+          })}
+        </Stack>
       </Box>
     );
   }
@@ -70,22 +100,42 @@ const Page = () => {
     <>
       <Grid container>
         <Grid item lg={9} md={6} xs={12}>
-          <Card variant="outlined">
-            <Header />
-            <CardContent>
-              {cart?.contents?.nodes?.map((item) => {
-                const _item = getFragmentData(CartItemContentFragmentDoc, item);
+          <Stack spacing={2}>
+            <Card variant="outlined">
+              <Header />
+              <CardContent>
+                <Grid container spacing={2}>
+                  {cart?.contents?.nodes?.map((item, index) => {
+                    const isLast = cart?.contents?.nodes?.length === index + 1;
+                    const _item = getFragmentData(
+                      CartItemContentFragmentDoc,
+                      item,
+                    );
 
-                const variant = getFragmentData(
-                  ProductVariationContentSliceFragmentDoc,
-                  _item.variation?.node,
-                )!;
+                    const variant = getFragmentData(
+                      ProductVariationContentSliceFragmentDoc,
+                      _item.variation?.node,
+                    )!;
 
-                return <CartItem key={_item?.key} value={variant} />;
-              })}
-            </CardContent>
-          </Card>
+                    return (
+                      <Grid item xs={12} key={_item?.key}>
+                        <Stack spacing={2}>
+                          <CartItem value={variant} />
+                          <Box width={200}>
+                            <CartItemController item={_item} />
+                          </Box>
+                          {!isLast && <Divider />}
+                        </Stack>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </CardContent>
+            </Card>
+            <Typography>{t('messages.cart.reserveMessage')}</Typography>
+          </Stack>
         </Grid>
+
         <Grid item lg={3} md={6} xs={12}></Grid>
       </Grid>
     </>

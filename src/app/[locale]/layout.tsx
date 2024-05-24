@@ -17,8 +17,10 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
-
+import { ToastContainer } from 'react-toastify';
 import ConfirmAlertProvider from '@/providers/ConfirmAlertProvider';
+import 'react-toastify/dist/ReactToastify.css';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -61,6 +63,10 @@ export default async function LocaleLayout({
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={themes[locale] ?? defaultTheme}>
+            <ToastContainer
+              rtl={languages?.[locale]?.direction == 'rtl'}
+              position="top-center"
+            />
             <ApolloProvider>
               <AppProvider userAgent={reqUserAgent}>
                 <CssBaseline />

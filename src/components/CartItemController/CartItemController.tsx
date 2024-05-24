@@ -6,12 +6,10 @@ import {
 } from '@/graphql/types/graphql';
 import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import useRemoveCartItem from '@/hooks/useRmoveCartItem';
-import { Link } from '@/navigation';
 import { Add, DeleteOutline, Remove } from '@mui/icons-material';
 import {
   Box,
   CircularProgress,
-  Collapse,
   IconButton,
   Stack,
   Typography,
@@ -21,10 +19,9 @@ import { FC } from 'react';
 
 export interface CartItemControllerProps {
   item: CartItemContentFragment;
-  height: number;
 }
 
-const CartItemController: FC<CartItemControllerProps> = ({ item, height }) => {
+const CartItemController: FC<CartItemControllerProps> = ({ item }) => {
   const isDecreaseEnabled = item.quantity ? item.quantity > 1 : false;
 
   const variant = getFragmentData(
@@ -78,7 +75,7 @@ const CartItemController: FC<CartItemControllerProps> = ({ item, height }) => {
         sx={{
           border: '1px solid',
           borderColor: 'divider',
-          height,
+          height: '100%',
           borderRadius: 1,
         }}
       >
@@ -131,18 +128,6 @@ const CartItemController: FC<CartItemControllerProps> = ({ item, height }) => {
           </IconButton>
         )}
       </Stack>
-      <Collapse appear in={true}>
-        <Stack direction="row" justifyContent="center" spacing={1}>
-          <Typography variant="body2">
-            {t('pages.product.buyBox.inYourCart')}
-          </Typography>
-          <Link href="/cart">
-            <Typography color="primary" variant="body2">
-              {t('pages.product.buyBox.viewCart')}
-            </Typography>
-          </Link>
-        </Stack>
-      </Collapse>
     </Stack>
   );
 };
