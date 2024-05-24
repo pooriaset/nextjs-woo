@@ -7,6 +7,9 @@ import {
 
 import { getSessionToken } from '@/services/common';
 import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
+import { Observable } from '@apollo/client/utilities';
+import { toast } from 'react-toastify';
 
 const createSessionLink = () => {
   return setContext(async () => {
@@ -45,6 +48,64 @@ const updateLink = new ApolloLink((operation, forward) => {
     return response;
   });
 });
+
+const createErrorLink = () => {
+  return onError(({ graphQLErrors, operation, forward }) => {
+    const targetErrors = [
+      'The iss do not match with this server',
+      'invalid-secret-key | Expired token',
+      'invalid-secret-key | Signature verification failed',
+      'Expired token',
+      'Wrong number of segments',
+    ];
+    let observable;
+
+    if (graphQLErrors?.length) {
+      graphQLErrors.map(({ originalError, message }) => {
+        if (
+          targetErrors.includes(message) ||
+          targetErrors.includes(originalError?.message ?? '')
+        ) {
+          observable = new Observable((observer) => {
+            getSessionToken(true)
+              .then((sessionToken) => {
+                operation.setContext(({ headers = {} }) => {
+                  const nextHeaders: Record<string, string> = headers;
+
+                  if (sessionToken) {
+                    nextHeaders[
+                      'woocommerce-session'
+                    ] = `Session ${sessionToken}`;
+                  } else {
+                    delete nextHeaders['woocommerce-session'];
+                  }
+
+                  return {
+                    headers: nextHeaders,
+                  };
+                });
+              })
+              .then(() => {
+                const subscriber = {
+                  next: observer.next.bind(observer),
+                  error: observer.error.bind(observer),
+                  complete: observer.complete.bind(observer),
+                };
+                forward(operation).subscribe(subscriber);
+              })
+              .catch((error) => {
+                observer.error(error);
+              });
+          });
+        } else {
+          toast.error(message);
+        }
+      });
+    }
+    return observable;
+  });
+};
+
 export const makeClient = () => {
   const httpLink = new HttpLink({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
@@ -56,6 +117,7 @@ export const makeClient = () => {
 
     link: from([
       createSessionLink(),
+      createErrorLink(),
       updateLink,
       ...(typeof window === 'undefined'
         ? [
