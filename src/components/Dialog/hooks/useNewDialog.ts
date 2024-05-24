@@ -28,6 +28,8 @@ const useNewDialog: IUseNewDialog = () => {
     variant: 'outlined',
     color: 'inherit',
     onClick: handleCloseDialog,
+    fullWidth: true,
+    size: 'large',
   };
 
   return { open, handleOpenDialog, handleCloseDialog, returnButton };

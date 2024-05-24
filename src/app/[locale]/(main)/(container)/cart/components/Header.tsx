@@ -66,6 +66,8 @@ const Header = () => {
             isLoading: emptyCartLoading,
             variant: 'contained',
             color: 'primary',
+            fullWidth: true,
+            size: 'large',
           },
         ]}
       >
