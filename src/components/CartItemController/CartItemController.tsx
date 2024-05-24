@@ -14,14 +14,17 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 
 export interface CartItemControllerProps {
   item: CartItemContentFragment;
+  disabled?: boolean;
 }
 
-const CartItemController: FC<CartItemControllerProps> = ({ item }) => {
+const CartItemController: FC<CartItemControllerProps> = ({
+  item,
+  disabled = false,
+}) => {
   const isDecreaseEnabled = item.quantity ? item.quantity > 1 : false;
 
   const variant = getFragmentData(
@@ -63,8 +66,7 @@ const CartItemController: FC<CartItemControllerProps> = ({ item }) => {
 
   const isLoading = removeCartItemMutateLoading || addOrUpdateCartItemLoading;
 
-  const t = useTranslations();
-
+  const _disabled = disabled || isLoading;
   return (
     <Stack spacing={1} justifyContent="center">
       <Stack
@@ -82,7 +84,7 @@ const CartItemController: FC<CartItemControllerProps> = ({ item }) => {
         <IconButton
           onClick={handleClickOnIncrease}
           size="large"
-          disabled={isLoading}
+          disabled={_disabled}
           color="primary"
         >
           <Add />
@@ -111,7 +113,7 @@ const CartItemController: FC<CartItemControllerProps> = ({ item }) => {
           <IconButton
             onClick={handleClickOnDecrease}
             size="large"
-            disabled={isLoading}
+            disabled={_disabled}
             color="primary"
           >
             <Remove />

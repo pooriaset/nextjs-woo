@@ -6,6 +6,7 @@ import { getFragmentData } from '@/graphql/types';
 import {
   CartItemContentFragmentDoc,
   ProductVariationContentSliceFragmentDoc,
+  StockStatusEnum,
 } from '@/graphql/types/graphql';
 import useCartQuery from '@/hooks/useCartQuery';
 import { Link as NextLink } from '@/navigation';
@@ -27,6 +28,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Header from './components/Header';
 import CartItemSkeleton from '@/components/CartItem/components/CartItemSkeleton';
+import OutOfStock from '@/components/common/OutOfStock';
 
 const Page = () => {
   const t = useTranslations();
@@ -151,14 +153,30 @@ const Page = () => {
                     ProductVariationContentSliceFragmentDoc,
                     _item.variation?.node,
                   )!;
+                  const isOutOfStock =
+                    variant.stockStatus === StockStatusEnum.OutOfStock;
 
                   return (
                     <Grid item xs={12} key={_item?.key}>
                       <Stack spacing={2}>
                         <CartItem value={variant} />
-                        <Box width={200}>
-                          <CartItemController item={_item} />
-                        </Box>
+                        <Stack direction="row" spacing={1}>
+                          <Box width={200}>
+                            <CartItemController
+                              item={_item}
+                              disabled={isOutOfStock}
+                            />
+                          </Box>
+                          {isOutOfStock && (
+                            <OutOfStock
+                              sx={{
+                                color: 'red',
+                                borderColor: 'error',
+                                width: 'fit-content',
+                              }}
+                            />
+                          )}
+                        </Stack>
                         {!isLast && <Divider />}
                       </Stack>
                     </Grid>
