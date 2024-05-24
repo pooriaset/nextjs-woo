@@ -2,11 +2,18 @@
 
 import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...params]/hooks/useProductContext';
 import { Variations } from '@/app/[locale]/(main)/(container)/products/types/common';
+import CartItemController from '@/components/CartItemController/CartItemController';
 import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
+import { getFragmentData } from '@/graphql/types';
+import {
+  ProductVariationContentSliceFragmentDoc,
+  StockStatusEnum,
+} from '@/graphql/types/graphql';
 import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import { useAppContext } from '@/hooks/useAppContext';
 import useCartUtils from '@/hooks/useCartUtils';
+import { Link } from '@/navigation';
 import {
   extractNumbers,
   getMinOfRangePrice,
@@ -28,10 +35,6 @@ import DiscountPercentage from '../../../../../../../components/common/DiscountP
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
-import CartItemController from '@/components/CartItemController/CartItemController';
-import { getFragmentData } from '@/graphql/types';
-import { ProductVariationContentSliceFragmentDoc } from '@/graphql/types/graphql';
-import { Link } from '@/navigation';
 
 const listItems = [
   {
@@ -46,9 +49,10 @@ const listItems = [
 
 export interface BuyBoxProps {
   variations: Variations;
+  stockStatus: StockStatusEnum | null | undefined;
 }
 
-const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
+const BuyBox: FC<BuyBoxProps> = ({ variations, stockStatus }) => {
   const { params } = useParams();
 
   const { isMobile } = useAppContext();
@@ -98,6 +102,8 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
 
   const height = 55;
 
+  const outOfStock = stockStatus === StockStatusEnum.OutOfStock;
+
   return (
     <>
       <AddToCartDialog
@@ -106,117 +112,129 @@ const BuyBox: FC<BuyBoxProps> = ({ variations }) => {
         value={variant!}
       />
 
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 2,
-          flexDirection: 'column',
-        }}
-      >
-        <List>
-          {listItems.map((item) => {
-            return (
-              <>
-                <ListItem
-                  disablePadding
-                  sx={{
-                    py: 1,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: 1,
-                    }}
-                  >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.text}
-                    primaryTypographyProps={{
-                      fontSize: (theme) => theme.typography.caption.fontSize,
-                    }}
-                  />
-                </ListItem>
-                <Divider />
-              </>
-            );
-          })}
-        </List>
-
+      {outOfStock ? (
+        <Typography
+          color="error"
+          variant="h6"
+          sx={{
+            textAlign: 'center',
+          }}
+        >
+          {t('products.outOfStock')}
+        </Typography>
+      ) : (
         <Box
           sx={{
             display: 'flex',
+            gap: 2,
             flexDirection: 'column',
-            alignItems: 'end',
-            gap: 1,
           }}
         >
+          <List>
+            {listItems.map((item) => {
+              return (
+                <>
+                  <ListItem
+                    disablePadding
+                    sx={{
+                      py: 1,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: 1,
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.text}
+                      primaryTypographyProps={{
+                        fontSize: (theme) => theme.typography.caption.fontSize,
+                      }}
+                    />
+                  </ListItem>
+                  <Divider />
+                </>
+              );
+            })}
+          </List>
+
           <Box
             sx={{
               display: 'flex',
-              gap: 0.5,
+              flexDirection: 'column',
+              alignItems: 'end',
+              gap: 1,
             }}
           >
-            {variant?.price !== variant?.regularPrice && (
-              <>
-                <OldPrice
-                  value={variant?.regularPrice}
-                  TypographyProps={{
-                    variant: 'body1',
-                  }}
-                />
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 0.5,
+              }}
+            >
+              {variant?.price !== variant?.regularPrice && (
+                <>
+                  <OldPrice
+                    value={variant?.regularPrice}
+                    TypographyProps={{
+                      variant: 'body1',
+                    }}
+                  />
 
-                <DiscountPercentage value={profitMarginPercentage} />
+                  <DiscountPercentage value={profitMarginPercentage} />
+                </>
+              )}
+            </Box>
+            <PriceLabel
+              TypographyProps={{
+                variant: 'h6',
+                fontWeight: 600,
+              }}
+              value={variant?.salePrice}
+            />
+          </Box>
+
+          <Box>
+            {/* TODO: Handle out of stock state */}
+            {!itemInCart && (
+              <ButtonWithLoading
+                isLoading={addOrUpdateCartItemLoading}
+                fullWidth
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={handleClickOnAdd}
+                sx={{ minHeight: height }}
+              >
+                {t('buttons.addToCart')}
+              </ButtonWithLoading>
+            )}
+
+            {itemInCart && (
+              <>
+                <Box height={height}>
+                  <CartItemController item={itemInCart} />
+                </Box>
+                <Collapse appear in={true}>
+                  <Stack direction="row" justifyContent="center" spacing={1}>
+                    <Typography variant="body2">
+                      {t('pages.product.buyBox.inYourCart')}
+                    </Typography>
+                    <Link href="/cart">
+                      <Typography color="primary" variant="body2">
+                        {t('pages.product.buyBox.viewCart')}
+                      </Typography>
+                    </Link>
+                  </Stack>
+                </Collapse>
               </>
             )}
           </Box>
-          <PriceLabel
-            TypographyProps={{
-              variant: 'h6',
-              fontWeight: 600,
-            }}
-            value={variant?.salePrice}
-          />
         </Box>
-
-        <Box>
-          {/* TODO: Handle out of stock state */}
-          {!itemInCart && (
-            <ButtonWithLoading
-              isLoading={addOrUpdateCartItemLoading}
-              fullWidth
-              variant="contained"
-              color="primary"
-              size="large"
-              onClick={handleClickOnAdd}
-              sx={{ minHeight: height }}
-            >
-              {t('buttons.addToCart')}
-            </ButtonWithLoading>
-          )}
-
-          {itemInCart && (
-            <>
-              <Box height={height}>
-                <CartItemController item={itemInCart} />
-              </Box>
-              <Collapse appear in={true}>
-                <Stack direction="row" justifyContent="center" spacing={1}>
-                  <Typography variant="body2">
-                    {t('pages.product.buyBox.inYourCart')}
-                  </Typography>
-                  <Link href="/cart">
-                    <Typography color="primary" variant="body2">
-                      {t('pages.product.buyBox.viewCart')}
-                    </Typography>
-                  </Link>
-                </Stack>
-              </Collapse>
-            </>
-          )}
-        </Box>
-      </Box>
+      )}
     </>
   );
 };
