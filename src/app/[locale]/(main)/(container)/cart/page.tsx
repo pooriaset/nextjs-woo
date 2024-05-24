@@ -1,5 +1,7 @@
 'use client';
 
+import CartItem from '@/components/CartItem/CartItem';
+import CartItemController from '@/components/CartItemController/CartItemController';
 import { getFragmentData } from '@/graphql/types';
 import {
   CartItemContentFragmentDoc,
@@ -12,20 +14,19 @@ import {
   Box,
   Button,
   Card,
+  CardActions,
   CardContent,
   Divider,
   Grid,
   Skeleton,
   Stack,
   Typography,
-  CardActions,
 } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Header from './components/Header';
-import CartItem from '@/components/CartItem/CartItem';
-import CartItemController from '@/components/CartItemController/CartItemController';
+import CartItemSkeleton from '@/components/CartItem/components/CartItemSkeleton';
 
 const Page = () => {
   const t = useTranslations();
@@ -34,8 +35,42 @@ const Page = () => {
   const cart = useAtomValue(cartAtom);
 
   if (loading) {
-    return <Skeleton />;
+    const skeletonLength = 4;
+    return (
+      <Grid container spacing={2}>
+        <Grid item lg={9} md={6} xs={12}>
+          <Card variant="outlined">
+            <CardContent>
+              <Grid container spacing={2}>
+                {new Array(skeletonLength).fill(0).map((item, index) => {
+                  const isLast = skeletonLength === index + 1;
+                  return (
+                    <Grid item xs={12} key={index}>
+                      <Stack spacing={2}>
+                        <CartItemSkeleton />
+                        {!isLast && <Divider />}
+                      </Stack>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item lg={3} md={6} xs={12}>
+          <Stack spacing={2}>
+            <Card variant="outlined">
+              <CardContent>
+                <Skeleton variant="rectangular" height={400} />
+              </CardContent>
+            </Card>
+          </Stack>
+        </Grid>
+      </Grid>
+    );
   }
+
   if (!cart?.contents?.itemCount) {
     const links = [
       {
