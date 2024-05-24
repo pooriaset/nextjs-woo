@@ -97,7 +97,10 @@
         "buttonTitle": "Go to Cart",
         "resume": "Resume"
       },
-      "title": "Your Cart"
+      "title": "Your Cart",
+      "buttons": {
+        "registerAndNextStep": "Register and Next"
+      }
     },
     "product": {
       "galleryDialogTitle": "Gallery",

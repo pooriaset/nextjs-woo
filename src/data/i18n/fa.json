@@ -97,7 +97,10 @@
         "buttonTitle": "برو به سبد خرید!",
         "resume": "ادامه خرید"
       },
-      "title": "سبد خرید شما"
+      "title": "سبد خرید شما",
+      "buttons": {
+        "registerAndNextStep": "ثبت و مرحله بعد"
+      }
     },
     "product": {
       "galleryDialogTitle": "گالری تصاویر محصول",

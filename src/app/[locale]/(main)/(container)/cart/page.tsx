@@ -18,6 +18,7 @@ import {
   Skeleton,
   Stack,
   Typography,
+  CardActions,
 } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
@@ -98,45 +99,61 @@ const Page = () => {
 
   return (
     <>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item lg={9} md={6} xs={12}>
-          <Stack spacing={2}>
-            <Card variant="outlined">
-              <Header />
-              <CardContent>
-                <Grid container spacing={2}>
-                  {cart?.contents?.nodes?.map((item, index) => {
-                    const isLast = cart?.contents?.nodes?.length === index + 1;
-                    const _item = getFragmentData(
-                      CartItemContentFragmentDoc,
-                      item,
-                    );
+          <Card variant="outlined">
+            <Header />
+            <CardContent>
+              <Grid container spacing={2}>
+                {cart?.contents?.nodes?.map((item, index) => {
+                  const isLast = cart?.contents?.nodes?.length === index + 1;
+                  const _item = getFragmentData(
+                    CartItemContentFragmentDoc,
+                    item,
+                  );
 
-                    const variant = getFragmentData(
-                      ProductVariationContentSliceFragmentDoc,
-                      _item.variation?.node,
-                    )!;
+                  const variant = getFragmentData(
+                    ProductVariationContentSliceFragmentDoc,
+                    _item.variation?.node,
+                  )!;
 
-                    return (
-                      <Grid item xs={12} key={_item?.key}>
-                        <Stack spacing={2}>
-                          <CartItem value={variant} />
-                          <Box width={200}>
-                            <CartItemController item={_item} />
-                          </Box>
-                          {!isLast && <Divider />}
-                        </Stack>
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </CardContent>
-            </Card>
-            <Typography>{t('messages.cart.reserveMessage')}</Typography>
-          </Stack>
+                  return (
+                    <Grid item xs={12} key={_item?.key}>
+                      <Stack spacing={2}>
+                        <CartItem value={variant} />
+                        <Box width={200}>
+                          <CartItemController item={_item} />
+                        </Box>
+                        {!isLast && <Divider />}
+                      </Stack>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
 
-        <Grid item lg={3} md={6} xs={12}></Grid>
+        <Grid item lg={3} md={6} xs={12}>
+          <Stack spacing={2}>
+            <Card variant="outlined">
+              <CardContent></CardContent>
+              <CardActions>
+                <Button
+                  fullWidth
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                >
+                  {t('pages.cart.buttons.registerAndNextStep')}
+                </Button>
+              </CardActions>
+            </Card>
+            <Typography variant="body2" color="gray">
+              {t('messages.cart.reserveMessage')}
+            </Typography>
+          </Stack>
+        </Grid>
       </Grid>
     </>
   );
