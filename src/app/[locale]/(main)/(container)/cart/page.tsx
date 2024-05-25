@@ -1,7 +1,6 @@
 'use client';
 
 import CartItem from '@/components/CartItem/CartItem';
-import CartItemSkeleton from '@/components/CartItem/components/CartItemSkeleton';
 import CartItemController from '@/components/CartItemController/CartItemController';
 import OutOfStock from '@/components/common/OutOfStock';
 import PriceLabel from '@/components/common/PriceLabel';
@@ -13,7 +12,6 @@ import {
   StockStatusEnum,
 } from '@/graphql/types/graphql';
 import useCartQuery from '@/hooks/useCartQuery';
-import { Link as NextLink } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
 import {
   Box,
@@ -23,15 +21,15 @@ import {
   CardContent,
   Divider,
   Grid,
-  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import Loading from '../loading';
 import CheckoutBox, { CheckoutBoxProps } from './components/CheckoutBox';
 import Header from './components/Header';
+import EmptyCart from './components/EmptyCart';
 
 const Page = () => {
   const t = useTranslations();
@@ -39,118 +37,9 @@ const Page = () => {
 
   const cart = useAtomValue(cartAtom);
 
-  if (loading) {
-    const skeletonLength = 4;
-    return (
-      <Grid container spacing={2}>
-        <Grid item lg={9} md={6} xs={12}>
-          <Card variant="outlined">
-            <CardContent>
-              <Grid container spacing={2}>
-                {new Array(skeletonLength).fill(0).map((item, index) => {
-                  const isLast = skeletonLength === index + 1;
-                  return (
-                    <Grid item xs={12} key={index}>
-                      <Stack spacing={2}>
-                        <CartItemSkeleton />
-                        {!isLast && <Divider />}
-                      </Stack>
-                    </Grid>
-                  );
-                })}
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
+  if (loading) return <Loading />;
 
-        <Grid item lg={3} md={6} xs={12}>
-          <Stack spacing={2}>
-            <Card variant="outlined">
-              <CardContent>
-                <Stack spacing={1}>
-                  {new Array(3).fill(1).map((item, index) => {
-                    return (
-                      <Stack
-                        key={index}
-                        direction="row"
-                        spacing={1}
-                        justifyContent="space-between"
-                      >
-                        <Skeleton variant="text" width={80} />
-                        <Skeleton variant="text" width={80} />
-                      </Stack>
-                    );
-                  })}
-                  <Skeleton variant="rectangular" height={45} />
-                </Stack>
-              </CardContent>
-            </Card>
-          </Stack>
-        </Grid>
-      </Grid>
-    );
-  }
-
-  if (!cart?.contents?.itemCount) {
-    const links = [
-      {
-        title: t('buttons.products'),
-        href: '/search',
-      },
-      {
-        title: t('header.navigation.bestSelling'),
-        href: '/best-selling',
-      },
-      {
-        title: t('header.navigation.categories'),
-        href: '/categories',
-      },
-    ];
-
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          gap: 2,
-          border: '1px solid',
-          borderColor: 'divider',
-          borderRadius: 1,
-          p: 2,
-        }}
-      >
-        <Box
-          sx={{
-            opacity: 0.7,
-            filter: 'grayscale(100%)',
-          }}
-        >
-          <Image
-            src="/assets/images/cart/unsuccess.svg"
-            alt="NotFound"
-            width={105}
-            height={105}
-          />
-        </Box>
-        <Typography variant="h6">{t('messages.cart.isEmpty')}</Typography>
-        <Typography variant="caption">
-          {t('messages.cart.shortDescription')}
-        </Typography>
-        <Stack spacing={2} direction="row">
-          {links.map((link) => {
-            return (
-              <NextLink href={link.href} key={link.href}>
-                <Button variant="outlined">{link.title}</Button>
-              </NextLink>
-            );
-          })}
-        </Stack>
-      </Box>
-    );
-  }
+  if (!cart?.contents?.itemCount) return <EmptyCart />;
 
   const checkoutBoxItems: CheckoutBoxProps['items'] = [
     {
