@@ -6,7 +6,7 @@ const ToomanIcon = () => {
       style={{
         width: 18,
         height: 18,
-        fill: 'var(--color-icon-medium-emphasis)',
+        fill: 'currentcolor',
       }}
     >
       <use xlinkHref="#tooman"></use>
