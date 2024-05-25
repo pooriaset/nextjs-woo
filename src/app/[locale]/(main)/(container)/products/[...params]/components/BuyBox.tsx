@@ -35,6 +35,7 @@ import DiscountPercentage from '../../../../../../../components/common/DiscountP
 import OldPrice from '../../../../../../../components/common/OldPrice';
 import PriceLabel from '../../../../../../../components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
+import MobileBuyBox from './MobileBuyBox';
 
 const listItems = [
   {
@@ -117,6 +118,89 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
     (variant === null && product?.discountPercentage) ||
     (variant !== null && variant?.discountPercentage);
 
+  const priceSection = (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'end',
+        gap: 1,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 0.5,
+        }}
+      >
+        {!!discountPercentage && (
+          <>
+            <OldPrice
+              value={variant ? variant?.regularPrice : product.regularPrice}
+              TypographyProps={{
+                variant: 'body1',
+              }}
+            />
+
+            <DiscountPercentage
+              value={
+                variant
+                  ? variant.discountPercentage
+                  : product.discountPercentage
+              }
+            />
+          </>
+        )}
+      </Box>
+      <PriceLabel
+        TypographyProps={{
+          variant: 'h6',
+          fontWeight: 600,
+        }}
+        value={variant ? variant.price : product.price}
+      />
+    </Box>
+  );
+
+  const controllerSection = (
+    <Box>
+      {/* TODO: Handle out of stock state */}
+      {!itemInCart && (
+        <ButtonWithLoading
+          isLoading={addOrUpdateCartItemLoading}
+          fullWidth
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={handleClickOnAdd}
+          sx={{ minHeight: height }}
+        >
+          {t('buttons.addToCart')}
+        </ButtonWithLoading>
+      )}
+
+      {itemInCart && (
+        <>
+          <Box height={height}>
+            <CartItemController item={itemInCart} />
+          </Box>
+          <Collapse appear in={true}>
+            <Stack direction="row" justifyContent="center" spacing={1}>
+              <Typography variant="body2">
+                {t('pages.product.buyBox.inYourCart')}
+              </Typography>
+              <Link href="/cart">
+                <Typography color="primary" variant="body2">
+                  {t('pages.product.buyBox.viewCart')}
+                </Typography>
+              </Link>
+            </Stack>
+          </Collapse>
+        </>
+      )}
+    </Box>
+  );
+
   return (
     <>
       <AddToCartDialog
@@ -174,86 +258,15 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
             })}
           </List>
 
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'end',
-              gap: 1,
-            }}
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 0.5,
-              }}
-            >
-              {!!discountPercentage && (
-                <>
-                  <OldPrice
-                    value={
-                      variant ? variant?.regularPrice : product.regularPrice
-                    }
-                    TypographyProps={{
-                      variant: 'body1',
-                    }}
-                  />
+          {isMobile && (
+            <MobileBuyBox>
+              <Box width="55%">{controllerSection}</Box>
+              {priceSection}
+            </MobileBuyBox>
+          )}
 
-                  <DiscountPercentage
-                    value={
-                      variant
-                        ? variant.discountPercentage
-                        : product.discountPercentage
-                    }
-                  />
-                </>
-              )}
-            </Box>
-            <PriceLabel
-              TypographyProps={{
-                variant: 'h6',
-                fontWeight: 600,
-              }}
-              value={variant ? variant.price : product.price}
-            />
-          </Box>
-
-          <Box>
-            {/* TODO: Handle out of stock state */}
-            {!itemInCart && (
-              <ButtonWithLoading
-                isLoading={addOrUpdateCartItemLoading}
-                fullWidth
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={handleClickOnAdd}
-                sx={{ minHeight: height }}
-              >
-                {t('buttons.addToCart')}
-              </ButtonWithLoading>
-            )}
-
-            {itemInCart && (
-              <>
-                <Box height={height}>
-                  <CartItemController item={itemInCart} />
-                </Box>
-                <Collapse appear in={true}>
-                  <Stack direction="row" justifyContent="center" spacing={1}>
-                    <Typography variant="body2">
-                      {t('pages.product.buyBox.inYourCart')}
-                    </Typography>
-                    <Link href="/cart">
-                      <Typography color="primary" variant="body2">
-                        {t('pages.product.buyBox.viewCart')}
-                      </Typography>
-                    </Link>
-                  </Stack>
-                </Collapse>
-              </>
-            )}
-          </Box>
+          {!isMobile && priceSection}
+          {!isMobile && controllerSection}
         </Box>
       )}
     </>
