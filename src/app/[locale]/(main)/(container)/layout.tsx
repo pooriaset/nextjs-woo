@@ -1,7 +1,4 @@
-import {
-  MOBILE_BUY_BOX_HEIGHT,
-  MOBILE_FOOTER_HEIGHT,
-} from '@/config/responsive';
+import { MOBILE_FOOTER_HEIGHT } from '@/config/responsive';
 import { Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
@@ -15,7 +12,7 @@ const Layout: FC<Layout> = async ({ children }) => {
       maxWidth="xl"
       sx={{
         mt: 3,
-        pb: { xs: `${MOBILE_FOOTER_HEIGHT + MOBILE_BUY_BOX_HEIGHT}px`, md: 0 },
+        pb: { xs: `${MOBILE_FOOTER_HEIGHT}px`, md: 0 },
         minHeight: '70vh',
       }}
     >

@@ -12,6 +12,7 @@ import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
 import SizeSelector from './components/SizeSelector';
 import ProductProvider from './providers/ProductProvider';
+import { MOBILE_BUY_BOX_HEIGHT } from '@/config/responsive';
 
 type PageProps = {
   params: { params: string[] };
@@ -61,7 +62,13 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
         selectedVariantId: null,
       }}
     >
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          pb: { xs: `${MOBILE_BUY_BOX_HEIGHT}px` },
+        }}
+      >
         <Grid item md={5} xs={12}>
           <ProductGallery
             thumbnail={product.image}

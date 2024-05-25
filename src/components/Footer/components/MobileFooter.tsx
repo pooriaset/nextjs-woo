@@ -68,7 +68,7 @@ const MobileFooter = () => {
         position: 'fixed',
         bottom: 0,
         boxShadow: (theme) => theme.shadows[3],
-        zIndex: 2000,
+        zIndex: 1290,
       }}
     >
       <MuiBottomNavigation
