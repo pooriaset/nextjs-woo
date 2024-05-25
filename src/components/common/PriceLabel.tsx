@@ -17,7 +17,7 @@ const PriceLabel: FC<PriceLabelProps> = ({
   value,
   TypographyProps = {
     sx: {
-      fontWeight: 300,
+      fontWeight: 600,
     },
   },
   suffix,
@@ -31,7 +31,7 @@ const PriceLabel: FC<PriceLabelProps> = ({
       : value;
 
   return (
-    <Stack alignItems="center" spacing={0.25} direction="row">
+    <Stack alignItems="center" spacing={1 / 8} direction="row">
       {prefix}
       <Typography {...TypographyProps}>{_value?.toLocaleString()}</Typography>
       <PriceUnit title={<ToomanIcon />} TypographyProps={TypographyProps} />
