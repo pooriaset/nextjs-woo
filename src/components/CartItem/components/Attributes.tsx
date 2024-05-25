@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, ReactNode } from 'react';
-import RulerIcon from '../../Icons/RulerIcon';
+import RulerIcon from '../../Icons/components/Use/RulerIcon';
 
 export interface AttributesProps {
   size: ReactNode | undefined;

@@ -1,8 +1,8 @@
 import { Typography, TypographyProps } from '@mui/material';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 export interface PriceUnitProps {
-  title: string;
+  title: ReactNode;
   TypographyProps?: Partial<TypographyProps>;
 }
 const PriceUnit: FC<PriceUnitProps> = ({ title, TypographyProps }) => {

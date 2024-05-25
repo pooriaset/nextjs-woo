@@ -24,6 +24,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import IconsSymbols from '@/components/Icons/components/IconsSymbols';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
@@ -61,6 +62,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={languages?.[locale]?.direction}>
       <body>
+        <IconsSymbols />
         <AppRouterCacheProvider>
           <ThemeProvider theme={themes[locale] ?? defaultTheme}>
             <ToastContainer

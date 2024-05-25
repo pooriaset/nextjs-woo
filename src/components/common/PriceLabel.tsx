@@ -4,6 +4,7 @@ import { extractNumbers, getMinOfRangePrice } from '@/utils/price';
 import { Stack, Typography, TypographyProps } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import PriceUnit from './PriceUnit';
+import { ToomanIcon } from '../Icons';
 
 export interface PriceLabelProps {
   value?: string | number | null;
@@ -33,7 +34,7 @@ const PriceLabel: FC<PriceLabelProps> = ({
     <Stack alignItems="center" spacing={0.25} direction="row">
       {prefix}
       <Typography {...TypographyProps}>{_value?.toLocaleString()}</Typography>
-      <PriceUnit title={t('units.price')} TypographyProps={TypographyProps} />
+      <PriceUnit title={<ToomanIcon />} TypographyProps={TypographyProps} />
       {suffix}
     </Stack>
   );
