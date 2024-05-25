@@ -31,9 +31,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { FC, useMemo } from 'react';
-import DiscountPercentage from '../../../../../../../components/common/DiscountPercentage';
-import OldPrice from '../../../../../../../components/common/OldPrice';
-import PriceLabel from '../../../../../../../components/common/PriceLabel';
+import DiscountPercentage from '@/components/common/DiscountPercentage';
+import OldPrice from '@/components/common/OldPrice';
+import PriceLabel from '@/components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
 import MobileBuyBox from './MobileBuyBox';
 
@@ -260,7 +260,7 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
 
           {isMobile && (
             <MobileBuyBox>
-              <Box width="55%">{controllerSection}</Box>
+              <Box width="60%">{controllerSection}</Box>
               {priceSection}
             </MobileBuyBox>
           )}
