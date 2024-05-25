@@ -30,6 +30,7 @@ import Loading from '../loading';
 import CheckoutBox, { CheckoutBoxProps } from './components/CheckoutBox';
 import Header from './components/Header';
 import EmptyCart from './components/EmptyCart';
+import { Z_INDEX_VALUES } from '@/config/responsive';
 
 const Page = () => {
   const t = useTranslations();
@@ -191,7 +192,7 @@ const Page = () => {
             sx={{
               position: 'sticky',
               top: 196,
-              zIndex: 1299,
+              zIndex: Z_INDEX_VALUES.cartPageDetailsBox,
             }}
           >
             <Card variant="outlined">

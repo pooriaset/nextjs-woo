@@ -8,6 +8,7 @@ import { DesktopHeader, MobileHeader } from './components';
 import TopBanner, {
   TopBannerProps,
 } from '@/components/Header/components/TopBanner';
+import { Z_INDEX_VALUES } from '@/config/responsive';
 
 export interface HeaderProps {
   topBanner?: TopBannerProps['data'];
@@ -23,7 +24,7 @@ const Header: FC<HeaderProps> = ({ topBanner }) => {
         borderColor: (theme) => theme.palette.divider,
         position: 'sticky',
         top: 0,
-        zIndex: 1299,
+        zIndex: Z_INDEX_VALUES.siteHeader,
       }}
     >
       {topBanner && <TopBanner data={topBanner} />}

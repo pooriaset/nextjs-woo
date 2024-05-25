@@ -11,6 +11,7 @@ import ButtonWithLoading, {
 } from '../common/ButtonWithLoading';
 import DialogTransition from '../common/DialogTransition';
 import { useAppContext } from '@/hooks/useAppContext';
+import { Z_INDEX_VALUES } from '@/config/responsive';
 
 export interface DialogProps extends MuiDialogProps {
   dialogContentProps?: DialogContentProps;
@@ -46,7 +47,7 @@ const Dialog: FC<DialogProps> = ({
         root: isMobile
           ? {
               style: {
-                zIndex: 2000,
+                zIndex: Z_INDEX_VALUES.dialog,
               },
             }
           : {},
