@@ -12,6 +12,10 @@ const nextConfig = {
         hostname: 'localhost',
         port: '6600',
       },
+      {
+        protocol: 'https',
+        hostname: 'nextwoo.ir',
+      },
     ],
   },
 };
