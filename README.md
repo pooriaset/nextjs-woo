@@ -5,7 +5,7 @@
 
 # nextjs-woo
 
-A brief description of your project, its purpose, and what problems it solves. You can also mention any key features or technologies used.
+Next.js & WooCommerce integration with Apollo Client & WP-GraphQL for efficient ecommerce functionalities in WordPress.
 
 ## Table of Contents
 
