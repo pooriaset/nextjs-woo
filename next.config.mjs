@@ -14,7 +14,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'nextwoo.ir',
+        hostname: 'api.nextwoo.ir',
       },
     ],
   },
