@@ -8,6 +8,6 @@ export const Z_INDEX_VALUES = {
   mobileFooter: 1290,
   cartPageDetailsBox: 1298,
   mobileBuyBox: 1289,
-  productTabs: 1288,
   variantSelectorMenu: 10,
+  productTabs: 9,
 };
