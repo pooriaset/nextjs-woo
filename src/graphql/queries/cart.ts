@@ -123,6 +123,17 @@ export const CartContent = gql`
     feeTotal
     discountTax
     discountTotal
+    fees {
+      id
+      name
+      total
+    }
+    appliedCoupons {
+      description
+      code
+      description
+      discountAmount
+    }
   }
   ${CartItemContent}
 `;
@@ -152,6 +163,27 @@ export const ADD_TO_CART_MUTATION = gql`
   }
   ${CartContent}
   ${CartItemContent}
+`;
+
+export const APPLY_COUPON_MUTATION = gql`
+  mutation ApplyCoupon($code: String!) {
+    applyCoupon(input: { code: $code }) {
+      clientMutationId
+      applied {
+        description
+        code
+        discountAmount
+      }
+    }
+  }
+`;
+
+export const REMOVE_COUPONS_MUTATION = gql`
+  mutation RemoveCoupons($codes: [String]) {
+    removeCoupons(input: { codes: $codes }) {
+      clientMutationId
+    }
+  }
 `;
 
 export const REMOVE_ITEMS_FROM_CART_MUTATION = gql`

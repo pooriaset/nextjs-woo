@@ -87,7 +87,8 @@
     }
   },
   "discounts": {
-    "off": "تخفیف"
+    "off": "تخفیف",
+    "discountCodeTitle": "کد تخفیف دارید؟"
   },
   "pages": {
     "cart": {
@@ -159,9 +160,18 @@
       "buttons": {
         "reset": "تلاش دوباره!"
       }
+    },
+    "checkout": {
+      "buttons": {
+        "placeOrder": "ثبت سفارش"
+      },
+      "fields": {
+        "description": "توضیحات سفارش (اختیاری)"
+      }
     }
   },
   "fields": {
-    "size": "سایز"
+    "size": "سایز",
+    "discountCode": "کد تخفیف"
   }
 }

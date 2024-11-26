@@ -4,15 +4,17 @@ import CartItem from '@/components/CartItem/CartItem';
 import CartItemController from '@/components/CartItemController/CartItemController';
 import OutOfStock from '@/components/common/OutOfStock';
 import PriceLabel from '@/components/common/PriceLabel';
+import { Z_INDEX_VALUES } from '@/config/responsive';
 import { getFragmentData } from '@/graphql/types';
 import {
+  CartContentFragmentDoc,
   CartItemContentFragmentDoc,
   ProductContentSliceFragmentDoc,
   ProductVariationContentSliceFragmentDoc,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
 import useCartQuery from '@/hooks/useCartQuery';
-import { cartAtom } from '@/store/atoms';
+import { Link } from '@/navigation';
 import {
   Box,
   Button,
@@ -24,34 +26,55 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import Loading from '../loading';
+import AppliedCoupons from './components/AppliedCoupons';
 import CheckoutBox, { CheckoutBoxProps } from './components/CheckoutBox';
-import Header from './components/Header';
+import DiscountCode from './components/DiscountCode';
 import EmptyCart from './components/EmptyCart';
-import { Z_INDEX_VALUES } from '@/config/responsive';
+import Header from './components/Header';
+import { extractNumbers } from '@/utils/price';
 
 const Page = () => {
   const t = useTranslations();
-  const { loading } = useCartQuery();
-
-  const cart = useAtomValue(cartAtom);
+  const { loading, data } = useCartQuery();
 
   if (loading) return <Loading />;
 
-  if (!cart?.contents?.itemCount) return <EmptyCart />;
+  const fragment = getFragmentData(CartContentFragmentDoc, data?.cart);
+
+  if (!fragment?.contents?.itemCount) return <EmptyCart />;
+
+  const fees =
+    fragment?.fees?.map((fee) => {
+      return {
+        key: (
+          <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
+            {fee?.name}
+          </Typography>
+        ),
+        value: (
+          <PriceLabel
+            value={Math.abs(fee?.total!)}
+            TypographyProps={{
+              fontWeight: 600,
+              color: 'error',
+            }}
+          />
+        ),
+      };
+    }) || [];
 
   const checkoutBoxItems: CheckoutBoxProps['items'] = [
     {
       key: (
         <Typography variant="body2" color="gray" sx={{ fontWeight: 600 }}>
-          {t('pages.cart.box.subTotal')} ({cart?.contents?.itemCount})
+          {t('pages.cart.box.subTotal')} ({fragment?.contents?.itemCount})
         </Typography>
       ),
       value: (
         <PriceLabel
-          value={cart.subtotal}
+          value={fragment.subtotal}
           TypographyProps={{
             fontWeight: 600,
             color: 'gray',
@@ -59,6 +82,7 @@ const Page = () => {
         />
       ),
     },
+    ...fees,
     {
       key: (
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
@@ -67,7 +91,7 @@ const Page = () => {
       ),
       value: (
         <PriceLabel
-          value={cart.total}
+          value={fragment.total}
           TypographyProps={{
             fontWeight: 600,
           }}
@@ -82,7 +106,10 @@ const Page = () => {
       ),
       value: (
         <PriceLabel
-          value={cart.discountTotal}
+          value={
+            extractNumbers(fragment?.discountTotal)! +
+            extractNumbers(fragment?.feeTotal?.replace('-', ''))!
+          }
           TypographyProps={{
             fontWeight: 600,
             color: 'error',
@@ -100,8 +127,9 @@ const Page = () => {
             <Header />
             <CardContent>
               <Grid container spacing={2}>
-                {cart?.contents?.nodes?.map((item, index) => {
-                  const isLast = cart?.contents?.nodes?.length === index + 1;
+                {fragment?.contents?.nodes?.map((item, index) => {
+                  const isLast =
+                    fragment?.contents?.nodes?.length === index + 1;
                   const _item = getFragmentData(
                     CartItemContentFragmentDoc,
                     item,
@@ -195,12 +223,20 @@ const Page = () => {
               zIndex: Z_INDEX_VALUES.cartPageDetailsBox,
             }}
           >
+            <DiscountCode />
+
+            {!!fragment?.appliedCoupons?.length && (
+              <AppliedCoupons items={fragment?.appliedCoupons} />
+            )}
+
             <Card variant="outlined">
               <CardContent>
                 <CheckoutBox items={checkoutBoxItems} />
               </CardContent>
               <CardActions>
                 <Button
+                  component={Link}
+                  href="/checkout"
                   fullWidth
                   color="primary"
                   size="large"

@@ -12,7 +12,7 @@ const ButtonWithLoading: FC<ButtonWithLoadingProps> = ({
     <Button
       {...props}
       disabled={isLoading || props.disabled}
-      sx={{ ...props.sx, minWidth: 100 }}
+      sx={{ minWidth: 100,...props.sx  }}
     >
       {isLoading ? (
         <CircularProgress color="inherit" size={20} />

@@ -70,9 +70,13 @@ const Page = () => {
           <Controller
             control={control}
             name="mobileNumber"
-            render={({ field: { name, value }, fieldState: { error } }) => {
+            render={({
+              field: { name, value, onChange },
+              fieldState: { error },
+            }) => {
               return (
                 <TextField
+                  onChange={onChange}
                   name={name}
                   value={value}
                   variant="outlined"

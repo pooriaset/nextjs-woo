@@ -4,7 +4,6 @@ export const extractNumbers = (
   if (!price) {
     return null;
   }
-
   const result = price.match(/[\d.]+/g);
   if (result) {
     return +result.join('');

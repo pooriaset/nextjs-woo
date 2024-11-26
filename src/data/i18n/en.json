@@ -87,7 +87,8 @@
     }
   },
   "discounts": {
-    "off": "Off"
+    "off": "Off",
+    "discountCodeTitle": "Do you have a discount code?"
   },
   "pages": {
     "cart": {
@@ -159,9 +160,18 @@
       "buttons": {
         "reset": "ُTry again!"
       }
+    },
+    "checkout": {
+      "buttons": {
+        "placeOrder": "Place Order"
+      },
+      "fields": {
+        "description": "Order Description (Optional)"
+      }
     }
   },
   "fields": {
-    "size": "Size"
+    "size": "Size",
+    "discountCode" : "Discount Code"
   }
 }

@@ -11,6 +11,7 @@ const useCartQuery = () => {
       setCartAtom(data.cart);
     },
     fetchPolicy: 'no-cache',
+    notifyOnNetworkStatusChange: true,
   });
 };
 

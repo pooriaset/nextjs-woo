@@ -9,7 +9,7 @@
     "lint": "next lint",
     "prepare": "husky",
     "test": "jest",
-    "generate": "graphql-codegen --config codegen.ts"
+    "generate": "env-cmd -f .env.local graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "3.9.11",
@@ -57,6 +57,8 @@
     "@types/stylis": "^4.2.5",
     "autoprefixer": "^10.0.1",
     "babel-jest": "^29.7.0",
+    "dotenv": "^16.4.5",
+    "env-cmd": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.2",
     "eslint-plugin-unused-imports": "^3.1.0",
