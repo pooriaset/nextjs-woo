@@ -24,7 +24,8 @@
       "products": "Products",
       "categories": "Categories",
       "promotions": "Promotions",
-      "bestSelling": "Best Selling"
+      "bestSelling": "Best Selling",
+      "newest": "Newest"
     },
     "search": {
       "placeholder": "Search..."

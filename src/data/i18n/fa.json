@@ -24,7 +24,8 @@
       "products": "محصولات",
       "categories": "دسته‌بندی‌ها",
       "promotions": "تخفیف‌ها و پیشنهادها",
-      "bestSelling": "پرفروش‌ترین‌ها"
+      "bestSelling": "پرفروش‌ترین‌ها",
+      "newest": "آخرین محصولات"
     },
     "search": {
       "placeholder": "جستجو..."

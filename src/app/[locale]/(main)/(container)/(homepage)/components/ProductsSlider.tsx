@@ -1,24 +1,23 @@
 'use client';
 
+import { VariableProductItem } from '@/components/VariableProductItem';
 import { GetAllProductsQuery } from '@/graphql/types/graphql';
 import { Card, CardContent, CardHeader, useTheme } from '@mui/material';
-import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
-import { VariableProductItem } from '@/components/VariableProductItem';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export interface BestSellingProductsProps {
+export interface ProductsSliderProps {
+  title: string;
   items?: NonNullable<GetAllProductsQuery['products']>['nodes'];
 }
-const BestSellingProducts: FC<BestSellingProductsProps> = ({ items }) => {
-  const t = useTranslations();
-  const theme = useTheme();
 
+const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
+  const theme = useTheme();
   return (
     <Card variant="outlined">
       <CardHeader
-        title={t('header.navigation.bestSelling')}
+        title={title}
         sx={{
           textAlign: 'center',
         }}
@@ -70,4 +69,4 @@ const BestSellingProducts: FC<BestSellingProductsProps> = ({ items }) => {
   );
 };
 
-export default BestSellingProducts;
+export default ProductsSlider;

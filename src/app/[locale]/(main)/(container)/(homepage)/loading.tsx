@@ -21,21 +21,23 @@ const Loading = () => {
           })}
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Card variant="outlined">
-          <CardContent>
-            <Grid container spacing={2}>
-              {new Array(4).fill(1).map((item, index) => {
-                return (
-                  <Grid key={index} item xs={12} md={6} lg={3} xl={2}>
-                    <VariableProductItemSkeleton />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </CardContent>
-        </Card>
-      </Grid>
+      {new Array(2).fill(1).map((item) => (
+        <Grid item xs={12} key={item}>
+          <Card variant="outlined">
+            <CardContent>
+              <Grid container spacing={2}>
+                {new Array(4).fill(1).map((item, index) => {
+                  return (
+                    <Grid key={index} item xs={12} md={6} lg={3} xl={2}>
+                      <VariableProductItemSkeleton />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      ))}
     </Grid>
   );
 };

@@ -8,12 +8,13 @@ import {
   GetMainCategoriesQuery,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
-import { bestSellingSortOption } from '@/static/sortOptions';
+import { bestSellingSortOption, newestSortOption } from '@/static/sortOptions';
 import { Grid } from '@mui/material';
-import BestSellingProducts from './components/BestSellingProducts';
+import ProductsSlider from './components/ProductsSlider';
 import MainCategories from './components/MainCategories';
 import { MainSlider } from './components/MainSlider';
 import { ISliderItem } from './components/MainSlider/types';
+import { getTranslations } from 'next-intl/server';
 
 const getSliders = async () => {
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
@@ -69,10 +70,27 @@ const getBestSellingProducts = async () => {
   return data?.products?.nodes;
 };
 
+const getLatestProducts = async () => {
+  const { data } = await getClient().query<GetAllProductsQuery>({
+    query: GET_VARIABLE_PRODUCTS_QUERY,
+    variables: {
+      q: null,
+      stockStatus: StockStatusEnum.InStock,
+      categoryIdIn: null,
+      orderBy: [newestSortOption.props],
+      first: 10,
+    },
+  });
+  return data?.products?.nodes;
+};
+
 export default async function Home() {
   const sliders = await getSliders();
   const categories = await getCategories();
   const bestSellingProducts = await getBestSellingProducts();
+  const latestProducts = await getLatestProducts();
+
+  const t = await getTranslations();
 
   return (
     <Grid container spacing={2}>
@@ -83,7 +101,16 @@ export default async function Home() {
         <MainCategories items={categories} />
       </Grid>
       <Grid item xs={12}>
-        <BestSellingProducts items={bestSellingProducts} />
+        <ProductsSlider
+          title={t('header.navigation.bestSelling')}
+          items={bestSellingProducts}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <ProductsSlider
+          title={t('header.navigation.newest')}
+          items={latestProducts}
+        />
       </Grid>
     </Grid>
   );

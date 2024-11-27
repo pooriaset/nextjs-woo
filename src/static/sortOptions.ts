@@ -1,6 +1,15 @@
 import { OrderEnum, ProductsOrderByEnum } from '@/graphql/types/graphql';
 import { ISortOptions } from './types/sort';
 
+export const newestSortOption: ISortOptions = {
+  key: 0,
+  label: 'products.sort.items.newest',
+  props: {
+    field: ProductsOrderByEnum.Date,
+    order: OrderEnum.Desc,
+  },
+};
+
 export const bestSellingSortOption: ISortOptions = {
   key: 1,
   label: 'products.sort.items.bestSelling',
@@ -11,14 +20,7 @@ export const bestSellingSortOption: ISortOptions = {
 };
 
 export const sortOptions: ISortOptions[] = [
-  {
-    key: 0,
-    label: 'products.sort.items.newest',
-    props: {
-      field: ProductsOrderByEnum.Date,
-      order: OrderEnum.Desc,
-    },
-  },
+  newestSortOption,
   bestSellingSortOption,
   {
     key: 2,
