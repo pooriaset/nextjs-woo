@@ -112,16 +112,16 @@ export const CartContent = gql`
       }
     }
     chosenShippingMethods
-    subtotal
-    subtotalTax
-    shippingTax
-    shippingTotal
-    total
-    totalTax
-    feeTax
-    feeTotal
-    discountTax
-    discountTotal
+    subtotal(format: RAW)
+    subtotalTax(format: RAW)
+    shippingTax(format: RAW)
+    shippingTotal(format: RAW)
+    total(format: RAW)
+    totalTax(format: RAW)
+    feeTax(format: RAW)
+    feeTotal(format: RAW)
+    discountTax(format: RAW)
+    discountTotal(format: RAW)
     fees {
       id
       name

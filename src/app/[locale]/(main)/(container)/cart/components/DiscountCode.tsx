@@ -42,44 +42,31 @@ const DiscountCode: FC<DiscountCodeProps> = () => {
   };
 
   return (
-    <Accordion variant="outlined">
-      <AccordionSummary expandIcon={<ExpandMore />}>
-        <Box
+    <Stack spacing={1}>
+      <Typography>{t('discounts.discountCodeTitle')}</Typography>
+      <Stack gap={1} direction="row" component="form" onSubmit={onSubmit}>
+        <TextField
+          size="small"
+          variant="outlined"
+          label={t('fields.discountCode')}
+          value={codeName || ''}
+          onChange={(e) => setCodeName(digitsFaToEn(e.target.value))}
+          fullWidth
+        />
+
+        <ButtonWithLoading
+          isLoading={loading}
+          type="submit"
+          variant="outlined"
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 1,
+            minWidth: 60,
+            width: 60,
           }}
         >
-          <DiscountOutlined fontSize="small" />
-          <Typography>{t('discounts.discountCodeTitle')}</Typography>
-        </Box>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack gap={1} direction="row" component="form" onSubmit={onSubmit}>
-          <TextField
-            size="small"
-            variant="outlined"
-            label={t('fields.discountCode')}
-            value={codeName || ''}
-            onChange={(e) => setCodeName(digitsFaToEn(e.target.value))}
-            fullWidth
-          />
-
-          <ButtonWithLoading
-            isLoading={loading}
-            type="submit"
-            variant="outlined"
-            sx={{
-              minWidth: 60,
-              width: 60,
-            }}
-          >
-            اعمال
-          </ButtonWithLoading>
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
+          اعمال
+        </ButtonWithLoading>
+      </Stack>
+    </Stack>
   );
 };
 

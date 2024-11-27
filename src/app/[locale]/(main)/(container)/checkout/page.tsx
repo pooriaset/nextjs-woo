@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
-import AppliedCoupons from '../cart/components/AppliedCoupons';
 import CheckoutBox from '../cart/components/CheckoutBox';
 import DiscountCode from '../cart/components/DiscountCode';
 import AvailableShippingMethods from './components/AvailableShippingMethods';
@@ -34,11 +33,9 @@ const Page = () => {
     console.log(data);
   };
 
-  const rates = content?.availableShippingMethods
-    ?.flatMap((item) => {
-      return item?.rates;
-    })
-    .filter((item) => item?.cost) as ShippingRate[];
+  const rates = content?.availableShippingMethods?.flatMap((item) => {
+    return item?.rates;
+  }) as ShippingRate[];
 
   return (
     <Grid container spacing={2} position="relative">
@@ -46,7 +43,6 @@ const Page = () => {
         <Card variant="outlined">
           <CardContent>
             <Stack spacing={3}>
-              <DiscountCode />
               <AvailableShippingMethods
                 rates={rates}
                 value={content.chosenShippingMethods?.[0]}
@@ -82,22 +78,30 @@ const Page = () => {
       </Grid>
 
       <Grid item lg={3} md={6} xs={12}>
-        <Card variant="outlined">
-          <CardContent>
-            <CheckoutBox content={content} />
-          </CardContent>
-          <CardActions>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              size="large"
-            >
-              {t('pages.checkout.buttons.placeOrder')}
-            </Button>
-          </CardActions>
-        </Card>
+        <Stack spacing={3}>
+          <Card variant="outlined">
+            <CardContent>
+              <DiscountCode />
+            </CardContent>
+          </Card>
+
+          <Card variant="outlined">
+            <CardContent>
+              <CheckoutBox content={content} />
+            </CardContent>
+            <CardActions>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                size="large"
+              >
+                {t('pages.checkout.buttons.placeOrder')}
+              </Button>
+            </CardActions>
+          </Card>
+        </Stack>
       </Grid>
     </Grid>
   );

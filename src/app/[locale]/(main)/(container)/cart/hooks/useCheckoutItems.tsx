@@ -53,8 +53,7 @@ const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
     }) || [];
 
   const totalProfit =
-    extractNumbers(content.discountTotal)! +
-    extractNumbers(content.feeTotal?.replace('-', ''))!;
+    +(content?.discountTotal || 0) + Math.abs(+(content?.feeTotal || 0));
 
   const items = [
     {

@@ -1,13 +1,13 @@
 import PriceLabel from '@/components/common/PriceLabel';
+import { UPDATE_SHIPPING_METHOD } from '@/graphql/queries/cart';
 import {
   ShippingRate,
   UpdateShippingMethodMutation,
 } from '@/graphql/types/graphql';
-import { Radio, Stack, Typography } from '@mui/material';
-import { FC, useState } from 'react';
-import ShippingMethodItem from './ShippingMethodItem';
 import { useMutation } from '@apollo/client';
-import { UPDATE_SHIPPING_METHOD } from '@/graphql/queries/cart';
+import { Radio, Stack, Typography } from '@mui/material';
+import { FC } from 'react';
+import ShippingMethodItem from './ShippingMethodItem';
 
 export interface AvailableShippingMethodsProps {
   rates: ShippingRate[];
@@ -42,7 +42,7 @@ const AvailableShippingMethods: FC<AvailableShippingMethodsProps> = ({
               <Radio disableRipple checked={selected} size="small" />
               <Typography variant="body2">{rate.label}</Typography>
             </Stack>
-            <PriceLabel value={rate.cost} />
+            {!!rate.cost && <PriceLabel value={rate.cost} />}
           </ShippingMethodItem>
         );
       })}
