@@ -29,11 +29,11 @@ import {
 import { useTranslations } from 'next-intl';
 import Loading from '../loading';
 import AppliedCoupons from './components/AppliedCoupons';
-import CheckoutBox, { CheckoutBoxProps } from './components/CheckoutBox';
+import CheckoutBox from './components/CheckoutBox';
 import DiscountCode from './components/DiscountCode';
 import EmptyCart from './components/EmptyCart';
 import Header from './components/Header';
-import { extractNumbers } from '@/utils/price';
+import useCheckoutItems from './hooks/useCheckoutItems';
 
 const Page = () => {
   const t = useTranslations();
@@ -41,83 +41,9 @@ const Page = () => {
 
   if (loading) return <Loading />;
 
-  const fragment = getFragmentData(CartContentFragmentDoc, data?.cart);
+  const content = getFragmentData(CartContentFragmentDoc, data?.cart);
 
-  if (!fragment?.contents?.itemCount) return <EmptyCart />;
-
-  const fees =
-    fragment?.fees?.map((fee) => {
-      return {
-        key: (
-          <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
-            {fee?.name}
-          </Typography>
-        ),
-        value: (
-          <PriceLabel
-            value={Math.abs(fee?.total!)}
-            TypographyProps={{
-              fontWeight: 600,
-              color: 'error',
-            }}
-          />
-        ),
-      };
-    }) || [];
-
-  const checkoutBoxItems: CheckoutBoxProps['items'] = [
-    {
-      key: (
-        <Typography variant="body2" color="gray" sx={{ fontWeight: 600 }}>
-          {t('pages.cart.box.subTotal')} ({fragment?.contents?.itemCount})
-        </Typography>
-      ),
-      value: (
-        <PriceLabel
-          value={fragment.subtotal}
-          TypographyProps={{
-            fontWeight: 600,
-            color: 'gray',
-          }}
-        />
-      ),
-    },
-    ...fees,
-    {
-      key: (
-        <Typography variant="body2" sx={{ fontWeight: 600 }}>
-          {t('pages.cart.box.total')}
-        </Typography>
-      ),
-      value: (
-        <PriceLabel
-          value={fragment.total}
-          TypographyProps={{
-            fontWeight: 600,
-          }}
-        />
-      ),
-    },
-    {
-      key: (
-        <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
-          {t('pages.cart.box.yourProfit')}
-        </Typography>
-      ),
-      value: (
-        <PriceLabel
-          value={
-            extractNumbers(fragment?.discountTotal)! +
-            extractNumbers(fragment?.feeTotal?.replace('-', ''))!
-          }
-          TypographyProps={{
-            fontWeight: 600,
-            color: 'error',
-          }}
-        />
-      ),
-    },
-  ];
+  if (!content?.contents?.itemCount) return <EmptyCart />;
 
   return (
     <>
@@ -127,9 +53,8 @@ const Page = () => {
             <Header />
             <CardContent>
               <Grid container spacing={2}>
-                {fragment?.contents?.nodes?.map((item, index) => {
-                  const isLast =
-                    fragment?.contents?.nodes?.length === index + 1;
+                {content?.contents?.nodes?.map((item, index) => {
+                  const isLast = content?.contents?.nodes?.length === index + 1;
                   const _item = getFragmentData(
                     CartItemContentFragmentDoc,
                     item,
@@ -225,13 +150,13 @@ const Page = () => {
           >
             <DiscountCode />
 
-            {!!fragment?.appliedCoupons?.length && (
-              <AppliedCoupons items={fragment?.appliedCoupons} />
+            {!!content?.appliedCoupons?.length && (
+              <AppliedCoupons items={content?.appliedCoupons} />
             )}
 
             <Card variant="outlined">
               <CardContent>
-                <CheckoutBox items={checkoutBoxItems} />
+                <CheckoutBox content={content} />
               </CardContent>
               <CardActions>
                 <Button

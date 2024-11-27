@@ -1,26 +1,38 @@
 'use client';
 
+import { getFragmentData } from '@/graphql/types';
+import { CartContentFragmentDoc, ShippingRate } from '@/graphql/types/graphql';
+import useCartQuery from '@/hooks/useCartQuery';
 import {
-  Stack,
-  Card,
-  CardContent,
-  CardActions,
   Button,
+  Card,
+  CardActions,
+  CardContent,
+  Stack,
   TextField,
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import AvailableShippingMethods from './components/AvailableShippingMethods';
 import Billing from './components/Billing';
 
 const Page = () => {
   const t = useTranslations();
-
   const form = useForm();
+
+  const { loading, data } = useCartQuery();
+
+  const content = getFragmentData(CartContentFragmentDoc, data?.cart);
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
+
+  const rates = content?.availableShippingMethods
+    ?.flatMap((item) => {
+      return item?.rates;
+    })
+    .filter((item) => item?.cost) as ShippingRate[];
 
   return (
     <Card
@@ -30,6 +42,8 @@ const Page = () => {
     >
       <CardContent>
         <Stack spacing={3}>
+          {rates?.length > 0 && <AvailableShippingMethods rates={rates} />}
+          {!rates?.length && 'Free'}
           <Billing />
           <Controller
             control={form.control}

@@ -103,8 +103,6 @@ export const CartContent = gql`
     }
     needsShippingAddress
     availableShippingMethods {
-      packageDetails
-      supportsShippingCalculator
       rates {
         id
         instanceId

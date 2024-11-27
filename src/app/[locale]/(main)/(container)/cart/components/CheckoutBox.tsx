@@ -1,11 +1,15 @@
+import { CartContentFragment } from '@/graphql/types/graphql';
 import { Stack } from '@mui/material';
-import React, { FC, ReactNode } from 'react';
+import { FC } from 'react';
+import useCheckoutItems from '../hooks/useCheckoutItems';
 
 export interface CheckoutBoxProps {
-  items: { key: ReactNode; value: ReactNode }[];
+  content: CartContentFragment;
 }
 
-const CheckoutBox: FC<CheckoutBoxProps> = ({ items }) => {
+const CheckoutBox: FC<CheckoutBoxProps> = ({ content }) => {
+  const items = useCheckoutItems({ content });
+
   return (
     <Stack spacing={1}>
       {items.map((item, index) => {
