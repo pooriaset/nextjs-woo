@@ -14,7 +14,7 @@ const CheckoutBox: FC<CheckoutBoxProps> = ({ content }) => {
     <Stack spacing={1}>
       {items.map((item, index) => {
         if (item.type === 'divider') {
-          return <Divider />;
+          return <Divider key={index} />;
         }
         return (
           <Stack

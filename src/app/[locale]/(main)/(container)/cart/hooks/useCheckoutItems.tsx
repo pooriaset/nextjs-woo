@@ -2,10 +2,8 @@
 
 import PriceLabel from '@/components/common/PriceLabel';
 import { CartContentFragment } from '@/graphql/types/graphql';
-import { extractNumbers } from '@/utils/price';
 import { Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import React from 'react';
 
 const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
   const t = useTranslations();

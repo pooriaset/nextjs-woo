@@ -2,16 +2,7 @@ import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import { APPLY_COUPON_MUTATION, GET_CART_QUERY } from '@/graphql/queries/cart';
 import { ApplyCouponMutation } from '@/graphql/types/graphql';
 import { useApolloClient, useMutation } from '@apollo/client';
-import { DiscountOutlined, ExpandMore } from '@mui/icons-material';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Stack, TextField, Typography } from '@mui/material';
 import { digitsFaToEn } from '@persian-tools/persian-tools';
 import { useTranslations } from 'next-intl';
 import { FC, useState } from 'react';

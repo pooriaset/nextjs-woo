@@ -35,6 +35,7 @@ const AvailableShippingMethods: FC<AvailableShippingMethodsProps> = ({
         const selected = rate.id === value;
         return (
           <ShippingMethodItem
+            key={rate.id}
             selected={selected}
             onClick={() => handleChange(rate.id)}
           >
