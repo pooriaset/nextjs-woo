@@ -30,13 +30,15 @@ const DiscountCode: FC<DiscountCodeProps> = () => {
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
+
     await applyCoupon({
       variables: {
         code: codeName,
       },
     });
-    await client.refetchQueries({ include: [GET_CART_QUERY] });
     setCodeName(null);
+
+    await client.refetchQueries({ include: [GET_CART_QUERY] });
   };
 
   return (
@@ -59,7 +61,7 @@ const DiscountCode: FC<DiscountCodeProps> = () => {
             size="small"
             variant="outlined"
             label={t('fields.discountCode')}
-            value={codeName}
+            value={codeName || ''}
             onChange={(e) => setCodeName(digitsFaToEn(e.target.value))}
             fullWidth
           />

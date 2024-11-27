@@ -108,7 +108,8 @@
       "box": {
         "yourProfit": "سود شما از خرید",
         "total": "جمع سبد خرید",
-        "subTotal": "قیمت کالاها"
+        "subTotal": "قیمت کالاها",
+        "shippingCost": "هزینه ارسال"
       }
     },
     "product": {

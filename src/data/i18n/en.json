@@ -108,7 +108,8 @@
       "box": {
         "yourProfit": "Your profit",
         "total": "Total",
-        "subTotal": "Subtotal"
+        "subTotal": "Subtotal",
+        "shippingCost": "Shipping Cost"
       }
     },
     "product": {
@@ -172,6 +173,6 @@
   },
   "fields": {
     "size": "Size",
-    "discountCode" : "Discount Code"
+    "discountCode": "Discount Code"
   }
 }

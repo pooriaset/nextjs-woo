@@ -28,12 +28,9 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Loading from '../loading';
-import AppliedCoupons from './components/AppliedCoupons';
 import CheckoutBox from './components/CheckoutBox';
-import DiscountCode from './components/DiscountCode';
 import EmptyCart from './components/EmptyCart';
 import Header from './components/Header';
-import useCheckoutItems from './hooks/useCheckoutItems';
 
 const Page = () => {
   const t = useTranslations();
@@ -148,12 +145,6 @@ const Page = () => {
               zIndex: Z_INDEX_VALUES.cartPageDetailsBox,
             }}
           >
-            <DiscountCode />
-
-            {!!content?.appliedCoupons?.length && (
-              <AppliedCoupons items={content?.appliedCoupons} />
-            )}
-
             <Card variant="outlined">
               <CardContent>
                 <CheckoutBox content={content} />

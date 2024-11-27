@@ -1,23 +1,37 @@
 import PriceLabel from '@/components/common/PriceLabel';
-import { ShippingRate } from '@/graphql/types/graphql';
+import {
+  ShippingRate,
+  UpdateShippingMethodMutation,
+} from '@/graphql/types/graphql';
 import { Radio, Stack, Typography } from '@mui/material';
 import { FC, useState } from 'react';
 import ShippingMethodItem from './ShippingMethodItem';
+import { useMutation } from '@apollo/client';
+import { UPDATE_SHIPPING_METHOD } from '@/graphql/queries/cart';
 
 export interface AvailableShippingMethodsProps {
   rates: ShippingRate[];
+  value?: string | null;
 }
 const AvailableShippingMethods: FC<AvailableShippingMethodsProps> = ({
   rates,
+  value,
 }) => {
-  const [value, setValue] = useState<string | null>(null);
+  const [update, { loading }] = useMutation<UpdateShippingMethodMutation>(
+    UPDATE_SHIPPING_METHOD,
+  );
+
   const handleChange = (value: string) => {
-    setValue(value);
+    update({
+      variables: {
+        shippingMethods: [value],
+      },
+    });
   };
 
   return (
     <Stack spacing={0.5}>
-      {rates.map((rate) => {
+      {rates?.map((rate) => {
         const selected = rate.id === value;
         return (
           <ShippingMethodItem
@@ -25,7 +39,7 @@ const AvailableShippingMethods: FC<AvailableShippingMethodsProps> = ({
             onClick={() => handleChange(rate.id)}
           >
             <Stack direction="row" spacing={1} alignItems="center">
-              <Radio checked={selected} size="small" />
+              <Radio disableRipple checked={selected} size="small" />
               <Typography variant="body2">{rate.label}</Typography>
             </Stack>
             <PriceLabel value={rate.cost} />

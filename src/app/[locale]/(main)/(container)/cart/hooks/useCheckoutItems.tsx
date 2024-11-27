@@ -13,6 +13,7 @@ const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
   const fees =
     content.fees?.map((fee) => {
       return {
+        type: 'row',
         key: (
           <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
             {fee?.name}
@@ -30,12 +31,34 @@ const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
       };
     }) || [];
 
+  const coupons =
+    content.appliedCoupons?.map((coupon) => {
+      return {
+        type: 'row',
+        key: (
+          <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
+            {t('fields.discountCode')}
+          </Typography>
+        ),
+        value: (
+          <PriceLabel
+            value={coupon?.discountAmount}
+            TypographyProps={{
+              fontWeight: 600,
+              color: 'error',
+            }}
+          />
+        ),
+      };
+    }) || [];
+
   const totalProfit =
     extractNumbers(content.discountTotal)! +
     extractNumbers(content.feeTotal?.replace('-', ''))!;
 
   const items = [
     {
+      type: 'row',
       key: (
         <Typography variant="body2" color="gray" sx={{ fontWeight: 600 }}>
           {t('pages.cart.box.subTotal')} ({content.contents?.itemCount})
@@ -51,7 +74,27 @@ const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
         />
       ),
     },
+    {
+      type: 'row',
+      key: (
+        <Typography variant="body2" sx={{ fontWeight: 600 }}>
+          {t('pages.cart.box.shippingCost')}
+        </Typography>
+      ),
+      value: (
+        <PriceLabel
+          value={content.shippingTotal}
+          TypographyProps={{
+            fontWeight: 600,
+          }}
+        />
+      ),
+    },
     ...fees,
+    ...coupons,
+    {
+      type: 'divider',
+    },
     {
       key: (
         <Typography variant="body2" sx={{ fontWeight: 600 }}>

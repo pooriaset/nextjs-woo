@@ -1,5 +1,5 @@
 import { CartContentFragment } from '@/graphql/types/graphql';
-import { Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 import { FC } from 'react';
 import useCheckoutItems from '../hooks/useCheckoutItems';
 
@@ -13,6 +13,9 @@ const CheckoutBox: FC<CheckoutBoxProps> = ({ content }) => {
   return (
     <Stack spacing={1}>
       {items.map((item, index) => {
+        if (item.type === 'divider') {
+          return <Divider />;
+        }
         return (
           <Stack
             key={index}

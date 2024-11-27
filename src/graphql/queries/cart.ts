@@ -111,6 +111,7 @@ export const CartContent = gql`
         cost
       }
     }
+    chosenShippingMethods
     subtotal
     subtotalTax
     shippingTax
@@ -172,6 +173,14 @@ export const APPLY_COUPON_MUTATION = gql`
         code
         discountAmount
       }
+    }
+  }
+`;
+
+export const UPDATE_SHIPPING_METHOD = gql`
+  mutation UpdateShippingMethod($shippingMethods: [String]) {
+    updateShippingMethod(input: { shippingMethods: $shippingMethods }) {
+      clientMutationId
     }
   }
 `;
