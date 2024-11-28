@@ -1,5 +1,6 @@
 'use client';
 
+import { SIGN_IN_PAGE_PATHNAME } from '@/app/api/auth/[...nextauth]/route';
 import Logo from '@/components/common/Logo';
 import { useAppContext } from '@/hooks/useAppContext';
 import { Link } from '@/navigation';
@@ -174,7 +175,7 @@ const Page = () => {
 
             <Button
               LinkComponent={Link}
-              href="/login"
+              href={SIGN_IN_PAGE_PATHNAME}
               variant="outlined"
               color="warning"
               startIcon={<Edit />}

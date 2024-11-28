@@ -25,6 +25,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import IconsSymbols from '@/components/Icons/components/IconsSymbols';
+import { getServerSession } from 'next-auth';
+import SessionProvider from '@/components/Auth/SessionProvider';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
@@ -52,6 +54,7 @@ export default async function LocaleLayout({
   children,
   params: { locale },
 }: PropsWithChildren<LocaleLayoutParams>) {
+  const session = await getServerSession();
   const reqUserAgent = userAgent({ headers: headers() });
 
   const themes: Record<Locale, ThemeOptions> = {
@@ -63,25 +66,27 @@ export default async function LocaleLayout({
     <html lang={locale} dir={languages?.[locale]?.direction}>
       <body>
         <IconsSymbols />
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={themes[locale] ?? defaultTheme}>
-            <ToastContainer
-              rtl={languages?.[locale]?.direction == 'rtl'}
-              position="top-center"
-            />
-            <ApolloProvider>
-              <AppProvider userAgent={reqUserAgent}>
-                <CssBaseline />
-                <GlobalStyles styles={globalStyles} />
-                <RTLProvider>
-                  <I18nProvider locale={locale}>
-                    <ConfirmAlertProvider>{children}</ConfirmAlertProvider>
-                  </I18nProvider>
-                </RTLProvider>
-              </AppProvider>
-            </ApolloProvider>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <SessionProvider session={session}>
+          <AppRouterCacheProvider>
+            <ThemeProvider theme={themes[locale] ?? defaultTheme}>
+              <ToastContainer
+                rtl={languages?.[locale]?.direction == 'rtl'}
+                position="top-center"
+              />
+              <ApolloProvider>
+                <AppProvider userAgent={reqUserAgent}>
+                  <CssBaseline />
+                  <GlobalStyles styles={globalStyles} />
+                  <RTLProvider>
+                    <I18nProvider locale={locale}>
+                      <ConfirmAlertProvider>{children}</ConfirmAlertProvider>
+                    </I18nProvider>
+                  </RTLProvider>
+                </AppProvider>
+              </ApolloProvider>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </SessionProvider>
       </body>
     </html>
   );

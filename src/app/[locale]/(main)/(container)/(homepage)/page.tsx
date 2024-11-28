@@ -108,7 +108,6 @@ export default async function Home() {
   const bestSellingProducts = await getBestSellingProducts();
   const latestProducts = await getLatestProducts();
   const menuOrderProducts = await getProductsByMenuOrder();
-  console.log('🚀 ~ Home ~ menuOrderProducts:', menuOrderProducts);
 
   const t = await getTranslations();
 

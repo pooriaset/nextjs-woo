@@ -135,12 +135,11 @@
     "login": {
       "title": "ورود | ثبت نام",
       "hello": "سلام!",
-      "message": "لطفا شماره موبایل خود را وارد نمایید.",
       "buttons": {
-        "login": "ورود",
-        "getTheCode": "دریافت کد"
+        "login": "ورود"
       },
-      "phoneNumber": "شماره موبایل"
+      "username": "نام کاربری",
+      "password": "رمز عبور"
     },
     "confirm": {
       "title": "تایید کد",

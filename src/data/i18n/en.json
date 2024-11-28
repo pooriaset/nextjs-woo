@@ -135,12 +135,11 @@
     "login": {
       "title": "Login | Register",
       "hello": "Hello!",
-      "message": "Please enter your phone number",
       "buttons": {
-        "login": "Login",
-        "getTheCode": "Get The Code"
+        "login": "Login"
       },
-      "phoneNumber": "Phone Number"
+      "username": "Username",
+      "password": "Password"
     },
     "confirm": {
       "title": "Confirm Code",
