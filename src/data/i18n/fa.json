@@ -25,7 +25,8 @@
       "categories": "دسته‌بندی‌ها",
       "promotions": "تخفیف‌ها و پیشنهادها",
       "bestSelling": "پرفروش‌ترین‌ها",
-      "newest": "آخرین محصولات"
+      "newest": "آخرین محصولات",
+      "selectedProducts": "محصولات منتخب"
     },
     "search": {
       "placeholder": "جستجو..."

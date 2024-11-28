@@ -8,7 +8,11 @@ import {
   GetMainCategoriesQuery,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
-import { bestSellingSortOption, newestSortOption } from '@/static/sortOptions';
+import {
+  bestSellingSortOption,
+  menuOrderSortOptions,
+  newestSortOption,
+} from '@/static/sortOptions';
 import { Grid } from '@mui/material';
 import ProductsSlider from './components/ProductsSlider';
 import MainCategories from './components/MainCategories';
@@ -84,11 +88,27 @@ const getLatestProducts = async () => {
   return data?.products?.nodes;
 };
 
+const getProductsByMenuOrder = async () => {
+  const { data } = await getClient().query<GetAllProductsQuery>({
+    query: GET_VARIABLE_PRODUCTS_QUERY,
+    variables: {
+      q: null,
+      stockStatus: StockStatusEnum.InStock,
+      categoryIdIn: null,
+      orderBy: [menuOrderSortOptions.props],
+      first: 10,
+    },
+  });
+  return data?.products?.nodes;
+};
+
 export default async function Home() {
   const sliders = await getSliders();
   const categories = await getCategories();
   const bestSellingProducts = await getBestSellingProducts();
   const latestProducts = await getLatestProducts();
+  const menuOrderProducts = await getProductsByMenuOrder();
+  console.log('🚀 ~ Home ~ menuOrderProducts:', menuOrderProducts);
 
   const t = await getTranslations();
 
@@ -110,6 +130,12 @@ export default async function Home() {
         <ProductsSlider
           title={t('header.navigation.newest')}
           items={latestProducts}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <ProductsSlider
+          title={t('header.navigation.selectedProducts')}
+          items={menuOrderProducts}
         />
       </Grid>
     </Grid>

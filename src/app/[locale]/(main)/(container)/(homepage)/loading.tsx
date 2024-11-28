@@ -21,12 +21,12 @@ const Loading = () => {
           })}
         </Grid>
       </Grid>
-      {new Array(2).fill(1).map((item) => (
+      {new Array(3).fill(1).map((item) => (
         <Grid item xs={12} key={item}>
           <Card variant="outlined">
             <CardContent>
               <Grid container spacing={2}>
-                {new Array(4).fill(1).map((item, index) => {
+                {new Array(6).fill(1).map((item, index) => {
                   return (
                     <Grid key={index} item xs={12} md={6} lg={3} xl={2}>
                       <VariableProductItemSkeleton />

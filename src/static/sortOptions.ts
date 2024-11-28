@@ -19,6 +19,15 @@ export const bestSellingSortOption: ISortOptions = {
   },
 };
 
+export const menuOrderSortOptions: ISortOptions = {
+  key: 1,
+  label: 'products.sort.items.bestSelling',
+  props: {
+    field: ProductsOrderByEnum.MenuOrder,
+    order: OrderEnum.Desc,
+  },
+};
+
 export const sortOptions: ISortOptions[] = [
   newestSortOption,
   bestSellingSortOption,
