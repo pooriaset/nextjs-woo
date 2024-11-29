@@ -15,3 +15,10 @@ export const GET_CUSTOMER_BILLING = gql`
     }
   }
 `;
+export const GET_CUSTOMER_SESSION_QUERY = gql`
+  query GetCustomerSession {
+    customer {
+      sessionToken
+    }
+  }
+`;

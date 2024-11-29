@@ -1,4 +1,4 @@
-import { GET_CUSTOMER_SESSION_QUERY } from '@/graphql/queries/cart';
+import { GET_CUSTOMER_SESSION_QUERY } from '@/graphql/queries/customer';
 import { GraphQLClient } from 'graphql-request';
 
 export const Sleep = (time = 3000) => {

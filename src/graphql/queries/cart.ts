@@ -1,13 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const GET_CUSTOMER_SESSION_QUERY = gql`
-  query {
-    customer {
-      sessionToken
-    }
-  }
-`;
-
 export const ProductContentSlice = gql`
   fragment ProductContentSlice on Product {
     id
