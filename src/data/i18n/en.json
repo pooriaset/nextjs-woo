@@ -33,7 +33,8 @@
     },
     "user": {
       "myAccount": "My Account",
-      "profile": "Profile"
+      "profile": "Profile",
+      "logout": "Logout"
     }
   },
   "breadcrumbs": {

@@ -1,3 +1,4 @@
+import { SIGN_IN_PAGE_PATHNAME } from '@/app/api/auth/[...nextauth]/route';
 import Logo from '@/components/common/Logo';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
@@ -16,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import { alpha, styled } from '@mui/material/styles';
 import { useAtomValue } from 'jotai';
+import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC, useState } from 'react';
 
@@ -34,6 +36,8 @@ const Form = styled('form')(({ theme }) => ({
 const TopSection: FC = () => {
   const t = useTranslations();
   const { inputRef } = useInputFiller();
+
+  const session = useSession();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -57,7 +61,11 @@ const TopSection: FC = () => {
   const cart = useAtomValue(cartAtom);
 
   const menuId = 'primary-search-account-menu';
-  const isLoggedIn = true;
+  const isAuthenticated = session.status === 'authenticated';
+
+  const handleLogout = () => {
+    signOut({ redirect: false });
+  };
 
   return (
     <>
@@ -94,10 +102,10 @@ const TopSection: FC = () => {
         </Form>
 
         <Stack spacing={1} direction="row" alignItems="center">
-          {isLoggedIn ? (
+          {!isAuthenticated ? (
             <Button
               component={Link}
-              href="/login"
+              href={SIGN_IN_PAGE_PATHNAME}
               variant="outlined"
               color="inherit"
               sx={{
@@ -160,6 +168,7 @@ const TopSection: FC = () => {
         <MenuItem onClick={handleMenuClose}>
           {t('header.user.myAccount')}
         </MenuItem>
+        <MenuItem onClick={handleLogout}>{t('header.user.logout')}</MenuItem>
       </Menu>
     </>
   );

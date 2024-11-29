@@ -37,7 +37,8 @@ const Page = () => {
   const onSubmit: SubmitHandler<FieldNames> = async (data) => {
     const result = await signIn('credentials', {
       ...data,
-      redirect: false,
+      redirect: true,
+      callbackUrl: '/',
     });
     if (result) {
       if (result.status !== 200) toast.error(result.error);

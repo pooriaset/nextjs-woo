@@ -33,7 +33,8 @@
     },
     "user": {
       "myAccount": "حساب من",
-      "profile": "پروفایل"
+      "profile": "پروفایل",
+      "logout": "خروج از حساب"
     }
   },
   "buttons": {
