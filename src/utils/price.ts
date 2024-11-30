@@ -24,6 +24,19 @@ export const getMinOfRangePrice = (
   return price;
 };
 
+export const getMaxOfRangePrice = (
+  price: string | null | undefined,
+): string | null => {
+  if (!price) {
+    return null;
+  }
+
+  if (price.includes(' - ')) {
+    return price.split('-')[1].trim();
+  }
+  return price;
+};
+
 export const getProfitPercentage = (
   newPrice: number | null,
   oldPrice: number | null,

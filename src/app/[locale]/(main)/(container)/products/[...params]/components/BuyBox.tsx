@@ -4,6 +4,9 @@ import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[.
 import CartItemController from '@/components/CartItemController/CartItemController';
 import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
+import DiscountPercentage from '@/components/common/DiscountPercentage';
+import OldPrice from '@/components/common/OldPrice';
+import PriceLabel from '@/components/common/PriceLabel';
 import { getFragmentData } from '@/graphql/types';
 import {
   GetSingleProductQuery,
@@ -14,11 +17,6 @@ import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import { useAppContext } from '@/hooks/useAppContext';
 import useCartUtils from '@/hooks/useCartUtils';
 import { Link } from '@/navigation';
-import {
-  extractNumbers,
-  getMinOfRangePrice,
-  getProfitPercentage,
-} from '@/utils/price';
 import {
   AccountBalanceWalletOutlined,
   LocalShippingOutlined,
@@ -31,11 +29,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { FC, useMemo } from 'react';
-import DiscountPercentage from '@/components/common/DiscountPercentage';
-import OldPrice from '@/components/common/OldPrice';
-import PriceLabel from '@/components/common/PriceLabel';
 import AddToCartDialog from './AddToCartDialog';
 import MobileBuyBox from './MobileBuyBox';
+import { getMaxOfRangePrice } from '@/utils/price';
 
 const listItems = [
   {
@@ -81,11 +77,6 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
   const variant = getFragmentData(
     ProductVariationContentSliceFragmentDoc,
     _variant,
-  );
-
-  const profitMarginPercentage = getProfitPercentage(
-    extractNumbers(getMinOfRangePrice(variant?.price)),
-    extractNumbers(variant?.regularPrice),
   );
 
   const { addOrUpdateCartItemMutate, addOrUpdateCartItemLoading } =
@@ -136,7 +127,11 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
         {!!discountPercentage && (
           <>
             <OldPrice
-              value={variant ? variant?.regularPrice : product.regularPrice}
+              value={
+                variant
+                  ? variant?.regularPrice
+                  : getMaxOfRangePrice(product.regularPrice)
+              }
               TypographyProps={{
                 variant: 'body1',
               }}
