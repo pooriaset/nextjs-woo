@@ -1,6 +1,4 @@
 import en from '../data/i18n/en.json';
-import Next from 'next';
-
 type Messages = typeof en;
 
 declare global {
