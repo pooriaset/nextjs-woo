@@ -2,7 +2,7 @@
 
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import Logo from '@/components/common/Logo';
-import { Link } from '@/navigation';
+import { Link, useRouter } from '@/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -34,14 +34,20 @@ const Page = () => {
 
   const { control, handleSubmit } = methods;
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FieldNames> = async (data) => {
     const result = await signIn('credentials', {
       ...data,
-      redirect: true,
-      callbackUrl: '/',
+      redirect: false,
     });
+
     if (result) {
-      if (result.status !== 200) toast.error(result.error);
+      if (result.status !== 200) {
+        toast.error('An Error Occurred!');
+      } else {
+        router.push('/');
+      }
     }
   };
 

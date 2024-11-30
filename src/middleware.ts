@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import nextIntlMiddleware from 'next-intl/middleware';
 import { locales, defaultLocale } from '@/navigation';
+import { cookies } from 'next/headers';
 
 const intlMiddleware = (request: NextRequest) =>
   Promise.resolve(
@@ -15,8 +16,25 @@ const intlMiddleware = (request: NextRequest) =>
 
 export default async function middleware(request: NextRequest) {
   request.headers.set('x-pathname', request.nextUrl.pathname);
+
   const intlResponse = await intlMiddleware(request);
-  return intlResponse ? intlResponse : NextResponse.next();
+  const response = intlResponse ? intlResponse : NextResponse.next();
+
+  const key = process.env.NEXT_PUBLIC_WOOCOMMERCE_SESSION_KEY!;
+  let wooSession = cookies().get(key)?.value;
+  if (!wooSession) {
+    wooSession =
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5uZXh0d29vLmlyIiwiaWF0IjoxNzMyOTUyMTMzLCJuYmYiOjE3MzI5NTIxMzMsImV4cCI6MTczNDE2MTczMywiZGF0YSI6eyJjdXN0b21lcl9pZCI6InRfYzNiOGYwNGVjODY2OTA4NDIzZGQ1ZDBjN2Q4NDY1In19.o8zBDgQHokzPwuNpXZvEZVFi8Pcc5KbqWwB9n3Zpw84';
+    response.cookies.set(key, wooSession, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60,
+    });
+  }
+
+  request.headers.set(key, wooSession);
+  return response;
 }
 export const config = {
   matcher: [
