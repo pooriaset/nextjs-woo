@@ -1,6 +1,6 @@
 'use client';
 
-import { SIGN_IN_PAGE_PATHNAME } from '@/app/api/auth/[...nextauth]/route';
+import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import Logo from '@/components/common/Logo';
 import { useAppContext } from '@/hooks/useAppContext';
 import { Link } from '@/navigation';

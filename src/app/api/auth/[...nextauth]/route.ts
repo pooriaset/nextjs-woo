@@ -4,12 +4,7 @@ import { GraphQLClient } from 'graphql-request';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-export const SIGN_IN_PAGE_PATHNAME = '/account/signin';
-
 const handler = NextAuth({
-  pages: {
-    signIn: SIGN_IN_PAGE_PATHNAME,
-  },
   providers: [
     CredentialsProvider({
       id: 'credentials',
