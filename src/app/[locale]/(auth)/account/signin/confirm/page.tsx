@@ -154,6 +154,7 @@ const Page = () => {
               renderer={(props) => {
                 return (
                   <Button
+                    size="small"
                     color="warning"
                     variant="outlined"
                     startIcon={<HourglassTopOutlined />}
@@ -174,6 +175,7 @@ const Page = () => {
             />
 
             <Button
+              size="small"
               LinkComponent={Link}
               href={SIGN_IN_PAGE_PATHNAME}
               variant="outlined"

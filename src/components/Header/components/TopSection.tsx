@@ -45,7 +45,7 @@ const TopSection: FC = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const onClose = () => {
     setAnchorEl(null);
   };
 
@@ -65,6 +65,7 @@ const TopSection: FC = () => {
 
   const handleLogout = () => {
     signOut({ redirect: false });
+    onClose();
   };
 
   return (
@@ -160,14 +161,10 @@ const TopSection: FC = () => {
           horizontal: 'right',
         }}
         open={isMenuOpen}
-        onClose={handleMenuClose}
+        onClose={onClose}
       >
-        <MenuItem onClick={handleMenuClose}>
-          {t('header.user.profile')}
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          {t('header.user.myAccount')}
-        </MenuItem>
+        <MenuItem onClick={onClose}>{t('header.user.profile')}</MenuItem>
+        <MenuItem onClick={onClose}>{t('header.user.myAccount')}</MenuItem>
         <MenuItem onClick={handleLogout}>{t('header.user.logout')}</MenuItem>
       </Menu>
     </>
