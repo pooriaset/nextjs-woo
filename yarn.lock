@@ -3288,9 +3288,9 @@ __metadata:
   linkType: hard
 
 "@types/stylis@npm:^4.2.5":
-  version: 4.2.5
-  resolution: "@types/stylis@npm:4.2.5"
-  checksum: 10c0/23f5b35a3a04f6bb31a29d404fa1bc8e0035fcaff2356b4047743a057e0c37b2eba7efe14d57dd2b95b398cea3bac294d9c6cd93ed307d8c0b7f5d282224b469
+  version: 4.2.7
+  resolution: "@types/stylis@npm:4.2.7"
+  checksum: 10c0/01a9679addb3f63951a9c09729564e2205581f2db40875a28b25cc461efc52ba17a711cc50cdb5e7d3a67c5f2cd60580e078c8a69b8df7b67699d89060d2a977
   languageName: node
   linkType: hard
 
@@ -10885,9 +10885,9 @@ __metadata:
   linkType: hard
 
 "stylis@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "stylis@npm:4.3.1"
-  checksum: 10c0/33e8ebd2bfa5f0bd0215f718dc2d3be896e1d00c5bcaeb9a4ae03cf239db6867af9eee230f57229bf1c29499357073ba3e6b547484ba1db2f5de1e8be7d4eee9
+  version: 4.3.4
+  resolution: "stylis@npm:4.3.4"
+  checksum: 10c0/4899c2674cd2538e314257abd1ba7ea3c2176439659ddac6593c78192cfd4a06f814a0a4fc69bc7f8fcc6b997e13d383dd9b578b71074746a0fb86045a83e42d
   languageName: node
   linkType: hard
 
