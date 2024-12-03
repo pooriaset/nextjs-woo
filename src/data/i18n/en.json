@@ -176,5 +176,9 @@
   "fields": {
     "size": "Size",
     "discountCode": "Discount Code"
+  },
+  "profile": {
+    "myOrders": "My Orders",
+    "accountInfo": "Account Information"
   }
 }
