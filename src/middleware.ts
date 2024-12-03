@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { defaultLocale, locales } from '@/navigation';
 import nextIntlMiddleware from 'next-intl/middleware';
-import { locales, defaultLocale } from '@/navigation';
 import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const intlMiddleware = (request: NextRequest) =>
   Promise.resolve(

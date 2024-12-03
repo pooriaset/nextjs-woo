@@ -15,6 +15,16 @@
   "categories": {
     "all": "همه"
   },
+  "orderStatuses": {
+    "FAILED": "ناموفق",
+    "CANCELLED": "لغو شده",
+    "COMPLETED": "انجام شده",
+    "ON_HOLD": "در انتظار بررسی",
+    "PENDING": "در انتظار پرداخت",
+    "PROCESSING": "در حال انجام",
+    "REFUNDED": "مسترد شده",
+    "CHECKOUT_DRAFT": "پیش نویس"
+  },
   "header": {
     "auth": {
       "register": "ثبت نام",
@@ -179,6 +189,11 @@
   },
   "profile": {
     "myOrders": "سفارش‌های من",
-    "accountInfo": "اطلاعات حساب کاربری"
+    "accountInfo": "اطلاعات حساب کاربری",
+    "latestOrders": "آخرین سفارش‌های من",
+    "user": "User"
+  },
+  "order": {
+    "view": "مشاهده سفارش"
   }
 }

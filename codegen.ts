@@ -12,6 +12,9 @@ const config: CodegenConfig = {
       presetConfig: {
         fragmentMasking: { unmaskFunctionName: 'getFragmentData' },
       },
+      config: {
+        avoidOptionals: true,
+      },
     },
   },
   overwrite: true,

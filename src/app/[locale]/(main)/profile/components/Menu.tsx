@@ -10,11 +10,11 @@ import { useTranslations } from 'next-intl';
 const Menu = () => {
   const { data } = useQuery<GetCustomerProfileQuery>(GET_CUSTOMER_PROFILE);
 
+  const t = useTranslations();
+
   const fullName = data?.customer?.firstName
     ? data?.customer?.firstName + ' ' + data?.customer?.lastName
-    : 'کاربر';
-
-  const t = useTranslations();
+    : t('profile.user');
 
   const items = [
     {

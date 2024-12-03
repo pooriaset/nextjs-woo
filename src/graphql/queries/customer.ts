@@ -27,3 +27,21 @@ export const GET_CUSTOMER_PROFILE = gql`
     }
   }
 `;
+
+export const GET_CUSTOMER_ORDERS = gql`
+  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {
+    customer {
+      orders(last: $count, where: { statuses: $statuses }) {
+        edges {
+          node {
+            id: databaseId
+            total(format: RAW)
+            subtotal(format: RAW)
+            status
+            date
+          }
+        }
+      }
+    }
+  }
+`;

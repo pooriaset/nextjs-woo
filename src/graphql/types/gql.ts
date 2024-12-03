@@ -30,6 +30,7 @@ const documents = {
     "\n  query GetMainCategories {\n    productCategories(where: { parent: null, orderby: TERM_ORDER }) {\n      edges {\n        node {\n          id: databaseId\n          name\n          image {\n            id: databaseId\n            sourceUrl\n          }\n        }\n      }\n    }\n  }\n": types.GetMainCategoriesDocument,
     "\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n": types.GetCustomerBillingDocument,
     "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n": types.GetCustomerProfileDocument,
+    "\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(last: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n          }\n        }\n      }\n    }\n  }\n": types.GetCustomerOrdersDocument,
     "\n  query GetGeneralSettings {\n    generalSettings {\n      title\n      description\n      timezone\n      language\n    }\n  }\n": types.GetGeneralSettingsDocument,
     "\n  query GetPage($slug: String) {\n    pages(where: { name: $slug, status: PUBLISH }) {\n      edges {\n        node {\n          title\n          content\n        }\n      }\n    }\n  }\n": types.GetPageDocument,
     "\n  query GetPublishedPagesList {\n    pages(where: { status: PUBLISH }) {\n      edges {\n        node {\n          title\n          slug\n        }\n      }\n    }\n  }\n": types.GetPublishedPagesListDocument,
@@ -121,6 +122,10 @@ export function graphql(source: "\n  query GetCustomerBilling {\n    customer {\
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(last: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(last: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

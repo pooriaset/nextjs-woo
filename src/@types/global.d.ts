@@ -11,4 +11,8 @@ declare global {
       NEXT_PUBLIC_GRAPHQL_URL: string;
     }
   }
+
+  type Nullable<T> = {
+    [P in keyof T]: T[P] | null;
+  };
 }
