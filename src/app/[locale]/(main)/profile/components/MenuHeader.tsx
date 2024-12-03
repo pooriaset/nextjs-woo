@@ -1,18 +1,29 @@
+import { Link } from '@/navigation';
 import { BorderColorOutlined } from '@mui/icons-material';
 import { IconButton, Stack, Typography, Divider, Box } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 
-const MenuHeader = () => {
+export interface MenuHeaderProps {
+  fullName: string;
+  username: string;
+}
+
+const MenuHeader: FC<MenuHeaderProps> = ({ fullName, username }) => {
   return (
     <Box p={2}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Stack>
-          <Typography>نام کاربر</Typography>
+          <Typography>{fullName}</Typography>
           <Typography variant="caption" color="text.secondary">
-            09560005522
+            {username}
           </Typography>
         </Stack>
-        <IconButton size="small" color="primary">
+        <IconButton
+          component={Link}
+          href="/profile/information"
+          size="small"
+          color="primary"
+        >
           <BorderColorOutlined fontSize="small" />
         </IconButton>
       </Stack>

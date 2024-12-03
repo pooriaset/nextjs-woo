@@ -15,3 +15,15 @@ export const GET_CUSTOMER_BILLING = gql`
     }
   }
 `;
+
+export const GET_CUSTOMER_PROFILE = gql`
+  query GetCustomerProfile {
+    customer {
+      id
+      firstName
+      lastName
+      username
+      orderCount
+    }
+  }
+`;

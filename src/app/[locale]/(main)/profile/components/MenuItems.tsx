@@ -1,6 +1,6 @@
 import { Link } from '@/navigation';
-import { PersonOutline, ShoppingBagOutlined } from '@mui/icons-material';
 import {
+  Chip,
   Divider,
   List,
   ListItem,
@@ -8,25 +8,21 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
+import { FC } from 'react';
 
-const MenuItems = () => {
-  const t = useTranslations();
+export interface MenuItem {
+  label: string;
+  href: string;
+  icon: any;
+  count?: number;
+}
 
-  const items = [
-    {
-      label: t('profile.myOrders'),
-      href: '/profile/orders',
-      icon: ShoppingBagOutlined,
-    },
-    {
-      label: t('profile.accountInfo'),
-      href: '/profile/information',
-      icon: PersonOutline,
-    },
-  ];
+export interface MenuItemsProps {
+  items: MenuItem[];
+}
 
+const MenuItems: FC<MenuItemsProps> = ({ items }) => {
   const pathname = usePathname();
 
   return (
@@ -36,7 +32,24 @@ const MenuItems = () => {
         {items.map((item) => {
           return (
             <>
-              <ListItem disablePadding key={item.href}>
+              <ListItem
+                disablePadding
+                key={item.href}
+                secondaryAction={
+                  !!item.count && (
+                    <Chip
+                      sx={{
+                        width: 24,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      size="small"
+                      label={item.count}
+                    />
+                  )
+                }
+              >
                 <ListItemButton
                   component={Link}
                   href={item.href}

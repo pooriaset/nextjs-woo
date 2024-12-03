@@ -699,8 +699,14 @@ export type Category = DatabaseIdentifier & HierarchicalNode & HierarchicalTermN
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -1263,7 +1269,7 @@ export type CollectionStatsWhereArgs = {
 };
 
 /** A Comment object */
-export type Comment = DatabaseIdentifier & Node & {
+export type Comment = DatabaseIdentifier & Node & UniformResourceIdentifiable & {
   __typename?: 'Comment';
   /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
   agent?: Maybe<Scalars['String']['output']>;
@@ -1293,10 +1299,22 @@ export type Comment = DatabaseIdentifier & Node & {
   dateGmt?: Maybe<Scalars['String']['output']>;
   /** The globally unique identifier for the comment object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
   /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
   karma?: Maybe<Scalars['Int']['output']>;
+  /** The permalink of the comment */
+  link?: Maybe<Scalars['String']['output']>;
   /** Connection between the Comment type and the Comment type */
   parent?: Maybe<CommentToParentCommentConnectionEdge>;
   /** The database id of the parent comment node or null if it is the root comment */
@@ -1309,6 +1327,8 @@ export type Comment = DatabaseIdentifier & Node & {
   status?: Maybe<CommentStatusEnum>;
   /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
   type?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -1694,8 +1714,14 @@ export type ContentNode = {
   guid?: Maybe<Scalars['String']['output']>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -1911,6 +1937,8 @@ export type ContentType = Node & UniformResourceIdentifiable & {
   hierarchical?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the post-type object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
   /** Whether this page is set to the static front page. */
@@ -4039,329 +4067,331 @@ export type CreateVisibleProductPayload = {
 
 /** Currencies enumeration */
 export enum CurrencyEnum {
-  /** درهم امارات متحده ی عربی */
+  /** United Arab Emirates dirham */
   Aed = 'AED',
-  /** افغانی افغانستان */
+  /** Afghan afghani */
   Afn = 'AFN',
-  /** لک آلبانی */
+  /** Albanian lek */
   All = 'ALL',
-  /** درام ارمنستان */
+  /** Armenian dram */
   Amd = 'AMD',
-  /** گیلدر آنتیل هلند */
+  /** Netherlands Antillean guilder */
   Ang = 'ANG',
-  /** کوانزای آنگولا */
+  /** Angolan kwanza */
   Aoa = 'AOA',
-  /** پزوی آرژانتین */
+  /** Argentine peso */
   Ars = 'ARS',
-  /** دلار استرالیا */
+  /** Australian dollar */
   Aud = 'AUD',
-  /** آروبا فلورین */
+  /** Aruban florin */
   Awg = 'AWG',
-  /** منات آذربایجان */
+  /** Azerbaijani manat */
   Azn = 'AZN',
-  /** مارک تبدیل‌پذیر بوسنی و هرزگوین */
+  /** Bosnia and Herzegovina convertible mark */
   Bam = 'BAM',
-  /** دلار باربادوس */
+  /** Barbadian dollar */
   Bbd = 'BBD',
-  /** تاکا بنگلادش */
+  /** Bangladeshi taka */
   Bdt = 'BDT',
-  /** لو بلغارستان */
+  /** Bulgarian lev */
   Bgn = 'BGN',
-  /** دینار بحرین */
+  /** Bahraini dinar */
   Bhd = 'BHD',
-  /** فرانک بوروندی */
+  /** Burundian franc */
   Bif = 'BIF',
-  /** دلار برمودا */
+  /** Bermudian dollar */
   Bmd = 'BMD',
-  /** دلار برونئی */
+  /** Brunei dollar */
   Bnd = 'BND',
-  /** بولیویانو بولیوی */
+  /** Bolivian boliviano */
   Bob = 'BOB',
-  /** رئال برزیل */
+  /** Brazilian real */
   Brl = 'BRL',
-  /** دلار باهاما */
+  /** Bahamian dollar */
   Bsd = 'BSD',
-  /** بیت‌کوین */
+  /** Bitcoin */
   Btc = 'BTC',
-  /** نگولتروم بوتان */
+  /** Bhutanese ngultrum */
   Btn = 'BTN',
-  /** پولای بوتسوانا */
+  /** Botswana pula */
   Bwp = 'BWP',
-  /** روبل بلاروس */
+  /** Belarusian ruble */
   Byn = 'BYN',
-  /** روبل بلاروس (قدیمی) */
+  /** Belarusian ruble (old) */
   Byr = 'BYR',
-  /** دلار بلیز */
+  /** Belize dollar */
   Bzd = 'BZD',
-  /** دلار کانادا */
+  /** Canadian dollar */
   Cad = 'CAD',
-  /** فرانک کنگو */
+  /** Congolese franc */
   Cdf = 'CDF',
-  /** فرانک سوئیس */
+  /** Swiss franc */
   Chf = 'CHF',
-  /** پزو شیلی */
+  /** Chilean peso */
   Clp = 'CLP',
-  /** یوان چین */
+  /** Chinese yuan */
   Cny = 'CNY',
-  /** پزوی کلمبیا */
+  /** Colombian peso */
   Cop = 'COP',
-  /** کولون کاستاریکا */
+  /** Costa Rican col&oacute;n */
   Crc = 'CRC',
-  /** پزوی تبدیل‌پذیر کوبا */
+  /** Cuban convertible peso */
   Cuc = 'CUC',
-  /** پزوی کوبا */
+  /** Cuban peso */
   Cup = 'CUP',
-  /** اسکودو کیپ ورد */
+  /** Cape Verdean escudo */
   Cve = 'CVE',
-  /** کرونای چک */
+  /** Czech koruna */
   Czk = 'CZK',
-  /** فرانک جیبوتی */
+  /** Djiboutian franc */
   Djf = 'DJF',
-  /** کرون دانمارک */
+  /** Danish krone */
   Dkk = 'DKK',
-  /** پزو دومینیکن */
+  /** Dominican peso */
   Dop = 'DOP',
-  /** دینار الجزایر */
+  /** Algerian dinar */
   Dzd = 'DZD',
-  /** پوند مصر */
+  /** Egyptian pound */
   Egp = 'EGP',
-  /** ناکفای اریتره */
+  /** Eritrean nakfa */
   Ern = 'ERN',
-  /** بیر اتیوپی */
+  /** Ethiopian birr */
   Etb = 'ETB',
-  /** یورو */
+  /** Euro */
   Eur = 'EUR',
-  /** دلار فیجی */
+  /** Fijian dollar */
   Fjd = 'FJD',
-  /** پوند جزایر فالکلند */
+  /** Falkland Islands pound */
   Fkp = 'FKP',
-  /** پوند استرلینگ */
+  /** Pound sterling */
   Gbp = 'GBP',
-  /** لاری گرجستان */
+  /** Georgian lari */
   Gel = 'GEL',
-  /** سدی غنا */
+  /** Guernsey pound */
+  Ggp = 'GGP',
+  /** Ghana cedi */
   Ghs = 'GHS',
-  /** پوند جبل الطارق */
+  /** Gibraltar pound */
   Gip = 'GIP',
-  /** دالاسی گامبیا */
+  /** Gambian dalasi */
   Gmd = 'GMD',
-  /** فرانک گینه */
+  /** Guinean franc */
   Gnf = 'GNF',
-  /** کوتزال گواتمالا */
+  /** Guatemalan quetzal */
   Gtq = 'GTQ',
-  /** دلار گویان */
+  /** Guyanese dollar */
   Gyd = 'GYD',
-  /** دلار هنگ کنگ */
+  /** Hong Kong dollar */
   Hkd = 'HKD',
-  /** لامپیرای هندوراس */
+  /** Honduran lempira */
   Hnl = 'HNL',
-  /** کونا کرواسی */
+  /** Croatian kuna */
   Hrk = 'HRK',
-  /** گورد‌هائیتی */
+  /** Haitian gourde */
   Htg = 'HTG',
-  /** فورینت مجارستان */
+  /** Hungarian forint */
   Huf = 'HUF',
-  /** روپیه اندونزی */
+  /** Indonesian rupiah */
   Idr = 'IDR',
-  /** شکل جدید اسرائیل */
+  /** Israeli new shekel */
   Ils = 'ILS',
-  /** پوند مانکس */
+  /** Manx pound */
   Imp = 'IMP',
-  /** روپیه هند */
+  /** Indian rupee */
   Inr = 'INR',
-  /** دینار عراق */
+  /** Iraqi dinar */
   Iqd = 'IQD',
-  /** ریال ایران */
+  /** Iranian rial */
   Irr = 'IRR',
-  /** تومان ایران */
+  /** Iranian toman */
   Irt = 'IRT',
-  /** کرونای ایسلند */
+  /** Icelandic kr&oacute;na */
   Isk = 'ISK',
-  /** پوند جرسی */
+  /** Jersey pound */
   Jep = 'JEP',
-  /** دلار جامائیکا */
+  /** Jamaican dollar */
   Jmd = 'JMD',
-  /** دینار اردن */
+  /** Jordanian dinar */
   Jod = 'JOD',
-  /** ین ژاپن */
+  /** Japanese yen */
   Jpy = 'JPY',
-  /** شلینگ کنیا */
+  /** Kenyan shilling */
   Kes = 'KES',
-  /** سوم قرقیزستان */
+  /** Kyrgyzstani som */
   Kgs = 'KGS',
-  /** ریال کامبوج */
+  /** Cambodian riel */
   Khr = 'KHR',
-  /** فرانک کومور */
+  /** Comorian franc */
   Kmf = 'KMF',
-  /** وون کره شمالی */
+  /** North Korean won */
   Kpw = 'KPW',
-  /** وون کره جنوبی */
+  /** South Korean won */
   Krw = 'KRW',
-  /** دینار کویت */
+  /** Kuwaiti dinar */
   Kwd = 'KWD',
-  /** دلار جزایر کیمن */
+  /** Cayman Islands dollar */
   Kyd = 'KYD',
-  /** تنگه قزاقستان */
+  /** Kazakhstani tenge */
   Kzt = 'KZT',
-  /** کیپ لائوس */
+  /** Lao kip */
   Lak = 'LAK',
-  /** پوند لبنان */
+  /** Lebanese pound */
   Lbp = 'LBP',
-  /** روپیه سری‌لانکا */
+  /** Sri Lankan rupee */
   Lkr = 'LKR',
-  /** دلار لیبریا */
+  /** Liberian dollar */
   Lrd = 'LRD',
-  /** لوتی لسوتو */
+  /** Lesotho loti */
   Lsl = 'LSL',
-  /** دینار لیبی */
+  /** Libyan dinar */
   Lyd = 'LYD',
-  /** درهم مراکش */
+  /** Moroccan dirham */
   Mad = 'MAD',
-  /** لئوی مولداوی */
+  /** Moldovan leu */
   Mdl = 'MDL',
-  /** آریاری ماداگاسکار */
+  /** Malagasy ariary */
   Mga = 'MGA',
-  /** دینار مقدونیه */
+  /** Macedonian denar */
   Mkd = 'MKD',
-  /** کیات میانمار */
+  /** Burmese kyat */
   Mmk = 'MMK',
-  /** توگروگ مغولستان */
+  /** Mongolian t&ouml;gr&ouml;g */
   Mnt = 'MNT',
-  /** پاتاکای ماکانز */
+  /** Macanese pataca */
   Mop = 'MOP',
-  /** اوگویای موریتانی */
+  /** Mauritanian ouguiya */
   Mru = 'MRU',
-  /** روپیه موریس */
+  /** Mauritian rupee */
   Mur = 'MUR',
-  /** روفیه مالدیو */
+  /** Maldivian rufiyaa */
   Mvr = 'MVR',
-  /** کواچا مالاویا */
+  /** Malawian kwacha */
   Mwk = 'MWK',
-  /** پزو مکزیک */
+  /** Mexican peso */
   Mxn = 'MXN',
-  /** رینگیت مالزی */
+  /** Malaysian ringgit */
   Myr = 'MYR',
-  /** متیکال موزامبیک */
+  /** Mozambican metical */
   Mzn = 'MZN',
-  /** دلار نامیبیا */
+  /** Namibian dollar */
   Nad = 'NAD',
-  /** نایرا نیجریه */
+  /** Nigerian naira */
   Ngn = 'NGN',
-  /** کوردوبا نیکاراگوئه */
+  /** Nicaraguan c&oacute;rdoba */
   Nio = 'NIO',
-  /** کرون نروژ */
+  /** Norwegian krone */
   Nok = 'NOK',
-  /** روپیه نپال */
+  /** Nepalese rupee */
   Npr = 'NPR',
-  /** دلار نیوزیلند */
+  /** New Zealand dollar */
   Nzd = 'NZD',
-  /** ریال عمان */
+  /** Omani rial */
   Omr = 'OMR',
-  /** بالبوآ پاناما */
+  /** Panamanian balboa */
   Pab = 'PAB',
-  /** سول */
+  /** Sol */
   Pen = 'PEN',
-  /** کینای پاپوآ گینه نو */
+  /** Papua New Guinean kina */
   Pgk = 'PGK',
-  /** پزو فیلیپین */
+  /** Philippine peso */
   Php = 'PHP',
-  /** روپیه پاکستان */
+  /** Pakistani rupee */
   Pkr = 'PKR',
-  /** زلوتی لهستان */
+  /** Polish z&#x142;oty */
   Pln = 'PLN',
-  /** روبل ترانسنیسترین */
+  /** Transnistrian ruble */
   Prb = 'PRB',
-  /** گوارانی پاراگوئه */
+  /** Paraguayan guaran&iacute; */
   Pyg = 'PYG',
-  /** ریال قطر */
+  /** Qatari riyal */
   Qar = 'QAR',
-  /** لئوی رومانی */
+  /** Romanian leu */
   Ron = 'RON',
-  /** دینار صربستان */
+  /** Serbian dinar */
   Rsd = 'RSD',
-  /** روبل روسیه */
+  /** Russian ruble */
   Rub = 'RUB',
-  /** فرانک رواندا */
+  /** Rwandan franc */
   Rwf = 'RWF',
-  /** ریال سعودی */
+  /** Saudi riyal */
   Sar = 'SAR',
-  /** دلار جزایر سلیمان */
+  /** Solomon Islands dollar */
   Sbd = 'SBD',
-  /** روپیه سیشل */
+  /** Seychellois rupee */
   Scr = 'SCR',
-  /** پوند سودان */
+  /** Sudanese pound */
   Sdg = 'SDG',
-  /** کرون سوئد */
+  /** Swedish krona */
   Sek = 'SEK',
-  /** دلار سنگاپور */
+  /** Singapore dollar */
   Sgd = 'SGD',
-  /** پوند سنت هلن */
+  /** Saint Helena pound */
   Shp = 'SHP',
-  /** لئون سیرالئون */
+  /** Sierra Leonean leone */
   Sll = 'SLL',
-  /** شیلینگ سومالی */
+  /** Somali shilling */
   Sos = 'SOS',
-  /** دلار سورینام */
+  /** Surinamese dollar */
   Srd = 'SRD',
-  /** پوند سودان جنوبی */
+  /** South Sudanese pound */
   Ssp = 'SSP',
-  /** دبرای سائوتومه و پرینسیپ */
+  /** S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra */
   Stn = 'STN',
-  /** پوند سوریه */
+  /** Syrian pound */
   Syp = 'SYP',
-  /** لیلانگنی سوازیلند */
+  /** Swazi lilangeni */
   Szl = 'SZL',
-  /** بات تایاند */
+  /** Thai baht */
   Thb = 'THB',
-  /** سمونی تاجیکستان */
+  /** Tajikistani somoni */
   Tjs = 'TJS',
-  /** منات ترکمنستان */
+  /** Turkmenistan manat */
   Tmt = 'TMT',
-  /** دینار تونس */
+  /** Tunisian dinar */
   Tnd = 'TND',
-  /** پاآنگای تونگا */
+  /** Tongan pa&#x2bb;anga */
   Top = 'TOP',
-  /** لیره ترک */
+  /** Turkish lira */
   Try = 'TRY',
-  /** دلار ترینیداد و توباگو */
+  /** Trinidad and Tobago dollar */
   Ttd = 'TTD',
-  /** دلار تایوان جدید */
+  /** New Taiwan dollar */
   Twd = 'TWD',
-  /** شیلینگ تانزانیا */
+  /** Tanzanian shilling */
   Tzs = 'TZS',
-  /** هریونیای اکراینی */
+  /** Ukrainian hryvnia */
   Uah = 'UAH',
-  /** شیلینگ اوگاندا */
+  /** Ugandan shilling */
   Ugx = 'UGX',
-  /** دلار آمریکا */
+  /** United States (US) dollar */
   Usd = 'USD',
-  /** پزو اروگوئه */
+  /** Uruguayan peso */
   Uyu = 'UYU',
-  /** سم ازبکستان */
+  /** Uzbekistani som */
   Uzs = 'UZS',
-  /** بولیوار ونزوئلا (2008–2018) */
+  /** Venezuelan bol&iacute;var (2008–2018) */
   Vef = 'VEF',
-  /** بولیوار ونزوئلا */
+  /** Venezuelan bol&iacute;var */
   Ves = 'VES',
-  /** دونگ ویتنامی */
+  /** Vietnamese &#x111;&#x1ed3;ng */
   Vnd = 'VND',
-  /** ونووتو واتو */
+  /** Vanuatu vatu */
   Vuv = 'VUV',
-  /** طلای ساموئل */
+  /** Samoan t&#x101;l&#x101; */
   Wst = 'WST',
-  /** فرانک CFA آفریقای مرکزی */
+  /** Central African CFA franc */
   Xaf = 'XAF',
-  /** دلار کارائیب شرق */
+  /** East Caribbean dollar */
   Xcd = 'XCD',
-  /** فرانک CFA آفریقای غربی */
+  /** West African CFA franc */
   Xof = 'XOF',
-  /** فرانک CFP */
+  /** CFP franc */
   Xpf = 'XPF',
-  /** ریال یمن */
+  /** Yemeni rial */
   Yer = 'YER',
-  /** رند آفریقای جنوبی */
+  /** South African rand */
   Zar = 'ZAR',
-  /** کوبه زامبیا */
+  /** Zambian kwacha */
   Zmw = 'ZMW'
 }
 
@@ -5471,11 +5501,11 @@ export type DeleteVisibleProductPayload = {
 
 /** Coupon discount type enumeration */
 export enum DiscountTypeEnum {
-  /** تخفیف ثابت سبدخرید */
+  /** Fixed cart discount */
   FixedCart = 'FIXED_CART',
-  /** تخفیف ثابت محصول */
+  /** Fixed product discount */
   FixedProduct = 'FIXED_PRODUCT',
-  /** درصد تخفیف */
+  /** Percentage discount */
   Percent = 'PERCENT'
 }
 
@@ -5841,12 +5871,20 @@ export type ExternalProduct = ContentNode & DatabaseIdentifier & MenuItemLinkabl
   globalAttributes?: Maybe<ProductToGlobalProductAttributeConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the product object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** Product or variation global ID */
   id: Scalars['ID']['output'];
   /** Main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -5871,6 +5909,8 @@ export type ExternalProduct = ContentNode & DatabaseIdentifier & MenuItemLinkabl
   name?: Maybe<Scalars['String']['output']>;
   /** Is product on sale? */
   onSale?: Maybe<Scalars['Boolean']['output']>;
+  /** The password for the product object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Product type and the Product type */
   preview?: Maybe<ProductToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -6633,12 +6673,20 @@ export type GroupProduct = ContentNode & DatabaseIdentifier & MenuItemLinkable &
   globalAttributes?: Maybe<ProductToGlobalProductAttributeConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the product object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** Product or variation global ID */
   id: Scalars['ID']['output'];
   /** Main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -6663,6 +6711,8 @@ export type GroupProduct = ContentNode & DatabaseIdentifier & MenuItemLinkable &
   name?: Maybe<Scalars['String']['output']>;
   /** Is product on sale? */
   onSale?: Maybe<Scalars['Boolean']['output']>;
+  /** The password for the product object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Product type and the Product type */
   preview?: Maybe<ProductToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -7217,8 +7267,14 @@ export type HierarchicalContentNode = {
   guid?: Maybe<Scalars['String']['output']>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -7474,8 +7530,14 @@ export type HierarchicalTermNode = {
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -7909,10 +7971,18 @@ export type MediaItem = ContentNode & DatabaseIdentifier & HierarchicalContentNo
   fileSize?: Maybe<Scalars['Int']['output']>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the attachment object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the attachment object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -7946,6 +8016,8 @@ export type MediaItem = ContentNode & DatabaseIdentifier & HierarchicalContentNo
   parentDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** The globally unique identifier of the parent node. */
   parentId?: Maybe<Scalars['ID']['output']>;
+  /** The password for the attachment object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** The database id of the preview node */
   previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** Whether the object is a node in the preview state */
@@ -8448,8 +8520,14 @@ export type MenuItemLinkable = {
   databaseId: Scalars['Int']['output'];
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the node is a Term */
   isTermNode: Scalars['Boolean']['output'];
   /** The unique resource identifier path */
@@ -8541,12 +8619,8 @@ export type MenuItemToMenuItemLinkableConnectionEdge = Edge & MenuItemLinkableCo
 
 /** Registered menu locations */
 export enum MenuLocationEnum {
-  /** Put the menu in the handheld location */
-  Handheld = 'HANDHELD',
-  /** Put the menu in the primary location */
-  Primary = 'PRIMARY',
-  /** Put the menu in the secondary location */
-  Secondary = 'SECONDARY'
+  /** Empty menu location */
+  Empty = 'EMPTY'
 }
 
 /** The Type of Identifier used to fetch a single node. Default is "ID". To be used along with the "id" field. */
@@ -8758,6 +8832,12 @@ export enum MimeTypeEnum {
   ImageGif = 'IMAGE_GIF',
   /** image/heic mime type. */
   ImageHeic = 'IMAGE_HEIC',
+  /** image/heic-sequence mime type. */
+  ImageHeicSequence = 'IMAGE_HEIC_SEQUENCE',
+  /** image/heif mime type. */
+  ImageHeif = 'IMAGE_HEIF',
+  /** image/heif-sequence mime type. */
+  ImageHeifSequence = 'IMAGE_HEIF_SEQUENCE',
   /** image/jpeg mime type. */
   ImageJpeg = 'IMAGE_JPEG',
   /** image/png mime type. */
@@ -9273,21 +9353,21 @@ export type OrderItemTax = {
 
 /** Order status enumeration */
 export enum OrderStatusEnum {
-  /** لغو شده */
+  /** Cancelled */
   Cancelled = 'CANCELLED',
-  /** پیش‌نویس */
+  /** Draft */
   CheckoutDraft = 'CHECKOUT_DRAFT',
-  /** تکمیل شده */
+  /** Completed */
   Completed = 'COMPLETED',
-  /** ناموفق */
+  /** Failed */
   Failed = 'FAILED',
-  /** در انتظار بررسی */
+  /** On hold */
   OnHold = 'ON_HOLD',
-  /** در انتظار پرداخت */
+  /** Pending payment */
   Pending = 'PENDING',
-  /** در حال انجام */
+  /** Processing */
   Processing = 'PROCESSING',
-  /** مسترد شده */
+  /** Refunded */
   Refunded = 'REFUNDED'
 }
 
@@ -9716,8 +9796,14 @@ export type PaCollar = DatabaseIdentifier & Node & TermNode & UniformResourceIde
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -10176,8 +10262,14 @@ export type PaColor = DatabaseIdentifier & Node & TermNode & UniformResourceIden
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -10636,8 +10728,14 @@ export type PaDesign = DatabaseIdentifier & Node & TermNode & UniformResourceIde
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -11096,8 +11194,14 @@ export type PaFabricMaterial = DatabaseIdentifier & Node & TermNode & UniformRes
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -11556,8 +11660,14 @@ export type PaForm = DatabaseIdentifier & Node & TermNode & UniformResourceIdent
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -12016,8 +12126,14 @@ export type PaHeight = DatabaseIdentifier & Node & TermNode & UniformResourceIde
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -12476,8 +12592,14 @@ export type PaSizes = DatabaseIdentifier & Node & TermNode & UniformResourceIden
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -12936,8 +13058,14 @@ export type PaSleeves = DatabaseIdentifier & Node & TermNode & UniformResourceId
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -13396,8 +13524,14 @@ export type PaUsage = DatabaseIdentifier & Node & TermNode & UniformResourceIden
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -13888,8 +14022,12 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   featuredImageId?: Maybe<Scalars['ID']['output']>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the page object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the page object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
   /** Whether this page is set to the static front page. */
@@ -13927,6 +14065,8 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   parentDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** The globally unique identifier of the parent node. */
   parentId?: Maybe<Scalars['ID']['output']>;
+  /** The password for the page object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Page type and the page type */
   preview?: Maybe<PageToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -14476,10 +14616,18 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   featuredImageId?: Maybe<Scalars['ID']['output']>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the post object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the post object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -14498,6 +14646,8 @@ export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & 
   modified?: Maybe<Scalars['String']['output']>;
   /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
   modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** The password for the post object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Whether the pings are open or closed for this particular post. */
   pingStatus?: Maybe<Scalars['String']['output']>;
   /** URLs that have been pinged. */
@@ -14701,8 +14851,14 @@ export type PostFormat = DatabaseIdentifier & Node & TermNode & UniformResourceI
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -15084,14 +15240,10 @@ export enum PostStatusEnum {
   AutoDraft = 'AUTO_DRAFT',
   /** Objects with the draft status */
   Draft = 'DRAFT',
-  /** Objects with the failed status */
-  Failed = 'FAILED',
   /** Objects with the future status */
   Future = 'FUTURE',
   /** Objects with the inherit status */
   Inherit = 'INHERIT',
-  /** Objects with the in-progress status */
-  InProgress = 'IN_PROGRESS',
   /** Objects with the pending status */
   Pending = 'PENDING',
   /** Objects with the private status */
@@ -15873,12 +16025,20 @@ export type Product = {
   globalAttributes?: Maybe<ProductToGlobalProductAttributeConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the product object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the product object. */
   id: Scalars['ID']['output'];
   /** Main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -15903,6 +16063,8 @@ export type Product = {
   name?: Maybe<Scalars['String']['output']>;
   /** Is product on sale? */
   onSale?: Maybe<Scalars['Boolean']['output']>;
+  /** The password for the product object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Product type and the Product type */
   preview?: Maybe<ProductToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -16566,8 +16728,14 @@ export type ProductCategory = DatabaseIdentifier & HierarchicalNode & Hierarchic
   id: Scalars['ID']['output'];
   /** Product category image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -17202,8 +17370,14 @@ export type ProductTag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -19525,8 +19699,14 @@ export type ProductType = DatabaseIdentifier & Node & TermNode & UniformResource
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -20019,8 +20199,14 @@ export type ProductVariation = {
   id: Scalars['ID']['output'];
   /** Product variation main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -26083,8 +26269,14 @@ export type ShippingClass = DatabaseIdentifier & Node & TermNode & UniformResour
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -26728,14 +26920,22 @@ export type SimpleProduct = ContentNode & DatabaseIdentifier & DownloadableProdu
   globalAttributes?: Maybe<ProductToGlobalProductAttributeConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the product object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** Product&#039;s height */
   height?: Maybe<Scalars['String']['output']>;
   /** Product or variation global ID */
   id: Scalars['ID']['output'];
   /** Main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -26766,6 +26966,8 @@ export type SimpleProduct = ContentNode & DatabaseIdentifier & DownloadableProdu
   name?: Maybe<Scalars['String']['output']>;
   /** Is product on sale? */
   onSale?: Maybe<Scalars['Boolean']['output']>;
+  /** The password for the product object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Product type and the Product type */
   preview?: Maybe<ProductToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -27375,8 +27577,14 @@ export type SimpleProductVariation = ContentNode & DownloadableProduct & Invento
   id: Scalars['ID']['output'];
   /** Main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -27580,10 +27788,18 @@ export type Size = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   featuredImageId?: Maybe<Scalars['ID']['output']>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the size object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the size object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -27604,6 +27820,8 @@ export type Size = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   parentDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** The globally unique identifier of the parent node. */
   parentId?: Maybe<Scalars['ID']['output']>;
+  /** The password for the size object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Size type and the size type */
   preview?: Maybe<SizeToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -27764,10 +27982,18 @@ export type Slider = ContentNode & DatabaseIdentifier & HierarchicalContentNode 
   featuredImageId?: Maybe<Scalars['ID']['output']>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the slider object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** The globally unique identifier of the slider object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -27788,6 +28014,8 @@ export type Slider = ContentNode & DatabaseIdentifier & HierarchicalContentNode 
   parentDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** The globally unique identifier of the parent node. */
   parentId?: Maybe<Scalars['ID']['output']>;
+  /** The password for the slider object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Slider type and the slider type */
   preview?: Maybe<SliderToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -27908,8 +28136,14 @@ export type SliderCategory = DatabaseIdentifier & HierarchicalNode & Hierarchica
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -28590,8 +28824,14 @@ export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Unif
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -29269,20 +29509,6 @@ export type TaxonomyToTermNodeConnectionPageInfo = PageInfo & TermNodeConnection
   total?: Maybe<Scalars['Int']['output']>;
 };
 
-/** The template assigned to the node */
-export type TemplateFullwidth = ContentTemplate & {
-  __typename?: 'TemplateFullwidth';
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']['output']>;
-};
-
-/** The template assigned to the node */
-export type TemplateHomepage = ContentTemplate & {
-  __typename?: 'TemplateHomepage';
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']['output']>;
-};
-
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
 export type TermNode = {
   /** The number of objects connected to the object */
@@ -29297,8 +29523,14 @@ export type TermNode = {
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -29530,8 +29762,14 @@ export type ThemeConnectionPageInfo = {
 export type UniformResourceIdentifiable = {
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the node is a Term */
   isTermNode: Scalars['Boolean']['output'];
   /** The unique resource identifier path */
@@ -30701,10 +30939,16 @@ export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdenti
   firstName?: Maybe<Scalars['String']['output']>;
   /** The globally unique identifier for the user object. */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
   /** Whether the JWT User secret has been revoked. If the secret has been revoked, auth tokens will not be issued until an admin, or user with proper capabilities re-issues a secret for the user. */
   isJwtAuthSecretRevoked: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -31619,14 +31863,22 @@ export type VariableProduct = ContentNode & DatabaseIdentifier & InventoriedProd
   globalAttributes?: Maybe<ProductToGlobalProductAttributeConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the product object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
   /** Product&#039;s height */
   height?: Maybe<Scalars['String']['output']>;
   /** Product or variation global ID */
   id: Scalars['ID']['output'];
   /** Main image */
   image?: Maybe<MediaItem>;
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -31657,6 +31909,8 @@ export type VariableProduct = ContentNode & DatabaseIdentifier & InventoriedProd
   name?: Maybe<Scalars['String']['output']>;
   /** Is product on sale? */
   onSale?: Maybe<Scalars['Boolean']['output']>;
+  /** The password for the product object. */
+  password?: Maybe<Scalars['String']['output']>;
   /** Connection between the Product type and the Product type */
   preview?: Maybe<ProductToPreviewConnectionEdge>;
   /** The database id of the preview node */
@@ -32278,8 +32532,14 @@ export type VisibleProduct = DatabaseIdentifier & Node & TermNode & UniformResou
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -32786,6 +33046,11 @@ export type GetCustomerBillingQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCustomerBillingQuery = { __typename?: 'RootQuery', customer?: { __typename?: 'Customer', billing?: { __typename?: 'CustomerAddress', firstName?: string | null, lastName?: string | null, address1?: string | null, state?: string | null, city?: string | null, phone?: string | null, postcode?: string | null } | null } | null };
 
+export type GetCustomerProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCustomerProfileQuery = { __typename?: 'RootQuery', customer?: { __typename?: 'Customer', id: string, firstName?: string | null, lastName?: string | null, username?: string | null, orderCount?: number | null } | null };
+
 export type GetGeneralSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -32850,6 +33115,7 @@ export const EmptyCartDocument = {"kind":"Document","definitions":[{"kind":"Oper
 export const CategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1000"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","alias":{"kind":"Name","value":"parentId"},"name":{"kind":"Name","value":"parentDatabaseId"}}]}}]}}]}}]} as unknown as DocumentNode<CategoriesQuery, CategoriesQueryVariables>;
 export const GetMainCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMainCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"parent"},"value":{"kind":"NullValue"}},{"kind":"ObjectField","name":{"kind":"Name","value":"orderby"},"value":{"kind":"EnumValue","value":"TERM_ORDER"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetMainCategoriesQuery, GetMainCategoriesQueryVariables>;
 export const GetCustomerBillingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCustomerBilling"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"billing"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"address1"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"postcode"}}]}}]}}]}}]} as unknown as DocumentNode<GetCustomerBillingQuery, GetCustomerBillingQueryVariables>;
+export const GetCustomerProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCustomerProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"orderCount"}}]}}]}}]} as unknown as DocumentNode<GetCustomerProfileQuery, GetCustomerProfileQueryVariables>;
 export const GetGeneralSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGeneralSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generalSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"timezone"}},{"kind":"Field","name":{"kind":"Name","value":"language"}}]}}]}}]} as unknown as DocumentNode<GetGeneralSettingsQuery, GetGeneralSettingsQueryVariables>;
 export const GetPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"EnumValue","value":"PUBLISH"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPageQuery, GetPageQueryVariables>;
 export const GetPublishedPagesListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublishedPagesList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"EnumValue","value":"PUBLISH"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPublishedPagesListQuery, GetPublishedPagesListQueryVariables>;

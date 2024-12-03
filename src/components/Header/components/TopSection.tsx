@@ -68,6 +68,21 @@ const TopSection: FC = () => {
     onClose();
   };
 
+  const loggedInMenuItems = [
+    {
+      label: t('header.user.profile'),
+      href: '/profile',
+    },
+    {
+      label: t('header.user.myAccount'),
+      href: '/profile/information',
+    },
+    {
+      label: t('header.user.logout'),
+      onClick: handleLogout,
+    },
+  ];
+
   return (
     <>
       <Toolbar disableGutters>
@@ -163,9 +178,26 @@ const TopSection: FC = () => {
         open={isMenuOpen}
         onClose={onClose}
       >
-        <MenuItem onClick={onClose}>{t('header.user.profile')}</MenuItem>
-        <MenuItem onClick={onClose}>{t('header.user.myAccount')}</MenuItem>
-        <MenuItem onClick={handleLogout}>{t('header.user.logout')}</MenuItem>
+        {loggedInMenuItems.map((item) => {
+          const linkProps = item.href
+            ? {
+                component: Link,
+                href: item.href,
+              }
+            : {};
+
+          return (
+            <MenuItem
+              {...linkProps}
+              onClick={() => {
+                item.onClick?.();
+                onClose();
+              }}
+            >
+              {item.label}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </>
   );
