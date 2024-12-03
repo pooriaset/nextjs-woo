@@ -185,7 +185,10 @@
   },
   "fields": {
     "size": "Size",
-    "discountCode": "Discount Code"
+    "discountCode": "Discount Code",
+    "date": "Date",
+    "orderId": "Order ID",
+    "amount": "Amount"
   },
   "profile": {
     "myOrders": "My Orders",

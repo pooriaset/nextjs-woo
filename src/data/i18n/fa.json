@@ -185,7 +185,10 @@
   },
   "fields": {
     "size": "سایز",
-    "discountCode": "کد تخفیف"
+    "discountCode": "کد تخفیف",
+    "date": "تاریخ",
+    "orderId": "شناسه سفارش",
+    "amount": "مبلغ"
   },
   "profile": {
     "myOrders": "سفارش‌های من",

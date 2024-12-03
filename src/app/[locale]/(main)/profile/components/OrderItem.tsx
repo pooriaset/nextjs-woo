@@ -71,7 +71,7 @@ const OrderItem: FC<OrderItemProps> = (props) => {
           </Stack>
           <Stack spacing={1} direction="row" alignItems="center">
             <Typography variant="body2" color="text.secondary">
-              تاریخ
+              {t('fields.date')}
             </Typography>
             <Typography variant="body2" fontWeight={600}>
               {new Date(date!).toLocaleDateString(
@@ -80,14 +80,14 @@ const OrderItem: FC<OrderItemProps> = (props) => {
             </Typography>
             <DotIcon color={theme.palette.divider} />
             <Typography variant="body2" color="text.secondary">
-              کد سفارش
+              {t('fields.orderId')}
             </Typography>
             <Typography variant="body2" fontWeight={600}>
               {id}
             </Typography>
             <DotIcon color={theme.palette.divider} />
             <Typography variant="body2" color="text.secondary">
-              مبلغ
+              {t('fields.amount')}
             </Typography>
             <PriceLabel value={total} />
           </Stack>
