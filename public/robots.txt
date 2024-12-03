@@ -1,0 +1,4 @@
+user-agent: *
+disallow: /card
+disallow: /checkout
+disallow: /profile*
