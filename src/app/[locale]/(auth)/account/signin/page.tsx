@@ -10,6 +10,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import { useTransition } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
@@ -36,19 +37,23 @@ const Page = () => {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<FieldNames> = async (data) => {
-    const result = await signIn('credentials', {
-      ...data,
-      redirect: false,
-    });
+  const [isPending, startTransition] = useTransition();
 
-    if (result) {
-      if (result.status !== 200) {
-        toast.error('An Error Occurred!');
-      } else {
-        router.push('/');
+  const onSubmit: SubmitHandler<FieldNames> = (data) => {
+    startTransition(async () => {
+      const result = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
+
+      if (result) {
+        if (result.status !== 200) {
+          toast.error('An Error Occurred!');
+        } else {
+          router.push('/');
+        }
       }
-    }
+    });
   };
 
   return (
@@ -132,7 +137,7 @@ const Page = () => {
       </CardContent>
       <CardActions>
         <ButtonWithLoading
-          isLoading={false}
+          isLoading={isPending}
           fullWidth
           type="submit"
           variant="contained"
