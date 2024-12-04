@@ -50,7 +50,7 @@ const Menu = () => {
       }}
     >
       <MenuHeader
-        // isLoading={!!error || loading}
+        isLoading={!!error || loading}
         fullName={fullName}
         username={data?.customer?.username || ''}
       />
