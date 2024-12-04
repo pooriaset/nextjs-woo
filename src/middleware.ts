@@ -42,14 +42,10 @@ const middleware = withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        const isLoggedIn = !!token;
-
         if (
-          protectedRoutes.some((route) =>
-            req.nextUrl.pathname.startsWith(route),
-          )
+          protectedRoutes.some((route) => req.nextUrl.pathname.includes(route))
         ) {
-          return isLoggedIn;
+          return !!token;
         }
         return true;
       },
