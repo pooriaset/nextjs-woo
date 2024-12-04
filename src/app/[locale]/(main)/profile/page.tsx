@@ -6,16 +6,20 @@ import { useQuery } from '@apollo/client';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import OrderItem from './components/OrderItem';
+import OrderItemSkeleton from './components/OrderItemSkeleton';
 
 const Page = () => {
   const t = useTranslations();
 
-  const { data } = useQuery<GetCustomerOrdersQuery>(GET_CUSTOMER_ORDERS, {
-    variables: {
-      count: 3,
-      statuses: [],
+  const { data, loading, error } = useQuery<GetCustomerOrdersQuery>(
+    GET_CUSTOMER_ORDERS,
+    {
+      variables: {
+        count: 3,
+        statuses: [],
+      },
     },
-  });
+  );
 
   return (
     <Stack spacing={2}>
@@ -27,10 +31,16 @@ const Page = () => {
           title={t('profile.latestOrders')}
         />
         <CardContent>
-          {data?.customer?.orders?.edges?.map((edge) => {
-            const order = edge.node!;
-            return <OrderItem key={order.id} {...order} />;
-          })}
+          {loading || !!error ? (
+            <OrderItemSkeleton />
+          ) : (
+            <>
+              {data?.customer?.orders?.edges?.map((edge) => {
+                const order = edge.node!;
+                return <OrderItem key={order.id} {...order} />;
+              })}
+            </>
+          )}
         </CardContent>
       </Card>
     </Stack>
