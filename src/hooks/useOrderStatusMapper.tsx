@@ -1,7 +1,6 @@
 import { OrderStatusEnum } from '@/graphql/types/graphql';
 import {
   CheckCircle,
-  CheckCircleOutlined,
   CloseOutlined,
   SvgIconComponent,
 } from '@mui/icons-material';

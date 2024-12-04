@@ -1,8 +1,8 @@
 import CustomSkeleton from '@/components/CustomSkeleton/CustomSkeleton';
 import { Link } from '@/navigation';
 import { BorderColorOutlined } from '@mui/icons-material';
-import { IconButton, Stack, Typography, Divider, Box } from '@mui/material';
-import React, { FC } from 'react';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { FC } from 'react';
 
 export interface MenuHeaderProps {
   fullName: string;

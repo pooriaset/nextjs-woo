@@ -196,6 +196,7 @@ const TopSection: FC = () => {
           return (
             <MenuItem
               {...linkProps}
+              key={item.href}
               onClick={() => {
                 item.onClick?.();
                 onClose();
