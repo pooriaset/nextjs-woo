@@ -1,6 +1,9 @@
 import DotIcon from '@/components/Icons/components/Use/DotIcon';
 import PriceLabel from '@/components/common/PriceLabel';
-import { OrderStatusEnum } from '@/graphql/types/graphql';
+import {
+  GetCustomerOrdersQuery,
+  OrderStatusEnum,
+} from '@/graphql/types/graphql';
 import useOrderStatusMapper from '@/hooks/useOrderStatusMapper';
 import { Link, Locale, languages } from '@/navigation';
 import { ChevronLeft } from '@mui/icons-material';
@@ -17,7 +20,9 @@ export type OrderItemProps = Nullable<{
   status: OrderStatusEnum;
   date: string;
   id: number;
-  lineItems: any;
+  lineItems: NonNullable<
+    NonNullable<GetCustomerOrdersQuery['customer']>['orders']
+  >['edges'][number]['node']['lineItems'];
 }>;
 
 const OrderItem: FC<OrderItemProps> = (props) => {
@@ -34,7 +39,7 @@ const OrderItem: FC<OrderItemProps> = (props) => {
   const locale = useLocale() as Locale;
 
   const images =
-    lineItems?.nodes.map((node: any) => {
+    lineItems!.nodes.map((node: any) => {
       return node.product?.node?.image;
     }) || [];
 

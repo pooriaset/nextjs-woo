@@ -1,12 +1,12 @@
 'use client';
 
 import { GET_CUSTOMER_ORDERS } from '@/graphql/queries/customer';
-import { GetCustomerOrdersQuery } from '@/graphql/types/graphql';
 import { useQuery } from '@apollo/client';
 import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import OrderItem from './components/OrderItem';
 import OrderItemSkeleton from './components/OrderItemSkeleton';
+import { GetCustomerOrdersQuery } from '@/graphql/types/graphql';
 
 const Page = () => {
   const t = useTranslations();
@@ -38,7 +38,6 @@ const Page = () => {
               <>
                 {data?.customer?.orders?.edges?.map((edge) => {
                   const order = edge.node!;
-
                   return <OrderItem key={order.id} {...order} />;
                 })}
               </>

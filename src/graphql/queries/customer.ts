@@ -35,6 +35,21 @@ export const GET_CUSTOMER_PROFILE = gql`
   }
 `;
 
+export const CUSTOMER_ORDER_LINE_ITEM_FRAGMENT = gql`
+  fragment CustomerOrdersLineItems on LineItem {
+    id
+    product {
+      node {
+        id
+        image {
+          id
+          sourceUrl
+        }
+      }
+    }
+  }
+`;
+
 export const GET_CUSTOMER_ORDERS = gql`
   query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {
     customer {
@@ -48,14 +63,7 @@ export const GET_CUSTOMER_ORDERS = gql`
             date
             lineItems {
               nodes {
-                product {
-                  node {
-                    image {
-                      id
-                      sourceUrl(size: THUMBNAIL)
-                    }
-                  }
-                }
+                ...CustomerOrdersLineItems
               }
             }
           }
@@ -63,4 +71,5 @@ export const GET_CUSTOMER_ORDERS = gql`
       }
     }
   }
+  ${CUSTOMER_ORDER_LINE_ITEM_FRAGMENT}
 `;
