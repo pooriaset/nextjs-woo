@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import { usePathname } from 'next/navigation';
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 
 export interface MenuItem {
   label: string;
@@ -31,10 +31,9 @@ const MenuItems: FC<MenuItemsProps> = ({ items }) => {
         <Divider />
         {items.map((item) => {
           return (
-            <>
+            <Fragment key={item.href}>
               <ListItem
                 disablePadding
-                key={item.href}
                 secondaryAction={
                   !!item.count && (
                     <Chip
@@ -71,7 +70,7 @@ const MenuItems: FC<MenuItemsProps> = ({ items }) => {
                 </ListItemButton>
               </ListItem>
               <Divider />
-            </>
+            </Fragment>
           );
         })}
       </List>
