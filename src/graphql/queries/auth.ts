@@ -12,3 +12,11 @@ export const LOGIN_USER_MUTATION = gql`
     }
   }
 `;
+
+export const REFRESH_TOKEN_MUTATION = gql`
+  mutation RefreshToken($refreshToken: String!) {
+    refreshJwtAuthToken(input: { jwtRefreshToken: $refreshToken }) {
+      accessToken: authToken
+    }
+  }
+`;

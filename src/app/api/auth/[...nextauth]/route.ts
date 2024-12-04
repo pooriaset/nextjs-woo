@@ -1,10 +1,9 @@
+import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import { LOGIN_USER_MUTATION } from '@/graphql/queries/auth';
 import { LoginUserMutation } from '@/graphql/types/graphql';
 import { GraphQLClient } from 'graphql-request';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-
-export const SIGN_IN_PAGE_PATHNAME = '/account/signin';
 
 const handler = NextAuth({
   pages: {
@@ -42,7 +41,10 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.accessToken = user.accessToken;
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.refreshToken = user.refreshToken;
+      }
       return token;
     },
     async session({ session, token }) {

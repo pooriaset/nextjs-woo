@@ -3,7 +3,7 @@ import Dialog from '@/components/Dialog/Dialog';
 import { ProductVariationContentSliceFragment } from '@/graphql/types/graphql';
 import { useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
-import { FC } from 'react';
+import { FC, useTransition } from 'react';
 
 export interface AddToCartDialogProps {
   open: boolean;
@@ -16,8 +16,12 @@ const AddToCartDialog: FC<AddToCartDialogProps> = ({
   value,
 }) => {
   const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
   const handleClickOnGoToCart = (): void => {
-    router.push('/cart');
+    startTransition(() => {
+      router.push('/cart');
+    });
   };
 
   const t = useTranslations();
@@ -35,6 +39,7 @@ const AddToCartDialog: FC<AddToCartDialogProps> = ({
         {
           id: 'go-to-cart',
           onClick: handleClickOnGoToCart,
+          isLoading: isPending,
           color: 'primary',
           variant: 'contained',
           children: t('pages.cart.addToCartDialog.buttonTitle'),

@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation LoginUser($username: String!, $password: String!) {\n    login(input: { username: $username, password: $password }) {\n      accessToken: authToken\n      refreshToken\n      user {\n        id\n        name\n      }\n    }\n  }\n": types.LoginUserDocument,
+    "\n  mutation RefreshToken($refreshToken: String!) {\n    refreshJwtAuthToken(input: { jwtRefreshToken: $refreshToken }) {\n      accessToken: authToken\n    }\n  }\n": types.RefreshTokenDocument,
     "\n  fragment ProductContentSlice on Product {\n    id\n    databaseId\n    name\n    slug\n    type\n    image {\n      id\n      sourceUrl(size: WOOCOMMERCE_THUMBNAIL)\n      altText\n    }\n    ... on SimpleProduct {\n      price\n      regularPrice\n      soldIndividually\n    }\n    ... on VariableProduct {\n      price\n      regularPrice\n      soldIndividually\n    }\n  }\n": types.ProductContentSliceFragmentDoc,
     "\n  fragment ProductVariationContentSlice on ProductVariation {\n    id\n    databaseId\n    name\n    slug\n    attributes {\n      nodes {\n        id\n        label\n        value\n        name\n      }\n    }\n    image {\n      id\n      sourceUrl(size: WOOCOMMERCE_THUMBNAIL)\n      altText\n    }\n    price\n    regularPrice\n    salePrice\n    discountAmount\n    discountPercentage\n    stockStatus\n  }\n": types.ProductVariationContentSliceFragmentDoc,
     "\n  fragment CartItemContent on CartItem {\n    key\n    product {\n      node {\n        ...ProductContentSlice\n      }\n    }\n    variation {\n      node {\n        ...ProductVariationContentSlice\n      }\n    }\n    quantity\n    total\n    subtotal\n    subtotalTax\n    totalOnSaleDiscount\n    extraData {\n      key\n      value\n    }\n  }\n  \n  \n": types.CartItemContentFragmentDoc,
@@ -29,6 +30,8 @@ const documents = {
     "\n  query Categories {\n    productCategories(first: 1000) {\n      nodes {\n        id: databaseId\n        name\n        parentId: parentDatabaseId\n      }\n    }\n  }\n": types.CategoriesDocument,
     "\n  query GetMainCategories {\n    productCategories(where: { parent: null, orderby: TERM_ORDER }) {\n      edges {\n        node {\n          id: databaseId\n          name\n          image {\n            id: databaseId\n            sourceUrl\n          }\n        }\n      }\n    }\n  }\n": types.GetMainCategoriesDocument,
     "\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n": types.GetCustomerBillingDocument,
+    "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n": types.GetCustomerProfileDocument,
+    "\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(last: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n            lineItems {\n              nodes {\n                product {\n                  node {\n                    image {\n                      id\n                      sourceUrl(size: THUMBNAIL)\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GetCustomerOrdersDocument,
     "\n  query GetGeneralSettings {\n    generalSettings {\n      title\n      description\n      timezone\n      language\n    }\n  }\n": types.GetGeneralSettingsDocument,
     "\n  query GetPage($slug: String) {\n    pages(where: { name: $slug, status: PUBLISH }) {\n      edges {\n        node {\n          title\n          content\n        }\n      }\n    }\n  }\n": types.GetPageDocument,
     "\n  query GetPublishedPagesList {\n    pages(where: { status: PUBLISH }) {\n      edges {\n        node {\n          title\n          slug\n        }\n      }\n    }\n  }\n": types.GetPublishedPagesListDocument,
@@ -56,6 +59,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation LoginUser($username: String!, $password: String!) {\n    login(input: { username: $username, password: $password }) {\n      accessToken: authToken\n      refreshToken\n      user {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation LoginUser($username: String!, $password: String!) {\n    login(input: { username: $username, password: $password }) {\n      accessToken: authToken\n      refreshToken\n      user {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation RefreshToken($refreshToken: String!) {\n    refreshJwtAuthToken(input: { jwtRefreshToken: $refreshToken }) {\n      accessToken: authToken\n    }\n  }\n"): (typeof documents)["\n  mutation RefreshToken($refreshToken: String!) {\n    refreshJwtAuthToken(input: { jwtRefreshToken: $refreshToken }) {\n      accessToken: authToken\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -116,6 +123,14 @@ export function graphql(source: "\n  query GetMainCategories {\n    productCateg
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(last: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n            lineItems {\n              nodes {\n                product {\n                  node {\n                    image {\n                      id\n                      sourceUrl(size: THUMBNAIL)\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(last: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n            lineItems {\n              nodes {\n                product {\n                  node {\n                    image {\n                      id\n                      sourceUrl(size: THUMBNAIL)\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

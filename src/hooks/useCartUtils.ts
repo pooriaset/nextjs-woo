@@ -41,7 +41,7 @@ const useCartUtils: IUseCartUtils = () => {
 
   const setCartAtom: ReturnTypeOfUseCartUtils['setCartAtom'] = (value) => {
     const _value: ICartAtom = {
-      ...value,
+      ...(value as any),
     };
 
     setCart(_value);

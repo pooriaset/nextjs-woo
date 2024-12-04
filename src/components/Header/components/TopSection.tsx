@@ -1,8 +1,8 @@
-import { SIGN_IN_PAGE_PATHNAME } from '@/app/api/auth/[...nextauth]/route';
+import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import Logo from '@/components/common/Logo';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
-import { Link as NextLink } from '@/navigation';
+import { Link as NextLink, usePathname, useRouter } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
 import {
   AccountCircleOutlined,
@@ -20,6 +20,7 @@ import { useAtomValue } from 'jotai';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC, useState } from 'react';
+import { protectedRoutes } from '@/config/app';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -45,7 +46,7 @@ const TopSection: FC = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const onClose = () => {
     setAnchorEl(null);
   };
 
@@ -63,9 +64,31 @@ const TopSection: FC = () => {
   const menuId = 'primary-search-account-menu';
   const isAuthenticated = session.status === 'authenticated';
 
-  const handleLogout = () => {
-    signOut({ redirect: false });
+  const pathname = usePathname();
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    if (protectedRoutes.some((route) => pathname.includes(route))) {
+      router.push('/');
+    }
   };
+
+  const loggedInMenuItems = [
+    {
+      label: t('header.user.profile'),
+      href: '/profile',
+    },
+    {
+      label: t('header.user.myAccount'),
+      href: '/profile/information',
+    },
+    {
+      label: t('header.user.logout'),
+      onClick: handleLogout,
+    },
+  ];
 
   return (
     <>
@@ -160,15 +183,29 @@ const TopSection: FC = () => {
           horizontal: 'right',
         }}
         open={isMenuOpen}
-        onClose={handleMenuClose}
+        onClose={onClose}
       >
-        <MenuItem onClick={handleMenuClose}>
-          {t('header.user.profile')}
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          {t('header.user.myAccount')}
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>{t('header.user.logout')}</MenuItem>
+        {loggedInMenuItems.map((item) => {
+          const linkProps = item.href
+            ? {
+                component: Link,
+                href: item.href,
+              }
+            : {};
+
+          return (
+            <MenuItem
+              {...linkProps}
+              key={item.href}
+              onClick={() => {
+                item.onClick?.();
+                onClose();
+              }}
+            >
+              {item.label}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </>
   );
