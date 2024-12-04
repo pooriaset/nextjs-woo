@@ -1,7 +1,7 @@
 import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import { LOGIN_USER_MUTATION } from '@/graphql/queries/auth';
 import { LoginUserMutation } from '@/graphql/types/graphql';
-import { GraphQLClient } from 'graphql-request';
+import { graphQLClient } from '@/services/common';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -18,10 +18,6 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const graphQLClient = new GraphQLClient(
-          process.env.NEXT_PUBLIC_GRAPHQL_URL!,
-        );
-
         const data = await graphQLClient.request<LoginUserMutation>(
           LOGIN_USER_MUTATION,
           { ...credentials },

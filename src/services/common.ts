@@ -9,13 +9,13 @@ export const Sleep = (time = 3000) => {
   });
 };
 
+export const graphQLClient = new GraphQLClient(
+  process.env.NEXT_PUBLIC_GRAPHQL_URL!,
+);
+
 async function fetchSessionToken() {
   let sessionToken;
   try {
-    const graphQLClient = new GraphQLClient(
-      process.env.NEXT_PUBLIC_GRAPHQL_URL!,
-    );
-
     const data = await graphQLClient.request<{
       customer: { sessionToken: string };
     }>(GET_CUSTOMER_SESSION_QUERY);

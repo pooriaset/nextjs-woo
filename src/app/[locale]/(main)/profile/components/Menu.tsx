@@ -4,7 +4,11 @@ import { useQuery } from '@apollo/client';
 import { Box } from '@mui/material';
 import MenuHeader from './MenuHeader';
 import MenuItems from './MenuItems';
-import { PersonOutline, ShoppingBagOutlined } from '@mui/icons-material';
+import {
+  HomeOutlined,
+  PersonOutline,
+  ShoppingBagOutlined,
+} from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 
 const Menu = () => {
@@ -18,6 +22,11 @@ const Menu = () => {
     : t('profile.user');
 
   const items = [
+    {
+      label: t('profile.activitySummary'),
+      href: '/profile',
+      icon: HomeOutlined,
+    },
     {
       label: t('profile.myOrders'),
       href: '/profile/orders',
@@ -41,7 +50,7 @@ const Menu = () => {
       }}
     >
       <MenuHeader
-        isLoading={!!error || loading}
+        // isLoading={!!error || loading}
         fullName={fullName}
         username={data?.customer?.username || ''}
       />

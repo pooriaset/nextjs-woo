@@ -6,6 +6,7 @@ export interface CustomSkeletonProps extends SkeletonProps {
 }
 const CustomSkeleton: FC<CustomSkeletonProps> = ({ isLoading, ...props }) => {
   if (!isLoading) {
+    return props.children;
   }
   return <Skeleton variant="rectangular" width="100%" {...props} />;
 };

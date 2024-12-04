@@ -59,7 +59,8 @@
     "addToCart": "Add To Cart",
     "yes": "Yes",
     "no": "No",
-    "removeAll": "Remove All"
+    "removeAll": "Remove All",
+    "viewMore": "View More"
   },
   "footer": {
     "links": {
@@ -194,9 +195,11 @@
     "myOrders": "My Orders",
     "accountInfo": "Account Information",
     "latestOrders": "Latest Orders",
-    "user": "User"
+    "user": "User",
+    "activitySummary": "Activity Summary"
   },
   "order": {
-    "view": "View"
+    "view": "View",
+    "ordersHistory": "Orders History"
   }
 }

@@ -55,7 +55,8 @@
     "addToCart": "افزودن به سبد",
     "yes": "بله",
     "no": "خیر",
-    "removeAll": "حذف همه"
+    "removeAll": "حذف همه",
+    "viewMore": "مشاهده بیشتر"
   },
   "footer": {
     "links": {
@@ -194,9 +195,11 @@
     "myOrders": "سفارش‌های من",
     "accountInfo": "اطلاعات حساب کاربری",
     "latestOrders": "آخرین سفارش‌های من",
-    "user": "User"
+    "user": "User",
+    "activitySummary": "خلاصه فعالیت‌ها"
   },
   "order": {
-    "view": "مشاهده سفارش"
+    "view": "مشاهده سفارش",
+    "ordersHistory": "تاریخچه سفارشات"
   }
 }
