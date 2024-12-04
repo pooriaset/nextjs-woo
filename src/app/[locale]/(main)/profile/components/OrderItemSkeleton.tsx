@@ -3,6 +3,7 @@ import { Skeleton, Stack, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { FC } from 'react';
+import OrderItemImage from './OrderItemImage';
 
 const OrderItemSkeleton: FC = () => {
   const theme = useTheme();
@@ -31,6 +32,18 @@ const OrderItemSkeleton: FC = () => {
             <DotIcon color={theme.palette.divider} />
             <Skeleton variant="text" width={50} />
             <Skeleton variant="text" width={50} />
+          </Stack>
+          <Stack direction="row" spacing={1}>
+            {new Array(3).fill(1).map((image) => {
+              return (
+                <Skeleton
+                  key={image}
+                  variant="rectangular"
+                  width={64}
+                  height={64}
+                />
+              );
+            })}
           </Stack>
         </Stack>
       </CardContent>

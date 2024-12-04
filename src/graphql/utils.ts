@@ -65,35 +65,12 @@ export const createErrorLink = () => {
           targetErrors.includes(originalError?.message ?? '')
         ) {
           observable = new Observable((observer) => {
-            getSessionToken(true)
-              .then((sessionToken) => {
-                operation.setContext(({ headers = {} }) => {
-                  const nextHeaders: Record<string, string> = headers;
-
-                  if (sessionToken) {
-                    nextHeaders[
-                      'woocommerce-session'
-                    ] = `Session ${sessionToken}`;
-                  } else {
-                    delete nextHeaders['woocommerce-session'];
-                  }
-
-                  return {
-                    headers: nextHeaders,
-                  };
-                });
-              })
-              .then(() => {
-                const subscriber = {
-                  next: observer.next.bind(observer),
-                  error: observer.error.bind(observer),
-                  complete: observer.complete.bind(observer),
-                };
-                forward(operation).subscribe(subscriber);
-              })
-              .catch((error) => {
-                observer.error(error);
-              });
+            const subscriber = {
+              next: observer.next.bind(observer),
+              error: observer.error.bind(observer),
+              complete: observer.complete.bind(observer),
+            };
+            forward(operation).subscribe(subscriber);
           });
         } else {
           toast.error(message, {

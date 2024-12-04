@@ -39,6 +39,18 @@ export const GET_CUSTOMER_ORDERS = gql`
             subtotal(format: RAW)
             status
             date
+            lineItems {
+              nodes {
+                product {
+                  node {
+                    image {
+                      id
+                      sourceUrl(size: THUMBNAIL)
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

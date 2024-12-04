@@ -1,14 +1,16 @@
 import DotIcon from '@/components/Icons/components/Use/DotIcon';
+import Image from '@/components/common/Image';
 import PriceLabel from '@/components/common/PriceLabel';
-import { OrderStatusEnum } from '@/graphql/types/graphql';
+import { LineItem, OrderStatusEnum } from '@/graphql/types/graphql';
 import useOrderStatusMapper from '@/hooks/useOrderStatusMapper';
 import { Link, Locale, languages } from '@/navigation';
 import { ChevronLeft } from '@mui/icons-material';
-import { Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useLocale, useTranslations } from 'next-intl';
 import { FC } from 'react';
+import OrderItemImage from './OrderItemImage';
 
 export type OrderItemProps = Nullable<{
   total: string;
@@ -16,10 +18,11 @@ export type OrderItemProps = Nullable<{
   status: OrderStatusEnum;
   date: string;
   id: number;
+  lineItems: any;
 }>;
 
 const OrderItem: FC<OrderItemProps> = (props) => {
-  const { date, id, status, total } = props;
+  const { date, id, status, total, lineItems } = props;
 
   const mapper = useOrderStatusMapper();
 
@@ -30,6 +33,11 @@ const OrderItem: FC<OrderItemProps> = (props) => {
   const t = useTranslations();
 
   const locale = useLocale() as Locale;
+
+  const images =
+    lineItems?.nodes.map((node: any) => {
+      return node.product?.node?.image;
+    }) || [];
 
   return (
     <Card
@@ -90,6 +98,11 @@ const OrderItem: FC<OrderItemProps> = (props) => {
               {t('fields.amount')}
             </Typography>
             <PriceLabel value={total} />
+          </Stack>
+          <Stack direction="row" spacing={1}>
+            {images.map((image) => {
+              return <OrderItemImage key={image.id} src={image.sourceUrl} />;
+            })}
           </Stack>
         </Stack>
       </CardContent>

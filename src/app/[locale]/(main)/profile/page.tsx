@@ -31,16 +31,19 @@ const Page = () => {
           title={t('profile.latestOrders')}
         />
         <CardContent>
-          {loading || !!error ? (
-            <OrderItemSkeleton />
-          ) : (
-            <>
-              {data?.customer?.orders?.edges?.map((edge) => {
-                const order = edge.node!;
-                return <OrderItem key={order.id} {...order} />;
-              })}
-            </>
-          )}
+          <Stack spacing={1.5}>
+            {loading || !!error ? (
+              <OrderItemSkeleton />
+            ) : (
+              <>
+                {data?.customer?.orders?.edges?.map((edge) => {
+                  const order = edge.node!;
+
+                  return <OrderItem key={order.id} {...order} />;
+                })}
+              </>
+            )}
+          </Stack>
         </CardContent>
       </Card>
     </Stack>
