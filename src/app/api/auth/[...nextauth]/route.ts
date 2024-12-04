@@ -1,3 +1,4 @@
+import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import { LOGIN_USER_MUTATION } from '@/graphql/queries/auth';
 import { LoginUserMutation } from '@/graphql/types/graphql';
 import { GraphQLClient } from 'graphql-request';
@@ -5,6 +6,9 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const handler = NextAuth({
+  pages: {
+    signIn: SIGN_IN_PAGE_PATHNAME,
+  },
   providers: [
     CredentialsProvider({
       id: 'credentials',

@@ -2,7 +2,7 @@ import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import Logo from '@/components/common/Logo';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
-import { Link as NextLink } from '@/navigation';
+import { Link as NextLink, usePathname, useRouter } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
 import {
   AccountCircleOutlined,
@@ -20,6 +20,7 @@ import { useAtomValue } from 'jotai';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC, useState } from 'react';
+import { protectedRoutes } from '@/config/app';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -63,9 +64,15 @@ const TopSection: FC = () => {
   const menuId = 'primary-search-account-menu';
   const isAuthenticated = session.status === 'authenticated';
 
-  const handleLogout = () => {
-    signOut({ redirect: false });
-    onClose();
+  const pathname = usePathname();
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    if (protectedRoutes.some((route) => pathname.includes(route))) {
+      router.push('/');
+    }
   };
 
   const loggedInMenuItems = [
