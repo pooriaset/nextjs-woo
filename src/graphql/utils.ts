@@ -96,7 +96,9 @@ export const createErrorLink = () => {
               });
           });
         } else {
-          toast.error(message);
+          toast.error(message, {
+            toastId: message,
+          });
         }
       });
     }

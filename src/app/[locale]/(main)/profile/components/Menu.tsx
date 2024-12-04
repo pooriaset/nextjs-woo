@@ -8,7 +8,8 @@ import { PersonOutline, ShoppingBagOutlined } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 
 const Menu = () => {
-  const { data } = useQuery<GetCustomerProfileQuery>(GET_CUSTOMER_PROFILE);
+  const { data, loading, error } =
+    useQuery<GetCustomerProfileQuery>(GET_CUSTOMER_PROFILE);
 
   const t = useTranslations();
 
@@ -40,6 +41,7 @@ const Menu = () => {
       }}
     >
       <MenuHeader
+        isLoading={!!error || loading}
         fullName={fullName}
         username={data?.customer?.username || ''}
       />
