@@ -9,6 +9,18 @@ import {
 import { green, grey } from '@mui/material/colors';
 
 export const globalStyles: GlobalStylesProps['styles'] = (theme) => ({
+  '*::-webkit-scrollbar-track': {
+    backgroundColor: grey[200],
+  },
+  '*::-webkit-scrollbar': {
+    width: 8,
+    backgroundColor: '#F5F5F5',
+  },
+  '*::-webkit-scrollbar-thumb': {
+    backgroundColor: grey[500],
+    borderRadius: 12,
+  },
+
   a: {
     textDecoration: 'none !important',
   },
