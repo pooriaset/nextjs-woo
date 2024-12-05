@@ -77,14 +77,17 @@ const TopSection: FC = () => {
 
   const loggedInMenuItems = [
     {
+      id: 'profile',
       label: t('header.user.profile'),
       href: '/profile',
     },
     {
+      id: 'profile-information',
       label: t('header.user.myAccount'),
       href: '/profile/information',
     },
     {
+      id: 'logout-button',
       label: t('header.user.logout'),
       onClick: handleLogout,
     },
@@ -196,7 +199,7 @@ const TopSection: FC = () => {
           return (
             <MenuItem
               {...linkProps}
-              key={item.href}
+              key={item.id}
               onClick={() => {
                 item.onClick?.();
                 onClose();
