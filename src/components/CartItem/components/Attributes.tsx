@@ -11,11 +11,11 @@ const Attributes: FC<AttributesProps> = ({ size }) => {
   return (
     <Stack gap={1} direction="row">
       <RulerIcon />
-      <Typography>
+      <Typography variant="subtitle2">
         {/* TODO: Get variant title from backend! */}
         {t('fields.size')}
       </Typography>
-      <Typography>{size}</Typography>
+      <Typography variant="subtitle2">{size}</Typography>
     </Stack>
   );
 };

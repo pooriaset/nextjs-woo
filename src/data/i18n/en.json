@@ -200,6 +200,21 @@
   },
   "order": {
     "view": "View",
-    "ordersHistory": "Orders History"
+    "ordersHistory": "Orders History",
+    "detailsTitle": "Order Details",
+    "itemsTitle": "Order Items",
+    "invoiceTitle": "Invoice",
+    "info": {
+      "orderId": "Order ID",
+      "status": "Status",
+      "orderDate": "Order Date",
+      "recipient": "Recipient",
+      "address": "Address",
+      "phone": "Phone Number"
+    },
+    "invoice": {
+      "paidAmount": "Paid Amount",
+      "yourProfit": "Your Profit from this Purchase"
+    }
   }
 }

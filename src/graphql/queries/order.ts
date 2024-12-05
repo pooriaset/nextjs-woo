@@ -34,8 +34,10 @@ export const GET_ORDER = gql`
       lineItems {
         nodes {
           id: variationId
+          productId
           total
           subtotal
+          quantity
           variation {
             node {
               ...ProductVariationContentSlice

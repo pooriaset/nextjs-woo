@@ -1,5 +1,5 @@
 import { useRouter } from '@/navigation';
-import { ChevronLeft } from '@mui/icons-material';
+import { ArrowBackOutlined } from '@mui/icons-material';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
@@ -17,7 +17,7 @@ const CardHeader: FC<CardHeaderProps> = ({ title, children, back }) => {
         <Stack direction="row" alignItems="center" spacing={0.5}>
           {back && (
             <IconButton size="small" onClick={() => router.back()}>
-              <ChevronLeft
+              <ArrowBackOutlined
                 sx={{
                   transform: (theme) =>
                     theme.direction === 'rtl' ? 'rotate(180deg)' : undefined,
@@ -25,7 +25,9 @@ const CardHeader: FC<CardHeaderProps> = ({ title, children, back }) => {
               />
             </IconButton>
           )}
-          <Typography variant="subtitle1">{title}</Typography>
+          <Typography variant="subtitle1" fontWeight={500}>
+            {title}
+          </Typography>
         </Stack>
         {children}
       </Stack>

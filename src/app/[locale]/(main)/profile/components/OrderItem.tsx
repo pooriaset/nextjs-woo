@@ -4,13 +4,14 @@ import {
   GetCustomerOrdersQuery,
   OrderStatusEnum,
 } from '@/graphql/types/graphql';
+import useLocaleDate from '@/hooks/useLocaleDate';
 import useOrderStatusMapper from '@/hooks/useOrderStatusMapper';
-import { Link, Locale, languages } from '@/navigation';
+import { Link } from '@/navigation';
 import { ChevronLeft } from '@mui/icons-material';
 import { Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import OrderItemImage from './OrderItemImage';
 
@@ -36,12 +37,12 @@ const OrderItem: FC<OrderItemProps> = (props) => {
 
   const t = useTranslations();
 
-  const locale = useLocale() as Locale;
-
   const images =
     lineItems!.nodes.map((node: any) => {
       return node.product?.node?.image;
     }) || [];
+
+  const localDate = useLocaleDate(date);
 
   return (
     <Card
@@ -86,9 +87,7 @@ const OrderItem: FC<OrderItemProps> = (props) => {
               {t('fields.date')}
             </Typography>
             <Typography variant="body2" fontWeight={600}>
-              {new Date(date!).toLocaleDateString(
-                languages[locale]?.code || navigator.language,
-              )}
+              {localDate}
             </Typography>
             <DotIcon color={theme.palette.divider} />
             <Typography variant="body2" color="text.secondary">

@@ -2,6 +2,9 @@ import { OrderStatusEnum } from '@/graphql/types/graphql';
 import {
   CheckCircle,
   CloseOutlined,
+  HourglassBottomOutlined,
+  ModeOutlined,
+  PendingOutlined,
   SvgIconComponent,
 } from '@mui/icons-material';
 import { blue, green, grey, orange, red } from '@mui/material/colors';
@@ -36,19 +39,19 @@ const useOrderStatusMapper = () => {
       color: orange[500],
       bgColor: orange[100],
       label: t('orderStatuses.ON_HOLD'),
-      icon: CloseOutlined,
+      icon: PendingOutlined,
     },
     PENDING: {
       color: orange[500],
       bgColor: orange[100],
       label: t('orderStatuses.PENDING'),
-      icon: CloseOutlined,
+      icon: PendingOutlined,
     },
     PROCESSING: {
       color: blue[500],
       bgColor: blue[100],
       label: t('orderStatuses.PROCESSING'),
-      icon: CloseOutlined,
+      icon: HourglassBottomOutlined,
     },
     REFUNDED: {
       color: grey[500],
@@ -60,7 +63,7 @@ const useOrderStatusMapper = () => {
       color: grey[500],
       bgColor: grey[100],
       label: t('orderStatuses.CHECKOUT_DRAFT'),
-      icon: CloseOutlined,
+      icon: ModeOutlined,
     },
   };
 

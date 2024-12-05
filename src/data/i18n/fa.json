@@ -200,6 +200,21 @@
   },
   "order": {
     "view": "مشاهده سفارش",
-    "ordersHistory": "تاریخچه سفارشات"
+    "ordersHistory": "تاریخچه سفارشات",
+    "detailsTitle": "جزئیات سفارش",
+    "itemsTitle": "اقلام سفارش",
+    "invoiceTitle": "صورت حساب",
+    "info": {
+      "orderId": "شناسه سفارش",
+      "status": "وضعیت",
+      "orderDate": "تاریخ ثبت سفارش",
+      "recipient": "تحویل گیرنده",
+      "address": "آدرس",
+      "phone": "شماره موبایل"
+    },
+    "invoice": {
+      "paidAmount": "مبلغ پرداخت شده",
+      "yourProfit": "سود شما از این خرید"
+    }
   }
 }
