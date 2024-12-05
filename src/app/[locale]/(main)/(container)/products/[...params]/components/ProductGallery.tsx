@@ -46,11 +46,11 @@ const ProductGallery: FC<ProductGalleryProps> = ({
     alt: thumbnail?.altText!,
   });
 
-  if (!galleryImages.length) {
+  const _galleryImages = [thumbnail, ...galleryImages];
+
+  if (!_galleryImages.length) {
     return null;
   }
-
-  const _galleryImages = [thumbnail, ...galleryImages];
 
   const height = 500;
 

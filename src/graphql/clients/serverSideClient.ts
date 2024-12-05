@@ -48,5 +48,10 @@ export const { getClient } = registerApolloClient(() => {
     cache: new InMemoryCache(),
     connectToDevTools: true,
     link: from([createAuthLink(), createWooTokenLink(), httpLink]),
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
   });
 });

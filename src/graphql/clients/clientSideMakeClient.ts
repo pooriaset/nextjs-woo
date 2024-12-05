@@ -86,5 +86,10 @@ export const makeClient = () => {
           ]
         : [httpLink]),
     ]),
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
   });
 };

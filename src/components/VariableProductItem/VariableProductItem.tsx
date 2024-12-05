@@ -12,6 +12,7 @@ import OldPrice from '../common/OldPrice';
 import OutOfStock from '../common/OutOfStock';
 import PriceLabel from '../common/PriceLabel';
 import { VariableProduct } from './types';
+import { getMaxOfRangePrice } from '@/utils/price';
 
 export interface ProductItemProps {
   data: VariableProduct;
@@ -98,7 +99,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
                   <Box>
                     <PriceLabel value={data.price} />
                     {data.regularPrice !== data.price && (
-                      <OldPrice value={data.regularPrice} />
+                      <OldPrice value={getMaxOfRangePrice(data.regularPrice)} />
                     )}
                   </Box>
                 </>
