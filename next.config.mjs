@@ -16,6 +16,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'api.nextwoo.ir',
       },
+      {
+        protocol: 'https',
+        hostname: 'jsonplaceholder.typicode.com',
+      },
     ],
   },
 };

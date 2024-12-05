@@ -48,10 +48,6 @@ const ProductGallery: FC<ProductGalleryProps> = ({
 
   const _galleryImages = [thumbnail, ...galleryImages];
 
-  if (!_galleryImages.length) {
-    return null;
-  }
-
   const height = 500;
 
   return (

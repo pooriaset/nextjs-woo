@@ -18,11 +18,16 @@ type PageProps = {
   params: { params: string[] };
 };
 
-const title = 'test_title';
-
 export async function generateMetadata({
-  params,
+  params: { params },
 }: PageProps): Promise<Metadata> {
+  const product = await getProduct({ id: +params[0] });
+
+  let title = '';
+  if (product?.__typename === 'VariableProduct') {
+    title = product?.title!;
+  }
+
   return {
     title,
     alternates: {
