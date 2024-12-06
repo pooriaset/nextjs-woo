@@ -6,7 +6,10 @@ import { Observable } from '@apollo/client/utilities';
 import { toast } from 'react-toastify';
 
 export const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
+  uri:
+    typeof window !== 'undefined'
+      ? process.env.NEXT_PUBLIC_GATEWAY_URL
+      : `${process.env.__NEXT_PRIVATE_ORIGIN}${process.env.NEXT_PUBLIC_GATEWAY_URL}`,
 });
 
 export const createSessionLink = () => {

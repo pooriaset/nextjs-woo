@@ -1,18 +1,14 @@
 import {
   ApolloClient,
   ApolloLink,
-  HttpLink,
   InMemoryCache,
   Observable,
   from,
 } from '@apollo/client';
 import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rsc';
-import { createAuthLink } from './clientSideMakeClient';
 import { cookies } from 'next/headers';
-
-const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
-});
+import { httpLink } from '../utils';
+import { createAuthLink } from './clientSideMakeClient';
 
 const createWooTokenLink = (): ApolloLink =>
   new ApolloLink((operation, forward) => {

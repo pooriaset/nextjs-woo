@@ -8,7 +8,8 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NEXT_PUBLIC_WOOCOMMERCE_SESSION_KEY: string;
-      NEXT_PUBLIC_GRAPHQL_URL: string;
+      NEXT_PUBLIC_BACKEND_URL: string;
+      NEXT_PUBLIC_GATEWAY_URL: string;
     }
   }
 

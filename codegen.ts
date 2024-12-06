@@ -4,7 +4,7 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 dotenv.config();
 
 const config: CodegenConfig = {
-  schema: process.env.NEXT_PUBLIC_GRAPHQL_URL,
+  schema: process.env.NEXT_PUBLIC_BACKEND_URL,
   documents: ['src/**/*.ts'],
   generates: {
     './src/graphql/types/': {

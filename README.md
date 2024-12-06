@@ -48,7 +48,7 @@ Before running the development server, you need to create a .env.local file base
 cp .env.sample .env.local
 ```
 
-2. Open `.env.local` in your preferred text editor and configure the necessary environment variables according to your setup. If you want to change the API URL, you can do this by modifying the `NEXT_PUBLIC_GRAPHQL_URL` variable in the .env.local file.
+2. Open `.env.local` in your preferred text editor and configure the necessary environment variables according to your setup. If you want to change the API URL, you can do this by modifying the `NEXT_PUBLIC_BACKEND_URL` variable in the .env.local file.
 
 ### Step 4: Run the Development Server
 

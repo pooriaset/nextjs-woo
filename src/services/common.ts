@@ -1,16 +1,8 @@
 import { GET_CUSTOMER_SESSION_QUERY } from '@/graphql/queries/customer';
 import { GraphQLClient } from 'graphql-request';
 
-export const Sleep = (time = 3000) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
-
 export const graphQLClient = new GraphQLClient(
-  process.env.NEXT_PUBLIC_GRAPHQL_URL!,
+  process.env.NEXT_PUBLIC_GATEWAY_URL!,
 );
 
 async function fetchSessionToken() {
