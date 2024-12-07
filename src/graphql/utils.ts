@@ -1,14 +1,6 @@
-import { HttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { Observable } from '@apollo/client/utilities';
 import { toast } from 'react-toastify';
-
-export const httpLink = new HttpLink({
-  uri:
-    typeof window !== 'undefined'
-      ? process.env.NEXT_PUBLIC_GATEWAY_URL
-      : `${process.env.__NEXT_PRIVATE_ORIGIN}${process.env.NEXT_PUBLIC_GATEWAY_URL}`,
-});
 
 export const createErrorLink = () => {
   return onError(({ graphQLErrors, operation, forward }) => {

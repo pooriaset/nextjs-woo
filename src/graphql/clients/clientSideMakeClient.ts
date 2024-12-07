@@ -1,10 +1,14 @@
-import { from } from '@apollo/client';
+import { HttpLink, from } from '@apollo/client';
 import {
   NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support/ssr';
-import { createErrorLink, httpLink } from '../utils';
+import { createErrorLink } from '../utils';
+
+const httpLink = new HttpLink({
+  uri: process.env.NEXT_PUBLIC_GATEWAY_URL,
+});
 
 export const makeClient = () => {
   return new NextSSRApolloClient({
