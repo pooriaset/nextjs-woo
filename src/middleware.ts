@@ -1,5 +1,5 @@
 import { defaultLocale, locales } from '@/navigation';
-import { withAuth } from 'next-auth/middleware';
+import { NextRequestWithAuth, withAuth } from 'next-auth/middleware';
 import nextIntlMiddleware from 'next-intl/middleware';
 import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
@@ -16,11 +16,16 @@ const intlMiddleware = (request: NextRequest) =>
     })(request),
   );
 
-async function middleware(request: NextRequest) {
+async function middleware(request: NextRequestWithAuth) {
   const { pathname } = request.nextUrl;
   request.headers.set('x-pathname', pathname);
 
   if (pathname.startsWith(process.env.NEXT_PUBLIC_GATEWAY_URL)) {
+    const token = request.nextauth.token;
+    if (token) {
+      request.headers.set('Authorization', `Bearer ${token?.accessToken}`);
+    }
+
     return NextResponse.rewrite(
       new URL(`${process.env.NEXT_PUBLIC_BACKEND_URL}`),
       {
