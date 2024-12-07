@@ -43,13 +43,6 @@ const handler = NextAuth({
       }
       return token;
     },
-    async session({ session, token }) {
-      if (session?.user) {
-        session.user.accessToken = token.accessToken;
-        session.user.refreshToken = token.refreshToken;
-      }
-      return session;
-    },
   },
 });
 

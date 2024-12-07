@@ -22,7 +22,8 @@ async function middleware(request: NextRequestWithAuth) {
 
   if (pathname.startsWith(process.env.NEXT_PUBLIC_GATEWAY_URL)) {
     const token = request.nextauth.token;
-    if (token) {
+
+    if (token?.accessToken) {
       request.headers.set('Authorization', `Bearer ${token?.accessToken}`);
     }
 
