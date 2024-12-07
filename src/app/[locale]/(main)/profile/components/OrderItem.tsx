@@ -82,7 +82,12 @@ const OrderItem: FC<OrderItemProps> = (props) => {
               />
             </Tooltip>
           </Stack>
-          <Stack spacing={1} direction="row" alignItems="center">
+          <Stack
+            spacing={1}
+            direction="row"
+            alignItems="center"
+            flexWrap="wrap"
+          >
             <Typography variant="body2" color="text.secondary">
               {t('fields.date')}
             </Typography>

@@ -1,6 +1,4 @@
-import { getSessionToken } from '@/services/common';
-import { ApolloLink, HttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { HttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { Observable } from '@apollo/client/utilities';
 import { toast } from 'react-toastify';
@@ -10,44 +8,6 @@ export const httpLink = new HttpLink({
     typeof window !== 'undefined'
       ? process.env.NEXT_PUBLIC_GATEWAY_URL
       : `${process.env.__NEXT_PRIVATE_ORIGIN}${process.env.NEXT_PUBLIC_GATEWAY_URL}`,
-});
-
-export const createSessionLink = () => {
-  return setContext(async () => {
-    const headers: Record<string, string> = {};
-    const sessionToken = await getSessionToken();
-
-    if (sessionToken) {
-      headers['woocommerce-session'] = `Session ${sessionToken}`;
-
-      return { headers };
-    }
-
-    return {};
-  });
-};
-
-export const updateLink = new ApolloLink((operation, forward) => {
-  return forward(operation).map((response) => {
-    const context = operation.getContext();
-    const {
-      response: { headers },
-    } = context;
-    const oldSessionToken = localStorage.getItem(
-      process.env.NEXT_PUBLIC_WOOCOMMERCE_SESSION_KEY as string,
-    );
-    const sessionToken = headers.get('woocommerce-session');
-    if (sessionToken) {
-      if (oldSessionToken !== sessionToken) {
-        localStorage.setItem(
-          process.env.NEXT_PUBLIC_WOOCOMMERCE_SESSION_KEY as string,
-          sessionToken,
-        );
-      }
-    }
-
-    return response;
-  });
 });
 
 export const createErrorLink = () => {

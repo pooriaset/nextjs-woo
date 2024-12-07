@@ -10,6 +10,7 @@ import PriceLabel from '@/components/common/PriceLabel';
 import { getFragmentData } from '@/graphql/types';
 import {
   GetSingleProductQuery,
+  ProductVariationContentSliceFragment,
   ProductVariationContentSliceFragmentDoc,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
@@ -17,6 +18,7 @@ import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import { useAppContext } from '@/hooks/useAppContext';
 import useCartUtils from '@/hooks/useCartUtils';
 import { Link } from '@/navigation';
+import { getMaxOfRangePrice } from '@/utils/price';
 import {
   AccountBalanceWalletOutlined,
   LocalShippingOutlined,
@@ -28,10 +30,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import AddToCartDialog from './AddToCartDialog';
 import MobileBuyBox from './MobileBuyBox';
-import { getMaxOfRangePrice } from '@/utils/price';
 
 const listItems = [
   {
@@ -59,12 +60,9 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
 
   const { selectedVariantId } = useProductContext();
 
-  const _variant = useMemo(() => {
-    if (!selectedVariantId) {
-      return null;
-    }
-
-    return product.variations?.nodes.find((item) => {
+  let variant: ProductVariationContentSliceFragment | null | undefined = null;
+  if (selectedVariantId) {
+    const _variant = product.variations?.nodes.find((item) => {
       const fragment = getFragmentData(
         ProductVariationContentSliceFragmentDoc,
         item,
@@ -72,12 +70,12 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
 
       return fragment.databaseId === selectedVariantId;
     });
-  }, [selectedVariantId]);
 
-  const variant = getFragmentData(
-    ProductVariationContentSliceFragmentDoc,
-    _variant,
-  );
+    variant = getFragmentData(
+      ProductVariationContentSliceFragmentDoc,
+      _variant,
+    );
+  }
 
   const { addOrUpdateCartItemMutate, addOrUpdateCartItemLoading } =
     useAddOrUpdateCartItem();

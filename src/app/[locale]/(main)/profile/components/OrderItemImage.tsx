@@ -16,7 +16,7 @@ const OrderItemImage: FC<OrderItemImageProps> = ({ src }) => {
         borderRadius: 1,
       }}
     >
-      <Image width={64} height={64} src={src} />
+      <Image width={64} height={64} src={src} alt="Product" />
     </Box>
   );
 };

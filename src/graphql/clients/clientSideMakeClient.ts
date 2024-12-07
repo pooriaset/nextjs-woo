@@ -4,7 +4,7 @@ import {
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support/ssr';
-import { createErrorLink, httpLink, updateLink } from '../utils';
+import { createErrorLink, httpLink } from '../utils';
 
 export const makeClient = () => {
   return new NextSSRApolloClient({
@@ -12,7 +12,6 @@ export const makeClient = () => {
     cache: new NextSSRInMemoryCache(),
     link: from([
       createErrorLink(),
-      updateLink,
       ...(typeof window === 'undefined'
         ? [
             new SSRMultipartLink({
