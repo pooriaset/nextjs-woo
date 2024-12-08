@@ -6,6 +6,9 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const handler = NextAuth({
+  session: {
+    maxAge: 1 * 24 * 60 * 60,
+  },
   pages: {
     signIn: SIGN_IN_PAGE_PATHNAME,
   },
