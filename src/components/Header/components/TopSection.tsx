@@ -1,5 +1,6 @@
-import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import Logo from '@/components/common/Logo';
+import { protectedRoutes } from '@/config/app';
+import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
 import { Link as NextLink, usePathname, useRouter } from '@/navigation';
@@ -20,7 +21,6 @@ import { useAtomValue } from 'jotai';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC, useState } from 'react';
-import { protectedRoutes } from '@/config/app';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -145,16 +145,55 @@ const TopSection: FC = () => {
               </Stack>
             </Button>
           ) : (
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-            >
-              <AccountCircleOutlined />
-            </IconButton>
+            <>
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'center',
+                  horizontal: 'left',
+                }}
+                id={menuId}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                open={isMenuOpen}
+                onClose={onClose}
+              >
+                {loggedInMenuItems.map((item) => {
+                  const linkProps = item.href
+                    ? {
+                        component: Link,
+                        href: item.href,
+                      }
+                    : {};
+
+                  return (
+                    <MenuItem
+                      {...linkProps}
+                      key={item.id}
+                      onClick={() => {
+                        item.onClick?.();
+                        onClose();
+                      }}
+                    >
+                      {item.label}
+                    </MenuItem>
+                  );
+                })}
+              </Menu>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+              >
+                <AccountCircleOutlined />
+              </IconButton>
+            </>
           )}
 
           <NextLink href="/cart">
@@ -173,43 +212,6 @@ const TopSection: FC = () => {
           </NextLink>
         </Stack>
       </Toolbar>
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'left',
-        }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        open={isMenuOpen}
-        onClose={onClose}
-      >
-        {loggedInMenuItems.map((item) => {
-          const linkProps = item.href
-            ? {
-                component: Link,
-                href: item.href,
-              }
-            : {};
-
-          return (
-            <MenuItem
-              {...linkProps}
-              key={item.id}
-              onClick={() => {
-                item.onClick?.();
-                onClose();
-              }}
-            >
-              {item.label}
-            </MenuItem>
-          );
-        })}
-      </Menu>
     </>
   );
 };
