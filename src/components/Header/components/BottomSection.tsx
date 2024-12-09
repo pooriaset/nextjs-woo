@@ -9,7 +9,6 @@ const BottomSection = () => {
 
   const pages = [
     { label: t('header.navigation.products'), href: '/search' },
-    { label: t('header.navigation.categories'), href: '/categories' },
     {
       label: t('header.navigation.bestSelling'),
       href: `/search?sort=${bestSellingSortOption.key}`,
