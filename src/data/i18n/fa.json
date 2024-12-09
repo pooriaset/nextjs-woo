@@ -28,7 +28,8 @@
   "header": {
     "auth": {
       "register": "ثبت نام",
-      "login": "ورود"
+      "login": "ورود",
+      "userAccount": "حساب کاربری"
     },
     "navigation": {
       "products": "محصولات",
@@ -40,11 +41,6 @@
     },
     "search": {
       "placeholder": "جستجو..."
-    },
-    "user": {
-      "myAccount": "حساب من",
-      "profile": "پروفایل",
-      "logout": "خروج از حساب"
     }
   },
   "buttons": {
@@ -196,7 +192,8 @@
     "accountInfo": "اطلاعات حساب کاربری",
     "latestOrders": "آخرین سفارش‌های من",
     "user": "User",
-    "activitySummary": "خلاصه فعالیت‌ها"
+    "activitySummary": "خلاصه فعالیت‌ها",
+    "logout": "خروج از حساب"
   },
   "order": {
     "view": "مشاهده سفارش",

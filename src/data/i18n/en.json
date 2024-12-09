@@ -28,7 +28,8 @@
   "header": {
     "auth": {
       "login": "Login",
-      "register": "Register"
+      "register": "Register",
+      "userAccount": "My Account"
     },
     "navigation": {
       "products": "Products",
@@ -40,11 +41,6 @@
     },
     "search": {
       "placeholder": "Search..."
-    },
-    "user": {
-      "myAccount": "My Account",
-      "profile": "Profile",
-      "logout": "Logout"
     }
   },
   "breadcrumbs": {
@@ -196,7 +192,8 @@
     "accountInfo": "Account Information",
     "latestOrders": "Latest Orders",
     "user": "User",
-    "activitySummary": "Activity Summary"
+    "activitySummary": "Activity Summary",
+    "logout": "Logout"
   },
   "order": {
     "view": "View",

@@ -2,14 +2,10 @@ import { GET_CUSTOMER_PROFILE } from '@/graphql/queries/customer';
 import { GetCustomerProfileQuery } from '@/graphql/types/graphql';
 import { useQuery } from '@apollo/client';
 import { Box } from '@mui/material';
+import { useTranslations } from 'next-intl';
+import useMenuItems from '../hooks/useMenuItems';
 import MenuHeader from './MenuHeader';
 import MenuItems from './MenuItems';
-import {
-  HomeOutlined,
-  PersonOutline,
-  ShoppingBagOutlined,
-} from '@mui/icons-material';
-import { useTranslations } from 'next-intl';
 
 const Menu = () => {
   const { data, loading, error } =
@@ -21,25 +17,9 @@ const Menu = () => {
     ? data?.customer?.firstName + ' ' + data?.customer?.lastName
     : t('profile.user');
 
-  const items = [
-    {
-      label: t('profile.activitySummary'),
-      href: '/profile',
-      icon: HomeOutlined,
-    },
-    {
-      label: t('profile.myOrders'),
-      href: '/profile/orders',
-      icon: ShoppingBagOutlined,
-      count: data?.customer?.orderCount || 0,
-    },
-    {
-      label: t('profile.accountInfo'),
-      href: '/profile/information',
-      icon: PersonOutline,
-    },
-  ];
-
+  const { items } = useMenuItems({
+    ordersCount: data?.customer?.orderCount || 0,
+  });
   return (
     <Box
       sx={{

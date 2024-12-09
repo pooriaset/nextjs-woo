@@ -13,9 +13,10 @@ import { FC, Fragment } from 'react';
 
 export interface MenuItem {
   label: string;
-  href: string;
+  href?: string;
   icon: any;
   count?: number;
+  onClick?: () => void;
 }
 
 export interface MenuItemsProps {
@@ -29,7 +30,7 @@ const MenuItems: FC<MenuItemsProps> = ({ items }) => {
     <nav aria-label="profile menu">
       <List disablePadding>
         <Divider />
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
             <Fragment key={item.href}>
               <ListItem
@@ -50,8 +51,8 @@ const MenuItems: FC<MenuItemsProps> = ({ items }) => {
                 }
               >
                 <ListItemButton
-                  component={Link}
-                  href={item.href}
+                  onClick={item.onClick}
+                  {...(item.href ? { component: Link, href: item.href } : {})}
                   selected={pathname === item.href}
                 >
                   <ListItemIcon
@@ -69,7 +70,7 @@ const MenuItems: FC<MenuItemsProps> = ({ items }) => {
                   />
                 </ListItemButton>
               </ListItem>
-              <Divider />
+              {items.length - 1 !== index && <Divider />}
             </Fragment>
           );
         })}
