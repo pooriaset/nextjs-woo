@@ -13,6 +13,7 @@ import MuiBottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
 import { useAtomValue } from 'jotai';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
@@ -31,9 +32,12 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
 }));
 
 const MobileFooter = () => {
+  const session = useSession();
   const pathname = usePathname();
   const t = useTranslations();
   const cart = useAtomValue(cartAtom);
+
+  const isAuthenticated = session.status === 'authenticated';
 
   const pages: Page[] = [
     {
@@ -57,7 +61,7 @@ const MobileFooter = () => {
     },
     {
       label: t('footer.navigation.myAccount'),
-      href: '/account',
+      href: isAuthenticated ? '/profile' : '/account/signin',
       icon: <AccountCircleOutlined />,
     },
   ];

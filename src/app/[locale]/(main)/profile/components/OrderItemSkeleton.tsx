@@ -22,7 +22,12 @@ const OrderItemSkeleton: FC = () => {
 
             <Skeleton variant="circular" width={24} />
           </Stack>
-          <Stack spacing={1} direction="row" alignItems="center">
+          <Stack
+            spacing={1}
+            direction="row"
+            alignItems="center"
+            flexWrap="wrap"
+          >
             <Skeleton variant="text" width={50} />
             <Skeleton variant="text" width={50} />
             <DotIcon color={theme.palette.divider} />

@@ -23,7 +23,12 @@ const Page = () => {
   );
 
   return (
-    <Card variant="outlined">
+    <Card
+      variant="outlined"
+      sx={{
+        flexGrow: 1,
+      }}
+    >
       <CardContent>
         <CardHeader title={t('order.ordersHistory')} />
         <Stack spacing={1.5} mt={2}>

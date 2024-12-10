@@ -113,7 +113,12 @@ const Page: FC<PageProps> = (props) => {
   }
 
   return (
-    <Card variant="outlined">
+    <Card
+      variant="outlined"
+      sx={{
+        flexGrow: 1,
+      }}
+    >
       <CardContent>
         <CardHeader title={t('order.detailsTitle')} back />
         <Stack spacing={2} mt={2}>
