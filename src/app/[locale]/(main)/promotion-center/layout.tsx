@@ -1,6 +1,7 @@
 import { Card, CardContent, Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
 import Header from './components/Header';
+import MobileHeader from '@/components/MobileHeader/MobileHeader';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = async ({ children }) => {
   return (
     <>
+      <MobileHeader />
       <Header />
       <Container
         maxWidth="xl"

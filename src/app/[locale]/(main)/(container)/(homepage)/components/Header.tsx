@@ -1,14 +1,15 @@
+'use client';
+
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
-import { Locale } from '@/navigation';
 import { SearchOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import SearchDialog from './SearchDialog';
 import SearchSection from './SearchSection';
 
-const MobileHeader = () => {
+const Header = () => {
   const { navigate, q } = useCustomSearchParams();
 
   const [open, setOpen] = useState(false);
@@ -23,14 +24,6 @@ const MobileHeader = () => {
   };
 
   const t = useTranslations();
-
-  const locale = useLocale() as Locale;
-
-  // const backIcons: Record<Direction, ReactNode> = {
-  //   rtl: <ArrowForward />,
-  //   ltr: <ArrowBack />,
-  // };
-  // {backIcons[languages[locale].direction]}
 
   return (
     <>
@@ -76,4 +69,4 @@ const MobileHeader = () => {
   );
 };
 
-export default MobileHeader;
+export default Header;

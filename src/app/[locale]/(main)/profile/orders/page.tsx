@@ -2,6 +2,7 @@
 
 import { GET_CUSTOMER_ORDERS } from '@/graphql/queries/customer';
 import { GetCustomerOrdersQuery } from '@/graphql/types/graphql';
+import { useAppContext } from '@/hooks/useAppContext';
 import { useQuery } from '@apollo/client';
 import { Card, CardContent, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
@@ -22,6 +23,28 @@ const Page = () => {
     },
   );
 
+  const { isMobile } = useAppContext();
+
+  const items = (
+    <Stack spacing={1.5}>
+      {loading || !!error ? (
+        <OrderItemSkeleton />
+      ) : (
+        <>
+          {data?.customer?.orders?.edges?.map((edge) => {
+            const order = edge.node!;
+            return <OrderItem key={order.id} {...order} />;
+          })}
+        </>
+      )}
+    </Stack>
+  );
+
+  if (isMobile) {
+    return items;
+  }
+
+  const title = t('order.ordersHistory');
   return (
     <Card
       variant="outlined"
@@ -30,19 +53,8 @@ const Page = () => {
       }}
     >
       <CardContent>
-        <CardHeader title={t('order.ordersHistory')} />
-        <Stack spacing={1.5} mt={2}>
-          {loading || !!error ? (
-            <OrderItemSkeleton />
-          ) : (
-            <>
-              {data?.customer?.orders?.edges?.map((edge) => {
-                const order = edge.node!;
-                return <OrderItem key={order.id} {...order} />;
-              })}
-            </>
-          )}
-        </Stack>
+        <CardHeader title={title} />
+        {items}
       </CardContent>
     </Card>
   );

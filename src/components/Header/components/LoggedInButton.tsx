@@ -1,3 +1,5 @@
+'use client';
+
 import MenuItems from '@/app/[locale]/(main)/profile/components/MenuItems';
 import useMenuItems from '@/app/[locale]/(main)/profile/hooks/useMenuItems';
 import { Link } from '@/navigation';

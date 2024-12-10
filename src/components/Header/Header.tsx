@@ -1,14 +1,13 @@
 'use client';
 
-import { AppBar, Container } from '@mui/material';
-import { FC, Suspense } from 'react';
-import DesktopView from '../ResponsiveDesign/components/DesktopView';
-import MobileView from '../ResponsiveDesign/components/MobileView';
-import { DesktopHeader, MobileHeader } from './components';
 import TopBanner, {
   TopBannerProps,
 } from '@/components/Header/components/TopBanner';
 import { Z_INDEX_VALUES } from '@/config/responsive';
+import { AppBar, Container } from '@mui/material';
+import { FC } from 'react';
+import DesktopView from '../ResponsiveDesign/components/DesktopView';
+import { DesktopHeader } from './components';
 
 export interface HeaderProps {
   topBanner?: TopBannerProps['data'];
@@ -32,11 +31,6 @@ const Header: FC<HeaderProps> = ({ topBanner }) => {
         <DesktopView>
           <DesktopHeader />
         </DesktopView>
-        <MobileView>
-          <Suspense>
-            <MobileHeader />
-          </Suspense>
-        </MobileView>
       </Container>
     </AppBar>
   );

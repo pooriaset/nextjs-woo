@@ -1,3 +1,4 @@
+import { MobileView } from '@/components/ResponsiveDesign';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
@@ -14,11 +15,12 @@ import {
   newestSortOption,
 } from '@/static/sortOptions';
 import { Grid } from '@mui/material';
-import ProductsSlider from './components/ProductsSlider';
+import { getTranslations } from 'next-intl/server';
+import Header from './components/Header';
 import MainCategories from './components/MainCategories';
 import { MainSlider } from './components/MainSlider';
 import { ISliderItem } from './components/MainSlider/types';
-import { getTranslations } from 'next-intl/server';
+import ProductsSlider from './components/ProductsSlider';
 
 const getSliders = async () => {
   const { data } = await getClient().query<GetHomePageSlidersQuery>({
@@ -112,31 +114,37 @@ export default async function Home() {
   const t = await getTranslations();
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <MainSlider items={sliders} />
+    <>
+      <MobileView>
+        <Header />
+      </MobileView>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <MainSlider items={sliders} />
+        </Grid>
+        <Grid item xs={12}>
+          <MainCategories items={categories} />
+        </Grid>
+        <Grid item xs={12}>
+          <ProductsSlider
+            title={t('header.navigation.bestSelling')}
+            items={bestSellingProducts}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ProductsSlider
+            title={t('header.navigation.newest')}
+            items={latestProducts}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ProductsSlider
+            title={t('header.navigation.selectedProducts')}
+            items={menuOrderProducts}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <MainCategories items={categories} />
-      </Grid>
-      <Grid item xs={12}>
-        <ProductsSlider
-          title={t('header.navigation.bestSelling')}
-          items={bestSellingProducts}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <ProductsSlider
-          title={t('header.navigation.newest')}
-          items={latestProducts}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <ProductsSlider
-          title={t('header.navigation.selectedProducts')}
-          items={menuOrderProducts}
-        />
-      </Grid>
-    </Grid>
+    </>
   );
 }
