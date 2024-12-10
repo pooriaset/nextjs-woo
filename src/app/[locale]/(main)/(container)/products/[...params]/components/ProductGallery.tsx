@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Product } from '../../types/common';
 import GalleryItem from './GalleryItem';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { useAppContext } from '@/hooks/useAppContext';
+import { Navigation, Pagination } from 'swiper/modules';
 
 export type GalleryImages = Extract<
   Product['galleryImages'],
@@ -31,30 +33,82 @@ const ProductGallery: FC<ProductGalleryProps> = ({
 
   const sliderRef = useRef<any>(null);
 
+  const _galleryImages = [thumbnail, ...galleryImages];
+  const [selected, setSelected] = useState<number>(0);
+  const selectedImage = _galleryImages[selected];
+
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slidePrev();
+
+    setSelected((prevState) => {
+      if (prevState > 0) {
+        return prevState - 1;
+      }
+      return prevState;
+    });
   }, []);
 
   const handleNext = useCallback(() => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
-  }, []);
 
-  const [selected, setSelected] = useState<ISelected>({
-    src: thumbnail?.sourceUrl!,
-    alt: thumbnail?.altText!,
-  });
+    setSelected((prevState) => {
+      if (prevState < _galleryImages.length - 1) {
+        return prevState + 1;
+      }
+      return prevState;
+    });
+  }, [_galleryImages?.length]);
 
-  const _galleryImages = [thumbnail, ...galleryImages];
+  const { isMobile } = useAppContext();
 
-  const height = 500;
+  if (isMobile) {
+    return (
+      <Swiper
+        ref={sliderRef}
+        dir={theme.direction}
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+      >
+        {_galleryImages?.map((item) => {
+          return (
+            <SwiperSlide
+              key={item?.id}
+              style={{
+                height: 'auto',
+                boxSizing: 'border-box',
+              }}
+            >
+              <img
+                alt={item?.altText!}
+                src={item?.sourceUrl!}
+                style={{
+                  objectFit: 'contain',
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                  width: '100%',
+                  height: '100%',
+                  maxHeight: 500,
+                }}
+              />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    );
+  }
 
   return (
     <Stack direction="row" spacing={2}>
       <Box>
         <IconButton
-          size="large"
+          size="small"
           onClick={handlePrev}
           sx={{
             left: '50%',
@@ -68,28 +122,24 @@ const ProductGallery: FC<ProductGalleryProps> = ({
           ref={sliderRef}
           dir={theme.direction}
           direction="vertical"
-          style={{
-            height: height - 2 * 48,
+          navigation={{
+            enabled: true,
           }}
           breakpoints={{
-            [theme.breakpoints.values.xs]: {
-              slidesPerView: 1,
-            },
-            [theme.breakpoints.values.sm]: {
-              slidesPerView: 2,
-            },
             [theme.breakpoints.values.md]: {
               slidesPerView: 4,
             },
           }}
+          style={{
+            height: 400,
+            width: 72,
+          }}
           spaceBetween={theme.spacing(2)}
+          modules={[Navigation]}
         >
-          {_galleryImages?.map((item) => {
+          {_galleryImages?.map((item, index) => {
             const handleClickOnItem = () => {
-              setSelected({
-                src: item?.sourceUrl!,
-                alt: item?.altText!,
-              });
+              setSelected(index);
             };
 
             return (
@@ -104,7 +154,7 @@ const ProductGallery: FC<ProductGalleryProps> = ({
                   onClick={handleClickOnItem}
                   alt={item?.altText}
                   src={item?.sourceUrl}
-                  isActive={item?.sourceUrl === selected.src}
+                  isActive={index === selected}
                   width={72}
                   height={72}
                 />
@@ -113,7 +163,7 @@ const ProductGallery: FC<ProductGalleryProps> = ({
           })}
         </Swiper>
         <IconButton
-          size="large"
+          size="small"
           onClick={handleNext}
           sx={{
             left: '50%',
@@ -123,12 +173,11 @@ const ProductGallery: FC<ProductGalleryProps> = ({
           <ExpandMore />
         </IconButton>
       </Box>
+
       <Box>
-        <Image
-          width={height}
-          height={height}
-          src={selected?.src}
-          alt={selected?.alt}
+        <img
+          src={selectedImage?.sourceUrl!}
+          alt={selectedImage?.altText!}
           draggable={false}
           style={{
             userSelect: 'none',

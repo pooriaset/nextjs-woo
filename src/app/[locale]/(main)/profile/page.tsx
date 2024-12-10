@@ -1,16 +1,16 @@
 'use client';
 
+import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
 import { GET_CUSTOMER_ORDERS } from '@/graphql/queries/customer';
 import { GetCustomerOrdersQuery } from '@/graphql/types/graphql';
 import { Link } from '@/navigation';
 import { useQuery } from '@apollo/client';
-import { Box, Button, Card, CardContent, Stack } from '@mui/material';
+import { Button, Card, CardContent, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import CardHeader from './components/CardHeader';
+import Menu from './components/Menu';
 import OrderItem from './components/OrderItem';
 import OrderItemSkeleton from './components/OrderItemSkeleton';
-import { MobileView } from '@/components/ResponsiveDesign';
-import Menu from './components/Menu';
 
 const Page = () => {
   const t = useTranslations();
@@ -26,13 +26,11 @@ const Page = () => {
   );
 
   return (
-    <>
+    <Stack spacing={2} flexGrow={1}>
       <MobileView>
-        <Box>
-          <Menu />
-        </Box>
+        <Menu />
       </MobileView>
-      <Stack spacing={2} flexGrow={1}>
+      <DesktopView>
         <Card variant="outlined">
           <CardContent>
             <CardHeader title={t('profile.latestOrders')}>
@@ -60,8 +58,8 @@ const Page = () => {
             </Stack>
           </CardContent>
         </Card>
-      </Stack>
-    </>
+      </DesktopView>
+    </Stack>
   );
 };
 

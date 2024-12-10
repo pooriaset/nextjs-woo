@@ -4,7 +4,6 @@ import CartItem from '@/components/CartItem/CartItem';
 import CartItemController from '@/components/CartItemController/CartItemController';
 import OutOfStock from '@/components/common/OutOfStock';
 import PriceLabel from '@/components/common/PriceLabel';
-import { Z_INDEX_VALUES } from '@/config/responsive';
 import { getFragmentData } from '@/graphql/types';
 import {
   CartContentFragmentDoc,
