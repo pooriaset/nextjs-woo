@@ -1,14 +1,13 @@
 'use client';
 
-import Image from '@/components/common/Image';
+import { useAppContext } from '@/hooks/useAppContext';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Box, IconButton, Stack, useTheme } from '@mui/material';
 import { FC, useCallback, useRef, useState } from 'react';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Product } from '../../types/common';
 import GalleryItem from './GalleryItem';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { useAppContext } from '@/hooks/useAppContext';
-import { Navigation, Pagination } from 'swiper/modules';
 
 export type GalleryImages = Extract<
   Product['galleryImages'],

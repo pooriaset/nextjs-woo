@@ -5,9 +5,10 @@ import {
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support/ssr';
 import { createErrorLink } from '../utils';
+import { PUBLIC_GATEWAY_URL } from '@/config/app';
 
 const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_GATEWAY_URL,
+  uri: PUBLIC_GATEWAY_URL,
 });
 
 export const makeClient = () => {

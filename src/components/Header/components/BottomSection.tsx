@@ -1,8 +1,8 @@
+import { Link as NextLink } from '@/navigation';
+import { bestSellingSortOption } from '@/static/sortOptions';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useTranslations } from 'next-intl';
-import { Link as NextLink } from '@/navigation';
-import { bestSellingSortOption } from '@/static/sortOptions';
 
 const BottomSection = () => {
   const t = useTranslations();

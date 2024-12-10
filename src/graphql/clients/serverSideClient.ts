@@ -1,3 +1,4 @@
+import { PUBLIC_GATEWAY_URL } from '@/config/app';
 import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
 import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rsc';
 import { cookies } from 'next/headers';
@@ -6,7 +7,7 @@ export const { getClient } = registerApolloClient(() => {
   const cookiesStore = cookies();
 
   const httpLink = new HttpLink({
-    uri: `${process.env.__NEXT_PRIVATE_ORIGIN}${process.env.NEXT_PUBLIC_GATEWAY_URL}`,
+    uri: `${process.env.__NEXT_PRIVATE_ORIGIN}${PUBLIC_GATEWAY_URL}`,
     headers: {
       cookie: cookiesStore.toString(),
     },

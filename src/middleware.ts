@@ -3,7 +3,7 @@ import { NextRequestWithAuth, withAuth } from 'next-auth/middleware';
 import nextIntlMiddleware from 'next-intl/middleware';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { protectedRoutes } from './config/app';
+import { PUBLIC_GATEWAY_URL, protectedRoutes } from './config/app';
 
 const intlMiddleware = (request: NextRequest) =>
   Promise.resolve(
@@ -19,7 +19,7 @@ async function middleware(request: NextRequestWithAuth) {
   const { pathname } = request.nextUrl;
   request.headers.set('x-pathname', pathname);
 
-  if (pathname.startsWith(process.env.NEXT_PUBLIC_GATEWAY_URL)) {
+  if (pathname.startsWith(PUBLIC_GATEWAY_URL)) {
     const token = request.nextauth.token;
 
     if (token?.accessToken) {

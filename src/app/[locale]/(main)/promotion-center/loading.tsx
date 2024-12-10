@@ -1,6 +1,5 @@
 import { VariableProductItemSkeleton } from '@/components/VariableProductItem';
 import { Grid } from '@mui/material';
-import React from 'react';
 
 const loading = () => {
   return (

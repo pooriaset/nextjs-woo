@@ -1,6 +1,6 @@
 import { Card, CardContent, Container } from '@mui/material';
-import Header from './components/Header';
 import { FC, ReactNode } from 'react';
+import Header from './components/Header';
 
 interface LayoutProps {
   children: ReactNode;
