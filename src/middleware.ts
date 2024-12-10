@@ -20,8 +20,9 @@ async function middleware(request: NextRequestWithAuth) {
   request.headers.set('x-pathname', pathname);
 
   if (pathname.startsWith(PUBLIC_GATEWAY_URL)) {
-    const token = request.nextauth.token;
+    request.headers.delete('cookie');
 
+    const token = request.nextauth.token;
     if (token?.accessToken) {
       request.headers.set('Authorization', `Bearer ${token?.accessToken}`);
     }
