@@ -4,7 +4,8 @@ import { GET_CUSTOMER_ORDERS } from '@/graphql/queries/customer';
 import { GetCustomerOrdersQuery } from '@/graphql/types/graphql';
 import { useAppContext } from '@/hooks/useAppContext';
 import { useQuery } from '@apollo/client';
-import { Card, CardContent, Stack } from '@mui/material';
+import { Warning } from '@mui/icons-material';
+import { Alert, Card, CardContent, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import CardHeader from '../components/CardHeader';
 import OrderItem from '../components/OrderItem';
@@ -31,6 +32,12 @@ const Page = () => {
         <OrderItemSkeleton />
       ) : (
         <>
+          {data?.customer?.orders?.edges?.length === 0 && (
+            <Alert color="warning" icon={<Warning />}>
+              {t('noRowsToShow')}
+            </Alert>
+          )}
+
           {data?.customer?.orders?.edges?.map((edge) => {
             const order = edge.node!;
             return <OrderItem key={order.id} {...order} />;

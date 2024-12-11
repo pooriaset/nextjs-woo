@@ -1,11 +1,10 @@
 'use client';
 
-import { Box, Container, Stack } from '@mui/material';
-import React, { FC, ReactNode } from 'react';
-import Menu from './components/Menu';
 import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
 import { useAppContext } from '@/hooks/useAppContext';
-import MobileHeader from '@/components/MobileHeader/MobileHeader';
+import { Box, Stack } from '@mui/material';
+import { FC, ReactNode } from 'react';
+import Menu from './components/Menu';
 
 export interface LayoutProps {
   children: ReactNode;

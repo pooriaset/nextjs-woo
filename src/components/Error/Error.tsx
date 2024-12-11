@@ -1,27 +1,20 @@
 'use client';
 
-import { Header } from '@/components/Header';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
-export interface ErrorPageProps {
+export interface ErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
 }
 
-const ErrorPage: FC<ErrorPageProps> = ({ error, reset }) => {
+const Error: FC<ErrorProps> = ({ error, reset }) => {
   const t = useTranslations();
-
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
 
   return (
     <>
-      <Header />
-
       <Container
         maxWidth="xs"
         sx={{
@@ -57,4 +50,4 @@ const ErrorPage: FC<ErrorPageProps> = ({ error, reset }) => {
   );
 };
 
-export default ErrorPage;
+export default Error;

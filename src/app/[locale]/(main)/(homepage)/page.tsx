@@ -14,12 +14,12 @@ import {
   menuOrderSortOptions,
   newestSortOption,
 } from '@/static/sortOptions';
-import { Container, Grid, Stack } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
-import { MainSlider } from './components/MainSlider';
-import { ISliderItem } from './components/MainSlider/types';
+import { MainSlider } from '../../../../components/MainSlider';
+import { ISliderItem } from '../../../../components/MainSlider/types';
 import ProductsSlider from './components/ProductsSlider';
 
 const getSliders = async () => {
