@@ -116,7 +116,9 @@ export default async function Home() {
   return (
     <>
       <MobileView>
-        <Header />
+        <Container maxWidth="xl">
+          <Header />
+        </Container>
       </MobileView>
 
       <Grid container spacing={2}>

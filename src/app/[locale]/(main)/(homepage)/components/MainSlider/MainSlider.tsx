@@ -21,6 +21,7 @@ const MainSlider: FC<MainSliderProps> = ({ items }) => {
         delay: 3000,
         stopOnLastSlide: false,
       }}
+      centeredSlides
       loop={true}
       navigation={true}
       modules={[Autoplay, Pagination, Navigation]}

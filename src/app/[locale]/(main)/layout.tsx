@@ -5,6 +5,7 @@ import { DesktopHeader } from '@/components/Header/components';
 import TopBanner from '@/components/Header/components/TopBanner';
 import MobileHeader from '@/components/MobileHeader/MobileHeader';
 import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
+import { MOBILE_FOOTER_HEIGHT } from '@/config/responsive';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_PUBLISHED_PAGES_LIST } from '@/graphql/queries/pages';
 import { GET_TOP_BANNER } from '@/graphql/queries/sliders';
@@ -13,7 +14,7 @@ import {
   GetPublishedPagesListQuery,
   GetTopBannerQuery,
 } from '@/graphql/types/graphql';
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
 export interface LayoutProps {
@@ -64,7 +65,18 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
           </DesktopView>
         </Container>
       </Header>
-      {children}
+
+      <MobileView>
+        <Box
+          sx={{
+            paddingBottom: `${MOBILE_FOOTER_HEIGHT}px`,
+          }}
+        >
+          {children}
+        </Box>
+      </MobileView>
+      <DesktopView>{children}</DesktopView>
+
       <Footer pages={pagesList} />
     </>
   );
