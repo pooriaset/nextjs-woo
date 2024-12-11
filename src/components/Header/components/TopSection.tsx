@@ -1,3 +1,5 @@
+'use client';
+
 import Logo from '@/components/common/Logo';
 import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
@@ -88,7 +90,7 @@ const TopSection: FC = () => {
               variant="outlined"
               color="inherit"
               sx={{
-                minWidth: 150,
+                minWidth: 180,
               }}
             >
               <Stack direction="row" spacing={1}>

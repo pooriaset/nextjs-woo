@@ -28,9 +28,6 @@ const MainSlider: FC<MainSliderProps> = ({ items }) => {
       pagination={{
         clickable: true,
       }}
-      style={{
-        borderRadius: 16,
-      }}
     >
       {items?.map((item) => {
         return (

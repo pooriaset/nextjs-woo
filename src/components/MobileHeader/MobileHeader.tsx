@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from '@/navigation';
+import { usePathname, useRouter } from '@/navigation';
 import { ArrowBack, Search, Share } from '@mui/icons-material';
 import { Box, BoxProps, IconButton, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
@@ -10,6 +10,10 @@ export interface MobileHeaderProps extends BoxProps {
 }
 const MobileHeader: FC<MobileHeaderProps> = ({ title, ...props }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  if (pathname === '/') {
+    return null;
+  }
 
   const onClick = () => {
     if (window?.history?.length > 1) {

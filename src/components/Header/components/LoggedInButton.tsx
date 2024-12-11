@@ -1,7 +1,7 @@
 'use client';
 
-import MenuItems from '@/app/[locale]/(main)/profile/components/MenuItems';
-import useMenuItems from '@/app/[locale]/(main)/profile/hooks/useMenuItems';
+import MenuItems from '@/app/[locale]/(main)/(container)/profile/components/MenuItems';
+import useMenuItems from '@/app/[locale]/(main)/(container)/profile/hooks/useMenuItems';
 import { Link } from '@/navigation';
 import { ChevronRight, PersonOutline } from '@mui/icons-material';
 import { Button, Menu, MenuItem, Typography } from '@mui/material';
@@ -82,7 +82,7 @@ const LoggedInButton: FC<LoggedInButton> = ({ session }) => {
         variant="outlined"
         color="inherit"
         sx={{
-          minWidth: 150,
+          minWidth: 180,
         }}
         startIcon={<PersonOutline />}
       >

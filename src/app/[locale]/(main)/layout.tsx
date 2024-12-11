@@ -1,6 +1,10 @@
 import { ISliderItem } from '@/app/[locale]/(main)/(container)/(homepage)/components/MainSlider/types';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import { DesktopHeader } from '@/components/Header/components';
+import TopBanner from '@/components/Header/components/TopBanner';
+import MobileHeader from '@/components/MobileHeader/MobileHeader';
+import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_PUBLISHED_PAGES_LIST } from '@/graphql/queries/pages';
 import { GET_TOP_BANNER } from '@/graphql/queries/sliders';
@@ -9,6 +13,7 @@ import {
   GetPublishedPagesListQuery,
   GetTopBannerQuery,
 } from '@/graphql/types/graphql';
+import { Container } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
 export interface LayoutProps {
@@ -48,7 +53,17 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
 
   return (
     <>
-      <Header topBanner={topBanner} />
+      <Header>
+        {topBanner && <TopBanner data={topBanner} />}
+        <MobileView>
+          <MobileHeader />
+        </MobileView>
+        <Container maxWidth="xl">
+          <DesktopView>
+            <DesktopHeader />
+          </DesktopView>
+        </Container>
+      </Header>
       {children}
       <Footer pages={pagesList} />
     </>

@@ -1,18 +1,13 @@
 'use client';
 
-import TopBanner, {
-  TopBannerProps,
-} from '@/components/Header/components/TopBanner';
 import { Z_INDEX_VALUES } from '@/config/responsive';
-import { AppBar, Container } from '@mui/material';
-import { FC } from 'react';
-import DesktopView from '../ResponsiveDesign/components/DesktopView';
-import { DesktopHeader } from './components';
+import { AppBar } from '@mui/material';
+import { FC, ReactNode } from 'react';
 
 export interface HeaderProps {
-  topBanner?: TopBannerProps['data'];
+  children: ReactNode;
 }
-const Header: FC<HeaderProps> = ({ topBanner }) => {
+const Header: FC<HeaderProps> = ({ children }) => {
   return (
     <AppBar
       elevation={0}
@@ -26,12 +21,7 @@ const Header: FC<HeaderProps> = ({ topBanner }) => {
         zIndex: Z_INDEX_VALUES.siteHeader,
       }}
     >
-      {topBanner && <TopBanner data={topBanner} />}
-      <Container maxWidth="xl">
-        <DesktopView>
-          <DesktopHeader />
-        </DesktopView>
-      </Container>
+      {children}
     </AppBar>
   );
 };
