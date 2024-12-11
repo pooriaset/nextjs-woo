@@ -11,20 +11,21 @@ const Layout: FC<Layout> = async ({ children }) => {
   return (
     <>
       <MobileView>
-        <Box
+        <Container
+          maxWidth="xl"
           sx={{
+            mt: 3,
             paddingBottom: MOBILE_FOOTER_HEIGHT,
           }}
         >
           {children}
-        </Box>
+        </Container>
       </MobileView>
       <DesktopView>
         <Container
           maxWidth="xl"
           sx={{
             mt: 3,
-            pb: { xs: `${MOBILE_FOOTER_HEIGHT}px`, md: 0 },
             minHeight: '70vh',
           }}
         >

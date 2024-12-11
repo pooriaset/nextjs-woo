@@ -1,4 +1,4 @@
-import { ISliderItem } from '@/app/[locale]/(main)/(container)/(homepage)/components/MainSlider/types';
+import { ISliderItem } from '@/app/[locale]/(main)/(homepage)/components/MainSlider/types';
 import Image from 'next/image';
 import React, { FC } from 'react';
 

@@ -1,4 +1,4 @@
-import { ISliderItem } from '@/app/[locale]/(main)/(container)/(homepage)/components/MainSlider/types';
+import { ISliderItem } from '@/app/[locale]/(main)/(homepage)/components/MainSlider/types';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { DesktopHeader } from '@/components/Header/components';

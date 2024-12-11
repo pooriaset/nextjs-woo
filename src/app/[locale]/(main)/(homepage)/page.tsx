@@ -14,7 +14,7 @@ import {
   menuOrderSortOptions,
   newestSortOption,
 } from '@/static/sortOptions';
-import { Grid } from '@mui/material';
+import { Container, Grid, Stack } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
@@ -124,25 +124,31 @@ export default async function Home() {
           <MainSlider items={sliders} />
         </Grid>
         <Grid item xs={12}>
-          <MainCategories items={categories} />
-        </Grid>
-        <Grid item xs={12}>
-          <ProductsSlider
-            title={t('header.navigation.bestSelling')}
-            items={bestSellingProducts}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <ProductsSlider
-            title={t('header.navigation.newest')}
-            items={latestProducts}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <ProductsSlider
-            title={t('header.navigation.selectedProducts')}
-            items={menuOrderProducts}
-          />
+          <Container maxWidth="xl">
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <MainCategories items={categories} />
+              </Grid>
+              <Grid item xs={12}>
+                <ProductsSlider
+                  title={t('header.navigation.bestSelling')}
+                  items={bestSellingProducts}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ProductsSlider
+                  title={t('header.navigation.newest')}
+                  items={latestProducts}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ProductsSlider
+                  title={t('header.navigation.selectedProducts')}
+                  items={menuOrderProducts}
+                />
+              </Grid>
+            </Grid>
+          </Container>
         </Grid>
       </Grid>
     </>
