@@ -34,7 +34,7 @@ const Page = () => {
         <>
           {data?.customer?.orders?.edges?.length === 0 && (
             <Alert color="warning" icon={<Warning />}>
-              {t('noRowsToShow')}
+              {t('order.noRowsToShow')}
             </Alert>
           )}
 

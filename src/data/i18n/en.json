@@ -212,7 +212,7 @@
     "invoice": {
       "paidAmount": "Paid Amount",
       "yourProfit": "Your Profit from this Purchase"
-    }
-  },
-  "noRowsToShow": "No rows to show."
+    },
+    "noRowsToShow": "No orders have been placed."
+  }
 }
