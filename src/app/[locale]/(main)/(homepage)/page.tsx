@@ -14,11 +14,11 @@ import {
 } from '@/static/sortOptions';
 import { Container, Grid } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
+import { Suspense } from 'react';
 import { MainSlider } from '../../../../components/MainSlider';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
 import ProductsSlider from './components/ProductsSlider';
-import { Suspense } from 'react';
 import SlidersSkeleton from './components/SlidersSkeleton';
 
 const getCategories = async () => {
@@ -84,7 +84,7 @@ export default async function Home() {
   const t = await getTranslations();
 
   const [categories, bestSellingProducts, latestProducts, menuOrderProducts] =
-    await Promise.all([
+    await Promise.allSettled([
       getCategories(),
       getBestSellingProducts(),
       getLatestProducts(),
@@ -109,24 +109,42 @@ export default async function Home() {
           <Container maxWidth="xl">
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <MainCategories items={categories} />
+                <MainCategories
+                  items={
+                    categories.status === 'fulfilled'
+                      ? categories.value
+                      : ([] as any)
+                  }
+                />
               </Grid>
               <Grid item xs={12}>
                 <ProductsSlider
                   title={t('header.navigation.bestSelling')}
-                  items={bestSellingProducts}
+                  items={
+                    bestSellingProducts.status === 'fulfilled'
+                      ? bestSellingProducts.value
+                      : ([] as any)
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
                 <ProductsSlider
                   title={t('header.navigation.newest')}
-                  items={latestProducts}
+                  items={
+                    latestProducts.status === 'fulfilled'
+                      ? latestProducts.value
+                      : ([] as any)
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
                 <ProductsSlider
                   title={t('header.navigation.selectedProducts')}
-                  items={menuOrderProducts}
+                  items={
+                    menuOrderProducts.status === 'fulfilled'
+                      ? menuOrderProducts.value
+                      : ([] as any)
+                  }
                 />
               </Grid>
             </Grid>
