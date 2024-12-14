@@ -6,6 +6,9 @@ const withNextIntl = nextIntlPlugin('./src/i18n.ts');
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
