@@ -2,10 +2,8 @@ import { MobileView } from '@/components/ResponsiveDesign';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
-import { GET_HOMEPAGE_SLIDERS } from '@/graphql/queries/sliders';
 import {
   GetAllProductsQuery,
-  GetHomePageSlidersQuery,
   GetMainCategoriesQuery,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
@@ -16,34 +14,12 @@ import {
 } from '@/static/sortOptions';
 import { Container, Grid } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
+import { MainSlider } from '../../../../components/MainSlider';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
-import { MainSlider } from '../../../../components/MainSlider';
-import { ISliderItem } from '../../../../components/MainSlider/types';
 import ProductsSlider from './components/ProductsSlider';
-
-const getSliders = async () => {
-  const { data } = await getClient().query<GetHomePageSlidersQuery>({
-    query: GET_HOMEPAGE_SLIDERS,
-  });
-
-  const items: ISliderItem[] = [];
-  data?.sliderCategories?.nodes?.map((item) => {
-    item.sliders?.edges.forEach((edge) => {
-      if (edge.node.featuredImage?.node.url) {
-        const item: ISliderItem = {
-          id: edge.node.id,
-          title: edge.node.title || '',
-          imageUrl: edge.node.featuredImage.node.url,
-          url: edge.node.url,
-        };
-        items.push(item);
-      }
-    });
-  });
-
-  return items;
-};
+import { Suspense } from 'react';
+import SlidersSkeleton from './components/SlidersSkeleton';
 
 const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({
@@ -105,13 +81,15 @@ const getProductsByMenuOrder = async () => {
 };
 
 export default async function Home() {
-  const sliders = await getSliders();
-  const categories = await getCategories();
-  const bestSellingProducts = await getBestSellingProducts();
-  const latestProducts = await getLatestProducts();
-  const menuOrderProducts = await getProductsByMenuOrder();
-
   const t = await getTranslations();
+
+  const [categories, bestSellingProducts, latestProducts, menuOrderProducts] =
+    await Promise.all([
+      getCategories(),
+      getBestSellingProducts(),
+      getLatestProducts(),
+      getProductsByMenuOrder(),
+    ]);
 
   return (
     <>
@@ -123,7 +101,9 @@ export default async function Home() {
 
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <MainSlider items={sliders} />
+          <Suspense fallback={<SlidersSkeleton />}>
+            <MainSlider />
+          </Suspense>
         </Grid>
         <Grid item xs={12}>
           <Container maxWidth="xl">

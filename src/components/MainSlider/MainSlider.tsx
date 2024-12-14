@@ -6,14 +6,32 @@ import { useTheme } from '@mui/material';
 import { FC } from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { SliderItem } from './components/SliderItem';
+import { useSuspenseQuery } from '@apollo/client';
+import { GetHomePageSlidersQuery } from '@/graphql/types/graphql';
+import { GET_HOMEPAGE_SLIDERS } from '@/graphql/queries/sliders';
 import { ISliderItem } from './types';
 
-export interface MainSliderProps {
-  items?: ISliderItem[];
-}
-
-const MainSlider: FC<MainSliderProps> = ({ items }) => {
+const MainSlider: FC = () => {
   const theme = useTheme();
+
+  const { data } =
+    useSuspenseQuery<GetHomePageSlidersQuery>(GET_HOMEPAGE_SLIDERS);
+
+  const items: ISliderItem[] = [];
+  data?.sliderCategories?.nodes?.map((item) => {
+    item.sliders?.edges.forEach((edge) => {
+      if (edge.node.featuredImage?.node.url) {
+        const item: ISliderItem = {
+          id: edge.node.id,
+          title: edge.node.title || '',
+          imageUrl: edge.node.featuredImage.node.url,
+          url: edge.node.url,
+        };
+        items.push(item);
+      }
+    });
+  });
+
   return (
     <Swiper
       dir={theme.direction}

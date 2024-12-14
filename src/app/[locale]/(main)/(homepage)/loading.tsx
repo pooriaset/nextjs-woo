@@ -8,6 +8,7 @@ import {
   Skeleton,
   Stack,
 } from '@mui/material';
+import SlidersSkeleton from './components/SlidersSkeleton';
 
 const Loading = () => {
   return (
@@ -27,7 +28,7 @@ const Loading = () => {
 
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Skeleton variant="rectangular" height={350} />
+          <SlidersSkeleton />
         </Grid>
 
         <Grid item xs={12}>
