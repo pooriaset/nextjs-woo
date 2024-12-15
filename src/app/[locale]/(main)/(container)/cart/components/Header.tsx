@@ -1,3 +1,5 @@
+'use client';
+
 import Dialog, { DialogProps } from '@/components/Dialog/Dialog';
 import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import useEmptyCart from '@/hooks/useEmptyCart';
@@ -35,6 +37,7 @@ const Header = () => {
 
   const handleClickOnConfirm = async () => {
     await emptyCartMutate();
+    handleCloseDialog();
   };
 
   const onCloseDialog: DialogProps['onClose'] = (event, reason) => {
