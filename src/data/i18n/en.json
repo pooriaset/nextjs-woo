@@ -9,6 +9,9 @@
       "shortDescription": "You can find your desired product in the below links:",
       "selectYourSize": "Please select your size.",
       "reserveMessage": "Adding a product to the shopping cart does not mean reserving it, please register your cart and complete the purchase."
+    },
+    "auth": {
+      "doNotHaveAnAccount": "Don't have an account?"
     }
   },
   "categories": {
@@ -57,7 +60,8 @@
     "no": "No",
     "removeAll": "Remove All",
     "viewMore": "View More",
-    "back": "Back"
+    "back": "Back",
+    "register": "Register"
   },
   "footer": {
     "links": {

@@ -14,6 +14,7 @@ import { useTransition } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
+import { Link as MuiLink } from '@mui/material';
 
 type FieldNames = Partial<Record<'username' | 'password', any>>;
 
@@ -136,16 +137,24 @@ const Page = () => {
         </Stack>
       </CardContent>
       <CardActions>
-        <ButtonWithLoading
-          isLoading={isPending}
-          fullWidth
-          type="submit"
-          variant="contained"
-          color="primary"
-          size="large"
-        >
-          {t('pages.login.buttons.login')}
-        </ButtonWithLoading>
+        <Stack spacing={2} width="100%">
+          <ButtonWithLoading
+            isLoading={isPending}
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            {t('pages.login.buttons.login')}
+          </ButtonWithLoading>
+          <Typography variant="subtitle2">
+            {t('messages.auth.doNotHaveAnAccount')}{' '}
+            <MuiLink component={Link} href="/account/signup">
+              {t('buttons.register')}
+            </MuiLink>
+          </Typography>
+        </Stack>
       </CardActions>
     </Card>
   );
