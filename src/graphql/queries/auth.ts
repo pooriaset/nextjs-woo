@@ -20,3 +20,29 @@ export const REFRESH_TOKEN_MUTATION = gql`
     }
   }
 `;
+
+export const REGISTER_CUSTOMER = gql`
+  mutation RegisterCustomer(
+    $email: String
+    $firstName: String
+    $lastName: String
+    $password: String
+  ) {
+    registerCustomer(
+      input: {
+        email: $email
+        firstName: $firstName
+        lastName: $lastName
+        password: $password
+      }
+    ) {
+      accessToken: authToken
+      refreshToken
+      customer {
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`;

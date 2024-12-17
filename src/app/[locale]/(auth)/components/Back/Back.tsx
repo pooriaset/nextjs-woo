@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from '@/navigation';
-import { ArrowForwardOutlined } from '@mui/icons-material';
+import { ArrowBackOutlined } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useTranslations } from 'next-intl';
@@ -22,7 +22,15 @@ const Back = () => {
           mr: 0.5,
         },
       }}
-      startIcon={<ArrowForwardOutlined fontSize="small" />}
+      startIcon={
+        <ArrowBackOutlined
+          fontSize="small"
+          sx={{
+            transform: (theme) =>
+              theme.direction === 'rtl' ? 'rotate(180deg)' : '',
+          }}
+        />
+      }
       variant="text"
       color="inherit"
       onClick={handleClickOnButton}

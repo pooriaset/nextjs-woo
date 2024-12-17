@@ -1,5 +1,7 @@
 import { Direction } from '@mui/material';
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
+import { faLocale } from './utils/yup';
+import { LocaleObject } from 'yup';
 
 export const locales = ['en', 'fa'] as const;
 
@@ -13,6 +15,7 @@ export const languages: Record<
     label: string;
     direction: Direction;
     code: string;
+    yupLocale?: LocaleObject;
   }
 > = {
   en: {
@@ -24,6 +27,7 @@ export const languages: Record<
     label: 'Persian',
     direction: 'rtl',
     code: 'fa-ir',
+    yupLocale: faLocale,
   },
 };
 

@@ -146,13 +146,17 @@
       "message": "The page not found!"
     },
     "login": {
-      "title": "Login | Register",
       "hello": "Hello!",
       "buttons": {
-        "login": "Login"
+        "login": "Login",
+        "register": "Register"
       },
       "username": "Username",
-      "password": "Password"
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "email": "Email",
+      "firstName": "First Name",
+      "lastName": "Last Name"
     },
     "confirm": {
       "title": "Confirm Code",

@@ -146,13 +146,17 @@
       "message": "به نظر آدرس را اشتباه وارد کرده‌اید"
     },
     "login": {
-      "title": "ورود | ثبت نام",
       "hello": "سلام!",
       "buttons": {
-        "login": "ورود"
+        "login": "ورود",
+        "register": "ثبت نام"
       },
       "username": "نام کاربری",
-      "password": "رمز عبور"
+      "password": "رمز عبور",
+      "confirmPassword": "تایید رمز عبور",
+      "email": "ایمیل",
+      "firstName": "نام",
+      "lastName": "نام خانوادگی"
     },
     "confirm": {
       "title": "تایید کد",

@@ -84,7 +84,7 @@ const Page = () => {
                 mb: 1,
               }}
             >
-              {t('pages.login.title')}
+              {t('pages.login.buttons.login')}
             </Typography>
           </Stack>
           <Stack spacing={2}>
