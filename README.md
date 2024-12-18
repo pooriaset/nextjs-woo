@@ -9,11 +9,22 @@ Next.js & WooCommerce integration with Apollo Client & WP-GraphQL for efficient 
 
 ## Table of Contents
 
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Requirements
+
+Before setting up the Next.js application, ensure that you have a WordPress installation as the backend with the following plugins:
+
+- **[WooCommerce](https://wordpress.org/plugins/woocommerce/)**: For eCommerce functionality.
+- **[WP-GraphQL](https://wordpress.org/plugins/wp-graphql/)**: Provides a GraphQL API for your WordPress site.
+- **[WPGraphQL for WooCommerce (WooGraphQL)](https://github.com/wp-graphql/wp-graphql-woocommerce)**: Extends WP-GraphQL to include WooCommerce data.
+- **[WPGraphQL JWT Authentication](https://github.com/wp-graphql/wp-graphql-jwt-authentication)**: Enables JWT authentication for secure API access.
+- **[wp-nextjs-woo](https://github.com/pooriaset/wp-nextjs-woo)**: A necessary plugin for this Next.js project to work with your WordPress setup.
 
 ## Installation
 
