@@ -2,7 +2,13 @@
 
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import Logo from '@/components/common/Logo';
+import { REGISTER_CUSTOMER } from '@/graphql/queries/auth';
+import {
+  RegisterCustomerDocument,
+  RegisterCustomerMutation,
+} from '@/graphql/types/graphql';
 import { Link, useRouter } from '@/navigation';
+import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid, Stack, TextField, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -53,20 +59,32 @@ const Page = () => {
 
   const [isPending, startTransition] = useTransition();
 
+  const [registerCustomer] =
+    useMutation<RegisterCustomerMutation>(REGISTER_CUSTOMER);
   const onSubmit: SubmitHandler<FieldNames> = (data) => {
     startTransition(async () => {
-      const result = await signIn('credentials', {
-        ...data,
-        redirect: false,
-      });
+      try {
+        const { errors } = await registerCustomer({
+          variables: {
+            ...data,
+          },
+        });
+        if (!errors?.length) {
+          const result = await signIn('credentials', {
+            username: data.email,
+            password: data.password,
+            redirect: false,
+          });
 
-      if (result) {
-        if (result.status !== 200) {
-          toast.error('An Error Occurred!');
-        } else {
-          router.push('/');
+          if (result) {
+            if (result.status !== 200) {
+              toast.error('An Error Occurred!');
+            } else {
+              router.push('/');
+            }
+          }
         }
-      }
+      } catch (error) {}
     });
   };
 
