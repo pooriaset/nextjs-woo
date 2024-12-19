@@ -1,6 +1,7 @@
 import { Link } from '@/navigation';
 import {
   Chip,
+  CircularProgress,
   Divider,
   List,
   ListItem,
@@ -17,6 +18,7 @@ export interface MenuItem {
   icon: any;
   count?: number;
   onClick?: () => void;
+  isLoading?: boolean;
 }
 
 export interface MenuItemsProps {
@@ -60,8 +62,13 @@ const MenuItems: FC<MenuItemsProps> = ({ items }) => {
                       minWidth: 36,
                     }}
                   >
-                    <item.icon />
+                    {item.isLoading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : (
+                      <item.icon />
+                    )}
                   </ListItemIcon>
+
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{

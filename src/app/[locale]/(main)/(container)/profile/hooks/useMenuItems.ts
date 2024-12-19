@@ -9,6 +9,7 @@ import { MenuItem } from '../components/MenuItems';
 import { usePathname, useRouter } from '@/navigation';
 import { signOut } from 'next-auth/react';
 import { protectedRoutes } from '@/config/app';
+import { useTransition } from 'react';
 
 export interface IUseMenuItems {
   (props?: { ordersCount: number }): {
@@ -17,14 +18,16 @@ export interface IUseMenuItems {
 }
 const useMenuItems: IUseMenuItems = (props) => {
   const t = useTranslations();
-
+  const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const router = useRouter();
   const handleLogout = async () => {
-    await signOut({ redirect: false });
-    if (protectedRoutes.some((route) => pathname.includes(route))) {
-      router.push('/');
-    }
+    startTransition(async () => {
+      await signOut({ redirect: false });
+      if (protectedRoutes.some((route) => pathname.includes(route))) {
+        router.push('/');
+      }
+    });
   };
 
   const items = [
@@ -48,6 +51,7 @@ const useMenuItems: IUseMenuItems = (props) => {
       label: t('profile.logout'),
       onClick: handleLogout,
       icon: LogoutOutlined,
+      isLoading: isPending,
     },
   ];
   return { items };
