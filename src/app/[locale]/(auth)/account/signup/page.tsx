@@ -3,10 +3,7 @@
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import Logo from '@/components/common/Logo';
 import { REGISTER_CUSTOMER } from '@/graphql/queries/auth';
-import {
-  RegisterCustomerDocument,
-  RegisterCustomerMutation,
-} from '@/graphql/types/graphql';
+import { RegisterCustomerMutation } from '@/graphql/types/graphql';
 import { Link, useRouter } from '@/navigation';
 import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';

@@ -1,11 +1,16 @@
+'use client';
+
 import { ISliderItem } from '@/components/MainSlider/types';
+import { useAppContext } from '@/hooks/useAppContext';
 import Image from 'next/image';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 export interface TopBannerProps {
   data: ISliderItem | null;
 }
 const TopBanner: FC<TopBannerProps> = ({ data }) => {
+  const { isMobile } = useAppContext();
+
   if (!data) {
     return null;
   }
@@ -13,7 +18,7 @@ const TopBanner: FC<TopBannerProps> = ({ data }) => {
   return (
     <Image
       width={2800}
-      height={60}
+      height={isMobile ? 35 : 60}
       src={data.imageUrl}
       alt="Top Banner"
       style={{
