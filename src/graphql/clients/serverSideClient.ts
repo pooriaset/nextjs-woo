@@ -10,6 +10,7 @@ export const { getClient } = registerApolloClient(() => {
     uri: `${process.env.__NEXT_PRIVATE_ORIGIN}${PUBLIC_GATEWAY_URL}`,
     headers: {
       cookie: cookiesStore.toString(),
+      'X-Server-Side': 'true',
     },
   });
 

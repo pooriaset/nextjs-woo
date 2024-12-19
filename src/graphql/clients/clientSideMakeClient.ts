@@ -8,7 +8,25 @@ import { createErrorLink } from '../utils';
 import { PUBLIC_GATEWAY_URL } from '@/config/app';
 import Cookies from 'js-cookie';
 
-export const WOO_SESSION_KEY = 'woo-session';
+const WOO_SESSION_KEY = 'woo-session';
+
+/**
+ * Apollo Link to manage WooCommerce session tokens.
+ * This link sets the session token in the request headers if available.
+ */
+export const wooSessionSetter = new ApolloLink((operation, forward) => {
+  const token = Cookies.get(WOO_SESSION_KEY);
+  if (token) {
+    // Set session token in the request headers
+    operation.setContext({
+      headers: {
+        'woocommerce-session': `Session ${token}`,
+      },
+    });
+  }
+
+  return forward(operation);
+});
 
 /**
  * Apollo Link to update the WooCommerce session token.
@@ -47,6 +65,7 @@ export const makeClient = () => {
     connectToDevTools: true,
     cache: new NextSSRInMemoryCache(),
     link: from([
+      wooSessionSetter,
       wooSessionUpdater,
       createErrorLink(),
       new SSRMultipartLink({ stripDefer: true }),
