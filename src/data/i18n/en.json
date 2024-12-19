@@ -4,6 +4,7 @@
     "title": "Are you sure?"
   },
   "messages": {
+    "copied": "Copied to clipboard",
     "cart": {
       "isEmpty": "Cart is empty!",
       "shortDescription": "You can find your desired product in the below links:",

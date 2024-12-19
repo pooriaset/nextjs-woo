@@ -3,7 +3,9 @@
 import { usePathname, useRouter } from '@/navigation';
 import { ArrowBack, Search, Share } from '@mui/icons-material';
 import { Box, BoxProps, IconButton, Stack, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import { toast } from 'react-toastify';
 
 export interface MobileHeaderProps extends BoxProps {
   title?: string;
@@ -11,6 +13,8 @@ export interface MobileHeaderProps extends BoxProps {
 const MobileHeader: FC<MobileHeaderProps> = ({ title, ...props }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations();
+
   if (pathname === '/') {
     return null;
   }
@@ -22,6 +26,12 @@ const MobileHeader: FC<MobileHeaderProps> = ({ title, ...props }) => {
     }
 
     router.replace('/');
+  };
+
+  const handleClickOnShare = () => {
+    const value = window.location.href;
+    navigator.clipboard.writeText(value);
+    toast.success(t('messages.copied'));
   };
 
   return (
@@ -46,7 +56,7 @@ const MobileHeader: FC<MobileHeaderProps> = ({ title, ...props }) => {
           <IconButton>
             <Search />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleClickOnShare}>
             <Share />
           </IconButton>
         </Stack>
