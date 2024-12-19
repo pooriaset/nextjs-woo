@@ -1,10 +1,11 @@
 'use client';
 
+import Image from '@/components/common/Image';
+import { useAppContext } from '@/hooks/useAppContext';
 import { ChevronLeft } from '@mui/icons-material';
 import { Box, Grid, Link, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import React, { FC } from 'react';
-import Image from '@/components/common/Image';
+import { FC } from 'react';
 
 export interface IMainCategory {
   id: number | string;
@@ -15,6 +16,7 @@ export interface MainCategoriesProps {
   items: IMainCategory[];
 }
 const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
+  const { isMobile } = useAppContext();
   return (
     <Grid container spacing={2}>
       {items.map((item) => {
@@ -22,12 +24,12 @@ const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
         params.set('categoryId', item.id.toString());
 
         return (
-          <Grid key={item.id} item xs={12} md={3}>
+          <Grid key={item.id} item xs={6} md={3}>
             <Link href={`/search?${params.toString()}`}>
               <Stack spacing={1} alignItems="end">
                 <Box
                   width="100%"
-                  height={210}
+                  height={isMobile ? 150 : 210}
                   sx={{
                     bgcolor: grey[100],
                     borderRadius: 2,

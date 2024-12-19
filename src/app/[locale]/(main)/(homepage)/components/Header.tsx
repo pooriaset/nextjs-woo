@@ -5,11 +5,13 @@ import { SearchOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import SearchDialog from './SearchDialog';
 import SearchSection from './SearchSection';
 
 const Header = () => {
+  const [isPending, startTransition] = useTransition();
+
   const { navigate, q } = useCustomSearchParams();
 
   const [open, setOpen] = useState(false);
@@ -19,8 +21,10 @@ const Header = () => {
   };
 
   const onClickOnSearch = (q: string) => {
-    navigate('Q', q);
-    setOpen(false);
+    startTransition(() => {
+      navigate('Q', q);
+      setOpen(false);
+    });
   };
 
   const t = useTranslations();
@@ -31,6 +35,7 @@ const Header = () => {
         <SearchSection
           onClickOnBack={handleToggleDialog}
           onClickOnSearch={onClickOnSearch}
+          isPending={isPending}
         />
       </SearchDialog>
       <Stack direction="row" spacing={1} alignItems="center" height={56}>

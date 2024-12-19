@@ -1,3 +1,4 @@
+import IconButtonWithLoading from '@/components/common/IconButtonWithLoading';
 import useInputFiller from '@/hooks/useInputFiller';
 import { Locale, languages } from '@/navigation';
 import {
@@ -12,11 +13,13 @@ import { DOMAttributes, FC } from 'react';
 export interface SearchSectionProps {
   onClickOnBack?: IconButtonProps['onClick'];
   onClickOnSearch?: (q: string) => void;
+  isPending?: boolean;
 }
 
 const SearchSection: FC<SearchSectionProps> = ({
   onClickOnBack,
   onClickOnSearch,
+  isPending,
 }) => {
   const { inputRef } = useInputFiller();
 
@@ -47,9 +50,9 @@ const SearchSection: FC<SearchSectionProps> = ({
             </IconButton>
           ),
           endAdornment: (
-            <IconButton type="submit">
+            <IconButtonWithLoading isLoading={isPending} type="submit">
               <SearchOutlined />
-            </IconButton>
+            </IconButtonWithLoading>
           ),
         }}
         fullWidth
