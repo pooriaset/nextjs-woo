@@ -4,6 +4,7 @@ import nextIntlMiddleware from 'next-intl/middleware';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { PUBLIC_GATEWAY_URL, protectedRoutes } from './config/app';
+import { WOO_SESSION_KEY } from './graphql/clients/clientSideMakeClient';
 
 const intlMiddleware = (request: NextRequest) =>
   Promise.resolve(
@@ -18,6 +19,11 @@ const intlMiddleware = (request: NextRequest) =>
 async function middleware(request: NextRequestWithAuth) {
   const { pathname } = request.nextUrl;
   request.headers.set('x-pathname', pathname);
+
+  const wooToken = request.cookies.get(WOO_SESSION_KEY)?.value;
+  if (wooToken) {
+    request.headers.set('woocommerce-session', `Session ${wooToken}`);
+  }
 
   if (pathname.startsWith(PUBLIC_GATEWAY_URL)) {
     request.headers.delete('cookie');
