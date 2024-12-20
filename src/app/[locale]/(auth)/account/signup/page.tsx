@@ -14,7 +14,7 @@ import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useTransition } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import * as yup from 'yup';
 
 type FieldNames = Partial<

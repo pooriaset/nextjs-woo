@@ -10,7 +10,7 @@ import {
 } from '@/graphql/types/graphql';
 import { useMutation } from '@apollo/client';
 import useCartUtils from './useCartUtils';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { useTranslations } from 'next-intl';
 
 export interface MutateCartFunction {

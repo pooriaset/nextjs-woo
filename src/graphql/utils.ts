@@ -1,6 +1,6 @@
 import { onError } from '@apollo/client/link/error';
 import { Observable } from '@apollo/client/utilities';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export const createErrorLink = () => {
   return onError(({ graphQLErrors, operation, forward }) => {

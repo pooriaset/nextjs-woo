@@ -5,7 +5,7 @@ import { ArrowBack, Search, Share } from '@mui/icons-material';
 import { Box, BoxProps, IconButton, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export interface MobileHeaderProps extends BoxProps {
   title?: string;

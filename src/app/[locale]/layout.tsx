@@ -17,9 +17,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
-import { ToastContainer } from 'react-toastify';
 import ConfirmAlertProvider from '@/providers/ConfirmAlertProvider';
-import 'react-toastify/dist/ReactToastify.css';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -27,6 +25,7 @@ import 'swiper/css/pagination';
 import IconsSymbols from '@/components/Icons/components/IconsSymbols';
 import { getServerSession } from 'next-auth';
 import SessionProvider from '@/components/Auth/SessionProvider';
+import { Toaster } from 'react-hot-toast';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
@@ -69,8 +68,8 @@ export default async function LocaleLayout({
         <SessionProvider session={session}>
           <AppRouterCacheProvider>
             <ThemeProvider theme={themes[locale] ?? defaultTheme}>
-              <ToastContainer
-                rtl={languages?.[locale]?.direction == 'rtl'}
+              <Toaster
+                // rtl={languages?.[locale]?.direction == 'rtl'}
                 position="top-center"
               />
               <ApolloProvider>
