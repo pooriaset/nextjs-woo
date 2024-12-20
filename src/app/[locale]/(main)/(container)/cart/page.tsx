@@ -6,7 +6,6 @@ import OutOfStock from '@/components/common/OutOfStock';
 import PriceLabel from '@/components/common/PriceLabel';
 import { getFragmentData } from '@/graphql/types';
 import {
-  CartContentFragmentDoc,
   CartItemContentFragmentDoc,
   ProductContentSliceFragmentDoc,
   ProductVariationContentSliceFragmentDoc,
@@ -27,17 +26,19 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
+import { cartAtom } from '@/store/atoms';
+import { useAtomValue } from 'jotai';
+import CartItemsSkeleton from './components/CartItemsSkeleton';
 import CheckoutBox from './components/CheckoutBox';
+import CheckoutBoxSkeleton from './components/CheckoutBoxSkeleton';
 import EmptyCart from './components/EmptyCart';
 import Header from './components/Header';
-import CheckoutBoxSkeleton from './components/CheckoutBoxSkeleton';
-import CartItemsSkeleton from './components/CartItemsSkeleton';
 
 const Page = () => {
   const t = useTranslations();
-  const { loading, data } = useCartQuery();
+  const { loading } = useCartQuery();
 
-  const content = getFragmentData(CartContentFragmentDoc, data?.cart);
+  const content = useAtomValue(cartAtom);
 
   if (!loading && !content?.contents?.itemCount) return <EmptyCart />;
 
