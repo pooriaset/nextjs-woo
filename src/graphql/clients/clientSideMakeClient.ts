@@ -1,72 +1,60 @@
-import { ApolloLink, HttpLink, from } from '@apollo/client';
+import { PUBLIC_GATEWAY_URL } from '@/config/app';
+import { ApolloClient, HttpLink, from } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import {
   NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from '@apollo/experimental-nextjs-app-support/ssr';
-import { createErrorLink } from '../utils';
-import { PUBLIC_GATEWAY_URL } from '@/config/app';
 import Cookies from 'js-cookie';
+import { GET_CUSTOMER_SESSION_QUERY } from '../queries/customer';
+import { GetCustomerSessionQuery } from '../types/graphql';
+import { createErrorLink } from '../utils';
 
 const WOO_SESSION_KEY = 'woo-session';
 
-/**
- * Apollo Link to manage WooCommerce session tokens.
- * This link sets the session token in the request headers if available.
- */
-export const wooSessionSetter = new ApolloLink((operation, forward) => {
-  const token = Cookies.get(WOO_SESSION_KEY);
-  if (token) {
-    // Set session token in the request headers
-    operation.setContext({
-      headers: {
-        'woocommerce-session': `Session ${token}`,
-      },
-    });
-  }
-
-  return forward(operation);
-});
-
-/**
- * Apollo Link to update the WooCommerce session token.
- * This link captures the session token from the response headers and stores it in cookies.
- */
-export const wooSessionUpdater = new ApolloLink((operation, forward) =>
-  forward(operation).map((response) => {
-    const context = operation.getContext();
-    const session = context.response?.headers.get('woocommerce-session');
-
-    if (session) {
-      if (session === 'false') {
-        // Remove session data if the session is destroyed
-        Cookies.remove(WOO_SESSION_KEY);
-      } else if (!Cookies.get(WOO_SESSION_KEY)) {
-        // Store new session token if it doesn't exist
-        Cookies.set(WOO_SESSION_KEY, session, { expires: 7 });
-      }
-    }
-
-    return response;
-  }),
-);
-
-// Create an HTTP link for Apollo Client
 const httpLink = new HttpLink({
   uri: PUBLIC_GATEWAY_URL,
 });
 
-/**
- * Function to create an Apollo Client instance with SSR support.
- */
+const client = new ApolloClient({
+  cache: new NextSSRInMemoryCache(),
+  link: from([httpLink]),
+});
+
+const createSessionLink = () => {
+  return setContext(async ({ context: { headers: currentHeaders } = {} }) => {
+    const headers = { ...currentHeaders };
+
+    let sessionToken = Cookies.get(WOO_SESSION_KEY);
+    if (!sessionToken) {
+      const { data } = await client.query<GetCustomerSessionQuery>({
+        query: GET_CUSTOMER_SESSION_QUERY,
+      });
+
+      sessionToken = data.customer?.sessionToken!;
+      Cookies.set(WOO_SESSION_KEY, sessionToken, { expires: 2 });
+    }
+
+    if (sessionToken) {
+      headers['woocommerce-session'] = `Session ${sessionToken}`;
+    }
+
+    if (sessionToken) {
+      return { headers };
+    }
+
+    return {};
+  });
+};
+
 export const makeClient = () => {
   return new NextSSRApolloClient({
     ssrMode: true,
     connectToDevTools: true,
     cache: new NextSSRInMemoryCache(),
     link: from([
-      wooSessionSetter,
-      wooSessionUpdater,
+      createSessionLink(),
       createErrorLink(),
       new SSRMultipartLink({ stripDefer: true }),
       httpLink,
