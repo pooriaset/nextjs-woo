@@ -33,7 +33,7 @@ const createSessionLink = () => {
       });
 
       sessionToken = data.customer?.sessionToken!;
-      Cookies.set(WOO_SESSION_KEY, sessionToken, { expires: 2 });
+      Cookies.set(WOO_SESSION_KEY, sessionToken, { expires: 7 });
     }
 
     if (sessionToken) {
