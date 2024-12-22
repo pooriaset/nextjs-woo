@@ -26,28 +26,29 @@ import IconsSymbols from '@/components/Icons/components/IconsSymbols';
 import { getServerSession } from 'next-auth';
 import SessionProvider from '@/components/Auth/SessionProvider';
 import { Toaster } from 'react-hot-toast';
+import { Provider } from 'jotai';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
-export async function generateMetadata(): Promise<Metadata> {
-  try {
-    const { data } = await getClient().query<GetGeneralSettingsQuery>({
-      query: GET_GENERAL_SETTINGS,
-    });
+// export async function generateMetadata(): Promise<Metadata> {
+//   try {
+//     const { data } = await getClient().query<GetGeneralSettingsQuery>({
+//       query: GET_GENERAL_SETTINGS,
+//     });
 
-    return {
-      title: {
-        template: `%s | ${data.generalSettings?.title!}`,
-        default: data.generalSettings?.title! ?? 'Test',
-      },
-      description: data.generalSettings?.description!,
-    };
-  } catch (error) {
-    return {
-      title: 'NextJs Woo',
-    };
-  }
-}
+//     return {
+//       title: {
+//         template: `%s | ${data.generalSettings?.title!}`,
+//         default: data.generalSettings?.title! ?? 'Test',
+//       },
+//       description: data.generalSettings?.description!,
+//     };
+//   } catch (error) {
+//     return {
+//       title: 'NextJs Woo',
+//     };
+//   }
+// }
 
 export default async function LocaleLayout({
   children,
@@ -66,25 +67,27 @@ export default async function LocaleLayout({
       <body>
         <IconsSymbols />
         <SessionProvider session={session}>
-          <AppRouterCacheProvider>
-            <ThemeProvider theme={themes[locale] ?? defaultTheme}>
-              <Toaster
-                // rtl={languages?.[locale]?.direction == 'rtl'}
-                position="top-center"
-              />
-              <ApolloProvider>
-                <AppProvider userAgent={reqUserAgent}>
-                  <CssBaseline />
-                  <GlobalStyles styles={globalStyles} />
-                  <RTLProvider>
-                    <I18nProvider locale={locale}>
-                      <ConfirmAlertProvider>{children}</ConfirmAlertProvider>
-                    </I18nProvider>
-                  </RTLProvider>
-                </AppProvider>
-              </ApolloProvider>
-            </ThemeProvider>
-          </AppRouterCacheProvider>
+          <Provider>
+            <AppRouterCacheProvider>
+              <ThemeProvider theme={themes[locale] ?? defaultTheme}>
+                <Toaster
+                  // rtl={languages?.[locale]?.direction == 'rtl'}
+                  position="top-center"
+                />
+                <ApolloProvider>
+                  <AppProvider userAgent={reqUserAgent}>
+                    <CssBaseline />
+                    <GlobalStyles styles={globalStyles} />
+                    <RTLProvider>
+                      <I18nProvider locale={locale}>
+                        <ConfirmAlertProvider>{children}</ConfirmAlertProvider>
+                      </I18nProvider>
+                    </RTLProvider>
+                  </AppProvider>
+                </ApolloProvider>
+              </ThemeProvider>
+            </AppRouterCacheProvider>
+          </Provider>
         </SessionProvider>
       </body>
     </html>
