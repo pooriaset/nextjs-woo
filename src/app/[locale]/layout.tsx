@@ -30,25 +30,25 @@ import { Provider } from 'jotai';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   try {
-//     const { data } = await getClient().query<GetGeneralSettingsQuery>({
-//       query: GET_GENERAL_SETTINGS,
-//     });
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const { data } = await getClient().query<GetGeneralSettingsQuery>({
+      query: GET_GENERAL_SETTINGS,
+    });
 
-//     return {
-//       title: {
-//         template: `%s | ${data.generalSettings?.title!}`,
-//         default: data.generalSettings?.title! ?? 'Test',
-//       },
-//       description: data.generalSettings?.description!,
-//     };
-//   } catch (error) {
-//     return {
-//       title: 'NextJs Woo',
-//     };
-//   }
-// }
+    return {
+      title: {
+        template: `%s | ${data.generalSettings?.title!}`,
+        default: data.generalSettings?.title! ?? 'Test',
+      },
+      description: data.generalSettings?.description!,
+    };
+  } catch (error) {
+    return {
+      title: 'NextJs Woo',
+    };
+  }
+}
 
 export default async function LocaleLayout({
   children,

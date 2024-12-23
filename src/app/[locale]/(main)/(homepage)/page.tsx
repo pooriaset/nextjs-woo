@@ -24,6 +24,9 @@ import SlidersSkeleton from './components/SlidersSkeleton';
 const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({
     query: GET_MAIN_CATEGORIES,
+    variables: {
+      first: 6,
+    },
   });
 
   const items =
