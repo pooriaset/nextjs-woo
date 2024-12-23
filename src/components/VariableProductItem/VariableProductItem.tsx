@@ -5,14 +5,14 @@ import { Box, Card, CardContent, Typography } from '@mui/material';
 import { StockStatusEnum } from '@/graphql/types/graphql';
 import { useAppContext } from '@/hooks/useAppContext';
 import { Link as NextLink } from '@/navigation';
-import Image from 'next/image';
+import { getMaxOfRangePrice } from '@/utils/price';
 import { FC } from 'react';
 import DiscountPercentage from '../common/DiscountPercentage';
+import Image from '../common/Image';
 import OldPrice from '../common/OldPrice';
 import OutOfStock from '../common/OutOfStock';
 import PriceLabel from '../common/PriceLabel';
 import { VariableProduct } from './types';
-import { getMaxOfRangePrice } from '@/utils/price';
 
 export interface ProductItemProps {
   data: VariableProduct;
@@ -96,12 +96,16 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
                     <DiscountPercentage value={data.discountPercentage ?? 0} />
                   )}
 
-                  <Box>
-                    <PriceLabel value={data.price} />
-                    {data.regularPrice !== data.price && (
-                      <OldPrice value={getMaxOfRangePrice(data.regularPrice)} />
-                    )}
-                  </Box>
+                  {!!data.price && (
+                    <Box>
+                      <PriceLabel value={data.price} />
+                      {data.regularPrice !== data.price && (
+                        <OldPrice
+                          value={getMaxOfRangePrice(data.regularPrice)}
+                        />
+                      )}
+                    </Box>
+                  )}
                 </>
               )}
             </Box>

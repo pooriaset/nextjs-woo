@@ -1,23 +1,32 @@
 'use client';
 
 import Image from '@/components/common/Image';
+import {
+  GET_ALL_CATEGORIES_QUERY,
+  GET_MAIN_CATEGORIES,
+} from '@/graphql/queries/categories';
+import {
+  CategoriesQuery,
+  GetMainCategoriesQuery,
+} from '@/graphql/types/graphql';
 import { Link } from '@/navigation';
+import { NetworkStatus, useQuery } from '@apollo/client';
 import { ChevronRight } from '@mui/icons-material';
 import { Stack, Typography } from '@mui/material';
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 export interface IMenuCategoryItem {
   id: string;
-  title: string;
+  name: string;
 }
 
 export interface MenuCategoryItemProps {
-  title: string;
+  name: string | null;
   selected: boolean;
   onClick: VoidFunction;
 }
 const MenuCategoryItem: FC<MenuCategoryItemProps> = ({
-  title,
+  name,
   selected,
   onClick,
 }) => {
@@ -32,16 +41,16 @@ const MenuCategoryItem: FC<MenuCategoryItemProps> = ({
           selected ? theme.palette.background.default : theme.palette.grey[200],
       }}
     >
-      <Typography variant="body2">{title}</Typography>
+      <Typography variant="body2">{name}</Typography>
     </Stack>
   );
 };
 
 export interface SubCategoryItemProps {
   id: string;
-  title: string;
+  name: string;
 }
-const SubCategoryItem: FC<SubCategoryItemProps> = ({ id, title }) => {
+const SubCategoryItem: FC<SubCategoryItemProps> = ({ id, name }) => {
   return (
     <Stack
       spacing={1}
@@ -62,11 +71,11 @@ const SubCategoryItem: FC<SubCategoryItemProps> = ({ id, title }) => {
           width={82}
           height={82}
           src="/assets/images/sample-category.webp"
-          alt={title}
+          alt={name}
         />
       </Stack>
       <Typography color="text.primary" variant="subtitle2">
-        {title}
+        {name}
       </Typography>
     </Stack>
   );
@@ -74,34 +83,17 @@ const SubCategoryItem: FC<SubCategoryItemProps> = ({ id, title }) => {
 
 export interface SubCategoriesProps {
   parentId: string | null;
-  title: string;
+  name: string;
+  items: any[];
 }
 
-const SubCategories: FC<SubCategoriesProps> = ({ title, parentId }) => {
+const SubCategories: FC<SubCategoriesProps> = ({ name, parentId, items }) => {
   if (!parentId) {
     return null;
   }
 
-  const items = [
-    {
-      title: 'لباس زنانه',
-    },
-    {
-      title: 'لباس مردانه',
-    },
-    {
-      title: 'لباس بچگانه',
-    },
-    {
-      title: 'لباس بچگانه',
-    },
-    {
-      title: 'لباس بچگانه',
-    },
-  ];
-
   return (
-    <Stack px={1.5}>
+    <Stack px={1.5} flexGrow={1}>
       <Stack component={Link} href="#" height={65} justifyContent="center">
         <Typography
           variant="body2"
@@ -111,7 +103,7 @@ const SubCategories: FC<SubCategoriesProps> = ({ title, parentId }) => {
             alignItems: 'center',
           }}
         >
-          مشاهده همه کالاهای {title}{' '}
+          مشاهده همه کالاهای {name}{' '}
           <ChevronRight
             fontSize="small"
             sx={{
@@ -123,7 +115,7 @@ const SubCategories: FC<SubCategoriesProps> = ({ title, parentId }) => {
       </Stack>
       <Stack direction="row" flexGrow={1} px={1.5} flexWrap="wrap" gap={1}>
         {items.map((item) => {
-          return <SubCategoryItem title={item.title} id={item.title} />;
+          return <SubCategoryItem name={item.name} id={item.name} />;
         })}
       </Stack>
     </Stack>
@@ -131,32 +123,28 @@ const SubCategories: FC<SubCategoriesProps> = ({ title, parentId }) => {
 };
 
 const page = () => {
-  const categories: IMenuCategoryItem[] = [
+  const { data, loading } = useQuery<CategoriesQuery>(
+    GET_ALL_CATEGORIES_QUERY,
     {
-      id: '1',
-      title: 'مد و پوشاک',
+      variables: {
+        first: 10000,
+      },
     },
-    {
-      id: '2',
-      title: 'زیبایی و سلامت',
-    },
-    {
-      id: '3',
-      title: 'ساعت و طلا',
-    },
-    {
-      id: '4',
-      title: 'ورزش و سفر',
-    },
-    {
-      id: '5',
-      title: 'لوازم خانه',
-    },
-  ];
-
-  const [selected, setSelected] = useState<{ id: string; title: string }>(
-    categories[0],
   );
+
+  const categories = data?.productCategories?.nodes || [];
+
+  const [selected, setSelected] = useState<any>(null);
+
+  useEffect(() => {
+    if (!loading) {
+      setSelected(categories[0]);
+    }
+  }, [loading]);
+
+  if (loading || !selected) {
+    return <>Loading</>;
+  }
 
   return (
     <>
@@ -182,18 +170,26 @@ const page = () => {
             minWidth: 110,
           }}
         >
-          {categories.map((category) => {
-            return (
-              <MenuCategoryItem
-                selected={category.id === selected.id}
-                {...category}
-                key={category.id}
-                onClick={() => setSelected(category)}
-              />
-            );
-          })}
+          {categories
+            .filter((category) => !category.parentId)
+            .map((category) => {
+              return (
+                <MenuCategoryItem
+                  selected={category.id === selected.id}
+                  {...category}
+                  key={category.id}
+                  onClick={() => setSelected(category)}
+                />
+              );
+            })}
         </Stack>
-        <SubCategories title={selected.title} parentId={selected.id} />
+        <SubCategories
+          name={selected.name}
+          parentId={selected.id}
+          items={categories.filter(
+            (category) => category.parentId === selected.id,
+          )}
+        />
       </Stack>
     </>
   );
