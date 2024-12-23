@@ -7,6 +7,7 @@ import { Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import MenuCategoryItem from './components/MenuCategoryItem';
 import SubCategories from './components/SubCategories';
+import Loading from './loading';
 
 const page = () => {
   const { data, loading } = useQuery<CategoriesQuery>(
@@ -28,8 +29,8 @@ const page = () => {
     }
   }, [loading]);
 
-  if (loading || !selected) {
-    return <>Loading</>;
+  if (!loading || !selected) {
+    return <Loading />;
   }
 
   return (
