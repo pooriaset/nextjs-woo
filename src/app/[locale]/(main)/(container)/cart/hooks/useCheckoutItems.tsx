@@ -107,7 +107,10 @@ const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
         />
       ),
     },
-    {
+  ];
+
+  if (totalProfit > 0) {
+    items.push({
       key: (
         <Typography color="error" variant="body2" sx={{ fontWeight: 600 }}>
           {t('pages.cart.box.yourProfit')}
@@ -122,8 +125,8 @@ const useCheckoutItems = ({ content }: { content: CartContentFragment }) => {
           }}
         />
       ),
-    },
-  ];
+    });
+  }
 
   return items;
 };
