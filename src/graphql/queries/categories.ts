@@ -13,8 +13,11 @@ export const GET_ALL_CATEGORIES_QUERY = gql`
 `;
 
 export const GET_MAIN_CATEGORIES = gql`
-  query GetMainCategories {
-    productCategories(where: { parent: null, orderby: TERM_ORDER }) {
+  query GetMainCategories($parent: Int, $first: Int) {
+    productCategories(
+      where: { parent: $parent, orderby: TERM_ORDER }
+      first: $first
+    ) {
       edges {
         node {
           id: databaseId
