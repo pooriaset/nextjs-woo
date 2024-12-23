@@ -1,3 +1,5 @@
+'use client';
+
 import { Stack, Typography } from '@mui/material';
 import { FC } from 'react';
 

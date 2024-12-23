@@ -9,13 +9,17 @@ export interface SubCategoryItemProps {
   src: string;
 }
 const SubCategoryItem: FC<SubCategoryItemProps> = ({ id, src, name }) => {
+  const params = new URLSearchParams();
+  params.set('categoryId', id!.toString());
+  const link = `/search?${params.toString()}`;
+
   return (
     <Stack
       spacing={1}
       width="30%"
       alignItems="center"
       component={Link}
-      href="#"
+      href={link}
       sx={{
         height: 'fit-content',
         maxHeight: 'auto',

@@ -5,6 +5,7 @@ import { FC, MouseEventHandler, useMemo, useState } from 'react';
 import { ProductCategoryOptions } from '../types';
 import { ListItem } from './ListItem';
 import { Title } from './Title';
+import { SearchPageParamsKeys } from '@/utils/params';
 
 export interface CategoriesProps {
   options: ProductCategoryOptions;
@@ -55,7 +56,7 @@ const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
 
   const handleClickOnItem = (id: number) => {
     const func: MouseEventHandler<HTMLDivElement> = (event) => {
-      navigate('CategoryId', id);
+      navigate(SearchPageParamsKeys.CategoryId, id);
     };
     return func;
   };

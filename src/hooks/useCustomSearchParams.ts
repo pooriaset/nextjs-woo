@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation';
 export interface IUseCustomSearchParams {
   (): {
     navigate: (
-      key: keyof typeof SearchPageParamsKeys,
+      key: SearchPageParamsKeys,
       value: string | number | boolean | null,
     ) => void;
   } & SearchPagesParams;
@@ -27,9 +27,9 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
   ) => {
     const newParams = new URLSearchParams(params);
     if (value === undefined || value === null || +value < 0) {
-      newParams.delete(SearchPageParamsKeys[key]);
+      newParams.delete(key);
     } else {
-      newParams.set(SearchPageParamsKeys[key], value.toString());
+      newParams.set(key, value.toString());
     }
     router.push(`/search?${newParams}`);
   };

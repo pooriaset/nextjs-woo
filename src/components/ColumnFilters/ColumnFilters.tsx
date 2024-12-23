@@ -20,6 +20,7 @@ import { FC, useState } from 'react';
 import Categories from './components/Categories';
 import { ListItem } from './components/ListItem';
 import { Title } from './components/Title';
+import { SearchPageParamsKeys } from '@/utils/params';
 
 export interface ColumnFiltersProps {}
 
@@ -43,7 +44,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = () => {
 
   const { navigate, inStock } = useCustomSearchParams();
   const handleClickOnInStock = () => {
-    navigate('InStock', !inStock);
+    navigate(SearchPageParamsKeys.InStock, !inStock);
   };
 
   return (

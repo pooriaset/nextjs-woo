@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { useState, useTransition } from 'react';
 import SearchDialog from './SearchDialog';
 import SearchSection from './SearchSection';
+import { SearchPageParamsKeys } from '@/utils/params';
 
 const Header = () => {
   const [isPending, startTransition] = useTransition();
@@ -22,7 +23,7 @@ const Header = () => {
 
   const onClickOnSearch = (q: string) => {
     startTransition(() => {
-      navigate('Q', q);
+      navigate(SearchPageParamsKeys.Q, q);
       setOpen(false);
     });
   };

@@ -17,6 +17,7 @@ import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC } from 'react';
 import LoggedInButton from './LoggedInButton';
+import { SearchPageParamsKeys } from '@/utils/params';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -43,7 +44,7 @@ const TopSection: FC = () => {
   ) => {
     event.preventDefault();
     const q = event.currentTarget.q.value;
-    navigate('Q', q);
+    navigate(SearchPageParamsKeys.Q, q);
   };
 
   const cart = useAtomValue(cartAtom);

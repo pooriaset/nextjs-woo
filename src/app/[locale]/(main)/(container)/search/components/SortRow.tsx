@@ -7,6 +7,7 @@ import { grey } from '@mui/material/colors';
 import { MouseEventHandler } from 'react';
 import { sortOptions } from '@/static/sortOptions';
 import { useTranslations } from 'next-intl';
+import { SearchPageParamsKeys } from '@/utils/params';
 
 const SortRow = () => {
   const { sort, navigate } = useCustomSearchParams();
@@ -15,7 +16,7 @@ const SortRow = () => {
 
   const handleClickOnItem = (value: number) => {
     const func: MouseEventHandler<HTMLButtonElement> = (event) => {
-      navigate('Sort', value);
+      navigate(SearchPageParamsKeys.Sort, value);
     };
     return func;
   };

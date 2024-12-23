@@ -1,3 +1,5 @@
+'use client';
+
 import { Link } from '@/navigation';
 import { ChevronRight } from '@mui/icons-material';
 import { Stack, Typography } from '@mui/material';
@@ -15,9 +17,18 @@ const SubCategories: FC<SubCategoriesProps> = ({ name, parentId, items }) => {
     return null;
   }
 
+  const params = new URLSearchParams();
+  params.set('categoryId', parentId!.toString());
+  const parentLink = `/search?${params.toString()}`;
+
   return (
     <Stack px={1.5} flexGrow={1}>
-      <Stack component={Link} href="#" height={65} justifyContent="center">
+      <Stack
+        component={Link}
+        href={parentLink}
+        height={65}
+        justifyContent="center"
+      >
         <Typography
           variant="body2"
           color="primary"
@@ -42,7 +53,7 @@ const SubCategories: FC<SubCategoriesProps> = ({ name, parentId, items }) => {
             <SubCategoryItem
               src={item.image.sourceUrl}
               name={item.name}
-              id={item.name}
+              id={item.id}
             />
           );
         })}
