@@ -29,7 +29,7 @@ const page = () => {
     }
   }, [loading]);
 
-  if (!loading || !selected) {
+  if (loading || !selected) {
     return <Loading />;
   }
 
