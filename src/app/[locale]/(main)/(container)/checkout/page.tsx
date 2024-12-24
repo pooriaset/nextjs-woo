@@ -1,18 +1,22 @@
 'use client';
 
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
-import { UPDATE_SHIPPING_METHOD } from '@/graphql/queries/cart';
+import {
+  EMPTY_CART_MUTATION,
+  UPDATE_SHIPPING_METHOD,
+} from '@/graphql/queries/cart';
 import {
   CHECKOUT_MUTATION,
   GET_PAYMENT_GATEWAYS,
 } from '@/graphql/queries/checkout';
 import {
+  CheckoutMutation,
   GetPaymentGatewaysQuery,
+  RemoveItemsFromCartMutation,
   ShippingRate,
   UpdateShippingMethodMutation,
 } from '@/graphql/types/graphql';
 import useCartQuery from '@/hooks/useCartQuery';
-import useEmptyCart from '@/hooks/useEmptyCart';
 import { redirect } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
 import { useMutation, useQuery } from '@apollo/client';
@@ -61,11 +65,13 @@ const Page = () => {
     useMutation<UpdateShippingMethodMutation>(UPDATE_SHIPPING_METHOD);
 
   const [checkout, { loading: checkoutLoading }] =
-    useMutation(CHECKOUT_MUTATION);
+    useMutation<CheckoutMutation>(CHECKOUT_MUTATION);
 
-  const { emptyCartLoading, emptyCartMutate } = useEmptyCart();
+  const [emptyCartMutate, { loading: emptyCartLoading }] =
+    useMutation<RemoveItemsFromCartMutation>(EMPTY_CART_MUTATION);
 
   if (!content?.contents?.itemCount) return redirect('/cart');
+
   const rates = content?.availableShippingMethods?.flatMap((item) => {
     return item?.rates;
   }) as ShippingRate[];
@@ -83,15 +89,20 @@ const Page = () => {
     refetch();
   };
 
-  const onSubmit = async (data: any) => {
-    await checkout({
+  const onSubmit = async (payload: any) => {
+    const { data } = await checkout({
       variables: {
-        customerNote: data.customerNote,
-        paymentMethod: data.paymentMethod,
+        customerNote: payload.customerNote,
+        paymentMethod: payload.paymentMethod,
       },
     });
 
-    await emptyCartMutate();
+    const url = data?.checkout?.redirect;
+
+    if (url) {
+      window.location.replace(url);
+      await emptyCartMutate();
+    }
   };
 
   const isCartLoading = loading || shippingMethodLoading;
