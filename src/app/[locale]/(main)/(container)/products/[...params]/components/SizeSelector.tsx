@@ -2,12 +2,12 @@
 
 import { VariantSelector } from '@/components/VariantSelector';
 import { VariantSelectorProps } from '@/components/VariantSelector/VariantSelector';
+import { getFragmentData } from '@/graphql/types';
+import { ProductVariationContentSliceFragmentDoc } from '@/graphql/types/graphql';
 import { useTranslations } from 'next-intl';
 import { FC, useMemo } from 'react';
 import { Variations } from '../../types/common';
 import { useProductContext } from '../hooks/useProductContext';
-import { getFragmentData } from '@/graphql/types';
-import { ProductVariationContentSliceFragmentDoc } from '@/graphql/types/graphql';
 
 export interface SizeSelectorProps {
   variations: Variations;

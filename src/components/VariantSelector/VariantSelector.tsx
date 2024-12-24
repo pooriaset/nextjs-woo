@@ -1,6 +1,5 @@
 'use client';
 
-import { Z_INDEX_VALUES } from '@/config/responsive';
 import { Box } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -44,7 +43,7 @@ const VariantSelector: FC<VariantSelectorProps> = ({
           MenuProps={{
             disableScrollLock: true,
             sx: {
-              zIndex: Z_INDEX_VALUES.variantSelectorMenu,
+              zIndex: (theme) => theme.zIndex.appBar + 1,
             },
           }}
         >

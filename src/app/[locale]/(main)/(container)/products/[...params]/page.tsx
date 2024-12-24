@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
+import { MOBILE_BUY_BOX_HEIGHT } from '@/config/responsive';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_SINGLE_VARIABLE_PRODUCT_QUERY } from '@/graphql/queries/products';
 import { GetSingleProductQuery } from '@/graphql/types/graphql';
@@ -12,7 +13,6 @@ import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
 import SizeSelector from './components/SizeSelector';
 import ProductProvider from './providers/ProductProvider';
-import { MOBILE_BUY_BOX_HEIGHT } from '@/config/responsive';
 
 type PageProps = {
   params: { params: string[] };

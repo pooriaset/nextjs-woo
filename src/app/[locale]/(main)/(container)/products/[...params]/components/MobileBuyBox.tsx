@@ -1,7 +1,6 @@
 import {
   MOBILE_BUY_BOX_HEIGHT,
   MOBILE_FOOTER_HEIGHT,
-  Z_INDEX_VALUES,
 } from '@/config/responsive';
 import { Stack } from '@mui/material';
 import { FC, PropsWithChildren } from 'react';
@@ -21,7 +20,7 @@ const MobileBuyBox: FC<PropsWithChildren<MobileBuyBoxProps>> = ({
         backgroundColor: (theme) => theme.palette.background.default,
         boxShadow: (theme) => theme.shadows[2],
         px: 3,
-        zIndex: Z_INDEX_VALUES.mobileBuyBox,
+        zIndex: (theme) => theme.zIndex.appBar,
       }}
       spacing={1}
       alignItems="center"

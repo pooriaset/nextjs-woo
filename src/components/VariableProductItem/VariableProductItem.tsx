@@ -73,12 +73,15 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
             <Typography
               variant="body2"
               sx={{
-                whiteSpace: !isMobile ? 'nowrap' : null,
+                textAlign: 'left',
                 textOverflow: 'ellipsis',
                 overflow: 'hidden',
+                display: '-webkit-box',
+                '-webkit-line-clamp': '2',
+                '-webkit-box-orient': 'vertical',
               }}
             >
-              {data.name}
+              {data.name}as
             </Typography>
             <Box
               sx={{
