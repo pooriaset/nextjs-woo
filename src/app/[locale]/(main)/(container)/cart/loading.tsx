@@ -1,4 +1,6 @@
-import { Grid } from '@mui/material';
+'use client';
+
+import { Card, CardActions, CardContent, Grid, Skeleton } from '@mui/material';
 import CartItemsSkeleton from './components/CartItemsSkeleton';
 import CheckoutBoxSkeleton from './components/CheckoutBoxSkeleton';
 
@@ -10,7 +12,14 @@ const Loading = () => {
       </Grid>
 
       <Grid item lg={3} md={6} xs={12}>
-        <CheckoutBoxSkeleton />
+        <Card variant="outlined">
+          <CardContent>
+            <CheckoutBoxSkeleton />
+          </CardContent>
+          <CardActions>
+            <Skeleton width="100%" variant="rectangular" height={42} />
+          </CardActions>
+        </Card>
       </Grid>
     </Grid>
   );

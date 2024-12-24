@@ -15,7 +15,6 @@ import useCartQuery from '@/hooks/useCartQuery';
 import { Link } from '@/navigation';
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -26,6 +25,7 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
+import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import { cartAtom } from '@/store/atoms';
 import { useAtomValue } from 'jotai';
 import CartItemsSkeleton from './components/CartItemsSkeleton';
@@ -139,39 +139,40 @@ const Page = () => {
       </Grid>
 
       <Grid item lg={3} md={6} xs={12}>
-        {loading && <CheckoutBoxSkeleton />}
-
-        {!loading && (
-          <Stack
-            spacing={2}
-            sx={{
-              position: 'sticky',
-              top: 196,
-              zIndex: (theme) => theme.zIndex.drawer - 1,
-            }}
-          >
-            <Card variant="outlined">
-              <CardContent>
+        <Stack
+          spacing={2}
+          sx={{
+            position: 'sticky',
+            top: 196,
+            zIndex: (theme) => theme.zIndex.drawer - 1,
+          }}
+        >
+          <Card variant="outlined">
+            <CardContent>
+              {loading ? (
+                <CheckoutBoxSkeleton />
+              ) : (
                 <CheckoutBox content={content!} />
-              </CardContent>
-              <CardActions>
-                <Button
-                  component={Link}
-                  href="/checkout"
-                  fullWidth
-                  color="primary"
-                  size="large"
-                  variant="contained"
-                >
-                  {t('pages.cart.buttons.registerAndNextStep')}
-                </Button>
-              </CardActions>
-            </Card>
-            <Typography variant="body2" color="gray">
-              {t('messages.cart.reserveMessage')}
-            </Typography>
-          </Stack>
-        )}
+              )}
+            </CardContent>
+            <CardActions>
+              <ButtonWithLoading
+                isLoading={loading}
+                component={Link}
+                href="/checkout"
+                fullWidth
+                color="primary"
+                size="large"
+                variant="contained"
+              >
+                {t('pages.cart.buttons.registerAndNextStep')}
+              </ButtonWithLoading>
+            </CardActions>
+          </Card>
+          <Typography variant="body2" color="gray">
+            {t('messages.cart.reserveMessage')}
+          </Typography>
+        </Stack>
       </Grid>
     </Grid>
   );

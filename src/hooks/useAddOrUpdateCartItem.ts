@@ -57,9 +57,7 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
   const addOrUpdateCartItemMutate: MutateCartFunction = async (values) => {
     const { quantity, variationId, productId, extraData } = values;
     if (!variationId) {
-      toast.error(t('messages.cart.selectYourSize'), {
-        toastId: 'variant-is-not-exist',
-      });
+      toast.error(t('messages.cart.selectYourSize'));
       return null;
     }
 

@@ -1,10 +1,15 @@
 'use client';
 
-import { getFragmentData } from '@/graphql/types';
-import { CartContentFragmentDoc, ShippingRate } from '@/graphql/types/graphql';
-import useCartQuery from '@/hooks/useCartQuery';
+import ButtonWithLoading from '@/components/common/ButtonWithLoading';
+import { UPDATE_SHIPPING_METHOD } from '@/graphql/queries/cart';
 import {
-  Button,
+  ShippingRate,
+  UpdateShippingMethodMutation,
+} from '@/graphql/types/graphql';
+import useCartQuery from '@/hooks/useCartQuery';
+import { cartAtom } from '@/store/atoms';
+import { useMutation } from '@apollo/client';
+import {
   Card,
   CardActions,
   CardContent,
@@ -12,9 +17,12 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CheckoutBox from '../cart/components/CheckoutBox';
+import CheckoutBoxSkeleton from '../cart/components/CheckoutBoxSkeleton';
 import DiscountCode from '../cart/components/DiscountCode';
 import AvailableShippingMethods from './components/AvailableShippingMethods';
 import Billing from './components/Billing';
@@ -23,19 +31,40 @@ const Page = () => {
   const t = useTranslations();
   const form = useForm();
 
-  const { loading, data } = useCartQuery();
+  const { loading, refetch } = useCartQuery();
 
-  const content = getFragmentData(CartContentFragmentDoc, data?.cart);
+  useEffect(() => {
+    refetch();
+  }, []);
 
+  const [update, { loading: shippingMethodLoading }] =
+    useMutation<UpdateShippingMethodMutation>(UPDATE_SHIPPING_METHOD);
+
+  const content = useAtomValue(cartAtom);
   if (!content?.contents?.itemCount) return <></>;
+
+  const rates = content?.availableShippingMethods?.flatMap((item) => {
+    return item?.rates;
+  }) as ShippingRate[];
+
+  const notFreeRates = rates.filter((item) => !item.methodId.includes('free'));
+
+  const isFree = rates.length !== notFreeRates.length;
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
 
-  const rates = content?.availableShippingMethods?.flatMap((item) => {
-    return item?.rates;
-  }) as ShippingRate[];
+  const onShippingMethodChange = async (newValue: string) => {
+    await update({
+      variables: {
+        shippingMethods: [newValue],
+      },
+    });
+    refetch();
+  };
+
+  const isLoading = loading || shippingMethodLoading;
 
   return (
     <Grid container spacing={2} position="relative">
@@ -44,8 +73,10 @@ const Page = () => {
           <CardContent>
             <Stack spacing={3}>
               <AvailableShippingMethods
-                rates={rates}
-                value={content.chosenShippingMethods?.[0]}
+                isFree={isFree}
+                rates={notFreeRates}
+                defaultValue={content.chosenShippingMethods?.[0]}
+                onChange={onShippingMethodChange}
               />
 
               <Billing />
@@ -87,10 +118,15 @@ const Page = () => {
 
           <Card variant="outlined">
             <CardContent>
-              <CheckoutBox content={content} />
+              {isLoading ? (
+                <CheckoutBoxSkeleton />
+              ) : (
+                <CheckoutBox content={content} />
+              )}
             </CardContent>
             <CardActions>
-              <Button
+              <ButtonWithLoading
+                isLoading={isLoading}
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -98,7 +134,7 @@ const Page = () => {
                 size="large"
               >
                 {t('pages.checkout.buttons.placeOrder')}
-              </Button>
+              </ButtonWithLoading>
             </CardActions>
           </Card>
         </Stack>
