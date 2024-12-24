@@ -1,7 +1,7 @@
 'use client';
 
 import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
-import { CategoriesQuery } from '@/graphql/types/graphql';
+import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
 import { useQuery } from '@apollo/client';
 import { Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -9,8 +9,8 @@ import MenuCategoryItem from './components/MenuCategoryItem';
 import SubCategories from './components/SubCategories';
 import Loading from './loading';
 
-const page = () => {
-  const { data, loading } = useQuery<CategoriesQuery>(
+const Page = () => {
+  const { data, loading } = useQuery<GetAllCategoriesQuery>(
     GET_ALL_CATEGORIES_QUERY,
     {
       variables: {
@@ -65,4 +65,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

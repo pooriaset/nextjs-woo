@@ -51,7 +51,8 @@ const SubCategories: FC<SubCategoriesProps> = ({ name, parentId, items }) => {
         {items.map((item) => {
           return (
             <SubCategoryItem
-              src={item.image.sourceUrl}
+              key={item.id}
+              src={item.image?.sourceUrl}
               name={item.name}
               id={item.id}
             />

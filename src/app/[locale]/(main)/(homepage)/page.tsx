@@ -26,6 +26,7 @@ const getCategories = async () => {
     query: GET_MAIN_CATEGORIES,
     variables: {
       first: 6,
+      parent: 0,
     },
   });
 

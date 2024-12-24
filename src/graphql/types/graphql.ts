@@ -1470,13 +1470,13 @@ export enum CommentNodeIdTypeEnum {
 
 /** The status of the comment object. */
 export enum CommentStatusEnum {
-  /** Comments with the Approved status */
+  /** Comments with the تایید شده status */
   Approve = 'APPROVE',
-  /** Comments with the Unapproved status */
+  /** Comments with the پذیرفته‌نشده status */
   Hold = 'HOLD',
-  /** Comments with the Spam status */
+  /** Comments with the جفنگ status */
   Spam = 'SPAM',
-  /** Comments with the Trash status */
+  /** Comments with the زباله‌دان status */
   Trash = 'TRASH'
 }
 
@@ -4200,331 +4200,333 @@ export type CreateVisibleProductPayload = {
 
 /** Currencies enumeration */
 export enum CurrencyEnum {
-  /** United Arab Emirates dirham */
+  /** درهم امارات متحده ی عربی */
   Aed = 'AED',
-  /** Afghan afghani */
+  /** افغانی افغانستان */
   Afn = 'AFN',
-  /** Albanian lek */
+  /** لک آلبانی */
   All = 'ALL',
-  /** Armenian dram */
+  /** درام ارمنستان */
   Amd = 'AMD',
-  /** Netherlands Antillean guilder */
+  /** گیلدر آنتیل هلند */
   Ang = 'ANG',
-  /** Angolan kwanza */
+  /** کوانزای آنگولا */
   Aoa = 'AOA',
-  /** Argentine peso */
+  /** پزوی آرژانتین */
   Ars = 'ARS',
-  /** Australian dollar */
+  /** دلار استرالیا */
   Aud = 'AUD',
-  /** Aruban florin */
+  /** آروبا فلورین */
   Awg = 'AWG',
-  /** Azerbaijani manat */
+  /** منات آذربایجان */
   Azn = 'AZN',
-  /** Bosnia and Herzegovina convertible mark */
+  /** مارک تبدیل‌پذیر بوسنی و هرزگوین */
   Bam = 'BAM',
-  /** Barbadian dollar */
+  /** دلار باربادوس */
   Bbd = 'BBD',
-  /** Bangladeshi taka */
+  /** تاکا بنگلادش */
   Bdt = 'BDT',
-  /** Bulgarian lev */
+  /** لو بلغارستان */
   Bgn = 'BGN',
-  /** Bahraini dinar */
+  /** دینار بحرین */
   Bhd = 'BHD',
-  /** Burundian franc */
+  /** فرانک بوروندی */
   Bif = 'BIF',
-  /** Bermudian dollar */
+  /** دلار برمودا */
   Bmd = 'BMD',
-  /** Brunei dollar */
+  /** دلار برونئی */
   Bnd = 'BND',
-  /** Bolivian boliviano */
+  /** بولیویانو بولیوی */
   Bob = 'BOB',
-  /** Brazilian real */
+  /** رئال برزیل */
   Brl = 'BRL',
-  /** Bahamian dollar */
+  /** دلار باهاما */
   Bsd = 'BSD',
-  /** Bitcoin */
+  /** بیت‌کوین */
   Btc = 'BTC',
-  /** Bhutanese ngultrum */
+  /** نگولتروم بوتان */
   Btn = 'BTN',
-  /** Botswana pula */
+  /** پولای بوتسوانا */
   Bwp = 'BWP',
-  /** Belarusian ruble */
+  /** روبل بلاروس */
   Byn = 'BYN',
-  /** Belarusian ruble (old) */
+  /** روبل بلاروس (قدیمی) */
   Byr = 'BYR',
-  /** Belize dollar */
+  /** دلار بلیز */
   Bzd = 'BZD',
-  /** Canadian dollar */
+  /** دلار کانادا */
   Cad = 'CAD',
-  /** Congolese franc */
+  /** فرانک کنگو */
   Cdf = 'CDF',
-  /** Swiss franc */
+  /** فرانک سوئیس */
   Chf = 'CHF',
-  /** Chilean peso */
+  /** پزو شیلی */
   Clp = 'CLP',
-  /** Chinese yuan */
+  /** یوان چین */
   Cny = 'CNY',
-  /** Colombian peso */
+  /** پزوی کلمبیا */
   Cop = 'COP',
-  /** Costa Rican col&oacute;n */
+  /** کولون کاستاریکا */
   Crc = 'CRC',
-  /** Cuban convertible peso */
+  /** پزوی تبدیل‌پذیر کوبا */
   Cuc = 'CUC',
-  /** Cuban peso */
+  /** پزوی کوبا */
   Cup = 'CUP',
-  /** Cape Verdean escudo */
+  /** اسکودو کیپ ورد */
   Cve = 'CVE',
-  /** Czech koruna */
+  /** کرونای چک */
   Czk = 'CZK',
-  /** Djiboutian franc */
+  /** فرانک جیبوتی */
   Djf = 'DJF',
-  /** Danish krone */
+  /** کرون دانمارک */
   Dkk = 'DKK',
-  /** Dominican peso */
+  /** پزو دومینیکن */
   Dop = 'DOP',
-  /** Algerian dinar */
+  /** دینار الجزایر */
   Dzd = 'DZD',
-  /** Egyptian pound */
+  /** پوند مصر */
   Egp = 'EGP',
-  /** Eritrean nakfa */
+  /** ناکفای اریتره */
   Ern = 'ERN',
-  /** Ethiopian birr */
+  /** بیر اتیوپی */
   Etb = 'ETB',
-  /** Euro */
+  /** یورو */
   Eur = 'EUR',
-  /** Fijian dollar */
+  /** دلار فیجی */
   Fjd = 'FJD',
-  /** Falkland Islands pound */
+  /** پوند جزایر فالکلند */
   Fkp = 'FKP',
-  /** Pound sterling */
+  /** پوند استرلینگ */
   Gbp = 'GBP',
-  /** Georgian lari */
+  /** لاری گرجستان */
   Gel = 'GEL',
-  /** Guernsey pound */
-  Ggp = 'GGP',
-  /** Ghana cedi */
+  /** سدی غنا */
   Ghs = 'GHS',
-  /** Gibraltar pound */
+  /** پوند جبل الطارق */
   Gip = 'GIP',
-  /** Gambian dalasi */
+  /** دالاسی گامبیا */
   Gmd = 'GMD',
-  /** Guinean franc */
+  /** فرانک گینه */
   Gnf = 'GNF',
-  /** Guatemalan quetzal */
+  /** کوتزال گواتمالا */
   Gtq = 'GTQ',
-  /** Guyanese dollar */
+  /** دلار گویان */
   Gyd = 'GYD',
-  /** Hong Kong dollar */
+  /** دلار هنگ کنگ */
   Hkd = 'HKD',
-  /** Honduran lempira */
+  /** لامپیرای هندوراس */
   Hnl = 'HNL',
-  /** Croatian kuna */
+  /** کونا کرواسی */
   Hrk = 'HRK',
-  /** Haitian gourde */
+  /** گورد‌هائیتی */
   Htg = 'HTG',
-  /** Hungarian forint */
+  /** فورینت مجارستان */
   Huf = 'HUF',
-  /** Indonesian rupiah */
+  /** روپیه اندونزی */
   Idr = 'IDR',
-  /** Israeli new shekel */
+  /** شکل جدید اسرائیل */
   Ils = 'ILS',
-  /** Manx pound */
+  /** پوند مانکس */
   Imp = 'IMP',
-  /** Indian rupee */
+  /** روپیه هند */
   Inr = 'INR',
-  /** Iraqi dinar */
+  /** دینار عراق */
   Iqd = 'IQD',
-  /** Iranian rial */
+  /** هزار ریال */
+  Irhr = 'IRHR',
+  /** هزار تومان */
+  Irht = 'IRHT',
+  /** ریال */
   Irr = 'IRR',
-  /** Iranian toman */
+  /** تومان */
   Irt = 'IRT',
-  /** Icelandic kr&oacute;na */
+  /** کرونای ایسلند */
   Isk = 'ISK',
-  /** Jersey pound */
+  /** پوند جرسی */
   Jep = 'JEP',
-  /** Jamaican dollar */
+  /** دلار جامائیکا */
   Jmd = 'JMD',
-  /** Jordanian dinar */
+  /** دینار اردن */
   Jod = 'JOD',
-  /** Japanese yen */
+  /** ین ژاپن */
   Jpy = 'JPY',
-  /** Kenyan shilling */
+  /** شلینگ کنیا */
   Kes = 'KES',
-  /** Kyrgyzstani som */
+  /** سوم قرقیزستان */
   Kgs = 'KGS',
-  /** Cambodian riel */
+  /** ریال کامبوج */
   Khr = 'KHR',
-  /** Comorian franc */
+  /** فرانک کومور */
   Kmf = 'KMF',
-  /** North Korean won */
+  /** وون کره شمالی */
   Kpw = 'KPW',
-  /** South Korean won */
+  /** وون کره جنوبی */
   Krw = 'KRW',
-  /** Kuwaiti dinar */
+  /** دینار کویت */
   Kwd = 'KWD',
-  /** Cayman Islands dollar */
+  /** دلار جزایر کیمن */
   Kyd = 'KYD',
-  /** Kazakhstani tenge */
+  /** تنگه قزاقستان */
   Kzt = 'KZT',
-  /** Lao kip */
+  /** کیپ لائوس */
   Lak = 'LAK',
-  /** Lebanese pound */
+  /** پوند لبنان */
   Lbp = 'LBP',
-  /** Sri Lankan rupee */
+  /** روپیه سری‌لانکا */
   Lkr = 'LKR',
-  /** Liberian dollar */
+  /** دلار لیبریا */
   Lrd = 'LRD',
-  /** Lesotho loti */
+  /** لوتی لسوتو */
   Lsl = 'LSL',
-  /** Libyan dinar */
+  /** دینار لیبی */
   Lyd = 'LYD',
-  /** Moroccan dirham */
+  /** درهم مراکش */
   Mad = 'MAD',
-  /** Moldovan leu */
+  /** لئوی مولداوی */
   Mdl = 'MDL',
-  /** Malagasy ariary */
+  /** آریاری ماداگاسکار */
   Mga = 'MGA',
-  /** Macedonian denar */
+  /** دینار مقدونیه */
   Mkd = 'MKD',
-  /** Burmese kyat */
+  /** کیات میانمار */
   Mmk = 'MMK',
-  /** Mongolian t&ouml;gr&ouml;g */
+  /** توگروگ مغولستان */
   Mnt = 'MNT',
-  /** Macanese pataca */
+  /** پاتاکای ماکانز */
   Mop = 'MOP',
-  /** Mauritanian ouguiya */
+  /** اوگویای موریتانی */
   Mru = 'MRU',
-  /** Mauritian rupee */
+  /** روپیه موریس */
   Mur = 'MUR',
-  /** Maldivian rufiyaa */
+  /** روفیه مالدیو */
   Mvr = 'MVR',
-  /** Malawian kwacha */
+  /** کواچا مالاویا */
   Mwk = 'MWK',
-  /** Mexican peso */
+  /** پزو مکزیک */
   Mxn = 'MXN',
-  /** Malaysian ringgit */
+  /** رینگیت مالزی */
   Myr = 'MYR',
-  /** Mozambican metical */
+  /** متیکال موزامبیک */
   Mzn = 'MZN',
-  /** Namibian dollar */
+  /** دلار نامیبیا */
   Nad = 'NAD',
-  /** Nigerian naira */
+  /** نایرا نیجریه */
   Ngn = 'NGN',
-  /** Nicaraguan c&oacute;rdoba */
+  /** کوردوبا نیکاراگوئه */
   Nio = 'NIO',
-  /** Norwegian krone */
+  /** کرون نروژ */
   Nok = 'NOK',
-  /** Nepalese rupee */
+  /** روپیه نپال */
   Npr = 'NPR',
-  /** New Zealand dollar */
+  /** دلار نیوزیلند */
   Nzd = 'NZD',
-  /** Omani rial */
+  /** ریال عمان */
   Omr = 'OMR',
-  /** Panamanian balboa */
+  /** بالبوآ پاناما */
   Pab = 'PAB',
-  /** Sol */
+  /** سول */
   Pen = 'PEN',
-  /** Papua New Guinean kina */
+  /** کینای پاپوآ گینه نو */
   Pgk = 'PGK',
-  /** Philippine peso */
+  /** پزو فیلیپین */
   Php = 'PHP',
-  /** Pakistani rupee */
+  /** روپیه پاکستان */
   Pkr = 'PKR',
-  /** Polish z&#x142;oty */
+  /** زلوتی لهستان */
   Pln = 'PLN',
-  /** Transnistrian ruble */
+  /** روبل ترانسنیسترین */
   Prb = 'PRB',
-  /** Paraguayan guaran&iacute; */
+  /** گوارانی پاراگوئه */
   Pyg = 'PYG',
-  /** Qatari riyal */
+  /** ریال قطر */
   Qar = 'QAR',
-  /** Romanian leu */
+  /** لئوی رومانی */
   Ron = 'RON',
-  /** Serbian dinar */
+  /** دینار صربستان */
   Rsd = 'RSD',
-  /** Russian ruble */
+  /** روبل روسیه */
   Rub = 'RUB',
-  /** Rwandan franc */
+  /** فرانک رواندا */
   Rwf = 'RWF',
-  /** Saudi riyal */
+  /** ریال سعودی */
   Sar = 'SAR',
-  /** Solomon Islands dollar */
+  /** دلار جزایر سلیمان */
   Sbd = 'SBD',
-  /** Seychellois rupee */
+  /** روپیه سیشل */
   Scr = 'SCR',
-  /** Sudanese pound */
+  /** پوند سودان */
   Sdg = 'SDG',
-  /** Swedish krona */
+  /** کرون سوئد */
   Sek = 'SEK',
-  /** Singapore dollar */
+  /** دلار سنگاپور */
   Sgd = 'SGD',
-  /** Saint Helena pound */
+  /** پوند سنت هلن */
   Shp = 'SHP',
-  /** Sierra Leonean leone */
+  /** لئون سیرالئون */
   Sll = 'SLL',
-  /** Somali shilling */
+  /** شیلینگ سومالی */
   Sos = 'SOS',
-  /** Surinamese dollar */
+  /** دلار سورینام */
   Srd = 'SRD',
-  /** South Sudanese pound */
+  /** پوند سودان جنوبی */
   Ssp = 'SSP',
-  /** S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra */
+  /** دبرای سائوتومه و پرینسیپ */
   Stn = 'STN',
-  /** Syrian pound */
+  /** پوند سوریه */
   Syp = 'SYP',
-  /** Swazi lilangeni */
+  /** لیلانگنی سوازیلند */
   Szl = 'SZL',
-  /** Thai baht */
+  /** بات تایاند */
   Thb = 'THB',
-  /** Tajikistani somoni */
+  /** سمونی تاجیکستان */
   Tjs = 'TJS',
-  /** Turkmenistan manat */
+  /** منات ترکمنستان */
   Tmt = 'TMT',
-  /** Tunisian dinar */
+  /** دینار تونس */
   Tnd = 'TND',
-  /** Tongan pa&#x2bb;anga */
+  /** پاآنگای تونگا */
   Top = 'TOP',
-  /** Turkish lira */
+  /** لیره ترک */
   Try = 'TRY',
-  /** Trinidad and Tobago dollar */
+  /** دلار ترینیداد و توباگو */
   Ttd = 'TTD',
-  /** New Taiwan dollar */
+  /** دلار تایوان جدید */
   Twd = 'TWD',
-  /** Tanzanian shilling */
+  /** شیلینگ تانزانیا */
   Tzs = 'TZS',
-  /** Ukrainian hryvnia */
+  /** هریونیای اکراینی */
   Uah = 'UAH',
-  /** Ugandan shilling */
+  /** شیلینگ اوگاندا */
   Ugx = 'UGX',
-  /** United States (US) dollar */
+  /** دلار آمریکا */
   Usd = 'USD',
-  /** Uruguayan peso */
+  /** پزو اروگوئه */
   Uyu = 'UYU',
-  /** Uzbekistani som */
+  /** سم ازبکستان */
   Uzs = 'UZS',
-  /** Venezuelan bol&iacute;var (2008–2018) */
+  /** بولیوار ونزوئلا (2008–2018) */
   Vef = 'VEF',
-  /** Venezuelan bol&iacute;var */
+  /** بولیوار ونزوئلا */
   Ves = 'VES',
-  /** Vietnamese &#x111;&#x1ed3;ng */
+  /** دونگ ویتنامی */
   Vnd = 'VND',
-  /** Vanuatu vatu */
+  /** ونووتو واتو */
   Vuv = 'VUV',
-  /** Samoan t&#x101;l&#x101; */
+  /** طلای ساموئل */
   Wst = 'WST',
-  /** Central African CFA franc */
+  /** فرانک CFA آفریقای مرکزی */
   Xaf = 'XAF',
-  /** East Caribbean dollar */
+  /** دلار کارائیب شرق */
   Xcd = 'XCD',
-  /** West African CFA franc */
+  /** فرانک CFA آفریقای غربی */
   Xof = 'XOF',
-  /** CFP franc */
+  /** فرانک CFP */
   Xpf = 'XPF',
-  /** Yemeni rial */
+  /** ریال یمن */
   Yer = 'YER',
-  /** South African rand */
+  /** رند آفریقای جنوبی */
   Zar = 'ZAR',
-  /** Zambian kwacha */
+  /** کوبه زامبیا */
   Zmw = 'ZMW'
 }
 
@@ -4586,6 +4588,14 @@ export type CustomProductAttributeConnectionPageInfo = {
 /** A customer object */
 export type Customer = Node & {
   __typename?: 'Customer';
+  /** A nonce for the account page. By default, it expires in 1 hour. */
+  accountNonce: Maybe<Scalars['String']['output']>;
+  /** A nonce link to the account page for session user. Expires in 24 hours. */
+  accountUrl: Maybe<Scalars['String']['output']>;
+  /** A nonce for the add payment method page. By default, it expires in 1 hour. */
+  addPaymentMethodNonce: Maybe<Scalars['String']['output']>;
+  /** A nonce link to the add payment method page for the authenticated user. Expires in 24 hours. */
+  addPaymentMethodUrl: Maybe<Scalars['String']['output']>;
   /** Customer&#039;s stored payment tokens. */
   availablePaymentMethods: Maybe<Array<Maybe<PaymentToken>>>;
   /** Customer&#039;s stored payment tokens. */
@@ -4596,6 +4606,14 @@ export type Customer = Node & {
   billing: Maybe<CustomerAddress>;
   /** Has customer calculated shipping? */
   calculatedShipping: Maybe<Scalars['Boolean']['output']>;
+  /** A nonce for the cart page. By default, it expires in 1 hour. */
+  cartNonce: Maybe<Scalars['String']['output']>;
+  /** A nonced link to the cart page. By default, it expires in 1 hour. */
+  cartUrl: Maybe<Scalars['String']['output']>;
+  /** A nonce for the checkout page. By default, it expires in 1 hour. */
+  checkoutNonce: Maybe<Scalars['String']['output']>;
+  /** A nonce link to the checkout page for session user. Expires in 24 hours. */
+  checkoutUrl: Maybe<Scalars['String']['output']>;
   /** The ID of the customer in the database */
   databaseId: Maybe<Scalars['Int']['output']>;
   /** Return the date customer was created */
@@ -5682,20 +5700,20 @@ export type DeleteVisibleProductPayload = {
 
 /** Coupon discount type enumeration */
 export enum DiscountTypeEnum {
-  /** Fixed cart discount */
+  /** تخفیف ثابت سبدخرید */
   FixedCart = 'FIXED_CART',
-  /** Fixed product discount */
+  /** تخفیف ثابت محصول */
   FixedProduct = 'FIXED_PRODUCT',
-  /** Percentage discount */
+  /** درصد تخفیف */
   Percent = 'PERCENT'
 }
 
 /** The discussion setting type */
 export type DiscussionSettings = {
   __typename?: 'DiscussionSettings';
-  /** Allow people to submit comments on new posts. */
+  /** اجازه دهید دیگران برای نوشته‌های جدید دیدگاه ارسال کنند. */
   defaultCommentStatus: Maybe<Scalars['String']['output']>;
-  /** Allow link notifications from other blogs (pingbacks and trackbacks) on new articles. */
+  /** اجازه دادن به دیگر سایت‌ها برای فرستادن بازتاب بر مقالات تازه. */
   defaultPingStatus: Maybe<Scalars['String']['output']>;
 };
 
@@ -7114,23 +7132,23 @@ export type ForgetSessionPayload = {
 /** The general setting type */
 export type GeneralSettings = {
   __typename?: 'GeneralSettings';
-  /** A date format for all date strings. */
+  /** یک ساختار برای همهٔ تاریخ‌ها. */
   dateFormat: Maybe<Scalars['String']['output']>;
-  /** Site tagline. */
+  /** شعار سایت. */
   description: Maybe<Scalars['String']['output']>;
-  /** This address is used for admin purposes, like new user notification. */
+  /** این نشانی برای کارهای مدیریتی، همانند اطلاعیه کاربر تازه استفاده می‌شود. */
   email: Maybe<Scalars['String']['output']>;
-  /** WordPress locale code. */
+  /** کد بومی وردپرس. */
   language: Maybe<Scalars['String']['output']>;
-  /** A day number of the week that the week should start on. */
+  /** عدد روزی که هفته از آن آغاز می‌شود. */
   startOfWeek: Maybe<Scalars['Int']['output']>;
-  /** A time format for all time strings. */
+  /** یک ساختار زمان برای تمام رشته‌های زمانی. */
   timeFormat: Maybe<Scalars['String']['output']>;
-  /** A city in the same timezone as you. */
+  /** شهری در منطقهٔ زمانی شما. */
   timezone: Maybe<Scalars['String']['output']>;
-  /** Site title. */
+  /** عنوان سایت. */
   title: Maybe<Scalars['String']['output']>;
-  /** Site URL. */
+  /** نشانی سایت. */
   url: Maybe<Scalars['String']['output']>;
 };
 
@@ -9830,8 +9848,12 @@ export type MenuItemToMenuItemLinkableConnectionEdge = Edge & MenuItemLinkableCo
 
 /** Registered menu locations */
 export enum MenuLocationEnum {
-  /** Empty menu location */
-  Empty = 'EMPTY'
+  /** Put the menu in the handheld location */
+  Handheld = 'HANDHELD',
+  /** Put the menu in the primary location */
+  Primary = 'PRIMARY',
+  /** Put the menu in the secondary location */
+  Secondary = 'SECONDARY'
 }
 
 /** The Type of Identifier used to fetch a single node. Default is "ID". To be used along with the "id" field. */
@@ -10564,21 +10586,21 @@ export type OrderItemTax = {
 
 /** Order status enumeration */
 export enum OrderStatusEnum {
-  /** Cancelled */
+  /** لغو شده */
   Cancelled = 'CANCELLED',
-  /** Draft */
+  /** پیش‌نویس */
   CheckoutDraft = 'CHECKOUT_DRAFT',
-  /** Completed */
+  /** تکمیل شده */
   Completed = 'COMPLETED',
-  /** Failed */
+  /** ناموفق */
   Failed = 'FAILED',
-  /** On hold */
+  /** در انتظار بررسی */
   OnHold = 'ON_HOLD',
-  /** Pending payment */
+  /** در انتظار پرداخت */
   Pending = 'PENDING',
-  /** Processing */
+  /** در حال انجام */
   Processing = 'PROCESSING',
-  /** Refunded */
+  /** مسترد شده */
   Refunded = 'REFUNDED'
 }
 
@@ -16506,10 +16528,14 @@ export enum PostStatusEnum {
   AutoDraft = 'AUTO_DRAFT',
   /** Objects with the draft status */
   Draft = 'DRAFT',
+  /** Objects with the failed status */
+  Failed = 'FAILED',
   /** Objects with the future status */
   Future = 'FUTURE',
   /** Objects with the inherit status */
   Inherit = 'INHERIT',
+  /** Objects with the in-progress status */
+  InProgress = 'IN_PROGRESS',
   /** Objects with the pending status */
   Pending = 'PENDING',
   /** Objects with the private status */
@@ -24992,13 +25018,13 @@ export type RatingCount = {
 /** The reading setting type */
 export type ReadingSettings = {
   __typename?: 'ReadingSettings';
-  /** The ID of the page that should display the latest posts */
+  /** شناسه برگه‌ای که باید آخرین نوشته‌ها را نمایش دهد */
   pageForPosts: Maybe<Scalars['Int']['output']>;
-  /** The ID of the page that should be displayed on the front page */
+  /** شناسه برگه‌ای که باید در صفحه نخست نمایش داده شود */
   pageOnFront: Maybe<Scalars['Int']['output']>;
-  /** Blog pages show at most. */
+  /** بیشترین تعداد نوشته‌ها در هر برگهٔ بلاگ. */
   postsPerPage: Maybe<Scalars['Int']['output']>;
-  /** What to show on the front page */
+  /** چه چیزی در صفحه نخست نمایش داده شود */
   showOnFront: Maybe<Scalars['String']['output']>;
 };
 
@@ -34520,15 +34546,15 @@ export type TaxonomyToTermNodeConnectionPageInfo = PageInfo & TermNodeConnection
 };
 
 /** The template assigned to the node */
-export type Template_Blank = ContentTemplate & {
-  __typename?: 'Template_Blank';
+export type TemplateFullwidth = ContentTemplate & {
+  __typename?: 'TemplateFullwidth';
   /** The name of the template */
   templateName: Maybe<Scalars['String']['output']>;
 };
 
 /** The template assigned to the node */
-export type Template_BlogAlternative = ContentTemplate & {
-  __typename?: 'Template_BlogAlternative';
+export type TemplateHomepage = ContentTemplate & {
+  __typename?: 'TemplateHomepage';
   /** The name of the template */
   templateName: Maybe<Scalars['String']['output']>;
 };
@@ -35664,41 +35690,41 @@ export type UpdateSessionPayload = {
 export type UpdateSettingsInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId: InputMaybe<Scalars['String']['input']>;
-  /** Allow people to submit comments on new posts. */
+  /** اجازه دهید دیگران برای نوشته‌های جدید دیدگاه ارسال کنند. */
   discussionSettingsDefaultCommentStatus: InputMaybe<Scalars['String']['input']>;
-  /** Allow link notifications from other blogs (pingbacks and trackbacks) on new articles. */
+  /** اجازه دادن به دیگر سایت‌ها برای فرستادن بازتاب بر مقالات تازه. */
   discussionSettingsDefaultPingStatus: InputMaybe<Scalars['String']['input']>;
-  /** A date format for all date strings. */
+  /** یک ساختار برای همهٔ تاریخ‌ها. */
   generalSettingsDateFormat: InputMaybe<Scalars['String']['input']>;
-  /** Site tagline. */
+  /** شعار سایت. */
   generalSettingsDescription: InputMaybe<Scalars['String']['input']>;
-  /** This address is used for admin purposes, like new user notification. */
+  /** این نشانی برای کارهای مدیریتی، همانند اطلاعیه کاربر تازه استفاده می‌شود. */
   generalSettingsEmail: InputMaybe<Scalars['String']['input']>;
-  /** WordPress locale code. */
+  /** کد بومی وردپرس. */
   generalSettingsLanguage: InputMaybe<Scalars['String']['input']>;
-  /** A day number of the week that the week should start on. */
+  /** عدد روزی که هفته از آن آغاز می‌شود. */
   generalSettingsStartOfWeek: InputMaybe<Scalars['Int']['input']>;
-  /** A time format for all time strings. */
+  /** یک ساختار زمان برای تمام رشته‌های زمانی. */
   generalSettingsTimeFormat: InputMaybe<Scalars['String']['input']>;
-  /** A city in the same timezone as you. */
+  /** شهری در منطقهٔ زمانی شما. */
   generalSettingsTimezone: InputMaybe<Scalars['String']['input']>;
-  /** Site title. */
+  /** عنوان سایت. */
   generalSettingsTitle: InputMaybe<Scalars['String']['input']>;
-  /** Site URL. */
+  /** نشانی سایت. */
   generalSettingsUrl: InputMaybe<Scalars['String']['input']>;
-  /** The ID of the page that should display the latest posts */
+  /** شناسه برگه‌ای که باید آخرین نوشته‌ها را نمایش دهد */
   readingSettingsPageForPosts: InputMaybe<Scalars['Int']['input']>;
-  /** The ID of the page that should be displayed on the front page */
+  /** شناسه برگه‌ای که باید در صفحه نخست نمایش داده شود */
   readingSettingsPageOnFront: InputMaybe<Scalars['Int']['input']>;
-  /** Blog pages show at most. */
+  /** بیشترین تعداد نوشته‌ها در هر برگهٔ بلاگ. */
   readingSettingsPostsPerPage: InputMaybe<Scalars['Int']['input']>;
-  /** What to show on the front page */
+  /** چه چیزی در صفحه نخست نمایش داده شود */
   readingSettingsShowOnFront: InputMaybe<Scalars['String']['input']>;
-  /** Default post category. */
+  /** دسته‌بندی پیشفرض نوشته. */
   writingSettingsDefaultCategory: InputMaybe<Scalars['Int']['input']>;
-  /** Default post format. */
+  /** ساختار پیش‌فرض نوشته. */
   writingSettingsDefaultPostFormat: InputMaybe<Scalars['String']['input']>;
-  /** Convert emoticons like :-) and :-P to graphics on display. */
+  /** تبدیل شکلک‌هایی مانند :-) و :-P به گرافیک هنگام نمایش. */
   writingSettingsUseSmilies: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -38094,11 +38120,11 @@ export type WriteReviewPayload = {
 /** The writing setting type */
 export type WritingSettings = {
   __typename?: 'WritingSettings';
-  /** Default post category. */
+  /** دسته‌بندی پیشفرض نوشته. */
   defaultCategory: Maybe<Scalars['Int']['output']>;
-  /** Default post format. */
+  /** ساختار پیش‌فرض نوشته. */
   defaultPostFormat: Maybe<Scalars['String']['output']>;
-  /** Convert emoticons like :-) and :-P to graphics on display. */
+  /** تبدیل شکلک‌هایی مانند :-) و :-P به گرافیک هنگام نمایش. */
   useSmilies: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -38243,12 +38269,17 @@ export type EmptyCartMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type EmptyCartMutation = { __typename?: 'RootMutation', emptyCart: { __typename?: 'EmptyCartPayload', cart: { __typename?: 'Cart', contents: { __typename?: 'CartToCartItemConnection', nodes: Array<{ __typename?: 'SimpleCartItem', key: string }> } | null } | null } | null };
 
-export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllCategoriesQueryVariables = Exact<{
+  first: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type CategoriesQuery = { __typename?: 'RootQuery', productCategories: { __typename?: 'RootQueryToProductCategoryConnection', nodes: Array<{ __typename?: 'ProductCategory', name: string | null, id: number, parentId: number | null }> } | null };
+export type GetAllCategoriesQuery = { __typename?: 'RootQuery', productCategories: { __typename?: 'RootQueryToProductCategoryConnection', nodes: Array<{ __typename?: 'ProductCategory', name: string | null, id: number, parentId: number | null, image: { __typename?: 'MediaItem', sourceUrl: string | null, id: number } | null }> } | null };
 
-export type GetMainCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetMainCategoriesQueryVariables = Exact<{
+  parent: InputMaybe<Scalars['Int']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
 export type GetMainCategoriesQuery = { __typename?: 'RootQuery', productCategories: { __typename?: 'RootQueryToProductCategoryConnection', edges: Array<{ __typename?: 'RootQueryToProductCategoryConnectionEdge', node: { __typename?: 'ProductCategory', name: string | null, id: number, image: { __typename?: 'MediaItem', sourceUrl: string | null, id: number } | null } }> } | null };
@@ -38355,8 +38386,8 @@ export const RemoveItemsFromCartDocument = {"kind":"Document","definitions":[{"k
 export const GetCartDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CartContent"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductContentSlice"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"WOOCOMMERCE_THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SimpleProduct"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"soldIndividually"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"VariableProduct"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"soldIndividually"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductVariationContentSlice"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductVariation"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"WOOCOMMERCE_THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"salePrice"}},{"kind":"Field","name":{"kind":"Name","value":"discountAmount"}},{"kind":"Field","name":{"kind":"Name","value":"discountPercentage"}},{"kind":"Field","name":{"kind":"Name","value":"stockStatus"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CartItemContent"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CartItem"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"product"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductContentSlice"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"variation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductVariationContentSlice"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"quantity"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"subtotal"}},{"kind":"Field","name":{"kind":"Name","value":"subtotalTax"}},{"kind":"Field","name":{"kind":"Name","value":"totalOnSaleDiscount"}},{"kind":"Field","name":{"kind":"Name","value":"extraData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CartContent"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cart"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"itemCount"}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CartItemContent"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"appliedCoupons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"discountAmount"}},{"kind":"Field","name":{"kind":"Name","value":"discountTax"}}]}},{"kind":"Field","name":{"kind":"Name","value":"needsShippingAddress"}},{"kind":"Field","name":{"kind":"Name","value":"availableShippingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"instanceId"}},{"kind":"Field","name":{"kind":"Name","value":"methodId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"cost"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"chosenShippingMethods"}},{"kind":"Field","name":{"kind":"Name","value":"subtotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"subtotalTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"shippingTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"shippingTotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"total"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"totalTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"feeTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"feeTotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"discountTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"discountTotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"fees"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"total"}}]}},{"kind":"Field","name":{"kind":"Name","value":"appliedCoupons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"discountAmount"}}]}}]}}]} as unknown as DocumentNode<GetCartQuery, GetCartQueryVariables>;
 export const UpdateCartItemQuantitiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCartItemQuantities"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"items"}},"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CartItemQuantityInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateItemQuantities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"items"},"value":{"kind":"Variable","name":{"kind":"Name","value":"items"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CartContent"}}]}},{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CartItemContent"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductContentSlice"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"WOOCOMMERCE_THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SimpleProduct"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"soldIndividually"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"VariableProduct"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"soldIndividually"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductVariationContentSlice"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductVariation"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"WOOCOMMERCE_THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"regularPrice"}},{"kind":"Field","name":{"kind":"Name","value":"salePrice"}},{"kind":"Field","name":{"kind":"Name","value":"discountAmount"}},{"kind":"Field","name":{"kind":"Name","value":"discountPercentage"}},{"kind":"Field","name":{"kind":"Name","value":"stockStatus"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CartItemContent"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CartItem"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"product"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductContentSlice"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"variation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductVariationContentSlice"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"quantity"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"subtotal"}},{"kind":"Field","name":{"kind":"Name","value":"subtotalTax"}},{"kind":"Field","name":{"kind":"Name","value":"totalOnSaleDiscount"}},{"kind":"Field","name":{"kind":"Name","value":"extraData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CartContent"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cart"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"itemCount"}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CartItemContent"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"appliedCoupons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"discountAmount"}},{"kind":"Field","name":{"kind":"Name","value":"discountTax"}}]}},{"kind":"Field","name":{"kind":"Name","value":"needsShippingAddress"}},{"kind":"Field","name":{"kind":"Name","value":"availableShippingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"instanceId"}},{"kind":"Field","name":{"kind":"Name","value":"methodId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"cost"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"chosenShippingMethods"}},{"kind":"Field","name":{"kind":"Name","value":"subtotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"subtotalTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"shippingTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"shippingTotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"total"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"totalTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"feeTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"feeTotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"discountTax"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"discountTotal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RAW"}}]},{"kind":"Field","name":{"kind":"Name","value":"fees"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"total"}}]}},{"kind":"Field","name":{"kind":"Name","value":"appliedCoupons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"discountAmount"}}]}}]}}]} as unknown as DocumentNode<UpdateCartItemQuantitiesMutation, UpdateCartItemQuantitiesMutationVariables>;
 export const EmptyCartDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"EmptyCart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emptyCart"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<EmptyCartMutation, EmptyCartMutationVariables>;
-export const CategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1000"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","alias":{"kind":"Name","value":"parentId"},"name":{"kind":"Name","value":"parentDatabaseId"}}]}}]}}]}}]} as unknown as DocumentNode<CategoriesQuery, CategoriesQueryVariables>;
-export const GetMainCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMainCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"parent"},"value":{"kind":"NullValue"}},{"kind":"ObjectField","name":{"kind":"Name","value":"orderby"},"value":{"kind":"EnumValue","value":"TERM_ORDER"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetMainCategoriesQuery, GetMainCategoriesQueryVariables>;
+export const GetAllCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"orderby"},"value":{"kind":"EnumValue","value":"TERM_ORDER"}},{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"ASC"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","alias":{"kind":"Name","value":"parentId"},"name":{"kind":"Name","value":"parentDatabaseId"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>;
+export const GetMainCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMainCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"parent"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"parent"},"value":{"kind":"Variable","name":{"kind":"Name","value":"parent"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"orderby"},"value":{"kind":"EnumValue","value":"TERM_ORDER"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"id"},"name":{"kind":"Name","value":"databaseId"}},{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetMainCategoriesQuery, GetMainCategoriesQueryVariables>;
 export const GetCustomerBillingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCustomerBilling"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"billing"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"address1"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"postcode"}}]}}]}}]}}]} as unknown as DocumentNode<GetCustomerBillingQuery, GetCustomerBillingQueryVariables>;
 export const GetCustomerSessionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCustomerSession"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sessionToken"}}]}}]}}]} as unknown as DocumentNode<GetCustomerSessionQuery, GetCustomerSessionQueryVariables>;
 export const GetCustomerProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCustomerProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"orderCount"}}]}}]}}]} as unknown as DocumentNode<GetCustomerProfileQuery, GetCustomerProfileQueryVariables>;
