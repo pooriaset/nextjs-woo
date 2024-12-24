@@ -54,7 +54,7 @@ const DiscountCode: FC<DiscountCodeProps> = () => {
             width: 60,
           }}
         >
-          اعمال
+          {t('buttons.apply')}
         </ButtonWithLoading>
       </Stack>
     </Stack>

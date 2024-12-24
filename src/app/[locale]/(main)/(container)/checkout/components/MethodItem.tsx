@@ -1,6 +1,6 @@
 import { Stack, lighten, styled } from '@mui/material';
 
-export const ShippingMethodItem = styled(Stack)<{ selected?: boolean }>(
+export const MethodItem = styled(Stack)<{ selected?: boolean }>(
   ({ theme, selected }) => ({
     width: '100%',
     flexDirection: 'row',
@@ -23,4 +23,4 @@ export const ShippingMethodItem = styled(Stack)<{ selected?: boolean }>(
   }),
 );
 
-export default ShippingMethodItem;
+export default MethodItem;

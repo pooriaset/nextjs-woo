@@ -30,7 +30,9 @@ const documents = {
     "\n  mutation EmptyCart {\n    emptyCart(input: {}) {\n      cart {\n        contents {\n          nodes {\n            key\n          }\n        }\n      }\n    }\n  }\n": types.EmptyCartDocument,
     "\n  query GetAllCategories($first: Int) {\n    productCategories(\n      where: { orderby: TERM_ORDER, order: ASC }\n      first: $first\n    ) {\n      nodes {\n        id: databaseId\n        name\n        parentId: parentDatabaseId\n        image {\n          id: databaseId\n          sourceUrl\n        }\n      }\n    }\n  }\n": types.GetAllCategoriesDocument,
     "\n  query GetMainCategories($parent: Int, $first: Int) {\n    productCategories(\n      where: { parent: $parent, orderby: TERM_ORDER }\n      first: $first\n    ) {\n      edges {\n        node {\n          id: databaseId\n          name\n          image {\n            id: databaseId\n            sourceUrl\n          }\n        }\n      }\n    }\n  }\n": types.GetMainCategoriesDocument,
-    "\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n": types.GetCustomerBillingDocument,
+    "\n  query GetPaymentGateways {\n    paymentGateways {\n      nodes {\n        id\n        title\n        description\n        icon\n      }\n    }\n  }\n": types.GetPaymentGatewaysDocument,
+    "\n  mutation Checkout($customerNote: String) {\n    checkout(input: { customerNote: $customerNote }) {\n      redirect\n      clientMutationId\n    }\n  }\n": types.CheckoutDocument,
+    "\n  query GetCustomerBilling {\n    customer {\n      id: databaseId\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n": types.GetCustomerBillingDocument,
     "\n  query GetCustomerSession {\n    customer {\n      sessionToken\n    }\n  }\n": types.GetCustomerSessionDocument,
     "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n": types.GetCustomerProfileDocument,
     "\n  fragment CustomerOrdersLineItems on LineItem {\n    id\n    product {\n      node {\n        id\n        image {\n          id\n          sourceUrl\n        }\n      }\n    }\n  }\n": types.CustomerOrdersLineItemsFragmentDoc,
@@ -130,7 +132,15 @@ export function graphql(source: "\n  query GetMainCategories($parent: Int, $firs
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerBilling {\n    customer {\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query GetPaymentGateways {\n    paymentGateways {\n      nodes {\n        id\n        title\n        description\n        icon\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetPaymentGateways {\n    paymentGateways {\n      nodes {\n        id\n        title\n        description\n        icon\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation Checkout($customerNote: String) {\n    checkout(input: { customerNote: $customerNote }) {\n      redirect\n      clientMutationId\n    }\n  }\n"): (typeof documents)["\n  mutation Checkout($customerNote: String) {\n    checkout(input: { customerNote: $customerNote }) {\n      redirect\n      clientMutationId\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetCustomerBilling {\n    customer {\n      id: databaseId\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerBilling {\n    customer {\n      id: databaseId\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

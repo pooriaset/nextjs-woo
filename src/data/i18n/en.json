@@ -62,7 +62,8 @@
     "removeAll": "Remove All",
     "viewMore": "View More",
     "back": "Back",
-    "register": "Register"
+    "register": "Register",
+    "apply": "Apply"
   },
   "footer": {
     "links": {
@@ -187,7 +188,9 @@
       },
       "fields": {
         "description": "Order Description (Optional)"
-      }
+      },
+      "shippingMethodTitle": "Shipping Method",
+      "paymentGateway": "Payment Gateway"
     }
   },
   "fields": {

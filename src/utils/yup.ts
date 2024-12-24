@@ -11,6 +11,9 @@ export const faLocale: LocaleObject = {
     min: ({ min }) => {
       return `حداقل ${min} کاراکتر وارد کنید.`;
     },
+    email: () => {
+      return `لطفا ایمیل معتبری وارد نمایید.`;
+    },
   },
   mixed: {
     required: `وارد کردن این فیلد اجباری است.`,

@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 export const GET_CUSTOMER_BILLING = gql`
   query GetCustomerBilling {
     customer {
+      id: databaseId
       billing {
         firstName
         lastName

@@ -1,5 +1,5 @@
 import { CartContentFragment } from '@/graphql/types/graphql';
-import { atom } from 'jotai';
+import { atomWithReset } from 'jotai/utils';
 
 export interface ICartAtom extends CartContentFragment {}
-export const cartAtom = atom<ICartAtom | null>(null);
+export const cartAtom = atomWithReset<ICartAtom | null>(null);

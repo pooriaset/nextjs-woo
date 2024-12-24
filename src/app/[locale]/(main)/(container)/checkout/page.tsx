@@ -3,12 +3,19 @@
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import { UPDATE_SHIPPING_METHOD } from '@/graphql/queries/cart';
 import {
+  CHECKOUT_MUTATION,
+  GET_PAYMENT_GATEWAYS,
+} from '@/graphql/queries/checkout';
+import {
+  GetPaymentGatewaysQuery,
   ShippingRate,
   UpdateShippingMethodMutation,
 } from '@/graphql/types/graphql';
 import useCartQuery from '@/hooks/useCartQuery';
+import useEmptyCart from '@/hooks/useEmptyCart';
+import { redirect } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import {
   Card,
   CardActions,
@@ -24,12 +31,25 @@ import { Controller, useForm } from 'react-hook-form';
 import CheckoutBox from '../cart/components/CheckoutBox';
 import CheckoutBoxSkeleton from '../cart/components/CheckoutBoxSkeleton';
 import DiscountCode from '../cart/components/DiscountCode';
+import AvailablePaymentGateways from './components/AvailablePaymentGateways';
 import AvailableShippingMethods from './components/AvailableShippingMethods';
 import Billing from './components/Billing';
 
 const Page = () => {
   const t = useTranslations();
   const form = useForm();
+  const content = useAtomValue(cartAtom);
+
+  const gatewaysQuery = useQuery<GetPaymentGatewaysQuery>(
+    GET_PAYMENT_GATEWAYS,
+    {
+      onCompleted: (data) => {
+        form.reset({
+          paymentMethod: data?.paymentGateways?.nodes?.[0].id,
+        });
+      },
+    },
+  );
 
   const { loading, refetch } = useCartQuery();
 
@@ -37,12 +57,15 @@ const Page = () => {
     refetch();
   }, []);
 
-  const [update, { loading: shippingMethodLoading }] =
+  const [updateShippingMethod, { loading: shippingMethodLoading }] =
     useMutation<UpdateShippingMethodMutation>(UPDATE_SHIPPING_METHOD);
 
-  const content = useAtomValue(cartAtom);
-  if (!content?.contents?.itemCount) return <></>;
+  const [checkout, { loading: checkoutLoading }] =
+    useMutation(CHECKOUT_MUTATION);
 
+  const { emptyCartLoading, emptyCartMutate } = useEmptyCart();
+
+  if (!content?.contents?.itemCount) return redirect('/cart');
   const rates = content?.availableShippingMethods?.flatMap((item) => {
     return item?.rates;
   }) as ShippingRate[];
@@ -51,12 +74,8 @@ const Page = () => {
 
   const isFree = rates.length !== notFreeRates.length;
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
   const onShippingMethodChange = async (newValue: string) => {
-    await update({
+    await updateShippingMethod({
       variables: {
         shippingMethods: [newValue],
       },
@@ -64,48 +83,79 @@ const Page = () => {
     refetch();
   };
 
-  const isLoading = loading || shippingMethodLoading;
+  const onSubmit = async (data: any) => {
+    await checkout({
+      variables: {
+        customerNote: data.customerNote,
+        paymentMethod: data.paymentMethod,
+      },
+    });
+
+    await emptyCartMutate();
+  };
+
+  const isCartLoading = loading || shippingMethodLoading;
+  const isButtonLoading = isCartLoading || checkoutLoading || emptyCartLoading;
 
   return (
-    <Grid container spacing={2} position="relative">
+    <Grid
+      container
+      spacing={2}
+      position="relative"
+      component="form"
+      onSubmit={form.handleSubmit(onSubmit)}
+    >
       <Grid item lg={9} md={6} xs={12}>
-        <Card variant="outlined">
-          <CardContent>
-            <Stack spacing={3}>
-              <AvailableShippingMethods
-                isFree={isFree}
-                rates={notFreeRates}
-                defaultValue={content.chosenShippingMethods?.[0]}
-                onChange={onShippingMethodChange}
-              />
+        <Stack spacing={3}>
+          <AvailableShippingMethods
+            isFree={isFree}
+            rates={notFreeRates}
+            defaultValue={content.chosenShippingMethods?.[0]}
+            onChange={onShippingMethodChange}
+          />
 
-              <Billing />
-              <Controller
-                control={form.control}
-                name="description"
-                render={({
-                  field: { name, value, onChange },
-                  fieldState: { error },
-                }) => {
-                  return (
-                    <TextField
-                      onChange={onChange}
-                      name={name}
-                      multiline
-                      rows={4}
-                      value={value}
-                      variant="outlined"
-                      fullWidth
-                      placeholder={t('pages.checkout.fields.description')}
-                      error={!!error?.message}
-                      helperText={error?.message?.toString()}
-                    />
-                  );
-                }}
-              />
-            </Stack>
-          </CardContent>
-        </Card>
+          <Billing />
+          <Controller
+            control={form.control}
+            name="customerNote"
+            render={({
+              field: { name, value, onChange },
+              fieldState: { error },
+            }) => {
+              return (
+                <TextField
+                  onChange={onChange}
+                  name={name}
+                  multiline
+                  rows={4}
+                  value={value}
+                  variant="outlined"
+                  fullWidth
+                  placeholder={t('pages.checkout.fields.description')}
+                  error={!!error?.message}
+                  helperText={error?.message?.toString()}
+                />
+              );
+            }}
+          />
+
+          <Controller
+            name="paymentMethod"
+            control={form.control}
+            render={(props) => {
+              const {
+                field: { value, onChange },
+              } = props;
+              return (
+                <AvailablePaymentGateways
+                  value={value}
+                  onChange={onChange}
+                  items={gatewaysQuery.data}
+                />
+              );
+            }}
+          />
+        </Stack>
       </Grid>
 
       <Grid item lg={3} md={6} xs={12}>
@@ -118,7 +168,7 @@ const Page = () => {
 
           <Card variant="outlined">
             <CardContent>
-              {isLoading ? (
+              {isCartLoading ? (
                 <CheckoutBoxSkeleton />
               ) : (
                 <CheckoutBox content={content} />
@@ -126,7 +176,7 @@ const Page = () => {
             </CardContent>
             <CardActions>
               <ButtonWithLoading
-                isLoading={isLoading}
+                isLoading={isButtonLoading}
                 type="submit"
                 variant="contained"
                 color="primary"

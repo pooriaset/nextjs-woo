@@ -125,12 +125,11 @@ const Page = () => {
                     value={value}
                     variant="outlined"
                     fullWidth
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
-                    inputProps={{
+                    InputProps={{
                       autoComplete: 'new-password',
-                      dir: 'ltr',
                     }}
                   />
                 );
@@ -152,12 +151,11 @@ const Page = () => {
                     value={value}
                     variant="outlined"
                     fullWidth
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
                     inputProps={{
                       autoComplete: 'new-password',
-                      dir: 'ltr',
                     }}
                   />
                 );
@@ -179,7 +177,7 @@ const Page = () => {
                     value={value}
                     variant="outlined"
                     fullWidth
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
                     inputProps={{
@@ -207,7 +205,7 @@ const Page = () => {
                     value={value}
                     variant="outlined"
                     fullWidth
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
                     inputProps={{
@@ -235,7 +233,7 @@ const Page = () => {
                     value={value}
                     variant="outlined"
                     fullWidth
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
                     inputProps={{

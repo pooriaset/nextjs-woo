@@ -58,7 +58,8 @@
     "removeAll": "حذف همه",
     "viewMore": "مشاهده بیشتر",
     "back": "بازگشت",
-    "register": "ثبت نام"
+    "register": "ثبت نام",
+    "apply": "اعمال"
   },
   "footer": {
     "links": {
@@ -187,7 +188,9 @@
       },
       "fields": {
         "description": "توضیحات سفارش (اختیاری)"
-      }
+      },
+      "shippingMethodTitle": "روش ارسال",
+      "paymentGateway": "درگاه پرداخت"
     }
   },
   "fields": {
