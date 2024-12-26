@@ -3,6 +3,7 @@
 import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...params]/hooks/useProductContext';
 import CartItemController from '@/components/CartItemController/CartItemController';
 import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
+import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import DiscountPercentage from '@/components/common/DiscountPercentage';
 import OldPrice from '@/components/common/OldPrice';
@@ -15,14 +16,9 @@ import {
   StockStatusEnum,
 } from '@/graphql/types/graphql';
 import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
-import { useAppContext } from '@/hooks/useAppContext';
 import useCartUtils from '@/hooks/useCartUtils';
 import { Link } from '@/navigation';
 import { getMaxOfRangePrice } from '@/utils/price';
-import {
-  AccountBalanceWalletOutlined,
-  LocalShippingOutlined,
-} from '@mui/icons-material';
 import { Box, Collapse, Divider, Stack, Typography } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -30,20 +26,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, Fragment, ReactNode } from 'react';
 import AddToCartDialog from './AddToCartDialog';
 import MobileBuyBox from './MobileBuyBox';
 
-const listItems = [
-  {
-    text: 'ارسال از دو روز کاری دیگر',
-    icon: <LocalShippingOutlined />,
-  },
-  {
-    text: '5% بازگشت به اعتبار',
-    icon: <AccountBalanceWalletOutlined />,
-  },
-];
+const features: { id: string; text: string; icon: ReactNode }[] = [];
 
 export interface BuyBoxProps {
   product: Extract<
@@ -55,7 +42,6 @@ export interface BuyBoxProps {
 const BuyBox: FC<BuyBoxProps> = ({ product }) => {
   const { params } = useParams();
 
-  const { isMobile } = useAppContext();
   const t = useTranslations();
 
   const { selectedVariantId } = useProductContext();
@@ -219,17 +205,12 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
             flexDirection: 'column',
           }}
         >
-          {!!listItems?.length && (
+          {!!features?.length && (
             <List>
-              {listItems.map((item) => {
+              {features.map((item, index) => {
                 return (
-                  <>
-                    <ListItem
-                      disablePadding
-                      sx={{
-                        py: 1,
-                      }}
-                    >
+                  <Fragment key={item.id}>
+                    <ListItem>
                       <ListItemIcon
                         sx={{
                           minWidth: 0,
@@ -246,22 +227,24 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
                         }}
                       />
                     </ListItem>
-                    <Divider />
-                  </>
+                    {index !== features.length - 1 && <Divider />}
+                  </Fragment>
                 );
               })}
             </List>
           )}
 
-          {isMobile && (
+          <MobileView>
             <MobileBuyBox>
               <Box width="60%">{controllerSection}</Box>
               {priceSection}
             </MobileBuyBox>
-          )}
+          </MobileView>
 
-          {!isMobile && priceSection}
-          {!isMobile && controllerSection}
+          <DesktopView>
+            {priceSection}
+            {controllerSection}
+          </DesktopView>
         </Box>
       )}
     </>

@@ -41,7 +41,6 @@ const getProduct = async ({ id }: { id: number }) => {
     variables: {
       id,
     },
-    fetchPolicy: 'no-cache',
   });
   return data.product;
 };
@@ -103,7 +102,11 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
         </Grid>
         <Grid item md={3} xs={12}>
           <Card variant="outlined">
-            <CardContent>
+            <CardContent
+              sx={{
+                paddingBottom: '16px !important',
+              }}
+            >
               <BuyBox product={product} />
             </CardContent>
           </Card>

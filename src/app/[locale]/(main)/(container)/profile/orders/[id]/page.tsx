@@ -31,7 +31,6 @@ const Page: FC<PageProps> = (props) => {
     variables: {
       id: +id,
     },
-    fetchPolicy: 'no-cache',
   });
 
   const t = useTranslations();

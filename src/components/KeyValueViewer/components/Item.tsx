@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { FC } from 'react';
 import { IKeyValueItem } from '../types';
+import { useAppContext } from '@/hooks/useAppContext';
 
 export type ItemProps = ListItemProps & {
   index: number;
@@ -34,6 +35,8 @@ const Item: FC<ItemProps> = ({ item, index, ...props }) => {
 
   const isOdd = index % 2 === 1;
 
+  const { isMobile } = useAppContext();
+
   return (
     <ListItem
       sx={{
@@ -52,7 +55,7 @@ const Item: FC<ItemProps> = ({ item, index, ...props }) => {
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: '256px 1fr',
+              gridTemplateColumns: `${isMobile ? 105 : 210}px 1fr`,
             }}
           >
             <Typography
