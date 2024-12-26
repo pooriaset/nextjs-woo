@@ -29,7 +29,7 @@ const Page: FC<PageProps> = async (props) => {
       <Card variant="outlined" sx={{ width: '100%' }}>
         <CardContent>
           <OrderDetails
-            transactionId={data.order.transactionId!}
+            transactionId={data.order.transactionId}
             orderId={orderId}
           />
         </CardContent>

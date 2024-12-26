@@ -10,19 +10,21 @@ import CheckedAnimation from './CheckedAnimation';
 
 export interface OrderDetailsProps {
   orderId: number | string;
-  transactionId: number | string;
+  transactionId?: number | string | null;
 }
 
 const OrderDetails: FC<OrderDetailsProps> = ({ orderId, transactionId }) => {
   const t = useTranslations();
 
   const handleClickOnCopy = () => {
-    navigator.clipboard
-      .writeText(transactionId.toString())
-      .then(() => {
-        toast.success(t('messages.copied'));
-      })
-      .catch((err) => {});
+    if (transactionId) {
+      navigator.clipboard
+        .writeText(transactionId.toString())
+        .then(() => {
+          toast.success(t('messages.copied'));
+        })
+        .catch((err) => {});
+    }
   };
 
   return (
@@ -42,18 +44,22 @@ const OrderDetails: FC<OrderDetailsProps> = ({ orderId, transactionId }) => {
         {t('order.payment.successful.description')}
       </Typography>
 
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <Typography variant="body2" color="textSecondary" gutterBottom>
-          {t('order.payment.successful.transactionId')}{' '}
-        </Typography>
-        <Button
-          onClick={handleClickOnCopy}
-          variant="outlined"
-          endIcon={<ContentCopyOutlined fontSize="small" />}
-        >
-          <Typography variant="h6">{transactionId}</Typography>
-        </Button>
-      </Stack>
+      {!!transactionId && (
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <Typography variant="body2" color="textSecondary" gutterBottom>
+            {t('order.payment.successful.transactionId')}{' '}
+          </Typography>
+
+          <Button
+            onClick={handleClickOnCopy}
+            variant="outlined"
+            endIcon={<ContentCopyOutlined fontSize="small" />}
+          >
+            <Typography variant="h6">{transactionId}</Typography>
+          </Button>
+        </Stack>
+      )}
+
       <Button
         sx={{
           width: 'fit-content',
