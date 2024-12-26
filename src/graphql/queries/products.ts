@@ -64,7 +64,7 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
         sourceUrl(size: WOOCOMMERCE_SINGLE)
         altText
       }
-      customAttributes {
+      globalAttributes {
         nodes {
           id
           label

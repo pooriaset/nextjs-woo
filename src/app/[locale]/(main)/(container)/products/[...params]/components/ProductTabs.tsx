@@ -9,7 +9,7 @@ import { Product } from '../../types/common';
 
 export interface ProductTabsProps {
   content?: string | null;
-  attributes?: NonNullable<Product['customAttributes']>['nodes'];
+  attributes?: NonNullable<Product['globalAttributes']>['nodes'];
 }
 
 const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
@@ -30,6 +30,7 @@ const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
           value,
         };
       }) ?? [];
+  console.log('🚀 ~ items:', items);
 
   return (
     <>

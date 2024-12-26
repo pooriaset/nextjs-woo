@@ -41,6 +41,7 @@ const getProduct = async ({ id }: { id: number }) => {
     variables: {
       id,
     },
+    fetchPolicy: 'no-cache',
   });
   return data.product;
 };
@@ -115,7 +116,7 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
 
       <ProductTabs
         content={product.content}
-        attributes={product.customAttributes?.nodes}
+        attributes={product.globalAttributes?.nodes}
       />
     </ProductProvider>
   );
