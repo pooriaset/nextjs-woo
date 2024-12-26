@@ -36,7 +36,7 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
           averageRating
           slug
           image {
-            sourceUrl
+            sourceUrl(size: WOOCOMMERCE_SINGLE)
           }
           price
           regularPrice
@@ -61,7 +61,7 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
       commentCount
       image {
         id: databaseId
-        sourceUrl
+        sourceUrl(size: WOOCOMMERCE_SINGLE)
         altText
       }
       customAttributes {
@@ -85,7 +85,7 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
       galleryImages {
         nodes {
           id
-          sourceUrl
+          sourceUrl(size: WOOCOMMERCE_SINGLE)
           altText
         }
       }
