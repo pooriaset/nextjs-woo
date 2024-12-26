@@ -1,6 +1,5 @@
 'use client';
 
-import { Z_INDEX_VALUES } from '@/config/responsive';
 import { cartAtom } from '@/store/atoms';
 import {
   AccountCircleOutlined,
@@ -73,7 +72,7 @@ const MobileFooter = () => {
         position: 'fixed',
         bottom: 0,
         boxShadow: (theme) => theme.shadows[3],
-        zIndex: Z_INDEX_VALUES.mobileFooter,
+        zIndex: (theme) => theme.zIndex.appBar,
       }}
     >
       <MuiBottomNavigation

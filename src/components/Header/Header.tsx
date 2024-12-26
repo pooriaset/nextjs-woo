@@ -1,6 +1,5 @@
 'use client';
 
-import { Z_INDEX_VALUES } from '@/config/responsive';
 import { AppBar } from '@mui/material';
 import { FC, ReactNode } from 'react';
 
@@ -18,7 +17,7 @@ const Header: FC<HeaderProps> = ({ children }) => {
         borderColor: (theme) => theme.palette.divider,
         position: 'sticky',
         top: 0,
-        zIndex: Z_INDEX_VALUES.siteHeader,
+        zIndex: (theme) => theme.zIndex.appBar,
       }}
     >
       {children}

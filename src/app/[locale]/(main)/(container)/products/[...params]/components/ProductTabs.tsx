@@ -6,7 +6,6 @@ import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, SyntheticEvent, useState } from 'react';
 import { Product } from '../../types/common';
-import { Z_INDEX_VALUES } from '@/config/responsive';
 
 export interface ProductTabsProps {
   content?: string | null;
@@ -36,12 +35,9 @@ const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
     <>
       <Box
         sx={{
-          position: 'sticky',
-          top: 118 + 60,
           borderBottom: 1,
           borderColor: 'divider',
           backgroundColor: (theme) => theme.palette.background.default,
-          zIndex: Z_INDEX_VALUES.productTabs,
         }}
       >
         <Tabs

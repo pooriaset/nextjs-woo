@@ -1,3 +1,4 @@
+import { useAppContext } from '@/hooks/useAppContext';
 import { Close } from '@mui/icons-material';
 import { Box, DialogActions, IconButton } from '@mui/material';
 import MuiDialog, {
@@ -10,8 +11,6 @@ import ButtonWithLoading, {
   type ButtonWithLoadingProps,
 } from '../common/ButtonWithLoading';
 import DialogTransition from '../common/DialogTransition';
-import { useAppContext } from '@/hooks/useAppContext';
-import { Z_INDEX_VALUES } from '@/config/responsive';
 
 export interface DialogProps extends MuiDialogProps {
   dialogContentProps?: DialogContentProps;
@@ -42,15 +41,6 @@ const Dialog: FC<DialogProps> = ({
               }
             : {}),
         },
-      }}
-      slotProps={{
-        root: isMobile
-          ? {
-              style: {
-                zIndex: Z_INDEX_VALUES.dialog,
-              },
-            }
-          : {},
       }}
       sx={{
         ...props.sx,

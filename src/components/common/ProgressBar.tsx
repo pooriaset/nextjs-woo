@@ -1,6 +1,5 @@
 'use client';
 
-import { Z_INDEX_VALUES } from '@/config/responsive';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useEffect, useState } from 'react';
@@ -32,7 +31,7 @@ const ProgressBar = () => {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: Z_INDEX_VALUES.progressBar,
+        zIndex: (theme) => theme.zIndex.appBar + 1,
       }}
     >
       <LinearProgress variant="determinate" value={progress} />

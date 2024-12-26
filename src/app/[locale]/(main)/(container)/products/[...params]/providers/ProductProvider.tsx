@@ -1,6 +1,9 @@
 'use client';
 
-import React, { FC, PropsWithChildren, useState } from 'react';
+import { MOBILE_BUY_BOX_HEIGHT } from '@/config/responsive';
+import { useAppContext } from '@/hooks/useAppContext';
+import { Box } from '@mui/material';
+import { FC, PropsWithChildren, useState } from 'react';
 import {
   IProductContext,
   SelectedVariantId,
@@ -22,6 +25,8 @@ const ProductProvider: FC<PropsWithChildren<ProductProviderProps>> = ({
     setSelectedVariantId(+value);
   };
 
+  const { isMobile } = useAppContext();
+
   return (
     <productContext.Provider
       value={{
@@ -29,7 +34,13 @@ const ProductProvider: FC<PropsWithChildren<ProductProviderProps>> = ({
         handleChangeSelectedVariantId,
       }}
     >
-      {children}
+      <Box
+        sx={{
+          paddingBottom: isMobile ? `${MOBILE_BUY_BOX_HEIGHT}px` : null,
+        }}
+      >
+        {children}
+      </Box>
     </productContext.Provider>
   );
 };

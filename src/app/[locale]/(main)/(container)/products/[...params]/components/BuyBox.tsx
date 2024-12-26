@@ -166,7 +166,6 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
           color="primary"
           size="large"
           onClick={handleClickOnAdd}
-          sx={{ minHeight: height }}
         >
           {t('buttons.addToCart')}
         </ButtonWithLoading>
@@ -220,36 +219,39 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
             flexDirection: 'column',
           }}
         >
-          <List>
-            {listItems.map((item) => {
-              return (
-                <>
-                  <ListItem
-                    disablePadding
-                    sx={{
-                      py: 1,
-                    }}
-                  >
-                    <ListItemIcon
+          {!!listItems?.length && (
+            <List>
+              {listItems.map((item) => {
+                return (
+                  <>
+                    <ListItem
+                      disablePadding
                       sx={{
-                        minWidth: 0,
-                        mr: 1,
+                        py: 1,
                       }}
                     >
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.text}
-                      primaryTypographyProps={{
-                        fontSize: (theme) => theme.typography.caption.fontSize,
-                      }}
-                    />
-                  </ListItem>
-                  <Divider />
-                </>
-              );
-            })}
-          </List>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: 1,
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item.text}
+                        primaryTypographyProps={{
+                          fontSize: (theme) =>
+                            theme.typography.caption.fontSize,
+                        }}
+                      />
+                    </ListItem>
+                    <Divider />
+                  </>
+                );
+              })}
+            </List>
+          )}
 
           {isMobile && (
             <MobileBuyBox>

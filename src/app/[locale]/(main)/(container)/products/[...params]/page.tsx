@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
-import { MOBILE_BUY_BOX_HEIGHT } from '@/config/responsive';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_SINGLE_VARIABLE_PRODUCT_QUERY } from '@/graphql/queries/products';
 import { GetSingleProductQuery } from '@/graphql/types/graphql';
@@ -67,13 +66,7 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
         selectedVariantId: null,
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          pb: { xs: `${MOBILE_BUY_BOX_HEIGHT}px` },
-        }}
-      >
+      <Grid container spacing={2}>
         <Grid item md={5} xs={12}>
           <ProductGallery
             thumbnail={product.image}
@@ -115,13 +108,12 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12}>
-          <ProductTabs
-            content={product.content}
-            attributes={product.customAttributes?.nodes}
-          />
-        </Grid>
       </Grid>
+
+      <ProductTabs
+        content={product.content}
+        attributes={product.customAttributes?.nodes}
+      />
     </ProductProvider>
   );
 };
