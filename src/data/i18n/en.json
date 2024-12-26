@@ -226,6 +226,13 @@
       "paidAmount": "Paid Amount",
       "yourProfit": "Your Profit from this Purchase"
     },
-    "noRowsToShow": "No orders have been placed."
+    "noRowsToShow": "No orders have been placed.",
+    "payment": {
+      "successful": {
+        "title": "Payment Successful",
+        "description": "Thank you for your purchase. Your payment has been successfully processed, and your order is now being prepared.",
+        "transactionId": "Transaction ID"
+      }
+    }
   }
 }

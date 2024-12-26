@@ -28,9 +28,7 @@ export const createErrorLink = () => {
             forward(operation).subscribe(subscriber);
           });
         } else {
-          toast.error(message, {
-            toastId: message,
-          });
+          toast.error(message);
         }
       });
     }

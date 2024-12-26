@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoriesQuery } from '@/graphql/types/graphql';
+import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
 import { sortOptions } from '@/static/sortOptions';
 import { SortOutlined } from '@mui/icons-material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 
 export interface InlineFiltersProps {
-  categories?: NonNullable<CategoriesQuery['productCategories']>['nodes'];
+  categories?: NonNullable<GetAllCategoriesQuery['productCategories']>['nodes'];
 }
 const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
   const t = useTranslations();

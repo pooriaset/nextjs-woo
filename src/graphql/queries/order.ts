@@ -5,6 +5,7 @@ export const GET_ORDER = gql`
   query GetOrder($id: ID) {
     order(idType: DATABASE_ID, id: $id) {
       id: databaseId
+      needsPayment
       shipping {
         address1
         address2
@@ -48,4 +49,13 @@ export const GET_ORDER = gql`
     }
   }
   ${ProductVariationContentSlice}
+`;
+
+export const GET_IS_PAYED_ORDER = gql`
+  query GetIsPayedOrder($id: ID) {
+    order(idType: DATABASE_ID, id: $id) {
+      transactionId
+      datePaid
+    }
+  }
 `;

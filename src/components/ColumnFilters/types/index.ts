@@ -1,5 +1,5 @@
-import { CategoriesQuery } from '@/graphql/types/graphql';
+import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
 
 export type ProductCategoryOptions = NonNullable<
-  CategoriesQuery['productCategories']
+  GetAllCategoriesQuery['productCategories']
 >['nodes'];

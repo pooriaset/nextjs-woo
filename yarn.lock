@@ -3154,6 +3154,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-lottie@npm:^1":
+  version: 1.2.10
+  resolution: "@types/react-lottie@npm:1.2.10"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10c0/c0b71c534a8f6e7540a620bfeb98264217a66db1f886f499a49e5bd39960fbc0897d9c5475e575d29ebb225b50bf51f6032053a51a1d3e919396a322e7f183b1
+  languageName: node
+  linkType: hard
+
 "@types/react-swipeable-views@npm:^0":
   version: 0.13.5
   resolution: "@types/react-swipeable-views@npm:0.13.5"
@@ -3910,7 +3919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-runtime@npm:^6.11.6":
+"babel-runtime@npm:^6.11.6, babel-runtime@npm:^6.26.0":
   version: 6.26.0
   resolution: "babel-runtime@npm:6.26.0"
   dependencies:
@@ -7921,6 +7930,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lottie-web@npm:^5.12.2":
+  version: 5.12.2
+  resolution: "lottie-web@npm:5.12.2"
+  checksum: 10c0/0aeaf631b10a76afd025df70c2a1486543530708e07a316946c08e55891dac483ffbaf2bf3648ae0b9c54c733118a0a086fd150aa76f7848606214c67ad72c30
+  languageName: node
+  linkType: hard
+
 "lower-case-first@npm:^1.0.0":
   version: 1.0.2
   resolution: "lower-case-first@npm:1.0.2"
@@ -8406,6 +8422,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
+    "@types/react-lottie": "npm:^1"
     "@types/react-swipeable-views": "npm:^0"
     "@types/stylis": "npm:^4.2.5"
     add: "npm:^2.0.6"
@@ -8431,6 +8448,7 @@ __metadata:
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.51.3"
     react-hot-toast: "npm:^2.4.1"
+    react-lottie: "npm:^1.2.10"
     react-otp-input: "npm:^3.1.1"
     react-swipeable-views: "npm:^0.14.0"
     sharp: "npm:^0.33.5"
@@ -9213,7 +9231,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.4, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.4, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -9344,6 +9362,19 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: 10c0/6eb5e4b28028c23e2bfcf73371e72cd4162e4ac7ab445ddae2afe24e347a37d6dc22fae6e1748632cd43c6d4f9b8f86dcf26bf9275e1874f436d129952528ae0
+  languageName: node
+  linkType: hard
+
+"react-lottie@npm:^1.2.10":
+  version: 1.2.10
+  resolution: "react-lottie@npm:1.2.10"
+  dependencies:
+    babel-runtime: "npm:^6.26.0"
+    lottie-web: "npm:^5.12.2"
+    prop-types: "npm:^15.6.1"
+  peerDependencies:
+    react: ">=15.0.0"
+  checksum: 10c0/f99881d38f7e5d279039f4fdb47d1817e4dd1a62d655e7015e70738c7f39a93d8969a49141044c220493e1374b242612a6e78b05bd5e931914f8e14e5cfd0709
   languageName: node
   linkType: hard
 

@@ -1,8 +1,9 @@
 'use client';
 
 import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
-import { CategoriesQuery } from '@/graphql/types/graphql';
+import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import { SearchPageParamsKeys } from '@/utils/params';
 import { useQuery } from '@apollo/client';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
@@ -20,19 +21,18 @@ import { FC, useState } from 'react';
 import Categories from './components/Categories';
 import { ListItem } from './components/ListItem';
 import { Title } from './components/Title';
-import { SearchPageParamsKeys } from '@/utils/params';
 
 export interface ColumnFiltersProps {}
 
 const ColumnFilters: FC<ColumnFiltersProps> = () => {
   const t = useTranslations();
 
-  const { data: categoriesData } = useQuery<CategoriesQuery>(
+  const { data: categoriesData } = useQuery<GetAllCategoriesQuery>(
     GET_ALL_CATEGORIES_QUERY,
   );
 
   const categories = [
-    { id: -1, parentId: -1, name: t('categories.all') },
+    { id: -1, parentId: -1, name: t('categories.all'), image: {} as any },
     ...(categoriesData?.productCategories?.nodes ?? []),
   ];
 
