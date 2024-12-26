@@ -4,7 +4,7 @@ import { useAppContext } from '@/hooks/useAppContext';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Box, IconButton, Stack, useTheme } from '@mui/material';
 import { FC, useCallback, useRef, useState } from 'react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Product } from '../../types/common';
 import GalleryItem from './GalleryItem';
@@ -121,9 +121,6 @@ const ProductGallery: FC<ProductGalleryProps> = ({
           ref={sliderRef}
           dir={theme.direction}
           direction="vertical"
-          navigation={{
-            enabled: true,
-          }}
           breakpoints={{
             [theme.breakpoints.values.md]: {
               slidesPerView: 4,
@@ -134,7 +131,6 @@ const ProductGallery: FC<ProductGalleryProps> = ({
             width: 72,
           }}
           spaceBetween={theme.spacing(2)}
-          modules={[Navigation]}
         >
           {_galleryImages?.map((item, index) => {
             const handleClickOnItem = () => {
