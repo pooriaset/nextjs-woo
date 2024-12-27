@@ -9,6 +9,7 @@ import {
 
 export const authClient = new ApolloClient({
   cache: new InMemoryCache(),
+  connectToDevTools: true,
   link: from([
     sessionCreatorLink(),
     sessionUpdaterLink,
@@ -21,6 +22,9 @@ export const authClient = new ApolloClient({
     query: {
       fetchPolicy: 'no-cache',
       errorPolicy: 'all',
+    },
+    watchQuery: {
+      fetchPolicy: 'no-cache',
     },
   },
 });

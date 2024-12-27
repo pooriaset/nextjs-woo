@@ -28,8 +28,10 @@ export const GET_CUSTOMER_PROFILE = gql`
   query GetCustomerProfile {
     customer {
       id
-      firstName
-      lastName
+      billing {
+        firstName
+        lastName
+      }
       username
       orderCount
     }
@@ -73,4 +75,12 @@ export const GET_CUSTOMER_ORDERS = gql`
     }
   }
   ${CUSTOMER_ORDER_LINE_ITEM_FRAGMENT}
+`;
+
+export const UPDATE_CUSTOMER_MUTATION = gql`
+  mutation UpdateCustomer($billing: CustomerAddressInput) {
+    updateCustomer(input: { billing: $billing, shipping: $billing }) {
+      clientMutationId
+    }
+  }
 `;

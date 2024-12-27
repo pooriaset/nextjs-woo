@@ -4,6 +4,7 @@
     "title": "آیا مطمئن هستید؟"
   },
   "messages": {
+    "defaultSuccess": "با موفقیت انجام شد",
     "authenticationError": "نام کاربری یا رمز عبور اشتباه است.",
     "passwordNotMatch": "تایید رمز عبور با رمز عبور مطابقت ندارد.",
     "copied": "کپی شد.",
@@ -61,7 +62,8 @@
     "viewMore": "مشاهده بیشتر",
     "back": "بازگشت",
     "register": "ثبت نام",
-    "apply": "اعمال"
+    "apply": "اعمال",
+    "save": "ذخیره تغییرات"
   },
   "footer": {
     "links": {
@@ -200,13 +202,19 @@
     "discountCode": "کد تخفیف",
     "date": "تاریخ",
     "orderId": "شناسه سفارش",
-    "amount": "مبلغ"
+    "amount": "مبلغ",
+    "firstName": "نام",
+    "lastName": "نام خانوادگی",
+    "state": "استان",
+    "city": "شهر",
+    "address1": "آدرس",
+    "postcode": "کد پستی"
   },
   "profile": {
     "myOrders": "سفارش‌های من",
     "accountInfo": "اطلاعات حساب کاربری",
     "latestOrders": "آخرین سفارش‌های من",
-    "user": "User",
+    "user": "کاربر",
     "activitySummary": "خلاصه فعالیت‌ها",
     "logout": "خروج از حساب"
   },

@@ -10,3 +10,12 @@ export const GET_GENERAL_SETTINGS = gql`
     }
   }
 `;
+
+export const  GET_COUNTRY_STATES = gql`
+  query GetCountryStates($country: CountriesEnum!) {
+    countryStates(country: $country) {
+      name
+      code
+    }
+  }
+`;

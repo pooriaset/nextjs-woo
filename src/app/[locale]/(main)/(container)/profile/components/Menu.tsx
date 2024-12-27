@@ -1,3 +1,4 @@
+import { authClient } from '@/graphql/clients/authClient';
 import { GET_CUSTOMER_PROFILE } from '@/graphql/queries/customer';
 import { GetCustomerProfileQuery } from '@/graphql/types/graphql';
 import { useQuery } from '@apollo/client';
@@ -7,13 +8,19 @@ import MenuHeader from './MenuHeader';
 import MenuItems from './MenuItems';
 
 const Menu = () => {
-  const { data, loading, error } =
-    useQuery<GetCustomerProfileQuery>(GET_CUSTOMER_PROFILE);
+  const { data, loading, error } = useQuery<GetCustomerProfileQuery>(
+    GET_CUSTOMER_PROFILE,
+    {
+      client: authClient,
+    },
+  );
 
   const t = useTranslations();
 
-  const fullName = data?.customer?.firstName
-    ? data?.customer?.firstName + ' ' + data?.customer?.lastName
+  const fullName = data?.customer?.billing?.firstName
+    ? data?.customer?.billing?.firstName +
+      ' ' +
+      data?.customer?.billing?.lastName
     : t('profile.user');
 
   const { items } = useMenuItems({

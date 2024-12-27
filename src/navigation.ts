@@ -2,6 +2,7 @@ import { Direction } from '@mui/material';
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 import { faLocale } from './utils/yup';
 import { LocaleObject } from 'yup';
+import { CountriesEnum } from './graphql/types/graphql';
 
 export const locales = ['en', 'fa'] as const;
 
@@ -16,18 +17,21 @@ export const languages: Record<
     direction: Direction;
     code: string;
     yupLocale?: LocaleObject;
+    country?: CountriesEnum;
   }
 > = {
   en: {
     label: 'English',
     direction: 'ltr',
     code: 'en-us',
+    country: CountriesEnum.Us,
   },
   fa: {
     label: 'Persian',
     direction: 'rtl',
     code: 'fa-ir',
     yupLocale: faLocale,
+    country: CountriesEnum.Ir,
   },
 };
 

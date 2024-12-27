@@ -118,7 +118,7 @@ const Page: FC<PageProps> = (props) => {
       }}
     >
       <CardContent>
-        <CardHeader title={t('order.detailsTitle')} back />
+        <CardHeader title={t('order.detailsTitle')} />
         <Stack spacing={2} mt={2}>
           <Grid container alignItems="center">
             {detailItems.map((item) => {

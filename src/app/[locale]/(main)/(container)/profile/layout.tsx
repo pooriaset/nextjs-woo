@@ -18,7 +18,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           <DesktopView>
             <Box
               sx={{
-                width: 260,
+                minWidth: 250,
                 border: '1px solid',
                 borderColor: 'divider',
                 borderRadius: 1,

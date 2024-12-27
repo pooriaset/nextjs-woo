@@ -70,10 +70,7 @@ export default async function LocaleLayout({
           <Provider>
             <AppRouterCacheProvider>
               <ThemeProvider theme={themes[locale] ?? defaultTheme}>
-                <Toaster
-                  // rtl={languages?.[locale]?.direction == 'rtl'}
-                  position="top-center"
-                />
+                <Toaster containerClassName="toaster" position="top-center" />
                 <ApolloProvider>
                   <AppProvider userAgent={reqUserAgent}>
                     <CssBaseline />

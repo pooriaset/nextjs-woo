@@ -56,6 +56,9 @@ export const globalStyles: GlobalStylesProps['styles'] = (theme) => ({
     width: 16,
     borderRadius: 8,
   },
+  '.toaster > div > div': {
+    width: `${250}px !important`,
+  },
 });
 
 const themeOptions: ThemeOptions = {

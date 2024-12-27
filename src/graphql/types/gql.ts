@@ -34,10 +34,12 @@ const documents = {
     "\n  mutation Checkout($customerNote: String, $paymentMethod: String) {\n    checkout(\n      input: { customerNote: $customerNote, paymentMethod: $paymentMethod }\n    ) {\n      redirect\n      clientMutationId\n    }\n  }\n": types.CheckoutDocument,
     "\n  query GetCustomerBilling {\n    customer {\n      id: databaseId\n      billing {\n        firstName\n        lastName\n        address1\n        state\n        city\n        phone\n        postcode\n      }\n    }\n  }\n": types.GetCustomerBillingDocument,
     "\n  query GetCustomerSession {\n    customer {\n      sessionToken\n    }\n  }\n": types.GetCustomerSessionDocument,
-    "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n": types.GetCustomerProfileDocument,
+    "\n  query GetCustomerProfile {\n    customer {\n      id\n      billing {\n        firstName\n        lastName\n      }\n      username\n      orderCount\n    }\n  }\n": types.GetCustomerProfileDocument,
     "\n  fragment CustomerOrdersLineItems on LineItem {\n    id\n    product {\n      node {\n        id\n        image {\n          id\n          sourceUrl\n        }\n      }\n    }\n  }\n": types.CustomerOrdersLineItemsFragmentDoc,
     "\n  query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {\n    customer {\n      orders(first: $count, where: { statuses: $statuses }) {\n        edges {\n          node {\n            id: databaseId\n            total(format: RAW)\n            subtotal(format: RAW)\n            status\n            date\n            lineItems {\n              nodes {\n                ...CustomerOrdersLineItems\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n  \n": types.GetCustomerOrdersDocument,
+    "\n  mutation UpdateCustomer($billing: CustomerAddressInput) {\n    updateCustomer(input: { billing: $billing, shipping: $billing }) {\n      clientMutationId\n    }\n  }\n": types.UpdateCustomerDocument,
     "\n  query GetGeneralSettings {\n    generalSettings {\n      title\n      description\n      timezone\n      language\n    }\n  }\n": types.GetGeneralSettingsDocument,
+    "\n  query GetCountryStates($country: CountriesEnum!) {\n    countryStates(country: $country) {\n      name\n      code\n    }\n  }\n": types.GetCountryStatesDocument,
     "\n  query GetOrder($id: ID) {\n    order(idType: DATABASE_ID, id: $id) {\n      id: databaseId\n      needsPayment\n      shipping {\n        address1\n        address2\n        city\n        firstName\n        lastName\n        phone\n        postcode\n        state\n      }\n      total(format: RAW)\n      subtotal(format: RAW)\n      discountTotal(format: RAW)\n      shippingTotal\n      feeLines {\n        edges {\n          node {\n            id\n            total\n          }\n        }\n      }\n      date\n      dateCompleted\n      status\n      datePaid\n      lineItems {\n        nodes {\n          id: variationId\n          productId\n          total\n          subtotal\n          quantity\n          variation {\n            node {\n              ...ProductVariationContentSlice\n            }\n          }\n        }\n      }\n    }\n  }\n  \n": types.GetOrderDocument,
     "\n  query GetIsPayedOrder($id: ID) {\n    order(idType: DATABASE_ID, id: $id) {\n      transactionId\n      datePaid\n    }\n  }\n": types.GetIsPayedOrderDocument,
     "\n  query GetPage($slug: String) {\n    pages(where: { name: $slug, status: PUBLISH }) {\n      edges {\n        node {\n          title\n          content\n        }\n      }\n    }\n  }\n": types.GetPageDocument,
@@ -149,7 +151,7 @@ export function graphql(source: "\n  query GetCustomerSession {\n    customer {\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerProfile {\n    customer {\n      id\n      firstName\n      lastName\n      username\n      orderCount\n    }\n  }\n"];
+export function graphql(source: "\n  query GetCustomerProfile {\n    customer {\n      id\n      billing {\n        firstName\n        lastName\n      }\n      username\n      orderCount\n    }\n  }\n"): (typeof documents)["\n  query GetCustomerProfile {\n    customer {\n      id\n      billing {\n        firstName\n        lastName\n      }\n      username\n      orderCount\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -161,7 +163,15 @@ export function graphql(source: "\n  query GetCustomerOrders($count: Int!, $stat
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation UpdateCustomer($billing: CustomerAddressInput) {\n    updateCustomer(input: { billing: $billing, shipping: $billing }) {\n      clientMutationId\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateCustomer($billing: CustomerAddressInput) {\n    updateCustomer(input: { billing: $billing, shipping: $billing }) {\n      clientMutationId\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  query GetGeneralSettings {\n    generalSettings {\n      title\n      description\n      timezone\n      language\n    }\n  }\n"): (typeof documents)["\n  query GetGeneralSettings {\n    generalSettings {\n      title\n      description\n      timezone\n      language\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetCountryStates($country: CountriesEnum!) {\n    countryStates(country: $country) {\n      name\n      code\n    }\n  }\n"): (typeof documents)["\n  query GetCountryStates($country: CountriesEnum!) {\n    countryStates(country: $country) {\n      name\n      code\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
