@@ -5,6 +5,7 @@ import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import { authClient } from '@/graphql/clients/authClient';
 import {
   GET_CUSTOMER_BILLING,
+  GET_CUSTOMER_PROFILE,
   UPDATE_CUSTOMER_MUTATION,
 } from '@/graphql/queries/customer';
 import { GET_COUNTRY_STATES } from '@/graphql/queries/general';
@@ -91,6 +92,7 @@ const Page = () => {
       },
     });
     if (!errors?.length) {
+      authClient.refetchQueries({ include: [GET_CUSTOMER_PROFILE] });
       toast.success(t('messages.defaultSuccess'));
     }
   };
