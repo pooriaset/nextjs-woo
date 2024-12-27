@@ -38,6 +38,8 @@ import DiscountCode from '../cart/components/DiscountCode';
 import AvailablePaymentGateways from './components/AvailablePaymentGateways';
 import AvailableShippingMethods from './components/AvailableShippingMethods';
 import Billing from './components/Billing';
+import { authClient } from '@/graphql/clients/authClient';
+import Loading from './loading';
 
 const Page = () => {
   const t = useTranslations();
@@ -62,15 +64,27 @@ const Page = () => {
   }, []);
 
   const [updateShippingMethod, { loading: shippingMethodLoading }] =
-    useMutation<UpdateShippingMethodMutation>(UPDATE_SHIPPING_METHOD);
+    useMutation<UpdateShippingMethodMutation>(UPDATE_SHIPPING_METHOD, {
+      client: authClient,
+    });
 
   const [checkout, { loading: checkoutLoading }] =
-    useMutation<CheckoutMutation>(CHECKOUT_MUTATION);
+    useMutation<CheckoutMutation>(CHECKOUT_MUTATION, {
+      client: authClient,
+    });
 
   const [emptyCartMutate, { loading: emptyCartLoading }] =
-    useMutation<RemoveItemsFromCartMutation>(EMPTY_CART_MUTATION);
+    useMutation<RemoveItemsFromCartMutation>(EMPTY_CART_MUTATION, {
+      client: authClient,
+    });
 
-  if (!content?.contents?.itemCount) return redirect('/cart');
+  if (!content?.contents?.itemCount) {
+    if (loading || content === null) {
+      return <Loading />;
+    }
+
+    return redirect('/cart');
+  }
 
   const rates = content?.availableShippingMethods?.flatMap((item) => {
     return item?.rates;

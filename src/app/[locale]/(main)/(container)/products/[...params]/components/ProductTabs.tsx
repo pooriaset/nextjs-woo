@@ -24,13 +24,15 @@ const ProductTabs: FC<ProductTabsProps> = ({ content, attributes }) => {
     attributes
       ?.filter((item) => !item.variation)
       .map((item) => {
-        const value = item.optionNames?.join(`${t('stringSeparator')} `) ?? '';
+        const value =
+          item.terms?.nodes
+            .map((item) => item.name)
+            ?.join(`${t('stringSeparator')} `) ?? '';
         return {
           key: item.label ?? '',
           value,
         };
       }) ?? [];
-  console.log('🚀 ~ items:', items);
 
   return (
     <>

@@ -54,7 +54,7 @@ export const CUSTOMER_ORDER_LINE_ITEM_FRAGMENT = gql`
 export const GET_CUSTOMER_ORDERS = gql`
   query GetCustomerOrders($count: Int!, $statuses: [OrderStatusEnum]) {
     customer {
-      orders(last: $count, where: { statuses: $statuses }) {
+      orders(first: $count, where: { statuses: $statuses }) {
         edges {
           node {
             id: databaseId

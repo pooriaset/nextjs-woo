@@ -40,12 +40,11 @@ const SubCategoryItem: FC<SubCategoryItemProps> = ({ id, src, name }) => {
         color="text.primary"
         variant="body2"
         sx={{
-          // whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
           overflow: 'hidden',
           display: '-webkit-box',
-          '-webkit-line-clamp': '3',
-          '-webkit-box-orient': 'vertical',
+          WebkitLineClamp: '3',
+          WebkitBoxOrient: 'vertical',
         }}
       >
         {name}

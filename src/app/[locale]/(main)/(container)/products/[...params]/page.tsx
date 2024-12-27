@@ -41,9 +41,9 @@ const getProduct = async ({ id }: { id: number }) => {
     variables: {
       id,
     },
-    fetchPolicy: 'no-cache',
   });
-  return data.product;
+
+  return data?.product || { __typename: 'SimpleProduct' };
 };
 
 const Page: FC<PageProps> = async ({ params: { params } }) => {

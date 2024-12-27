@@ -15,11 +15,11 @@ import {
 import { Container, Grid } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
-import { MainSlider } from '../../../../components/MainSlider';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
 import ProductsSlider from './components/ProductsSlider';
 import SlidersSkeleton from './components/SlidersSkeleton';
+import { MainSlider } from '@/components/MainSlider';
 
 const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({

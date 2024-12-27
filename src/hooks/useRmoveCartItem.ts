@@ -2,6 +2,7 @@ import { REMOVE_ITEMS_FROM_CART_MUTATION } from '@/graphql/queries/cart';
 import { RemoveItemsFromCartMutation } from '@/graphql/types/graphql';
 import { useMutation } from '@apollo/client';
 import useCartUtils from './useCartUtils';
+import { authClient } from '@/graphql/clients/authClient';
 
 export interface RemoveCartItemMutate {
   (values: { variationId: number | undefined }): Promise<any>;
@@ -19,6 +20,7 @@ const useRemoveCartItem: IUseRemoveCartItem = () => {
 
   const [removeCartItem, { loading }] =
     useMutation<RemoveItemsFromCartMutation>(REMOVE_ITEMS_FROM_CART_MUTATION, {
+      client: authClient,
       onCompleted({ removeItemsFromCart: data }) {
         if (data?.cart) {
           setCartAtom(data.cart);

@@ -1,6 +1,8 @@
 'use client';
 
+import SimpleLoading from '@/components/SimpleLoading/SimpleLoading';
 import PriceLabel from '@/components/common/PriceLabel';
+import { authClient } from '@/graphql/clients/authClient';
 import { GET_ORDER } from '@/graphql/queries/order';
 import { getFragmentData } from '@/graphql/types';
 import {
@@ -10,7 +12,7 @@ import {
 import useLocaleDate from '@/hooks/useLocaleDate';
 import useOrderStatusMapper from '@/hooks/useOrderStatusMapper';
 import { useQuery } from '@apollo/client';
-import { Chip, CircularProgress, Grid, Stack, Typography } from '@mui/material';
+import { Chip, Grid, Stack, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useTranslations } from 'next-intl';
@@ -31,6 +33,7 @@ const Page: FC<PageProps> = (props) => {
     variables: {
       id: +id,
     },
+    client: authClient,
   });
 
   const t = useTranslations();
@@ -41,11 +44,7 @@ const Page: FC<PageProps> = (props) => {
   const localeDate = useLocaleDate(order?.date);
 
   if (loading || !!error || !order) {
-    return (
-      <Stack alignItems="center" justifyContent="center" height="100%">
-        <CircularProgress size={28} />
-      </Stack>
-    );
+    return <SimpleLoading />;
   }
 
   const shipping = order?.shipping!;

@@ -1,7 +1,7 @@
 import SimpleLoading from '@/components/SimpleLoading/SimpleLoading';
 
-const loading = () => {
+const Loading = () => {
   return <SimpleLoading />;
 };
 
-export default loading;
+export default Loading;

@@ -5,7 +5,7 @@ import {
   ShoppingBagOutlined,
 } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
-import { MenuItem } from '../components/MenuItems';
+import { IMenuItem } from '../components/MenuItems';
 import { usePathname, useRouter } from '@/navigation';
 import { signOut } from 'next-auth/react';
 import { protectedRoutes } from '@/config/app';
@@ -13,7 +13,7 @@ import { useTransition } from 'react';
 
 export interface IUseMenuItems {
   (props?: { ordersCount: number }): {
-    items: MenuItem[];
+    items: IMenuItem[];
   };
 }
 const useMenuItems: IUseMenuItems = (props) => {

@@ -69,8 +69,12 @@ export const GET_SINGLE_VARIABLE_PRODUCT_QUERY = gql`
           id
           label
           name
-          optionNames
           variation
+          terms {
+            nodes {
+              name
+            }
+          }
         }
       }
       productCategories(where: { order: ASC, orderby: TERM_ORDER }) {

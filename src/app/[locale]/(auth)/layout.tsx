@@ -1,8 +1,10 @@
+'use client';
+
+import { MobileFooter } from '@/components/Footer/components';
 import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
 import { Grid, Stack } from '@mui/material';
 import { FC, ReactNode } from 'react';
 import Back from './components/Back/Back';
-import { MobileFooter } from '@/components/Footer/components';
 
 export interface AuthLayoutProps {
   children: ReactNode;

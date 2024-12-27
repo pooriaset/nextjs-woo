@@ -1,10 +1,17 @@
 'use client';
 
+import PasswordTextField from '@/components/PasswordTextField/PasswordTextField';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import Logo from '@/components/common/Logo';
 import { Link, useRouter } from '@/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Stack, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Link as MuiLink,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -14,7 +21,6 @@ import { useTransition } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import * as yup from 'yup';
-import { Link as MuiLink } from '@mui/material';
 
 type FieldNames = Partial<Record<'username' | 'password', any>>;
 
@@ -42,16 +48,17 @@ const Page = () => {
 
   const onSubmit: SubmitHandler<FieldNames> = (data) => {
     startTransition(async () => {
+      const callbackUrl =
+        new URL(location.href).searchParams.get('callbackUrl') || '/';
+
       const result = await signIn('credentials', {
         ...data,
-        redirect: false,
+        callbackUrl,
       });
 
       if (result) {
         if (result.status !== 200) {
-          toast.error('An Error Occurred!');
-        } else {
-          router.push('/');
+          toast.error(t('pages.error.message'));
         }
       }
     });
@@ -102,10 +109,12 @@ const Page = () => {
                     value={value}
                     variant="outlined"
                     fullWidth
-                    dir="ltr"
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
+                    inputProps={{
+                      dir: 'ltr',
+                    }}
                   />
                 );
               }}
@@ -118,15 +127,13 @@ const Page = () => {
                 fieldState: { error },
               }) => {
                 return (
-                  <TextField
-                    type="password"
+                  <PasswordTextField
                     onChange={onChange}
                     name={name}
                     value={value}
                     variant="outlined"
                     fullWidth
-                    dir="ltr"
-                    placeholder={labels[name]}
+                    label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
                   />

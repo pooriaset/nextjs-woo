@@ -12,6 +12,7 @@ import { useMutation } from '@apollo/client';
 import useCartUtils from './useCartUtils';
 import { toast } from 'react-hot-toast';
 import { useTranslations } from 'next-intl';
+import { authClient } from '@/graphql/clients/authClient';
 
 export interface MutateCartFunction {
   (values: {
@@ -35,6 +36,7 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
 
   const [addToCart, { loading: addToCartLoading }] =
     useMutation<AddToCartMutation>(ADD_TO_CART_MUTATION, {
+      client: authClient,
       onCompleted({ addToCart: data }) {
         if (data?.cart) {
           setCartAtom(data.cart);
@@ -46,6 +48,7 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
     useMutation<UpdateCartItemQuantitiesMutation>(
       UPDATE_CART_ITEMS_QUANTITIES_MUTATION,
       {
+        client: authClient,
         onCompleted({ updateItemQuantities: data }) {
           if (data?.cart) {
             setCartAtom(data.cart);

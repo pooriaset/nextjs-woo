@@ -1,5 +1,6 @@
 'use client';
 
+import PasswordTextField from '@/components/PasswordTextField/PasswordTextField';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import Logo from '@/components/common/Logo';
 import { REGISTER_CUSTOMER } from '@/graphql/queries/auth';
@@ -36,11 +37,12 @@ const Page = () => {
   };
   const resolveSchema: yup.ObjectSchema<FieldNames> = yup.object({
     email: yup.string().email().nullable().required().label(labels.email),
-    password: yup.string().nullable().required().label(labels.password),
+    password: yup.string().min(6).nullable().required().label(labels.password),
     confirmPassword: yup
       .string()
       .nullable()
       .required()
+      .oneOf([yup.ref('password')], t('messages.passwordNotMatch'))
       .label(labels.confirmPassword),
     firstName: yup.string().nullable().required().label(labels.firstName),
     lastName: yup.string().nullable().required().label(labels.lastName),
@@ -198,8 +200,7 @@ const Page = () => {
                 fieldState: { error },
               }) => {
                 return (
-                  <TextField
-                    type="password"
+                  <PasswordTextField
                     onChange={onChange}
                     name={name}
                     value={value}
@@ -208,10 +209,6 @@ const Page = () => {
                     label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
-                    inputProps={{
-                      autoComplete: 'new-password',
-                      dir: 'ltr',
-                    }}
                   />
                 );
               }}
@@ -226,8 +223,7 @@ const Page = () => {
                 fieldState: { error },
               }) => {
                 return (
-                  <TextField
-                    type="password"
+                  <PasswordTextField
                     onChange={onChange}
                     name={name}
                     value={value}
@@ -236,10 +232,6 @@ const Page = () => {
                     label={labels[name]}
                     error={!!error?.message}
                     helperText={error?.message?.toString()}
-                    inputProps={{
-                      autoComplete: 'new-password',
-                      dir: 'ltr',
-                    }}
                   />
                 );
               }}

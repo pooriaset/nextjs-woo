@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: {
         template: `%s | ${data.generalSettings?.title!}`,
-        default: data.generalSettings?.title! ?? 'Test',
+        default: data.generalSettings?.title! ?? 'NextJs Woo',
       },
       description: data.generalSettings?.description!,
     };

@@ -1,3 +1,4 @@
+import { authClient } from '@/graphql/clients/authClient';
 import { EMPTY_CART_MUTATION } from '@/graphql/queries/cart';
 import { RemoveItemsFromCartMutation } from '@/graphql/types/graphql';
 import { cartAtom } from '@/store/atoms';
@@ -16,6 +17,7 @@ const useEmptyCart: IUseEmptyCart = () => {
 
   const [emptyCartMutate, { loading }] =
     useMutation<RemoveItemsFromCartMutation>(EMPTY_CART_MUTATION, {
+      client: authClient,
       onCompleted() {
         reset();
       },

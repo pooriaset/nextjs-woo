@@ -7,7 +7,7 @@ import {
   Stack,
 } from '@mui/material';
 
-const loading = () => {
+const Loading = () => {
   return (
     <Card
       variant="outlined"
@@ -39,4 +39,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;

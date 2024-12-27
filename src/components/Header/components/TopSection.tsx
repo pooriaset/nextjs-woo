@@ -4,7 +4,7 @@ import Logo from '@/components/common/Logo';
 import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
 import useCustomSearchParams from '@/hooks/useCustomSearchParams';
 import useInputFiller from '@/hooks/useInputFiller';
-import { Link as NextLink } from '@/navigation';
+import { Link as NextLink, usePathname } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
 import { SearchOutlined, ShoppingBasketOutlined } from '@mui/icons-material';
 import { Button, Link, Stack, TextField } from '@mui/material';
@@ -18,6 +18,7 @@ import { useTranslations } from 'next-intl';
 import { DOMAttributes, FC } from 'react';
 import LoggedInButton from './LoggedInButton';
 import { SearchPageParamsKeys } from '@/utils/params';
+import { useSearchParams } from 'next/navigation';
 
 const Form = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -48,6 +49,10 @@ const TopSection: FC = () => {
   };
 
   const cart = useAtomValue(cartAtom);
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const callbackUrl = `${pathname}?${searchParams.toString()}`;
 
   return (
     <>
@@ -87,7 +92,7 @@ const TopSection: FC = () => {
           {!isAuthenticated ? (
             <Button
               component={Link}
-              href={SIGN_IN_PAGE_PATHNAME}
+              href={`${SIGN_IN_PAGE_PATHNAME}?callbackUrl=${callbackUrl}`}
               variant="outlined"
               color="inherit"
               sx={{
