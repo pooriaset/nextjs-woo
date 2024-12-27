@@ -4,6 +4,7 @@
     "title": "آیا مطمئن هستید؟"
   },
   "messages": {
+    "authenticationError": "نام کاربری یا رمز عبور اشتباه است.",
     "passwordNotMatch": "تایید رمز عبور با رمز عبور مطابقت ندارد.",
     "copied": "کپی شد.",
     "cart": {

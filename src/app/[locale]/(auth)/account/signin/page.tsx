@@ -46,19 +46,28 @@ const Page = () => {
 
   const [isPending, startTransition] = useTransition();
 
+  const getCallbackUrl = () => {
+    const callbackUrl =
+      new URL(location.href).searchParams.get('callbackUrl') || '/';
+
+    const url = new URL(callbackUrl || '/');
+    return url.pathname + url.search + url.hash;
+  };
+
   const onSubmit: SubmitHandler<FieldNames> = (data) => {
     startTransition(async () => {
-      const callbackUrl =
-        new URL(location.href).searchParams.get('callbackUrl') || '/';
+      const callbackUrl = getCallbackUrl();
 
       const result = await signIn('credentials', {
         ...data,
-        callbackUrl,
+        redirect: false,
       });
 
       if (result) {
         if (result.status !== 200) {
-          toast.error(t('pages.error.message'));
+          toast.error(t('messages.authenticationError'));
+        } else {
+          router.push(callbackUrl);
         }
       }
     });

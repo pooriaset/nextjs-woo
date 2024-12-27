@@ -4,6 +4,7 @@
     "title": "Are you sure?"
   },
   "messages": {
+    "authenticationError": "Authentication Error",
     "passwordNotMatch": "Passwords must match",
     "copied": "Copied to clipboard",
     "cart": {

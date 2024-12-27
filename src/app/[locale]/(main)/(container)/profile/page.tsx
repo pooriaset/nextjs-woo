@@ -36,7 +36,12 @@ const Page = () => {
         <Menu />
       </MobileView>
       <DesktopView>
-        <Card variant="outlined">
+        <Card
+          variant="outlined"
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           <CardContent>
             <CardHeader title={t('profile.latestOrders')}>
               {!!edges?.length && (
