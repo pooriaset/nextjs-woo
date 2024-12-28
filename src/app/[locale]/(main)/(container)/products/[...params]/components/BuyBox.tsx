@@ -76,6 +76,9 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
     });
     if (data) {
       handleOpenDialog();
+      setTimeout(() => {
+        handleCloseDialog();
+      }, 4000);
     }
   };
 

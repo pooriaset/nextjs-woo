@@ -54,6 +54,7 @@ const AddToCartDialog: FC<AddToCartDialogProps> = ({
           children: t('pages.cart.addToCartDialog.resume'),
           fullWidth: true,
           size: 'large',
+          disabled: isPending,
         },
       ]}
       dialogContentProps={{
