@@ -49,8 +49,7 @@ const Page = () => {
   const getCallbackUrl = () => {
     const callbackUrl =
       new URL(location.href).searchParams.get('callbackUrl') || '/';
-
-    const url = new URL(callbackUrl || '/');
+    const url = new URL(callbackUrl, window.location.origin);
     return url.pathname + url.search + url.hash;
   };
 

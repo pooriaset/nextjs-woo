@@ -52,7 +52,9 @@ const TopSection: FC = () => {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const callbackUrl = `${pathname}?${searchParams.toString()}`;
+  const callbackUrl = `${pathname}${
+    searchParams.toString() ? `?${searchParams.toString()}` : ''
+  }`;
 
   return (
     <>
