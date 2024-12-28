@@ -13,7 +13,10 @@ const YupLocaleProvider: FC<YupLocaleProviderProps> = ({
   children,
 }) => {
   if (languages[locale]) {
-    yup.setLocale(languages[locale].yupLocale!);
+    const yupLocale = languages[locale].yupLocale;
+    if (yupLocale) {
+      yup.setLocale(yupLocale);
+    }
   }
 
   return <>{children}</>;
