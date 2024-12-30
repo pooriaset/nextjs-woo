@@ -23,7 +23,7 @@ const ProductsList: FC<ProductsListProps> = () => {
     categoryIdIn: categoryId ? [+categoryId] : null,
     q,
     orderBy: [sortOptions.find((item) => item.key === sort)?.props],
-    first: 15,
+    first: 4,
   };
 
   const initQuery = useSuspenseQuery<GetAllProductsQuery>(
@@ -33,10 +33,6 @@ const ProductsList: FC<ProductsListProps> = () => {
     },
   );
 
-  const { isIntersecting, ref } = useIntersectionObserver({
-    threshold: 0.1,
-  });
-
   const paginateQuery = useQuery<GetAllProductsQuery>(
     GET_VARIABLE_PRODUCTS_QUERY,
     {
@@ -45,14 +41,26 @@ const ProductsList: FC<ProductsListProps> = () => {
     },
   );
 
+  const items = [
+    ...(initQuery.data?.products?.nodes || []),
+    ...(paginateQuery.data?.products?.nodes || []),
+  ];
+
+  const { hasNextPage, endCursor } = {
+    ...initQuery.data?.products?.pageInfo,
+    ...paginateQuery.data?.products?.pageInfo,
+  };
+
+  const { isIntersecting, ref } = useIntersectionObserver({
+    threshold: 0.1,
+  });
+
   useEffect(() => {
     if (isIntersecting) {
       paginateQuery.fetchMore({
         variables: {
           ...variables,
-          after:
-            paginateQuery.data?.products?.pageInfo.endCursor ||
-            initQuery.data?.products?.pageInfo.endCursor,
+          after: endCursor,
         },
         updateQuery: (previousQueryResult, { fetchMoreResult }) => {
           const newNodes = fetchMoreResult.products?.nodes || [];
@@ -79,14 +87,9 @@ const ProductsList: FC<ProductsListProps> = () => {
     }
   }, [isIntersecting]);
 
-  if (!initQuery.data?.products?.nodes?.length) {
+  if (!items?.length) {
     return <NotFoundItem />;
   }
-
-  const items = [
-    ...initQuery.data.products.nodes,
-    ...(paginateQuery.data?.products?.nodes || []),
-  ];
 
   return (
     <Grid container spacing={1}>
@@ -100,8 +103,7 @@ const ProductsList: FC<ProductsListProps> = () => {
         }
       })}
 
-      {(initQuery.data.products.pageInfo.hasNextPage ||
-        paginateQuery.data?.products?.pageInfo.hasNextPage) && (
+      {hasNextPage && (
         <>
           {new Array(4 - (items.length % 4)).fill(1).map((_, index) => {
             return (

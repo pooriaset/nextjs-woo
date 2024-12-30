@@ -28,7 +28,6 @@ const Page = async (props: { searchParams: Record<string, string> }) => {
           <Box
             sx={{
               minWidth: 270,
-              width: 300,
             }}
           >
             <ColumnFilters />
