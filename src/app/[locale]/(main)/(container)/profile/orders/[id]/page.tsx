@@ -2,7 +2,6 @@
 
 import SimpleLoading from '@/components/SimpleLoading/SimpleLoading';
 import PriceLabel from '@/components/common/PriceLabel';
-import { authClient } from '@/graphql/clients/authClient';
 import { GET_ORDER } from '@/graphql/queries/order';
 import { getFragmentData } from '@/graphql/types';
 import {
@@ -33,7 +32,6 @@ const Page: FC<PageProps> = (props) => {
     variables: {
       id: +id,
     },
-    client: authClient,
   });
 
   const t = useTranslations();

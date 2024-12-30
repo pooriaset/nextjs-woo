@@ -1,7 +1,9 @@
 'use client';
 
 import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
+import { authClient } from '@/graphql/clients/authClient';
 import { useAppContext } from '@/hooks/useAppContext';
+import { ApolloProvider } from '@apollo/client';
 import { Box, Stack } from '@mui/material';
 import { FC, ReactNode } from 'react';
 import Menu from './components/Menu';
@@ -12,7 +14,7 @@ export interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
   const { isMobile } = useAppContext();
   return (
-    <>
+    <ApolloProvider client={authClient}>
       <DesktopView>
         <Stack direction={isMobile ? 'column' : 'row'} spacing={2}>
           <DesktopView>
@@ -36,7 +38,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           {children}
         </Stack>
       </MobileView>
-    </>
+    </ApolloProvider>
   );
 };
 

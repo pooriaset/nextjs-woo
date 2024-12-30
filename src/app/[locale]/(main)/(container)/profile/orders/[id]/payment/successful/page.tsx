@@ -1,6 +1,5 @@
 'use client';
 
-import { authClient } from '@/graphql/clients/authClient';
 import { GET_IS_PAYED_ORDER } from '@/graphql/queries/order';
 import { GetIsPayedOrderQuery } from '@/graphql/types/graphql';
 import { redirect } from '@/navigation';
@@ -20,7 +19,6 @@ const Page: FC<PageProps> = (props) => {
   const { data, error, loading } = useQuery<GetIsPayedOrderQuery>(
     GET_IS_PAYED_ORDER,
     {
-      client: authClient,
       variables: {
         id: orderId,
       },

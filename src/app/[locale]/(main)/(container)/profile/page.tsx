@@ -5,14 +5,13 @@ import { GET_CUSTOMER_ORDERS } from '@/graphql/queries/customer';
 import { GetCustomerOrdersQuery } from '@/graphql/types/graphql';
 import { Link } from '@/navigation';
 import { useQuery } from '@apollo/client';
+import { Warning } from '@mui/icons-material';
 import { Alert, Button, Card, CardContent, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import CardHeader from './components/CardHeader';
 import Menu from './components/Menu';
 import OrderItem from './components/OrderItem';
 import OrderItemSkeleton from './components/OrderItemSkeleton';
-import { Warning } from '@mui/icons-material';
-import { authClient } from '@/graphql/clients/authClient';
 
 const Page = () => {
   const t = useTranslations();
@@ -24,7 +23,6 @@ const Page = () => {
         count: 3,
         statuses: [],
       },
-      client: authClient,
     },
   );
 

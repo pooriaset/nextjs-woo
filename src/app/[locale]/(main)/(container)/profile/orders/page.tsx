@@ -10,7 +10,6 @@ import { useTranslations } from 'next-intl';
 import CardHeader from '../components/CardHeader';
 import OrderItem from '../components/OrderItem';
 import OrderItemSkeleton from '../components/OrderItemSkeleton';
-import { authClient } from '@/graphql/clients/authClient';
 
 const Page = () => {
   const t = useTranslations();
@@ -18,7 +17,6 @@ const Page = () => {
   const { data, loading, error } = useQuery<GetCustomerOrdersQuery>(
     GET_CUSTOMER_ORDERS,
     {
-      client: authClient,
       variables: {
         count: 1000,
         statuses: [],

@@ -2,7 +2,6 @@
 
 import CustomSkeleton from '@/components/CustomSkeleton/CustomSkeleton';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
-import { authClient } from '@/graphql/clients/authClient';
 import {
   GET_CUSTOMER_BILLING,
   GET_CUSTOMER_PROFILE,
@@ -45,7 +44,6 @@ const Page = () => {
     variables: {
       country: languages[locale as Locale].country,
     },
-    client: authClient,
   });
 
   const options =
@@ -81,7 +79,7 @@ const Page = () => {
   const [mutateAsync, { loading }] = useMutation<UpdateCustomerMutation>(
     UPDATE_CUSTOMER_MUTATION,
     {
-      client: authClient,
+      refetchQueries: [{ query: GET_CUSTOMER_PROFILE }],
     },
   );
 
@@ -92,13 +90,11 @@ const Page = () => {
       },
     });
     if (!errors?.length) {
-      authClient.refetchQueries({ include: [GET_CUSTOMER_PROFILE] });
       toast.success(t('messages.defaultSuccess'));
     }
   };
 
   const customer = useQuery<GetCustomerBillingQuery>(GET_CUSTOMER_BILLING, {
-    client: authClient,
     onCompleted: (data) => {
       const billing = data.customer?.billing!;
       delete billing.__typename;
