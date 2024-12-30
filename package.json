@@ -43,6 +43,7 @@
     "stylis": "^4.3.1",
     "stylis-plugin-rtl": "^2.1.1",
     "swiper": "^11.1.1",
+    "usehooks-ts": "^3.1.0",
     "yarn": "^1.22.22",
     "yup": "^1.4.0"
   },

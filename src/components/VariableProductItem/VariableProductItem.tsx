@@ -81,7 +81,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
                 WebkitBoxOrient: 'vertical',
               }}
             >
-              {data.name}as
+              {data.name}
             </Typography>
             <Box
               sx={{

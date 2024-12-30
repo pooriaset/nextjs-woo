@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from '@/navigation';
 import {
   SearchPageParamsKeys,
   SearchPagesParams,
@@ -19,7 +18,6 @@ export interface IUseCustomSearchParams {
 
 const useCustomSearchParams: IUseCustomSearchParams = () => {
   const params = useSearchParams();
-  const router = useRouter();
 
   const navigate: ReturnType<IUseCustomSearchParams>['navigate'] = (
     key,
@@ -31,7 +29,8 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
     } else {
       newParams.set(key, value.toString());
     }
-    router.push(`/search?${newParams}`);
+
+    window.history.pushState(null, '', `/search?${newParams}`);
   };
 
   return {

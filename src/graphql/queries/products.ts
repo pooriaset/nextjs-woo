@@ -11,9 +11,11 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
     $categoryIdIn: [Int]
     $q: String
     $first: Int
+    $after: String
   ) {
     products(
       first: $first
+      after: $after
       where: {
         stockStatus: $stockStatus
         orderby: $orderBy
@@ -23,6 +25,8 @@ export const GET_VARIABLE_PRODUCTS_QUERY = gql`
     ) {
       pageInfo {
         total
+        endCursor
+        startCursor
         hasNextPage
         hasPreviousPage
       }
