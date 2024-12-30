@@ -14,7 +14,7 @@ import {
   UpdateCustomerMutation,
 } from '@/graphql/types/graphql';
 import { Locale, languages } from '@/navigation';
-import { useMutation, useQuery } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Autocomplete, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -78,10 +78,9 @@ const Page = () => {
 
   const [mutateAsync, { loading }] = useMutation<UpdateCustomerMutation>(
     UPDATE_CUSTOMER_MUTATION,
-    {
-      refetchQueries: [{ query: GET_CUSTOMER_PROFILE }],
-    },
   );
+
+  const client = useApolloClient();
 
   const onSubmit: SubmitHandler<FieldNames> = async (payload) => {
     const { errors } = await mutateAsync({
@@ -90,6 +89,9 @@ const Page = () => {
       },
     });
     if (!errors?.length) {
+      client.refetchQueries({
+        include: [GET_CUSTOMER_PROFILE],
+      });
       toast.success(t('messages.defaultSuccess'));
     }
   };
