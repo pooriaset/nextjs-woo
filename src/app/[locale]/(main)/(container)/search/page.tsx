@@ -6,6 +6,8 @@ import MobileView from '@/components/ResponsiveDesign/components/MobileView';
 import { Box } from '@mui/material';
 import SortRow from './components/SortRow';
 import SortWrapper from './components/SortWrapper';
+import { Suspense } from 'react';
+import DesktopFallback from './components/DesktopFallback';
 
 const Page = async (props: { searchParams: Record<string, string> }) => {
   return (
@@ -37,7 +39,9 @@ const Page = async (props: { searchParams: Record<string, string> }) => {
               {/* <ProductsCount value={data.products?.pageInfo.total} /> */}
             </SortWrapper>
 
-            <ProductsList />
+            <Suspense fallback={<DesktopFallback />}>
+              <ProductsList />
+            </Suspense>
           </Box>
         </Box>
       </DesktopView>
