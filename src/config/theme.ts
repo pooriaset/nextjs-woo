@@ -66,6 +66,7 @@ const themeOptions: ThemeOptions = {
     primary: {
       main: green[500],
       contrastText: '#fff',
+      lighter: green[200],
     },
   },
   shape: {

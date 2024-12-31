@@ -4,13 +4,19 @@ import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_SINGLE_VARIABLE_PRODUCT_QUERY } from '@/graphql/queries/products';
 import { GetSingleProductQuery } from '@/graphql/types/graphql';
-import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from '@mui/material';
 import type { Metadata } from 'next';
 import BuyBox from './components/BuyBox';
-import FindYourSize from './components/FindYourSize';
 import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
-import SizeSelector from './components/SizeSelector';
+import VariantSelector from './components/VariantSelector';
 import ProductProvider from './providers/ProductProvider';
 
 type PageProps = {
@@ -61,11 +67,7 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
   })!;
 
   return (
-    <ProductProvider
-      value={{
-        selectedVariantId: null,
-      }}
-    >
+    <ProductProvider>
       <Grid container spacing={2}>
         <Grid item md={5} xs={12}>
           <ProductGallery
@@ -74,32 +76,23 @@ const Page: FC<PageProps> = async ({ params: { params } }) => {
           />
         </Grid>
         <Grid item md={4} xs={12}>
-          <Breadcrumbs items={breadcrumbItems} />
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: 700,
-              lineHeight: 2.1,
-              fontSize: '1rem',
-            }}
-          >
-            {product?.title}
-          </Typography>
-          <Divider />
-          <Grid
-            container
-            spacing={1}
-            sx={{
-              mt: 2,
-            }}
-          >
-            <Grid item>
-              <SizeSelector variations={product.variations} />
-            </Grid>
-            <Grid item>
-              <FindYourSize />
-            </Grid>
-          </Grid>
+          <Stack spacing={2}>
+            <Stack>
+              <Breadcrumbs items={breadcrumbItems} />
+              <Typography
+                variant="h1"
+                sx={{
+                  fontWeight: 700,
+                  lineHeight: 2.1,
+                  fontSize: '1rem',
+                }}
+              >
+                {product?.title}
+              </Typography>
+              <Divider />
+            </Stack>
+            <VariantSelector variations={product.variations} />
+          </Stack>
         </Grid>
         <Grid item md={3} xs={12}>
           <Card variant="outlined">

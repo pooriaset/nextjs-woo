@@ -9,7 +9,9 @@ import { ICartAtom, cartAtom } from '@/store/atoms';
 import { useAtom } from 'jotai';
 
 export interface ReturnTypeOfUseCartUtils {
-  findInCart: (args: { variationId: number }) => CartItemContentFragment | null;
+  findInCart: (args: {
+    variationId: string | number | null;
+  }) => CartItemContentFragment | null;
   setCartAtom: (value: GetCartQuery['cart']) => void;
 }
 
@@ -23,13 +25,17 @@ const useCartUtils: IUseCartUtils = () => {
   const findInCart: ReturnTypeOfUseCartUtils['findInCart'] = ({
     variationId,
   }) => {
+    if (!variationId) {
+      return null;
+    }
+
     const item = cart?.contents?.nodes.find((item) => {
       const { variation } = getFragmentData(CartItemContentFragmentDoc, item);
       const productContent = getFragmentData(
         ProductVariationContentSliceFragmentDoc,
         variation?.node,
       )!;
-      return productContent?.databaseId == variationId;
+      return productContent?.databaseId == +variationId;
     });
 
     if (!item) {

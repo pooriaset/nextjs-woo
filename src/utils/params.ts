@@ -36,3 +36,29 @@ export const getSearchPageParams = (
     categoryId,
   };
 };
+
+export enum ProductPageEnum {
+  Color = 'color',
+  Size = 'size',
+  VariantId = 'variantId',
+}
+
+export interface ProductPageParams {
+  color: string | null;
+  size: string | null;
+  variantId: string | null;
+}
+
+export const getProductPageParams = (
+  params: URLSearchParams,
+): ProductPageParams => {
+  const color = params.get(ProductPageEnum.Color);
+  const size = params.get(ProductPageEnum.Size);
+  const variantId = params.get(ProductPageEnum.VariantId);
+
+  return {
+    color,
+    size,
+    variantId,
+  };
+};

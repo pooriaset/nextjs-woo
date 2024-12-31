@@ -18,7 +18,7 @@ export interface MutateCartFunction {
   (values: {
     quantity: number;
     productId: number;
-    variationId: number | undefined;
+    variationId: number | string | undefined | null;
     extraData?: any;
   }): Promise<any> | null;
 }
@@ -59,15 +59,19 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
 
   const addOrUpdateCartItemMutate: MutateCartFunction = async (values) => {
     const { quantity, variationId, productId, extraData } = values;
+
     if (!variationId) {
       toast.error(t('messages.cart.selectYourSize'));
       return null;
     }
 
-    const quantityFound = findInCart({ variationId })?.quantity || 0;
+    const _variationId = +variationId;
+
+    const quantityFound =
+      findInCart({ variationId: _variationId })?.quantity || 0;
 
     if (quantityFound) {
-      const item = findInCart({ variationId });
+      const item = findInCart({ variationId: _variationId });
 
       if (!item) {
         throw new Error('Failed to find item in cart.');
@@ -80,7 +84,7 @@ const useAddOrUpdateCartItem: IUseAddOrUpdateCartItem = () => {
       return addToCart({
         variables: {
           productId,
-          variationId,
+          variationId: _variationId,
           quantity,
           extraData,
         },

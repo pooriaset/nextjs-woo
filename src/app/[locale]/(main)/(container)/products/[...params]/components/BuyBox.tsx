@@ -1,6 +1,5 @@
 'use client';
 
-import { useProductContext } from '@/app/[locale]/(main)/(container)/products/[...params]/hooks/useProductContext';
 import CartItemController from '@/components/CartItemController/CartItemController';
 import useNewDialog from '@/components/Dialog/hooks/useNewDialog';
 import { DesktopView, MobileView } from '@/components/ResponsiveDesign';
@@ -17,6 +16,7 @@ import {
 } from '@/graphql/types/graphql';
 import useAddOrUpdateCartItem from '@/hooks/useAddOrUpdateCartItem';
 import useCartUtils from '@/hooks/useCartUtils';
+import useProductPageParams from '@/hooks/useProductPageParams';
 import { Link } from '@/navigation';
 import { getMaxOfRangePrice } from '@/utils/price';
 import { Box, Collapse, Divider, Stack, Typography } from '@mui/material';
@@ -44,17 +44,17 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
 
   const t = useTranslations();
 
-  const { selectedVariantId } = useProductContext();
+  const { variantId } = useProductPageParams();
 
   let variant: ProductVariationContentSliceFragment | null | undefined = null;
-  if (selectedVariantId) {
+  if (variantId) {
     const _variant = product.variations?.nodes.find((item) => {
       const fragment = getFragmentData(
         ProductVariationContentSliceFragmentDoc,
         item,
       );
 
-      return fragment.databaseId === selectedVariantId;
+      return fragment.databaseId === +variantId;
     });
 
     variant = getFragmentData(
@@ -72,20 +72,17 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
     const data = await addOrUpdateCartItemMutate({
       quantity: 1,
       productId: +params[0],
-      variationId: selectedVariantId!,
+      variationId: variantId,
     });
     if (data) {
       handleOpenDialog();
-      setTimeout(() => {
-        handleCloseDialog();
-      }, 4000);
     }
   };
 
   const { findInCart } = useCartUtils();
 
   const itemInCart = findInCart({
-    variationId: selectedVariantId!,
+    variationId: variantId,
   });
 
   const height = 55;

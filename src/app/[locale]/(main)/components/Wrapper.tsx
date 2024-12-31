@@ -1,9 +1,9 @@
 'use client';
 
-import { MOBILE_BUY_BOX_HEIGHT } from '@/config/responsive';
+import { MOBILE_FOOTER_HEIGHT } from '@/config/responsive';
 import { useAppContext } from '@/hooks/useAppContext';
 import { Box } from '@mui/material';
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 export interface WrapperProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ const Wrapper: FC<WrapperProps> = ({ children }) => {
   return (
     <Box
       sx={{
-        paddingBottom: isMobile ? `${MOBILE_BUY_BOX_HEIGHT}px` : undefined,
+        paddingBottom: isMobile ? `${MOBILE_FOOTER_HEIGHT}px` : undefined,
       }}
     >
       {children}

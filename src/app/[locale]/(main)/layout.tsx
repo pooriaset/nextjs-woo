@@ -5,7 +5,7 @@ import { GET_PUBLISHED_PAGES_LIST } from '@/graphql/queries/pages';
 import { IPageListItem } from '@/graphql/types/common';
 import { GetPublishedPagesListQuery } from '@/graphql/types/graphql';
 import { FC, ReactNode } from 'react';
-import Wrapper from './(homepage)/components/Wrapper';
+import Wrapper from './components/Wrapper';
 
 export interface LayoutProps {
   children: ReactNode;

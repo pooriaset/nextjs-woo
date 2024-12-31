@@ -199,6 +199,7 @@
   },
   "fields": {
     "size": "Size",
+    "color": "Color",
     "discountCode": "Discount Code",
     "date": "Date",
     "orderId": "Order ID",

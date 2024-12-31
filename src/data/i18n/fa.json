@@ -199,6 +199,7 @@
   },
   "fields": {
     "size": "سایز",
+    "color": "رنگ",
     "discountCode": "کد تخفیف",
     "date": "تاریخ",
     "orderId": "شناسه سفارش",

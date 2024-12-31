@@ -23,7 +23,7 @@ const ProductsList: FC<ProductsListProps> = () => {
     categoryIdIn: categoryId ? [+categoryId] : null,
     q,
     orderBy: [sortOptions.find((item) => item.key === sort)?.props],
-    first: 4,
+    first: 16,
   };
 
   const initQuery = useSuspenseQuery<GetAllProductsQuery>(
