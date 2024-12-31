@@ -144,7 +144,7 @@ const Page = () => {
           sx={{
             position: 'sticky',
             top: 196,
-            zIndex: (theme) => theme.zIndex.drawer - 1,
+            zIndex: (theme) => theme.zIndex.appBar - 1,
           }}
         >
           <Card variant="outlined">

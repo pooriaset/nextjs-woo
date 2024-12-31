@@ -32,6 +32,9 @@ const MenuItem: FC<MenuItemProps> = ({ item, hasDivider }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                '& .MuiChip-label': {
+                  padding: 0,
+                },
               }}
               size="small"
               label={item.count}
