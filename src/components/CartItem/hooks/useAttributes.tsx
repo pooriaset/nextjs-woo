@@ -39,6 +39,8 @@ const useAttributes = ({
                     height: 18,
                     borderRadius: 1,
                     backgroundColor: `#${attribute.value}`,
+                    border: '1px solid',
+                    borderColor: 'divider',
                   }}
                 />
               ),

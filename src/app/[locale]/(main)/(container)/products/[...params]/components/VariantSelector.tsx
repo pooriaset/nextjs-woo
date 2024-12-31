@@ -178,7 +178,7 @@ const VariantSelector: FC<VariantSelectorProps> = ({ variations }) => {
                         userSelect: 'none',
                       }}
                     >
-                      {item}
+                      {item.toUpperCase()}
                     </Box>
                   }
                 />
