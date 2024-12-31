@@ -6,6 +6,7 @@ import { IPageListItem } from '@/graphql/types/common';
 import { GetPublishedPagesListQuery } from '@/graphql/types/graphql';
 import { FC, ReactNode } from 'react';
 import Wrapper from './components/Wrapper';
+import { Stack } from '@mui/material';
 
 export interface LayoutProps {
   children: ReactNode;
@@ -27,11 +28,11 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
   const pagesList = await getPagesList();
 
   return (
-    <>
+    <Stack sx={{ height: '100vh' }}>
       <MainLayoutHeader />
       <Wrapper>{children}</Wrapper>
       <Footer pages={pagesList} />
-    </>
+    </Stack>
   );
 };
 

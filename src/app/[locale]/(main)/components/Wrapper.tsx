@@ -14,6 +14,7 @@ const Wrapper: FC<WrapperProps> = ({ children }) => {
   return (
     <Box
       sx={{
+        flexGrow: 1,
         paddingBottom: isMobile ? `${MOBILE_FOOTER_HEIGHT}px` : undefined,
       }}
     >

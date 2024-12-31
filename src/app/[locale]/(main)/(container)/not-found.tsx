@@ -2,9 +2,14 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Link as NextLink } from '@/navigation';
 import { useTranslations } from 'next-intl';
+import Lottie from 'react-lottie';
+import { useAppContext } from '@/hooks/useAppContext';
 
 const NotFound = () => {
   const t = useTranslations();
+
+  const { isMobile } = useAppContext();
+
   return (
     <Box
       sx={{
@@ -14,18 +19,35 @@ const NotFound = () => {
         justifyContent: 'center',
         textAlign: 'center',
         gap: 3,
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
       }}
     >
-      <Typography
-        variant="h1"
+      <Box
         sx={{
-          color: (theme) => theme.palette.primary.main,
-          mt: 5,
-          fontWeight: 'bold',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        404
-      </Typography>
+        <Lottie
+          options={
+            {
+              loop: true,
+              autoplay: true,
+              path: '/assets/json/404.json',
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid slice',
+              },
+            } as any
+          }
+          width={isMobile ? '60vw' : '25vw'}
+          isStopped={false}
+          isPaused={false}
+        />
+      </Box>
       <Typography variant="h6">{t('pages.notfound.message')}</Typography>
 
       <Button variant="outlined" component={NextLink} href="/">
