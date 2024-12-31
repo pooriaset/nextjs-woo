@@ -3,12 +3,17 @@ import React, { FC } from 'react';
 import Attributes from './components/Attributes';
 import Image from '../common/Image';
 import { ProductVariationContentSliceFragment } from '@/graphql/types/graphql';
+import useAttributes from './hooks/useAttributes';
 
 export interface CartItemProps {
   value: ProductVariationContentSliceFragment;
   href?: string;
 }
 const CartItem: FC<CartItemProps> = ({ value, href = '#' }) => {
+  const attributes = useAttributes({
+    attributes: value.attributes,
+  });
+
   return (
     <Stack gap={2} direction="row">
       <Link href={href}>
@@ -27,9 +32,7 @@ const CartItem: FC<CartItemProps> = ({ value, href = '#' }) => {
             </Typography>
           </Link>
 
-          <Attributes
-            size={value?.attributes?.nodes?.[0]?.value?.toUpperCase()}
-          />
+          <Attributes items={attributes} />
         </Stack>
       </Box>
     </Stack>

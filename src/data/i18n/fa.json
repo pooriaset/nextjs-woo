@@ -200,6 +200,7 @@
   "fields": {
     "size": "سایز",
     "color": "رنگ",
+    "count": "تعداد",
     "discountCode": "کد تخفیف",
     "date": "تاریخ",
     "orderId": "شناسه سفارش",

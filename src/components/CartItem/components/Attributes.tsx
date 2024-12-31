@@ -1,22 +1,29 @@
-import { Stack, Typography } from '@mui/material';
-import { useTranslations } from 'next-intl';
+import { Box, Stack, Typography } from '@mui/material';
 import { FC, ReactNode } from 'react';
-import RulerIcon from '../../Icons/components/Use/RulerIcon';
+
+export interface IAttribute {
+  title: string;
+  value: ReactNode | undefined;
+  icon: ReactNode;
+  name?: string | undefined | null;
+}
 
 export interface AttributesProps {
-  size: ReactNode | undefined;
+  items: IAttribute[];
 }
-const Attributes: FC<AttributesProps> = ({ size }) => {
-  const t = useTranslations();
+const Attributes: FC<AttributesProps> = ({ items }) => {
   return (
-    <Stack gap={1} direction="row">
-      <RulerIcon />
-      <Typography variant="subtitle2">
-        {/* TODO: Get variant title from backend! */}
-        {t('fields.size')}
-      </Typography>
-      <Typography variant="subtitle2">{size}</Typography>
-    </Stack>
+    <>
+      {items.map((item) => {
+        return (
+          <Stack key={item.title} spacing={0.5} direction="row">
+            <Box minWidth={20}>{item.icon}</Box>
+            <Typography variant="subtitle2">{item.title}</Typography>
+            <Typography variant="subtitle2">{item.value}</Typography>
+          </Stack>
+        );
+      })}
+    </>
   );
 };
 

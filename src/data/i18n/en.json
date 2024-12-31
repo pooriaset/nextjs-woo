@@ -200,6 +200,7 @@
   "fields": {
     "size": "Size",
     "color": "Color",
+    "count": "Count",
     "discountCode": "Discount Code",
     "date": "Date",
     "orderId": "Order ID",
