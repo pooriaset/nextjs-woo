@@ -14,6 +14,7 @@ const BottomSection = () => {
       href: `/search?sort=${bestSellingSortOption.key}`,
     },
     { label: t('header.navigation.promotions'), href: '/promotion-center' },
+    { label: t('header.navigation.blog'), href: '/blog' },
   ];
 
   return (

@@ -44,7 +44,8 @@
       "promotions": "Promotions",
       "bestSelling": "Best Selling",
       "newest": "Newest",
-      "selectedProducts": "Selected Products"
+      "selectedProducts": "Selected Products",
+      "blog": "Blog"
     },
     "search": {
       "placeholder": "Search..."
