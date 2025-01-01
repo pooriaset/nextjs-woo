@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Categories from './components/Categories';
 import SearchBox from './components/SearchBox';
 import { Section } from './components/Section';
+import Posts from './components/Posts';
 
 const spacing = 2;
 
@@ -50,7 +51,7 @@ const Page = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item container xs={12} spacing={spacing}>
+        <Grid item container xs={12} spacing={spacing} alignItems="flex-start">
           <Grid item container lg={3} md={12} xs={12}>
             <Grid item xs={12}>
               <Stack spacing={spacing}>
@@ -75,17 +76,7 @@ const Page = () => {
                 <Typography>آخرین مقالات</Typography>
               </Divider>
             </Grid>
-            <Grid item lg={4} md={12}>
-              <Section sx={{ height: 300 }}></Section>
-            </Grid>
-
-            <Grid item lg={4} md={12}>
-              <Section sx={{ height: 300 }}></Section>
-            </Grid>
-
-            <Grid item lg={4} md={12}>
-              <Section sx={{ height: 300 }}></Section>
-            </Grid>
+            <Posts />
           </Grid>
         </Grid>
       </Grid>
