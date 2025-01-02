@@ -6,6 +6,7 @@ import { AccessTimeOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
+import PostCategories from './components/PostCategories';
 
 export type PageProps = {
   params: { params: string[] };
@@ -53,32 +54,43 @@ const Page: FC<PageProps> = async ({ params }) => {
         <Typography variant="h6" component="h1">
           {post.title}
         </Typography>
-        <Box>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.5,
-            }}
-          >
-            <AccessTimeOutlined fontSize="small" />
-            <LocaleDate value={post.dateGmt!} />
-          </Typography>
-        </Box>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Box>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 0.5,
+              }}
+            >
+              <AccessTimeOutlined fontSize="small" />
+              <LocaleDate value={post.dateGmt!} />
+            </Typography>
+          </Box>
+          <Stack direction="row" justifyContent="space-between" spacing={1}>
+            <PostCategories items={post.categories?.edges || []} />
+          </Stack>
+        </Stack>
       </Stack>
 
-      <Box
-        borderRadius={2}
-        component="img"
-        src={post.featuredImage?.node.sourceUrl!}
-        alt={post.featuredImage?.node.altText || post.title!}
-        style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
-        }}
-      />
+      {!!post.featuredImage?.node.sourceUrl && (
+        <Box
+          borderRadius={2}
+          component="img"
+          src={post.featuredImage?.node.sourceUrl!}
+          alt={post.featuredImage?.node.altText || post.title!}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+          }}
+        />
+      )}
 
       <Typography
         variant="body1"

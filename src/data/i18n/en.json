@@ -247,5 +247,10 @@
         "transactionId": "Transaction ID"
       }
     }
+  },
+  "blog": {
+    "search": "Search",
+    "categories": "Blog Categories",
+    "latestArticles": "Latest Articles"
   }
 }

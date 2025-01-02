@@ -247,5 +247,10 @@
         "transactionId": "شناسه تراکنش"
       }
     }
+  },
+  "blog": {
+    "search": "جستجو",
+    "categories": "دسته بندی مقالات",
+    "latestArticles": "آخرین مقالات"
   }
 }

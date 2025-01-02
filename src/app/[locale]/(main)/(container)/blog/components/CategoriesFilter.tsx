@@ -1,30 +1,17 @@
 import { GET_CATEGORIES } from '@/graphql/queries/blog';
 import { GetCategoriesQuery } from '@/graphql/types/graphql';
+import { Link } from '@/navigation';
 import { useQuery } from '@apollo/client';
-import Checkbox from '@mui/material/Checkbox';
+import { Chip } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import * as React from 'react';
 
-const Categories = () => {
+const CategoriesFilter = () => {
   const { data, loading } = useQuery<GetCategoriesQuery>(GET_CATEGORIES);
 
-  const [checked, setChecked] = React.useState<number[]>([]);
-
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
+  const handleToggle = (value: number) => () => {};
 
   return (
     <List dense sx={{ width: '100%' }}>
@@ -32,19 +19,21 @@ const Categories = () => {
         const labelId = `checkbox-list-secondary-label-${category.node.databaseId}`;
         return (
           <ListItem
+            component={Link}
+            href={`/blog/categories/${category.node.databaseId}/${category.node.slug}`}
             onClick={handleToggle(category.node.databaseId)}
             key={category.node.databaseId}
-            secondaryAction={
-              <Checkbox
-                edge="end"
-                checked={checked.includes(category.node.databaseId)}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            }
             disablePadding
           >
             <ListItemButton>
-              <ListItemText id={labelId} primary={category.node.name} />
+              <ListItemText
+                id={labelId}
+                primary={category.node.name}
+                primaryTypographyProps={{
+                  color: 'text.primary',
+                }}
+              />
+              <Chip label={category.node.count} />
             </ListItemButton>
           </ListItem>
         );
@@ -52,4 +41,4 @@ const Categories = () => {
     </List>
   );
 };
-export default Categories;
+export default CategoriesFilter;

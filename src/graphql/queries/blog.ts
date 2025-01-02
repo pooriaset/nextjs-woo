@@ -8,6 +8,7 @@ export const GET_CATEGORIES = gql`
           databaseId
           name
           slug
+          count
         }
       }
     }
@@ -73,6 +74,7 @@ export const GET_POST = gql`
           node {
             databaseId
             slug
+            name
           }
         }
       }
