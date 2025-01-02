@@ -8,6 +8,7 @@ import { Grid, Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
 import Posts from '../../../components/Posts';
+import ColumnSection from '../../../components/ColumnSection';
 
 type PageProps = { params: { slug: string } };
 
@@ -46,6 +47,17 @@ const Page: FC<PageProps> = async ({ params: { slug } }) => {
 
   return (
     <Grid container spacing={2}>
+      {!!category.name && (
+        <Grid item xs={12}>
+          <ColumnSection
+            title={category.name}
+            typographyProps={{
+              component: 'h1',
+            }}
+          />
+        </Grid>
+      )}
+
       <Posts categoryIn={[category.databaseId.toString()]} />
 
       {!!category.description && (

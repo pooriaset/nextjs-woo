@@ -39,6 +39,7 @@ const Page = async () => {
             <Grid item xs={12}>
               <ColumnSection title={t('blog.latestArticles')} />
             </Grid>
+
             <Posts />
           </Grid>
         </Grid>

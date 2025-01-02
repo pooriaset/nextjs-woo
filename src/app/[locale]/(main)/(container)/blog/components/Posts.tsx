@@ -9,8 +9,8 @@ import {
 } from '@/graphql/types/graphql';
 import { useSuspenseQuery } from '@apollo/client';
 import { Grid } from '@mui/material';
-import PostItem from './PostItem';
 import { FC } from 'react';
+import PostItem from './PostItem';
 
 export interface PostsProps {
   categoryIn?: string[];
