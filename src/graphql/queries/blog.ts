@@ -54,6 +54,12 @@ export const GET_POSTS = gql`
           ...PostItem
         }
       }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
+        hasPreviousPage
+      }
     }
   }
   ${POST_ITEM_FRAGMENT}

@@ -7,35 +7,96 @@ import {
   GetPostsQueryVariables,
   PostItemFragmentDoc,
 } from '@/graphql/types/graphql';
-import { useSuspenseQuery } from '@apollo/client';
+import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Grid } from '@mui/material';
-import { FC } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import PostItem from './PostItem';
+import { useIntersectionObserver } from 'usehooks-ts';
+import NotFoundItem from './NotFoundItem';
 
 export interface PostsProps {
   categoryIn?: string[];
 }
 
 const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
-  const variables: GetPostsQueryVariables = {
-    first: 10,
-    after: null,
-    before: null,
-    categoryIn,
-    last: null,
-    title: null,
-  };
+  const variables: GetPostsQueryVariables = useMemo(() => {
+    return {
+      first: 12,
+      after: null,
+      before: null,
+      categoryIn,
+      last: null,
+      title: null,
+    };
+  }, [categoryIn]);
 
-  const { data } = useSuspenseQuery<GetPostsQuery, GetPostsQueryVariables>(
+  const initQuery = useSuspenseQuery<GetPostsQuery, GetPostsQueryVariables>(
     GET_POSTS,
     {
       variables,
     },
   );
 
+  const paginateQuery = useQuery<GetPostsQuery, GetPostsQueryVariables>(
+    GET_POSTS,
+    {
+      variables,
+      skip: true,
+    },
+  );
+
+  const items = [
+    ...(initQuery.data?.posts?.edges || []),
+    ...(paginateQuery.data?.posts?.edges || []),
+  ];
+
+  const { hasNextPage, endCursor } = {
+    ...initQuery.data?.posts?.pageInfo,
+    ...paginateQuery.data?.posts?.pageInfo,
+  };
+
+  const { isIntersecting, ref } = useIntersectionObserver({
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (isIntersecting) {
+      paginateQuery.fetchMore({
+        variables: {
+          ...variables,
+          after: endCursor,
+        },
+        updateQuery: (previousQueryResult, { fetchMoreResult }) => {
+          const newNodes = fetchMoreResult.posts?.edges || [];
+          const pageInfo = fetchMoreResult.posts?.pageInfo!;
+
+          return newNodes?.length!
+            ? {
+                ...previousQueryResult,
+
+                posts: {
+                  ...previousQueryResult.posts,
+
+                  edges: [
+                    ...(previousQueryResult.posts?.edges || []),
+                    ...newNodes,
+                  ],
+
+                  pageInfo,
+                },
+              }
+            : previousQueryResult;
+        },
+      });
+    }
+  }, [isIntersecting]);
+  if (!items?.length) {
+    return <NotFoundItem />;
+  }
+
   return (
     <>
-      {data.posts?.edges.map(({ node }) => {
+      {items.map(({ node }) => {
         const fragment = getFragmentData(PostItemFragmentDoc, node);
         return (
           <Grid item lg={4} md={12} key={fragment.databaseId}>
@@ -43,6 +104,26 @@ const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
           </Grid>
         );
       })}
+
+      {hasNextPage && (
+        <>
+          {new Array(4 - (items.length % 4)).fill(1).map((_, index) => {
+            return (
+              <Grid
+                ref={index === 0 ? ref : null}
+                key={index.toString()}
+                item
+                xs={12}
+                md={6}
+                lg={4}
+                xl={3}
+              >
+                test
+              </Grid>
+            );
+          })}
+        </>
+      )}
     </>
   );
 };

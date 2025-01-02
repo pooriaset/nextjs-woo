@@ -42,6 +42,7 @@ export async function generateMetadata(props: PageProps) {
 
 const Page: FC<PageProps> = async ({ params }) => {
   const slug = params.slug;
+
   const post = await getPost(slug);
 
   if (!post) {
