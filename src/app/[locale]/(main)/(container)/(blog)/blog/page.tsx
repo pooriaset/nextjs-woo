@@ -2,10 +2,9 @@
 
 import { Divider, Grid, Stack, TabsProps, Typography } from '@mui/material';
 import { useState } from 'react';
-import Categories from './components/Categories';
-import SearchBox from './components/SearchBox';
-import { Section } from './components/Section';
+import Column from './components/Column';
 import Posts from './components/Posts';
+import { Section } from './components/Section';
 
 const spacing = 2;
 
@@ -25,12 +24,6 @@ const Page = () => {
 
   return (
     <Stack gap={spacing}>
-      <Section
-        sx={{
-          height: 400,
-        }}
-      ></Section>
-
       <Grid container spacing={spacing}>
         <Grid item container xs={12} spacing={spacing} height="60vh">
           <Grid item md={6} xs={12}>
@@ -53,22 +46,7 @@ const Page = () => {
         </Grid>
         <Grid item container xs={12} spacing={spacing} alignItems="flex-start">
           <Grid item container lg={3} md={12} xs={12}>
-            <Grid item xs={12}>
-              <Stack spacing={spacing}>
-                <Divider>
-                  <Typography>جستجو</Typography>
-                </Divider>
-                <SearchBox />
-              </Stack>
-            </Grid>
-            <Grid item xs={12}>
-              <Stack spacing={1}>
-                <Divider>
-                  <Typography>موضوعات</Typography>
-                </Divider>
-                <Categories />
-              </Stack>
-            </Grid>
+            <Column spacing={spacing} />
           </Grid>
           <Grid item container lg={9} md={12} xs={12} spacing={spacing}>
             <Grid item xs={12}>

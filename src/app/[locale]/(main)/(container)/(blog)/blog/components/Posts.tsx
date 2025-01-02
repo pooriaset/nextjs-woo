@@ -1,3 +1,4 @@
+import Image from '@/components/common/Image';
 import { GET_POSTS } from '@/graphql/queries/blog';
 import { GetPostsQuery, GetPostsQueryVariables } from '@/graphql/types/graphql';
 import { Link } from '@/navigation';
@@ -31,22 +32,20 @@ const Posts = () => {
               href={`/blog/${node.databaseId}/${node.slug}`}
               spacing={1.5}
               color="text.primary"
+              alignItems="center"
             >
               <Box
-                height={200}
+                height={216}
                 sx={{
                   borderRadius: 2,
                   overflow: 'hidden',
                 }}
               >
-                <img
+                <Image
+                  width={1920 / 3}
+                  height={1080 / 3}
                   alt={node.slug!}
-                  src={
-                    node?.featuredImage?.node.sourceUrl ||
-                    '/assets/images/placeholders/no-image.jpg'
-                  }
-                  width={400}
-                  height={400}
+                  src={node?.featuredImage?.node.sourceUrl}
                   style={{
                     width: '100%',
                     height: '100%',
