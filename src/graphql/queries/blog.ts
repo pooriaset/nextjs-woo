@@ -15,6 +15,20 @@ export const GET_CATEGORIES = gql`
   }
 `;
 
+export const POST_ITEM_FRAGMENT = gql`
+  fragment PostItem on Post {
+    databaseId
+    slug
+    title
+    content
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
+  }
+`;
+
 export const GET_POSTS = gql`
   query GetPosts(
     $first: Int
@@ -37,25 +51,17 @@ export const GET_POSTS = gql`
     ) {
       edges {
         node {
-          id
-          title
-          slug
-          databaseId
-          featuredImage {
-            node {
-              databaseId
-              sourceUrl
-            }
-          }
+          ...PostItem
         }
       }
     }
   }
+  ${POST_ITEM_FRAGMENT}
 `;
 
 export const GET_POST = gql`
   query GetPost($id: ID!) {
-    post(id: $id, idType: DATABASE_ID) {
+    post(id: $id, idType: SLUG) {
       title
       slug
       content
@@ -87,6 +93,32 @@ export const GET_POST = gql`
           }
         }
       }
+    }
+  }
+`;
+export const GET_CATEGORY_POSTS = gql`
+  query GetCategoryPosts($first: Int, $id: ID!) {
+    category(id: $id, idType: SLUG) {
+      description
+      name
+      posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+        edges {
+          node {
+            ...PostItem
+          }
+        }
+      }
+    }
+  }
+  ${POST_ITEM_FRAGMENT}
+`;
+
+export const GET_CATEGORY = gql`
+  query GetCategory($id: ID!) {
+    category(id: $id, idType: SLUG) {
+      databaseId
+      description
+      name
     }
   }
 `;

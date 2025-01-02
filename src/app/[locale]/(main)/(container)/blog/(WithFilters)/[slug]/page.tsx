@@ -9,15 +9,15 @@ import { FC } from 'react';
 import PostCategories from './components/PostCategories';
 
 export type PageProps = {
-  params: { params: string[] };
+  params: { slug: string };
 };
 
-const getPost = async (id: string) => {
+const getPost = async (slug: string) => {
   const { data } = await getClient().query<GetPostQuery, GetPostQueryVariables>(
     {
       query: GET_POST,
       variables: {
-        id,
+        id: slug,
       },
     },
   );
@@ -27,9 +27,9 @@ const getPost = async (id: string) => {
 };
 
 export async function generateMetadata(props: PageProps) {
-  const id = props.params.params[0];
+  const slug = props.params.slug;
 
-  const post = await getPost(id);
+  const post = await getPost(slug);
 
   if (!post) {
     return notFound();
@@ -41,8 +41,8 @@ export async function generateMetadata(props: PageProps) {
 }
 
 const Page: FC<PageProps> = async ({ params }) => {
-  const id = params.params[0];
-  const post = await getPost(id);
+  const slug = params.slug;
+  const post = await getPost(slug);
 
   if (!post) {
     return notFound();

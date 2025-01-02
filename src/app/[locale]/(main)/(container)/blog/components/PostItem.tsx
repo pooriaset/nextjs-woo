@@ -1,22 +1,23 @@
 import Image from '@/components/common/Image';
-import { GetPostsQuery } from '@/graphql/types/graphql';
+import { PostItemFragment } from '@/graphql/types/graphql';
 import { Link } from '@/navigation';
 import { Box, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
 
 export interface PostItemProps {
-  data: NonNullable<GetPostsQuery['posts']>['edges'][number]['node'];
+  fragment: PostItemFragment;
 }
-const PostItem: FC<PostItemProps> = ({ data }) => {
+const PostItem: FC<PostItemProps> = ({ fragment }) => {
   return (
     <Stack
       component={Link}
-      href={`/blog/${data.databaseId}/${data.slug}`}
+      href={`/blog/${fragment.slug}`}
       spacing={1.5}
       color="text.primary"
       alignItems="center"
     >
       <Box
+        width="100%"
         height={216}
         sx={{
           borderRadius: 2,
@@ -26,8 +27,8 @@ const PostItem: FC<PostItemProps> = ({ data }) => {
         <Image
           width={1920 / 3}
           height={1080 / 3}
-          alt={data.slug!}
-          src={data?.featuredImage?.node?.sourceUrl}
+          alt={fragment.slug!}
+          src={fragment?.featuredImage?.node?.sourceUrl}
           style={{
             width: '100%',
             height: '100%',
@@ -46,7 +47,7 @@ const PostItem: FC<PostItemProps> = ({ data }) => {
           WebkitBoxOrient: 'vertical',
         }}
       >
-        {data?.title}
+        {fragment?.title}
       </Typography>
     </Stack>
   );

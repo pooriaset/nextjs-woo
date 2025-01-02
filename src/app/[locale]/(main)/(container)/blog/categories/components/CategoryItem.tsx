@@ -14,7 +14,7 @@ const CategoryItem: FC<CategoryItemProps> = ({ data }) => {
       color="inherit"
       variant="outlined"
       component={Link}
-      href={`/blog/categories/${data.databaseId}/${data.slug}`}
+      href={`/blog/categories/${data.slug}`}
     >
       {data.name}
     </Button>
