@@ -249,7 +249,7 @@
     }
   },
   "blog": {
-    "search": "Search",
+    "search": "Searching in articles",
     "categories": "Blog Categories",
     "latestArticles": "Latest Articles",
     "notFound": {

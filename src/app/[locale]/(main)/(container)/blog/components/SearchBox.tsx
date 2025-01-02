@@ -24,7 +24,7 @@ const SearchBox = () => {
         fullWidth
         defaultValue={params.search}
         variant="outlined"
-        placeholder={t('header.search.placeholder')}
+        placeholder={t('blog.search')}
         InputProps={{
           endAdornment: (
             <IconButton type="submit">

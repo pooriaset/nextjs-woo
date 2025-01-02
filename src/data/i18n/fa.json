@@ -249,7 +249,7 @@
     }
   },
   "blog": {
-    "search": "جستجو",
+    "search": "جستجو در مقالات",
     "categories": "دسته بندی مقالات",
     "latestArticles": "آخرین مقالات",
     "notFound": {

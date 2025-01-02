@@ -107,7 +107,7 @@ const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
       {items.map(({ node }) => {
         const fragment = getFragmentData(PostItemFragmentDoc, node);
         return (
-          <Grid item lg={4} md={12} key={fragment.databaseId}>
+          <Grid item lg={4} md={12} xs={12} key={fragment.databaseId}>
             <PostItem fragment={fragment} />
           </Grid>
         );
@@ -123,6 +123,7 @@ const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
                 item
                 lg={4}
                 md={12}
+                xs={12}
               >
                 <PostItemSkeleton />
               </Grid>
