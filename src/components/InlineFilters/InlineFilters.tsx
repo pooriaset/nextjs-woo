@@ -1,7 +1,7 @@
 'use client';
 
 import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { sortOptions } from '@/static/sortOptions';
 import { SearchPageParamsKeys } from '@/utils/params';
 import { SortOutlined } from '@mui/icons-material';
@@ -25,7 +25,7 @@ export interface InlineFiltersProps {
 const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
   const t = useTranslations();
 
-  const { sort, navigate } = useCustomSearchParams();
+  const { sort, navigate } = useSearchPageParams();
 
   const [sortDialog, setSortDialog] = useState(false);
 

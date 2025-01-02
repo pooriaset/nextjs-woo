@@ -37,6 +37,8 @@ export const getSearchPageParams = (
   };
 };
 
+// =================================================
+
 export enum ProductPageEnum {
   Color = 'color',
   Size = 'size',
@@ -60,5 +62,25 @@ export const getProductPageParams = (
     color,
     size,
     variantId,
+  };
+};
+
+// ====================================================
+
+export enum BlogPageParamsEnum {
+  Search = 'search',
+}
+
+export interface BlogPagesParams {
+  search: string | null;
+}
+
+export const getBlogPageParams = (params: URLSearchParams): BlogPagesParams => {
+  const search = params.has(BlogPageParamsEnum.Search)
+    ? (params.get(BlogPageParamsEnum.Search) as string)
+    : null;
+
+  return {
+    search,
   };
 };

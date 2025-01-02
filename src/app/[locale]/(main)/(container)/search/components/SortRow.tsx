@@ -1,6 +1,6 @@
 'use client';
 
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { SortOutlined } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 import { SearchPageParamsKeys } from '@/utils/params';
 
 const SortRow = () => {
-  const { sort, navigate } = useCustomSearchParams();
+  const { sort, navigate } = useSearchPageParams();
 
   const t = useTranslations();
 

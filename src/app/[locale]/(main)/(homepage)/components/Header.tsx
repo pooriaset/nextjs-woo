@@ -1,6 +1,6 @@
 'use client';
 
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { SearchOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
@@ -13,7 +13,7 @@ import { SearchPageParamsKeys } from '@/utils/params';
 const Header = () => {
   const [isPending, startTransition] = useTransition();
 
-  const { navigate, q } = useCustomSearchParams();
+  const { navigate, q } = useSearchPageParams();
 
   const [open, setOpen] = useState(false);
 

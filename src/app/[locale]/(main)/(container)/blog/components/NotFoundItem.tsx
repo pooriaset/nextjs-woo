@@ -8,8 +8,7 @@ const NotFoundItem = () => {
   const t = useTranslations();
   return (
     <Alert variant="outlined" color="warning" icon={<Warning />}>
-      <AlertTitle>{t('products.notFound.title')}</AlertTitle>
-      {t('products.notFound.message')}
+      <AlertTitle>{t('blog.notFound.title')}</AlertTitle>
     </Alert>
   );
 };

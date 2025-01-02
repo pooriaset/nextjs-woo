@@ -35,7 +35,7 @@ export const GET_POSTS = gql`
     $last: Int
     $after: String
     $before: String
-    $title: String
+    $search: String
     $categoryIn: [ID]
   ) {
     posts(
@@ -44,7 +44,7 @@ export const GET_POSTS = gql`
       after: $after
       before: $before
       where: {
-        title: $title
+        search: $search
         categoryIn: $categoryIn
         orderby: { order: DESC, field: DATE }
       }

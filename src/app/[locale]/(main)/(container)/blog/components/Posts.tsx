@@ -14,12 +14,15 @@ import { useIntersectionObserver } from 'usehooks-ts';
 import NotFoundItem from './NotFoundItem';
 import PostItem from './PostItem';
 import PostItemSkeleton from './PostItemSkeleton';
+import useBlogPageParams from '@/hooks/useBlogPageParams';
 
 export interface PostsProps {
   categoryIn?: string[];
 }
 
 const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
+  const params = useBlogPageParams();
+
   const variables: GetPostsQueryVariables = useMemo(() => {
     return {
       first: 12,
@@ -27,9 +30,9 @@ const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
       before: null,
       categoryIn,
       last: null,
-      title: null,
+      search: params.search,
     };
-  }, [categoryIn]);
+  }, [categoryIn, params.search]);
 
   const initQuery = useSuspenseQuery<GetPostsQuery, GetPostsQueryVariables>(
     GET_POSTS,
@@ -92,7 +95,11 @@ const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
     }
   }, [isIntersecting]);
   if (!items?.length) {
-    return <NotFoundItem />;
+    return (
+      <Grid item xs={12}>
+        <NotFoundItem />
+      </Grid>
+    );
   }
 
   return (

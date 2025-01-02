@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname, useRouter } from '@/navigation';
 import {
   SearchPageParamsKeys,
   SearchPagesParams,
@@ -7,7 +8,7 @@ import {
 } from '@/utils/params';
 import { useSearchParams } from 'next/navigation';
 
-export interface IUseCustomSearchParams {
+export interface IUseSearchPageParams {
   (): {
     navigate: (
       key: SearchPageParamsKeys,
@@ -16,10 +17,12 @@ export interface IUseCustomSearchParams {
   } & SearchPagesParams;
 }
 
-const useCustomSearchParams: IUseCustomSearchParams = () => {
+const useSearchPageParams: IUseSearchPageParams = () => {
   const params = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const navigate: ReturnType<IUseCustomSearchParams>['navigate'] = (
+  const navigate: ReturnType<IUseSearchPageParams>['navigate'] = (
     key,
     value,
   ) => {
@@ -30,7 +33,13 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
       newParams.set(key, value.toString());
     }
 
-    window.history.pushState(null, '', `/search?${newParams}`);
+    const target = `/search?${newParams}`;
+
+    if (pathname.includes('/search')) {
+      window.history.pushState(null, '', target);
+    } else {
+      router.push(target);
+    }
   };
 
   return {
@@ -39,4 +48,4 @@ const useCustomSearchParams: IUseCustomSearchParams = () => {
   };
 };
 
-export default useCustomSearchParams;
+export default useSearchPageParams;

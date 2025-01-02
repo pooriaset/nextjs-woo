@@ -251,6 +251,9 @@
   "blog": {
     "search": "Search",
     "categories": "Blog Categories",
-    "latestArticles": "Latest Articles"
+    "latestArticles": "Latest Articles",
+    "notFound": {
+      "title": "We did not find a article with these filters"
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
 import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { SearchPageParamsKeys } from '@/utils/params';
 import { useQuery } from '@apollo/client';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
@@ -42,7 +42,7 @@ const ColumnFilters: FC<ColumnFiltersProps> = () => {
     setOpen(!open);
   };
 
-  const { navigate, inStock } = useCustomSearchParams();
+  const { navigate, inStock } = useSearchPageParams();
   const handleClickOnInStock = () => {
     navigate(SearchPageParamsKeys.InStock, !inStock);
   };

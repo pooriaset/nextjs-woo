@@ -251,6 +251,9 @@
   "blog": {
     "search": "جستجو",
     "categories": "دسته بندی مقالات",
-    "latestArticles": "آخرین مقالات"
+    "latestArticles": "آخرین مقالات",
+    "notFound": {
+      "title": "موردی یافت نشد"
+    }
   }
 }
