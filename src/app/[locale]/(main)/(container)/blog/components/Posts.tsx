@@ -10,9 +10,10 @@ import {
 import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Grid } from '@mui/material';
 import { FC, useEffect, useMemo } from 'react';
-import PostItem from './PostItem';
 import { useIntersectionObserver } from 'usehooks-ts';
 import NotFoundItem from './NotFoundItem';
+import PostItem from './PostItem';
+import PostItemSkeleton from './PostItemSkeleton';
 
 export interface PostsProps {
   categoryIn?: string[];
@@ -107,18 +108,16 @@ const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
 
       {hasNextPage && (
         <>
-          {new Array(4 - (items.length % 4)).fill(1).map((_, index) => {
+          {new Array(3 - (items.length % 3)).fill(1).map((_, index) => {
             return (
               <Grid
                 ref={index === 0 ? ref : null}
                 key={index.toString()}
                 item
-                xs={12}
-                md={6}
                 lg={4}
-                xl={3}
+                md={12}
               >
-                test
+                <PostItemSkeleton />
               </Grid>
             );
           })}
