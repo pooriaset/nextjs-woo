@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import ColumnSection from './components/ColumnSection';
 import Filters from './components/Filters';
 import Posts from './components/Posts';
+import { Suspense } from 'react';
+import PostsSkeleton from './components/PostsSkeleton';
 
 const spacing = 2;
 
@@ -19,7 +21,9 @@ const Page = async () => {
             <Grid item xs={12}>
               <ColumnSection title={t('blog.latestArticles')} />
             </Grid>
-            <Posts />
+            <Suspense fallback={<PostsSkeleton />}>
+              <Posts />
+            </Suspense>
           </Grid>
         </Grid>
       </Grid>
