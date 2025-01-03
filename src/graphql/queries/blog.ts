@@ -67,7 +67,7 @@ export const GET_POSTS = gql`
 
 export const GET_POST = gql`
   query GetPost($id: ID!) {
-    post(id: $id, idType: SLUG) {
+    post(id: $id, idType: DATABASE_ID) {
       title
       slug
       content
