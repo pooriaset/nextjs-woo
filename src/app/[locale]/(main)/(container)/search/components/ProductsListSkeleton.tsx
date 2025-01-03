@@ -1,7 +1,7 @@
 import { VariableProductItemSkeleton } from '@/components/VariableProductItem';
 import { Grid } from '@mui/material';
 
-const DesktopFallback = () => {
+const ProductsListSkeleton = () => {
   return (
     <Grid container spacing={1}>
       {new Array(4).fill(1).map((_, index) => {
@@ -15,4 +15,4 @@ const DesktopFallback = () => {
   );
 };
 
-export default DesktopFallback;
+export default ProductsListSkeleton;

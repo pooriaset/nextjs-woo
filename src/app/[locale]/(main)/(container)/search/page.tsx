@@ -4,17 +4,19 @@ import ProductsList from '@/components/ProductsList/ProductsList';
 import DesktopView from '@/components/ResponsiveDesign/components/DesktopView';
 import MobileView from '@/components/ResponsiveDesign/components/MobileView';
 import { Box } from '@mui/material';
+import { Suspense } from 'react';
+import ProductsListSkeleton from './components/ProductsListSkeleton';
 import SortRow from './components/SortRow';
 import SortWrapper from './components/SortWrapper';
-import { Suspense } from 'react';
-import DesktopFallback from './components/DesktopFallback';
 
 const Page = async (props: { searchParams: Record<string, string> }) => {
   return (
     <>
       <MobileView>
         <InlineFilters />
-        <ProductsList />
+        <Suspense fallback={<ProductsListSkeleton />}>
+          <ProductsList />
+        </Suspense>
       </MobileView>
 
       <DesktopView>
@@ -38,7 +40,7 @@ const Page = async (props: { searchParams: Record<string, string> }) => {
               {/* <ProductsCount value={data.products?.pageInfo.total} /> */}
             </SortWrapper>
 
-            <Suspense fallback={<DesktopFallback />}>
+            <Suspense fallback={<ProductsListSkeleton />}>
               <ProductsList />
             </Suspense>
           </Box>
