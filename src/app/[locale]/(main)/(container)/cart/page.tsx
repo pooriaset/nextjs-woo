@@ -76,7 +76,7 @@ const Page = () => {
                       <Stack spacing={2}>
                         <CartItem
                           value={variant}
-                          href={`/products/${product?.databaseId}`}
+                          href={`/products/${product?.databaseId}/${product?.slug}`}
                         />
                         <Stack direction="row" spacing={1}>
                           <Box width={200}>
