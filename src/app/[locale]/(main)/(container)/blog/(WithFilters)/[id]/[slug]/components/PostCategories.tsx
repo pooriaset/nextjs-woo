@@ -17,7 +17,7 @@ const PostCategories: FC<PostCategoriesProps> = ({ items }) => {
             key={node.databaseId}
             size="small"
             component={Link}
-            href={`/blog/categories/${node.slug}`}
+            href={`/blog/categories/${node.databaseId}/${node.slug}`}
             label={node.name}
             sx={{
               cursor: 'pointer',

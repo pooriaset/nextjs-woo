@@ -121,7 +121,7 @@ export const GET_CATEGORY_POSTS = gql`
 
 export const GET_CATEGORY = gql`
   query GetCategory($id: ID!) {
-    category(id: $id, idType: SLUG) {
+    category(id: $id, idType: DATABASE_ID) {
       databaseId
       description
       name

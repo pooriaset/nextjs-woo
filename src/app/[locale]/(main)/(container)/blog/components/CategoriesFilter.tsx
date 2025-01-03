@@ -20,7 +20,7 @@ const CategoriesFilter = () => {
         return (
           <ListItem
             component={Link}
-            href={`/blog/categories/${category.node.slug}`}
+            href={`/blog/categories/${category.node.databaseId}/${category.node.slug}`}
             onClick={handleToggle(category.node.databaseId)}
             key={category.node.databaseId}
             disablePadding

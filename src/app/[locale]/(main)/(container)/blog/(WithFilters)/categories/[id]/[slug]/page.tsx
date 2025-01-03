@@ -7,27 +7,27 @@ import {
 import { Grid, Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
-import Posts from '../../../components/Posts';
-import ColumnSection from '../../../components/ColumnSection';
+import Posts from '../../../../components/Posts';
+import ColumnSection from '../../../../components/ColumnSection';
 
-type PageProps = { params: { slug: string } };
+type PageProps = { params: { slug: string; id: string } };
 
-const getCategory = async (slug: string) => {
+const getCategory = async (id: string) => {
   const { data } = await getClient().query<
     GetCategoryQuery,
     GetCategoryQueryVariables
   >({
     query: GET_CATEGORY,
     variables: {
-      id: slug,
+      id,
     },
   });
 
   return data.category;
 };
 
-export async function generateMetadata({ params: { slug } }: PageProps) {
-  const category = await getCategory(slug);
+export async function generateMetadata({ params: { id } }: PageProps) {
+  const category = await getCategory(id);
 
   if (!category) {
     return notFound();
@@ -38,8 +38,8 @@ export async function generateMetadata({ params: { slug } }: PageProps) {
   };
 }
 
-const Page: FC<PageProps> = async ({ params: { slug } }) => {
-  const category = await getCategory(slug);
+const Page: FC<PageProps> = async ({ params: { id } }) => {
+  const category = await getCategory(id);
 
   if (!category) {
     return notFound();
