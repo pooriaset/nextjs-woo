@@ -29,6 +29,7 @@ import {
 import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import CardHeader from '../components/CardHeader';
+import { BILLING_STATE_NAME_METADATA_KEY } from '@/config/inAppMetadata';
 
 type FieldNames = Record<
   'firstName' | 'lastName' | 'state' | 'city' | 'address1' | 'postcode',
@@ -83,9 +84,19 @@ const Page = () => {
   const client = useApolloClient();
 
   const onSubmit: SubmitHandler<FieldNames> = async (payload) => {
+    const selectedState = states.data?.countryStates?.find(
+      (item) => item?.code === payload.state,
+    );
+
     const { errors } = await mutateAsync({
       variables: {
         billing: payload,
+        metaData: [
+          {
+            key: BILLING_STATE_NAME_METADATA_KEY,
+            value: selectedState?.name,
+          },
+        ],
       },
     });
     if (!errors?.length) {

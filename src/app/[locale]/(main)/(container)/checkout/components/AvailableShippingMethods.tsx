@@ -1,17 +1,11 @@
 import PriceLabel from '@/components/common/PriceLabel';
 import { ShippingRate } from '@/graphql/types/graphql';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Radio,
-  Stack,
-  Typography,
-} from '@mui/material';
+import LocalShippingOutlined from '@mui/icons-material/LocalShippingOutlined';
+import { Card, CardContent, Radio, Stack, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, useState } from 'react';
+import CardHeader from './CardHeader';
 import MethodItem from './MethodItem';
-
 export interface AvailableShippingMethodsProps {
   rates: ShippingRate[];
   defaultValue?: string | null;
@@ -41,9 +35,7 @@ const AvailableShippingMethods: FC<AvailableShippingMethodsProps> = ({
     <Card variant="outlined">
       <CardHeader
         title={t('pages.checkout.shippingMethodTitle')}
-        titleTypographyProps={{
-          variant: 'h6',
-        }}
+        icon={LocalShippingOutlined}
       />
       <CardContent>
         <Stack spacing={0.5}>

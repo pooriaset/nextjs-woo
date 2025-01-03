@@ -195,7 +195,10 @@
         "description": "Order Description (Optional)"
       },
       "shippingMethodTitle": "Shipping Method",
-      "paymentGateway": "Payment Gateway"
+      "shipmentTo": "Shipment to",
+      "paymentGateway": "Payment Gateway",
+      "editAddress": "Edit Address",
+      "shipmentToAddressMessage": "Your package will be sent to the following address:"
     }
   },
   "fields": {

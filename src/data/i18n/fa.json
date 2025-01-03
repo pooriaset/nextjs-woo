@@ -195,7 +195,10 @@
         "description": "توضیحات سفارش (اختیاری)"
       },
       "shippingMethodTitle": "روش ارسال",
-      "paymentGateway": "درگاه پرداخت"
+      "shipmentTo": "ارسال به",
+      "paymentGateway": "درگاه پرداخت",
+      "editAddress": "ویرایش آدرس",
+      "shipmentToAddressMessage": "مرسوله شما به آدرس زیر ارسال می شود:"
     }
   },
   "fields": {
