@@ -11,7 +11,7 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
   return (
     <Stack
       component={Link}
-      href={`/blog/${fragment.slug}`}
+      href={`/blog/${fragment.databaseId}/${fragment.slug}`}
       spacing={1.5}
       color="text.primary"
       alignItems="center"
