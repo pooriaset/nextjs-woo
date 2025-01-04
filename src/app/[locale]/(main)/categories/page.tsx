@@ -1,68 +1,28 @@
-'use client';
-
+import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_ALL_CATEGORIES_QUERY } from '@/graphql/queries/categories';
 import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
-import { useQuery } from '@apollo/client';
-import { Stack } from '@mui/material';
-import { useEffect, useState } from 'react';
-import MenuCategoryItem from './components/MenuCategoryItem';
-import SubCategories from './components/SubCategories';
-import Loading from './loading';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import Content from './components/Content';
 
-const Page = () => {
-  const { data, loading } = useQuery<GetAllCategoriesQuery>(
-    GET_ALL_CATEGORIES_QUERY,
-    {
-      variables: {
-        first: 10000,
-      },
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: t('header.navigation.categories'),
+  };
+}
+
+const Page = async () => {
+  const { data } = await getClient().query<GetAllCategoriesQuery>({
+    query: GET_ALL_CATEGORIES_QUERY,
+    variables: {
+      first: 10000,
     },
-  );
+  });
 
   const categories = data?.productCategories?.nodes || [];
 
-  const [selected, setSelected] = useState<any>(null);
-
-  useEffect(() => {
-    if (!loading) {
-      setSelected(categories[0]);
-    }
-  }, [loading]);
-
-  if (loading || !selected) {
-    return <Loading />;
-  }
-
-  return (
-    <Stack overflow="auto" direction="row">
-      <Stack
-        overflow="auto"
-        sx={{
-          minWidth: 110,
-        }}
-      >
-        {categories
-          .filter((category) => !category.parentId)
-          .map((category) => {
-            return (
-              <MenuCategoryItem
-                selected={category.id === selected.id}
-                {...category}
-                key={category.id}
-                onClick={() => setSelected(category)}
-              />
-            );
-          })}
-      </Stack>
-      <SubCategories
-        name={selected.name}
-        parentId={selected.id}
-        items={categories.filter(
-          (category) => category.parentId === selected.id,
-        )}
-      />
-    </Stack>
-  );
+  return <Content categories={categories} />;
 };
 
 export default Page;

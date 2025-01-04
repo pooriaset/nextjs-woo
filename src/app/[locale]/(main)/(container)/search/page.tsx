@@ -8,6 +8,15 @@ import { Suspense } from 'react';
 import ProductsListSkeleton from './components/ProductsListSkeleton';
 import SortRow from './components/SortRow';
 import SortWrapper from './components/SortWrapper';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: t('header.navigation.products'),
+  };
+}
 
 const Page = async (props: { searchParams: Record<string, string> }) => {
   return (

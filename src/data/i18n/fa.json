@@ -40,7 +40,7 @@
     },
     "navigation": {
       "products": "محصولات",
-      "categories": "دسته‌بندی‌ها",
+      "categories": "دسته بندی ها",
       "promotions": "تخفیف‌ها و پیشنهادها",
       "bestSelling": "پرفروش‌ترین‌ها",
       "newest": "آخرین محصولات",
@@ -74,7 +74,7 @@
     "navigation": {
       "myAccount": "حساب من",
       "cart": "سبد خرید",
-      "categories": "دسته‌بندی‌ها",
+      "categories": "دسته بندی ها",
       "home": "خانه"
     },
     "text": "تمامی حقوق این سایت محفوظ است و انتشار مطالب فقط با منبع مجاز است."
@@ -94,7 +94,7 @@
     "count": "کالا",
     "outOfStock": "نا موجود",
     "filters": {
-      "categories": "دسته‌بندی‌ها",
+      "categories": "دسته بندی ها",
       "justInStock": "فقط کالاهای موجود"
     },
     "sort": {

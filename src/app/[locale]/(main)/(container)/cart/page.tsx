@@ -28,6 +28,7 @@ import { useTranslations } from 'next-intl';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import { cartAtom } from '@/store/atoms';
 import { useAtomValue } from 'jotai';
+import { Metadata } from 'next';
 import CartItemsSkeleton from './components/CartItemsSkeleton';
 import CheckoutBox from './components/CheckoutBox';
 import CheckoutBoxSkeleton from './components/CheckoutBoxSkeleton';
