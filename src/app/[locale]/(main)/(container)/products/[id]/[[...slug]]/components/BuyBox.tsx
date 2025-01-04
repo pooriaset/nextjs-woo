@@ -40,7 +40,7 @@ export interface BuyBoxProps {
 }
 
 const BuyBox: FC<BuyBoxProps> = ({ product }) => {
-  const { params } = useParams();
+  const params = useParams<{ id: string; slug: string[] }>();
 
   const t = useTranslations();
 
@@ -71,7 +71,7 @@ const BuyBox: FC<BuyBoxProps> = ({ product }) => {
   const handleClickOnAdd = async () => {
     const data = await addOrUpdateCartItemMutate({
       quantity: 1,
-      productId: +params[0],
+      productId: +params.id,
       variationId: variantId,
     });
     if (data) {
