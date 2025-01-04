@@ -7,6 +7,8 @@ import { Box, Stack, Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
 import PostCategories from './components/PostCategories';
+import { Metadata } from 'next';
+import { stripHtml } from '@/utils/text';
 
 export type PageProps = {
   params: { id: string };
@@ -26,7 +28,7 @@ const getPost = async (id: string) => {
   return post;
 };
 
-export async function generateMetadata(props: PageProps) {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const id = props.params.id;
 
   const post = await getPost(id);
@@ -37,6 +39,7 @@ export async function generateMetadata(props: PageProps) {
 
   return {
     title: post.title,
+    description: stripHtml(post.excerpt),
     alternates: {
       canonical: `/blog/${id}/${post.slug}`,
     },
@@ -104,7 +107,7 @@ const Page: FC<PageProps> = async ({ params }) => {
         dangerouslySetInnerHTML={{
           __html: post.content!,
         }}
-      ></Typography>
+      />
     </Stack>
   );
 };

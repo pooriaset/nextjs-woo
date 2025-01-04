@@ -19,6 +19,7 @@ import ProductTabs from './components/ProductTabs';
 import VariantSelector from './components/VariantSelector';
 import ProductProvider from './providers/ProductProvider';
 import { notFound } from 'next/navigation';
+import { stripHtml } from '@/utils/text';
 
 type PageProps = {
   params: {
@@ -39,7 +40,7 @@ export async function generateMetadata({
   if (product?.__typename === 'VariableProduct') {
     return {
       title: product.title,
-      description: product.description,
+      description: stripHtml(product.description),
       alternates: {
         canonical: `/products/${id}/${product.slug}`,
       },

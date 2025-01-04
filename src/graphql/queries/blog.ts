@@ -70,6 +70,7 @@ export const GET_POST = gql`
     post(id: $id, idType: DATABASE_ID) {
       title
       slug
+      excerpt
       content
       dateGmt
       modifiedGmt
