@@ -1,25 +1,15 @@
 'use client';
 
 import { useAppContext } from '@/hooks/useAppContext';
-import { Box, Card, CardContent, Skeleton } from '@mui/material';
+import { Box, Skeleton, Stack } from '@mui/material';
+import { Container } from './Container';
 
 const VariableProductItemSkeleton = () => {
   const { variantImageSize, isMobile } = useAppContext();
 
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        display: 'block',
-        height: '100%',
-      }}
-    >
-      <CardContent
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+    <Container>
+      <Stack>
         <Box
           sx={{
             display: 'flex',
@@ -32,7 +22,6 @@ const VariableProductItemSkeleton = () => {
             height={variantImageSize}
             width="100%"
           />
-          {!isMobile && <Box mt={3} />}
 
           <Box
             sx={{
@@ -41,6 +30,7 @@ const VariableProductItemSkeleton = () => {
               justifyContent: 'space-between',
               gap: 1,
               width: '100%',
+              p: 1,
             }}
           >
             <Skeleton variant="text" width={90} />
@@ -59,8 +49,8 @@ const VariableProductItemSkeleton = () => {
             </Box>
           </Box>
         </Box>
-      </CardContent>
-    </Card>
+      </Stack>
+    </Container>
   );
 };
 

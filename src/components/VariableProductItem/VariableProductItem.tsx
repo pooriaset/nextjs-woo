@@ -13,6 +13,7 @@ import OldPrice from '../common/OldPrice';
 import OutOfStock from '../common/OutOfStock';
 import PriceLabel from '../common/PriceLabel';
 import { VariableProduct } from './types';
+import { Container } from './Container';
 
 export interface ProductItemProps {
   data: VariableProduct;
@@ -27,18 +28,9 @@ const VariableProductItem: FC<ProductItemProps> = ({ data, vertical }) => {
   const outOfStock = data.stockStatus === StockStatusEnum.OutOfStock;
 
   return (
-    <Box
+    <Container
       component={NextLink}
       href={`/products/${data.databaseId}/${data.slug}`}
-      sx={{
-        display: 'block',
-        height: '100%',
-        border: '1px solid',
-        borderColor: 'divider',
-        color: 'text.primary',
-        borderRadius: 1,
-        overflow: 'hidden',
-      }}
     >
       <Stack>
         <Box
@@ -115,7 +107,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data, vertical }) => {
           </Box>
         </Box>
       </Stack>
-    </Box>
+    </Container>
   );
 };
 

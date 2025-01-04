@@ -23,6 +23,8 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
     modules.push(Navigation);
   }
 
+  const spaceBetween = theme.spacing(isMobile ? 1 : 2);
+
   return (
     <Card variant="outlined">
       <CardHeader
@@ -41,9 +43,9 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
           navigation={!!modules.length}
           modules={modules}
           slidesPerView={'auto'}
-          spaceBetween={theme.spacing(isMobile ? 1 : 2)}
+          spaceBetween={spaceBetween}
         >
-          {items?.map((product) => {
+          {items?.map((product, index) => {
             if (product.__typename === 'VariableProduct') {
               return (
                 <SwiperSlide
@@ -51,7 +53,8 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
                   style={{
                     height: 'auto',
                     boxSizing: 'border-box',
-                    width: isMobile ? 130 : 250,
+                    width: isMobile ? 130 : 240,
+                    paddingLeft: index === items.length - 1 ? spaceBetween : 0,
                   }}
                 >
                   <VariableProductItem data={product} vertical />

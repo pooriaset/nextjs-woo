@@ -23,31 +23,28 @@ export interface PostsProps {
 const Posts: FC<PostsProps> = ({ categoryIn = null }) => {
   const params = useBlogPageParams();
 
-  const variables: GetPostsQueryVariables = useMemo(() => {
+  const variables: Partial<GetPostsQueryVariables> = useMemo(() => {
     return {
       first: 12,
-      after: null,
-      before: null,
       categoryIn,
-      last: null,
       search: params.search,
     };
   }, [categoryIn, params.search]);
 
-  const initQuery = useSuspenseQuery<GetPostsQuery, GetPostsQueryVariables>(
-    GET_POSTS,
-    {
-      variables,
-    },
-  );
+  const initQuery = useSuspenseQuery<
+    GetPostsQuery,
+    Partial<GetPostsQueryVariables>
+  >(GET_POSTS, {
+    variables,
+  });
 
-  const paginateQuery = useQuery<GetPostsQuery, GetPostsQueryVariables>(
-    GET_POSTS,
-    {
-      variables,
-      skip: true,
-    },
-  );
+  const paginateQuery = useQuery<
+    GetPostsQuery,
+    Partial<GetPostsQueryVariables>
+  >(GET_POSTS, {
+    variables,
+    skip: true,
+  });
 
   const items = [
     ...(initQuery.data?.posts?.edges || []),
