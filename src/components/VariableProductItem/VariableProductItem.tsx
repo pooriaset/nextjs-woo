@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Card, CardContent, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 import { StockStatusEnum } from '@/graphql/types/graphql';
 import { useAppContext } from '@/hooks/useAppContext';
@@ -16,36 +16,35 @@ import { VariableProduct } from './types';
 
 export interface ProductItemProps {
   data: VariableProduct;
+  vertical?: boolean;
 }
 
-const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
+const VariableProductItem: FC<ProductItemProps> = ({ data, vertical }) => {
   const { isMobile, variantImageSize } = useAppContext();
+
+  const _horizontal = isMobile && !vertical;
 
   const outOfStock = data.stockStatus === StockStatusEnum.OutOfStock;
 
   return (
-    <Card
-      variant="outlined"
+    <Box
       component={NextLink}
       href={`/products/${data.databaseId}/${data.slug}`}
       sx={{
         display: 'block',
         height: '100%',
+        border: '1px solid',
+        borderColor: 'divider',
+        color: 'text.primary',
+        borderRadius: 1,
+        overflow: 'hidden',
       }}
     >
-      <CardContent
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          '&:last-child': {
-            paddingBottom: (theme) => `${theme.spacing(2)}`,
-          },
-        }}
-      >
+      <Stack>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: isMobile ? 'row' : 'column',
+            flexDirection: _horizontal ? 'row' : 'column',
             gap: 1,
           }}
         >
@@ -56,10 +55,9 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
             alt="Product Image"
             style={{
               objectFit: 'contain',
-              width: isMobile ? 120 : '100%',
+              width: _horizontal ? 120 : '100%',
             }}
           />
-          {!isMobile && <Box mt={3} />}
 
           <Box
             sx={{
@@ -68,6 +66,8 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
               justifyContent: 'space-between',
               gap: 1,
               width: '100%',
+              mt: !_horizontal ? 3 : 0,
+              p: 1,
             }}
           >
             <Typography
@@ -114,8 +114,8 @@ const VariableProductItem: FC<ProductItemProps> = ({ data }) => {
             </Box>
           </Box>
         </Box>
-      </CardContent>
-    </Card>
+      </Stack>
+    </Box>
   );
 };
 

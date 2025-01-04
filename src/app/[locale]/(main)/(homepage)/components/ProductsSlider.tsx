@@ -2,9 +2,10 @@
 
 import { VariableProductItem } from '@/components/VariableProductItem';
 import { GetAllProductsQuery } from '@/graphql/types/graphql';
+import { useAppContext } from '@/hooks/useAppContext';
 import { Card, CardContent, CardHeader, useTheme } from '@mui/material';
 import { FC } from 'react';
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export interface ProductsSliderProps {
@@ -14,6 +15,14 @@ export interface ProductsSliderProps {
 
 const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
   const theme = useTheme();
+
+  const { isMobile } = useAppContext();
+
+  const modules = [];
+  if (!isMobile) {
+    modules.push(Navigation);
+  }
+
   return (
     <Card variant="outlined">
       <CardHeader
@@ -22,31 +31,17 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
           textAlign: 'center',
         }}
       />
-      <CardContent>
+      <CardContent
+        sx={{
+          pr: 0,
+        }}
+      >
         <Swiper
           dir={theme.direction}
-          navigation={true}
-          modules={[Autoplay, Navigation]}
-          slidesPerView={1}
-          breakpoints={{
-            [theme.breakpoints.values.xs]: {
-              slidesPerView: 1,
-              spaceBetween: 16,
-            },
-            [theme.breakpoints.values.sm]: {
-              slidesPerView: 2,
-              spaceBetween: 16,
-            },
-            [theme.breakpoints.values.md]: {
-              slidesPerView: 5,
-              spaceBetween: 16,
-            },
-            [theme.breakpoints.values.lg]: {
-              slidesPerView: 6,
-              spaceBetween: 16,
-            },
-          }}
-          spaceBetween={theme.spacing(2)}
+          navigation={!!modules.length}
+          modules={modules}
+          slidesPerView={'auto'}
+          spaceBetween={theme.spacing(isMobile ? 1 : 2)}
         >
           {items?.map((product) => {
             if (product.__typename === 'VariableProduct') {
@@ -56,9 +51,10 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
                   style={{
                     height: 'auto',
                     boxSizing: 'border-box',
+                    width: isMobile ? 130 : 250,
                   }}
                 >
-                  <VariableProductItem data={product} />
+                  <VariableProductItem data={product} vertical />
                 </SwiperSlide>
               );
             }
