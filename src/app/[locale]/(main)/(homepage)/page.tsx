@@ -16,7 +16,7 @@ import {
   menuOrderSortOptions,
   newestSortOption,
 } from '@/static/sortOptions';
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 import PostsSlider from '../(container)/blog/components/PostsSlider';
@@ -128,64 +128,70 @@ export default async function Home() {
         </Container>
       </MobileView>
 
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+      <Stack spacing={4} alignItems="center">
+        <Box
+          sx={{
+            width: '100%',
+          }}
+        >
           <Suspense fallback={<SlidersSkeleton />}>
             <MainSlider />
           </Suspense>
-        </Grid>
-        <Grid item xs={12}>
-          <Container maxWidth="xl">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <MainCategories
-                  items={
-                    categories.status === 'fulfilled'
-                      ? categories.value
-                      : ([] as any)
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <ProductsSlider
-                  title={t('header.navigation.bestSelling')}
-                  items={
-                    bestSellingProducts.status === 'fulfilled'
-                      ? bestSellingProducts.value
-                      : ([] as any)
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <ProductsSlider
-                  title={t('header.navigation.newest')}
-                  items={
-                    latestProducts.status === 'fulfilled'
-                      ? latestProducts.value
-                      : ([] as any)
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <ProductsSlider
-                  title={t('header.navigation.selectedProducts')}
-                  items={
-                    menuOrderProducts.status === 'fulfilled'
-                      ? menuOrderProducts.value
-                      : ([] as any)
-                  }
-                />
-              </Grid>
+        </Box>
 
-              {!!_posts.length && (
-                <Grid item xs={12}>
-                  <PostsSlider items={_posts} />
-                </Grid>
-              )}
-            </Grid>
-          </Container>
-        </Grid>
-      </Grid>
+        <Container maxWidth="xl">
+          <Stack spacing={2}>
+            <MainCategories
+              items={
+                categories.status === 'fulfilled'
+                  ? categories.value
+                  : ([] as any)
+              }
+            />
+
+            <ProductsSlider
+              title={t('header.navigation.bestSelling')}
+              items={
+                bestSellingProducts.status === 'fulfilled'
+                  ? bestSellingProducts.value
+                  : ([] as any)
+              }
+            />
+
+            <ProductsSlider
+              title={t('header.navigation.newest')}
+              items={
+                latestProducts.status === 'fulfilled'
+                  ? latestProducts.value
+                  : ([] as any)
+              }
+            />
+
+            <ProductsSlider
+              title={t('header.navigation.selectedProducts')}
+              items={
+                menuOrderProducts.status === 'fulfilled'
+                  ? menuOrderProducts.value
+                  : ([] as any)
+              }
+            />
+          </Stack>
+        </Container>
+
+        {!!_posts.length && (
+          <Box
+            sx={{
+              py: 4,
+              bgcolor: '#f1f4f7',
+              width: '100%',
+            }}
+          >
+            <Container maxWidth="xl">
+              <PostsSlider items={_posts} />
+            </Container>
+          </Box>
+        )}
+      </Stack>
     </>
   );
 }

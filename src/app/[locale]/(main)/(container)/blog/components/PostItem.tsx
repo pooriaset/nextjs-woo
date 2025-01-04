@@ -20,6 +20,7 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
         borderColor: 'divider',
         borderRadius: 2,
         overflow: 'hidden',
+        backgroundColor: (theme) => theme.palette.background.default,
       }}
     >
       <Box
@@ -50,7 +51,7 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
           display: '-webkit-box',
           WebkitLineClamp: '21',
           WebkitBoxOrient: 'vertical',
-          p: 1,
+          p: 2,
         }}
       >
         {fragment?.title}
