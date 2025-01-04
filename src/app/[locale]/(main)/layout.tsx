@@ -28,7 +28,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
   const pagesList = await getPagesList();
 
   return (
-    <Stack sx={{ height: '100vh' }}>
+    <Stack sx={{ minHeight: '100vh' }}>
       <MainLayoutHeader />
       <Wrapper>{children}</Wrapper>
       <Footer pages={pagesList} />
