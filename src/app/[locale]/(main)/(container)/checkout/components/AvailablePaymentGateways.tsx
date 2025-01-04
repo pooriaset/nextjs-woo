@@ -1,8 +1,8 @@
 import { GetPaymentGatewaysQuery } from '@/graphql/types/graphql';
+import CreditCardOutlined from '@mui/icons-material/CreditCardOutlined';
 import {
   Card,
   CardContent,
-  CardHeader,
   Grid,
   Radio,
   Stack,
@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import CardHeader from './CardHeader';
 import MethodItem from './MethodItem';
 
 export interface AvailablePaymentGatewaysProps {
@@ -28,10 +29,9 @@ const AvailablePaymentGateways: FC<AvailablePaymentGatewaysProps> = ({
     <Card variant="outlined">
       <CardHeader
         title={t('pages.checkout.paymentGateway')}
-        titleTypographyProps={{
-          variant: 'h6',
-        }}
+        icon={CreditCardOutlined}
       />
+
       <CardContent>
         <Grid container spacing={2}>
           {items?.paymentGateways?.nodes.map((gateway) => {

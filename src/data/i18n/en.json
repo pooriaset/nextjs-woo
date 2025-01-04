@@ -195,7 +195,10 @@
         "description": "Order Description (Optional)"
       },
       "shippingMethodTitle": "Shipping Method",
-      "paymentGateway": "Payment Gateway"
+      "shipmentTo": "Shipment to",
+      "paymentGateway": "Payment Gateway",
+      "editAddress": "Edit Address",
+      "shipmentToAddressMessage": "Your package will be sent to the following address:"
     }
   },
   "fields": {
@@ -246,6 +249,14 @@
         "description": "Thank you for your purchase. Your payment has been successfully processed, and your order is now being prepared.",
         "transactionId": "Transaction ID"
       }
+    }
+  },
+  "blog": {
+    "search": "Searching in articles",
+    "categories": "Blog Categories",
+    "latestArticles": "Latest Articles",
+    "notFound": {
+      "title": "We did not find a article with these filters"
     }
   }
 }

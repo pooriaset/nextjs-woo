@@ -1,4 +1,4 @@
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, IconButton, List, ListItemText } from '@mui/material';
 import { FC, MouseEventHandler, useMemo, useState } from 'react';
@@ -33,7 +33,7 @@ const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
     return value;
   };
 
-  const { navigate, categoryId } = useCustomSearchParams();
+  const { navigate, categoryId } = useSearchPageParams();
 
   const [open, setOpen] = useState<Record<number | string, boolean>>({
     ...getAllParentsOfItem(options, categoryId, {

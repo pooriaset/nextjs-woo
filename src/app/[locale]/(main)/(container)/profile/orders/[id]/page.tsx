@@ -198,6 +198,7 @@ const Page: FC<PageProps> = (props) => {
                   productId={node.productId!}
                   total={node.total!}
                   quantity={node.quantity!}
+                  slug={node.product?.node?.slug!}
                 />
               );
             })}

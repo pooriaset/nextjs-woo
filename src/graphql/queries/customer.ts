@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_CUSTOMER_BILLING = gql`
-  query GetCustomerBilling {
+  query GetCustomerBilling($keysIn: [String]) {
     customer {
       id: databaseId
       billing {
@@ -12,6 +12,11 @@ export const GET_CUSTOMER_BILLING = gql`
         city
         phone
         postcode
+      }
+      metaData(keysIn: $keysIn) {
+        id
+        key
+        value
       }
     }
   }
@@ -78,8 +83,13 @@ export const GET_CUSTOMER_ORDERS = gql`
 `;
 
 export const UPDATE_CUSTOMER_MUTATION = gql`
-  mutation UpdateCustomer($billing: CustomerAddressInput) {
-    updateCustomer(input: { billing: $billing, shipping: $billing }) {
+  mutation UpdateCustomer(
+    $billing: CustomerAddressInput
+    $metaData: [MetaDataInput]
+  ) {
+    updateCustomer(
+      input: { billing: $billing, shipping: $billing, metaData: $metaData }
+    ) {
       clientMutationId
     }
   }

@@ -16,7 +16,7 @@ const Image: FC<
     setLoaded(true);
   };
 
-  const _src = src ?? '/assets/images/placeholders/no-image.jpg';
+  const _src = src ?? '/assets/images/placeholders/placeholder.svg';
   const _alt = alt ?? 'No Image';
 
   return (

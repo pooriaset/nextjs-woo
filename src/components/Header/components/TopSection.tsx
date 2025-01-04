@@ -2,7 +2,7 @@
 
 import Logo from '@/components/common/Logo';
 import { SIGN_IN_PAGE_PATHNAME } from '@/config/routes';
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import useInputFiller from '@/hooks/useInputFiller';
 import { Link as NextLink, usePathname } from '@/navigation';
 import { cartAtom } from '@/store/atoms';
@@ -39,7 +39,7 @@ const TopSection: FC = () => {
   const session = useSession();
   const isAuthenticated = session.status === 'authenticated';
 
-  const { navigate } = useCustomSearchParams();
+  const { navigate } = useSearchPageParams();
   const handleSubmitSearch: DOMAttributes<HTMLFormElement>['onSubmit'] = (
     event,
   ) => {

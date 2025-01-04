@@ -2,7 +2,7 @@
 
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import { GetAllProductsQuery, StockStatusEnum } from '@/graphql/types/graphql';
-import useCustomSearchParams from '@/hooks/useCustomSearchParams';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { sortOptions } from '@/static/sortOptions';
 import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Grid } from '@mui/material';
@@ -16,7 +16,7 @@ import NotFoundItem from '../common/NotFoundItem';
 
 export interface ProductsListProps {}
 const ProductsList: FC<ProductsListProps> = () => {
-  const { inStock, categoryId, sort, q } = useCustomSearchParams();
+  const { inStock, categoryId, sort, q } = useSearchPageParams();
 
   const variables = {
     stockStatus: inStock ? StockStatusEnum.InStock : null,

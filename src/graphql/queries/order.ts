@@ -39,6 +39,11 @@ export const GET_ORDER = gql`
           total
           subtotal
           quantity
+          product {
+            node {
+              slug
+            }
+          }
           variation {
             node {
               ...ProductVariationContentSlice

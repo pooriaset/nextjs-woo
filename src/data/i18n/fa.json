@@ -195,7 +195,10 @@
         "description": "توضیحات سفارش (اختیاری)"
       },
       "shippingMethodTitle": "روش ارسال",
-      "paymentGateway": "درگاه پرداخت"
+      "shipmentTo": "ارسال به",
+      "paymentGateway": "درگاه پرداخت",
+      "editAddress": "ویرایش آدرس",
+      "shipmentToAddressMessage": "مرسوله شما به آدرس زیر ارسال می شود:"
     }
   },
   "fields": {
@@ -246,6 +249,14 @@
         "description": "از خرید شما متشکریم. پرداخت شما با موفقیت انجام شده و سفارش شما در حال آماده‌سازی است.",
         "transactionId": "شناسه تراکنش"
       }
+    }
+  },
+  "blog": {
+    "search": "جستجو در مقالات",
+    "categories": "دسته بندی مقالات",
+    "latestArticles": "آخرین مقالات",
+    "notFound": {
+      "title": "موردی یافت نشد"
     }
   }
 }
