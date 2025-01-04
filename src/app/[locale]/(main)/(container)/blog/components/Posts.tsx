@@ -7,6 +7,7 @@ import {
   GetPostsQueryVariables,
   PostItemFragmentDoc,
 } from '@/graphql/types/graphql';
+import useBlogPageParams from '@/hooks/useBlogPageParams';
 import { useQuery, useSuspenseQuery } from '@apollo/client';
 import { Grid } from '@mui/material';
 import { FC, useEffect, useMemo } from 'react';
@@ -14,7 +15,6 @@ import { useIntersectionObserver } from 'usehooks-ts';
 import NotFoundItem from './NotFoundItem';
 import PostItem from './PostItem';
 import PostItemSkeleton from './PostItemSkeleton';
-import useBlogPageParams from '@/hooks/useBlogPageParams';
 
 export interface PostsProps {
   categoryIn?: string[];

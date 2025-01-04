@@ -1,10 +1,14 @@
+import { MainSlider } from '@/components/MainSlider';
 import { MobileView } from '@/components/ResponsiveDesign';
 import { getClient } from '@/graphql/clients/serverSideClient';
+import { GET_POSTS } from '@/graphql/queries/blog';
 import { GET_MAIN_CATEGORIES } from '@/graphql/queries/categories';
 import { GET_VARIABLE_PRODUCTS_QUERY } from '@/graphql/queries/products';
 import {
   GetAllProductsQuery,
   GetMainCategoriesQuery,
+  GetPostsQuery,
+  GetPostsQueryVariables,
   StockStatusEnum,
 } from '@/graphql/types/graphql';
 import {
@@ -15,11 +19,11 @@ import {
 import { Container, Grid } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
+import PostsSlider from '../(container)/blog/components/PostsSlider';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
 import ProductsSlider from './components/ProductsSlider';
 import SlidersSkeleton from './components/SlidersSkeleton';
-import { MainSlider } from '@/components/MainSlider';
 
 const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({
@@ -84,16 +88,37 @@ const getProductsByMenuOrder = async () => {
   return data?.products?.nodes;
 };
 
+const getBlogPosts = async () => {
+  const { data } = await getClient().query<
+    GetPostsQuery,
+    Partial<GetPostsQueryVariables>
+  >({
+    query: GET_POSTS,
+    variables: {
+      first: 4,
+    },
+  });
+  return data?.posts?.edges || [];
+};
+
 export default async function Home() {
   const t = await getTranslations();
 
-  const [categories, bestSellingProducts, latestProducts, menuOrderProducts] =
-    await Promise.allSettled([
-      getCategories(),
-      getBestSellingProducts(),
-      getLatestProducts(),
-      getProductsByMenuOrder(),
-    ]);
+  const [
+    categories,
+    bestSellingProducts,
+    latestProducts,
+    menuOrderProducts,
+    posts,
+  ] = await Promise.allSettled([
+    getCategories(),
+    getBestSellingProducts(),
+    getLatestProducts(),
+    getProductsByMenuOrder(),
+    getBlogPosts(),
+  ]);
+
+  const _posts = posts.status === 'fulfilled' ? posts.value : ([] as any);
 
   return (
     <>
@@ -151,6 +176,12 @@ export default async function Home() {
                   }
                 />
               </Grid>
+
+              {!!_posts.length && (
+                <Grid item xs={12}>
+                  <PostsSlider items={_posts} />
+                </Grid>
+              )}
             </Grid>
           </Container>
         </Grid>

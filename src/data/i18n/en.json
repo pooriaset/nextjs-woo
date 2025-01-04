@@ -3,6 +3,9 @@
   "confirmAlert": {
     "title": "Are you sure?"
   },
+  "homepage": {
+    "viewMore": "View more posts on the blog"
+  },
   "messages": {
     "defaultSuccess": "Successful!",
     "authenticationError": "Authentication Error",
@@ -254,7 +257,7 @@
   "blog": {
     "search": "Searching in articles",
     "categories": "Blog Categories",
-    "latestArticles": "Latest Articles",
+    "latestPosts": "Latest Articles",
     "notFound": {
       "title": "We did not find a article with these filters"
     }

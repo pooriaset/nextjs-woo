@@ -46,7 +46,7 @@ export const GET_POSTS = gql`
       where: {
         search: $search
         categoryIn: $categoryIn
-        orderby: { order: DESC, field: DATE }
+        orderby: { field: DATE, order: DESC }
       }
     ) {
       edges {

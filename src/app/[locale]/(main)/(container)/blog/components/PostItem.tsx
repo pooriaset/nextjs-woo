@@ -14,13 +14,18 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
       href={`/blog/${fragment.databaseId}/${fragment.slug}`}
       spacing={1.5}
       color="text.primary"
-      alignItems="center"
+      alignItems="flex-start"
+      sx={{
+        border: '1px solid',
+        borderColor: 'divider',
+        borderRadius: 2,
+        overflow: 'hidden',
+      }}
     >
       <Box
         width="100%"
         height={216}
         sx={{
-          borderRadius: 2,
           overflow: 'hidden',
         }}
       >
@@ -45,6 +50,7 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
           display: '-webkit-box',
           WebkitLineClamp: '21',
           WebkitBoxOrient: 'vertical',
+          p: 1,
         }}
       >
         {fragment?.title}

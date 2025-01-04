@@ -27,7 +27,7 @@ const Page = async () => {
           </Grid>
           <Grid item container lg={9} md={12} xs={12} spacing={spacing}>
             <Grid item xs={12}>
-              <ColumnSection title={t('blog.latestArticles')} />
+              <ColumnSection title={t('blog.latestPosts')} />
             </Grid>
             <Suspense fallback={<PostsSkeleton />}>
               <Posts />

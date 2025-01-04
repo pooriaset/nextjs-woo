@@ -3,6 +3,9 @@
   "confirmAlert": {
     "title": "آیا مطمئن هستید؟"
   },
+  "homepage": {
+    "viewMore": "مشاهده مطالب بیشتر در بلاگ"
+  },
   "messages": {
     "defaultSuccess": "با موفقیت انجام شد",
     "authenticationError": "نام کاربری یا رمز عبور اشتباه است.",
@@ -252,9 +255,9 @@
     }
   },
   "blog": {
-    "search": "جستجو در مقالات",
-    "categories": "دسته بندی مقالات",
-    "latestArticles": "آخرین مقالات",
+    "search": "جستجو در مطالب",
+    "categories": "دسته بندی مطالب",
+    "latestPosts": "آخرین مطالب",
     "notFound": {
       "title": "موردی یافت نشد"
     }
