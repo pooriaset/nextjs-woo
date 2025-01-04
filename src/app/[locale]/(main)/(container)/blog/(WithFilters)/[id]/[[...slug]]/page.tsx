@@ -9,7 +9,7 @@ import { FC } from 'react';
 import PostCategories from './components/PostCategories';
 
 export type PageProps = {
-  params: { slug: string; id: string };
+  params: { id: string };
 };
 
 const getPost = async (id: string) => {
@@ -37,6 +37,9 @@ export async function generateMetadata(props: PageProps) {
 
   return {
     title: post.title,
+    alternates: {
+      canonical: `/blog/${id}/${post.slug}`,
+    },
   };
 }
 

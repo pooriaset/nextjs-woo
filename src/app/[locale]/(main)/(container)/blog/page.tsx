@@ -1,12 +1,20 @@
 import { Grid, Stack } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
+import { Suspense } from 'react';
 import ColumnSection from './components/ColumnSection';
 import Filters from './components/Filters';
 import Posts from './components/Posts';
-import { Suspense } from 'react';
 import PostsSkeleton from './components/PostsSkeleton';
 
 const spacing = 2;
+
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: t('header.navigation.blog'),
+  };
+}
 
 const Page = async () => {
   const t = await getTranslations();

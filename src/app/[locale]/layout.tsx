@@ -38,10 +38,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
     return {
       title: {
-        template: `%s | ${data.generalSettings?.title!}`,
+        template: `%s - ${data.generalSettings?.title!}`,
         default: data.generalSettings?.title! ?? 'NextJs Woo',
       },
       description: data.generalSettings?.description!,
+      metadataBase: new URL(`https://mywebsite.com`),
+      alternates: {
+        canonical: './',
+      },
     };
   } catch (error) {
     return {

@@ -125,6 +125,7 @@ export const GET_CATEGORY = gql`
       databaseId
       description
       name
+      slug
     }
   }
 `;

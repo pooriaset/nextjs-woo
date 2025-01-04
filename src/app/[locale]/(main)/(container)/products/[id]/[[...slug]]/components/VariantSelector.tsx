@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, useEffect } from 'react';
-import { Variations } from '../../types/common';
+import { Variations } from '../../../types/common';
 
 export interface VariantSelectorProps {
   variations: Variations;

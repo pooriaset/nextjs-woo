@@ -18,27 +18,34 @@ import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
 import VariantSelector from './components/VariantSelector';
 import ProductProvider from './providers/ProductProvider';
+import { notFound } from 'next/navigation';
 
 type PageProps = {
-  params: { params: string[] };
+  params: {
+    id: string;
+    slug: string[];
+  };
 };
 
 export async function generateMetadata({
-  params: { params },
+  params: { id },
 }: PageProps): Promise<Metadata> {
-  const product = await getProduct({ id: +params[0] });
+  const product = await getProduct({ id: +id });
 
-  let title = '';
-  if (product?.__typename === 'VariableProduct') {
-    title = product?.title!;
+  if (!product) {
+    return notFound();
   }
 
-  return {
-    title,
-    alternates: {
-      canonical: '',
-    },
-  };
+  if (product?.__typename === 'VariableProduct') {
+    return {
+      title: product.title,
+      description: product.description,
+      alternates: {
+        canonical: `/products/${id}/${product.slug}`,
+      },
+    };
+  }
+  return {};
 }
 
 const getProduct = async ({ id }: { id: number }) => {
@@ -49,11 +56,15 @@ const getProduct = async ({ id }: { id: number }) => {
     },
   });
 
-  return data?.product || { __typename: 'SimpleProduct' };
+  return data?.product;
 };
 
-const Page: FC<PageProps> = async ({ params: { params } }) => {
-  const product = await getProduct({ id: +params[0] });
+const Page: FC<PageProps> = async ({ params: { id } }) => {
+  const product = await getProduct({ id: +id });
+
+  if (!product) {
+    return notFound();
+  }
 
   if (product?.__typename !== 'VariableProduct') {
     return null;

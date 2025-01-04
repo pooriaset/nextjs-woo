@@ -5,7 +5,7 @@ import TabPanel from '@/components/common/TabPanel';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, SyntheticEvent, useState } from 'react';
-import { Product } from '../../types/common';
+import { Product } from '../../../types/common';
 
 export interface ProductTabsProps {
   content?: string | null;

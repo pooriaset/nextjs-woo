@@ -35,6 +35,9 @@ export async function generateMetadata({ params: { id } }: PageProps) {
 
   return {
     title: category.name,
+    alternates: {
+      canonical: `/blog/categories/${id}/${category.slug}`,
+    },
   };
 }
 

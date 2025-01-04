@@ -6,7 +6,7 @@ import { Box, IconButton, Stack, useTheme } from '@mui/material';
 import { FC, useCallback, useRef, useState } from 'react';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Product } from '../../types/common';
+import { Product } from '../../../types/common';
 import GalleryItem from './GalleryItem';
 
 export type GalleryImages = Extract<
