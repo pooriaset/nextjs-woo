@@ -17,7 +17,7 @@ const PostsSlider: FC<PostsSliderProps> = ({ items }) => {
   const t = useTranslations();
 
   return (
-    <Stack spacing={1} mt={3}>
+    <Stack spacing={1}>
       <SlidersHeader
         moreLink="/blog"
         title={t('blog.latestPosts')}
