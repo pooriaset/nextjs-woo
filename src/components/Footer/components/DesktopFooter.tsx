@@ -27,11 +27,11 @@ const Footer: FC<FooterProps> = ({ pages }) => {
       sx={{
         borderTop: '1px solid',
         borderColor: (theme) => theme.palette.divider,
-        py: 2,
+        py: 4,
       }}
     >
       <Container maxWidth="xl">
-        <Stack spacing={3}>
+        <Stack spacing={4}>
           <Stack direction="row" justifyContent="space-between">
             <Logo />
             <Button
