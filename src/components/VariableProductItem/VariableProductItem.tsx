@@ -48,6 +48,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data, vertical }) => {
             style={{
               objectFit: 'contain',
               width: '100%',
+              alignSelf: 'center',
             }}
           />
 

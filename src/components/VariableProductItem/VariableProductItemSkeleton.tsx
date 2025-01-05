@@ -28,7 +28,10 @@ const VariableProductItemSkeleton: FC<VariableProductItemSkeletonProps> = ({
           <Skeleton
             variant="rectangular"
             height={variantImageSize}
-            width={variantImageSize}
+            width="100%"
+            sx={{
+              alignSelf: 'center',
+            }}
           />
 
           <Box
