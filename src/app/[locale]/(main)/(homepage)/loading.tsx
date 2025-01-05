@@ -12,6 +12,7 @@ import {
   Stack,
 } from '@mui/material';
 import SlidersSkeleton from './components/SlidersSkeleton';
+import SlidersContainer from './components/SlidersContainer';
 
 const Loading = () => {
   const { isMobile } = useAppContext();
@@ -37,7 +38,7 @@ const Loading = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <Container maxWidth="xl">
+          <SlidersContainer>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Stack
@@ -82,7 +83,7 @@ const Loading = () => {
                               width={isMobile ? 150 : 240}
                               key={index.toString()}
                             >
-                              <VariableProductItemSkeleton />
+                              <VariableProductItemSkeleton vertical />
                             </Stack>
                           );
                         })}
@@ -92,7 +93,7 @@ const Loading = () => {
                 </Grid>
               ))}
             </Grid>
-          </Container>
+          </SlidersContainer>
         </Grid>
       </Grid>
     </>

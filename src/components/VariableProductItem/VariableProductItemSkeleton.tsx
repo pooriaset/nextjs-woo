@@ -2,10 +2,18 @@
 
 import { useAppContext } from '@/hooks/useAppContext';
 import { Box, Skeleton, Stack } from '@mui/material';
+import { FC } from 'react';
 import { Container } from './Container';
 
-const VariableProductItemSkeleton = () => {
+export interface VariableProductItemSkeletonProps {
+  vertical?: boolean;
+}
+
+const VariableProductItemSkeleton: FC<VariableProductItemSkeletonProps> = ({
+  vertical,
+}) => {
   const { variantImageSize, isMobile } = useAppContext();
+  const _horizontal = isMobile && !vertical;
 
   return (
     <Container>
@@ -13,14 +21,14 @@ const VariableProductItemSkeleton = () => {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: isMobile ? 'row' : 'column',
+            flexDirection: _horizontal ? 'row' : 'column',
             gap: 1,
           }}
         >
           <Skeleton
             variant="rectangular"
             height={variantImageSize}
-            width="100%"
+            width={variantImageSize}
           />
 
           <Box

@@ -1,6 +1,5 @@
 import Image from '@/components/common/Image';
 import { PostItemFragment } from '@/graphql/types/graphql';
-import { useAppContext } from '@/hooks/useAppContext';
 import { Link } from '@/navigation';
 import { Box, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
@@ -9,8 +8,6 @@ export interface PostItemProps {
   fragment: PostItemFragment;
 }
 const PostItem: FC<PostItemProps> = ({ fragment }) => {
-  const { isMobile } = useAppContext();
-
   return (
     <Stack
       component={Link}
@@ -24,11 +21,12 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
         borderRadius: 2,
         overflow: 'hidden',
         backgroundColor: (theme) => theme.palette.background.default,
+        height: '100%',
       }}
     >
       <Box
         width="100%"
-        height={isMobile ? 113 : 216}
+        height={200}
         sx={{
           overflow: 'hidden',
         }}

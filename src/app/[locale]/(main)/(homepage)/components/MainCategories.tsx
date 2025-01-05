@@ -59,7 +59,6 @@ const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
                     src={item.imageUrl}
                     alt={item.title}
                     style={{
-                      borderRadius: '50%',
                       objectFit: 'cover',
                       maxWidth: '100%',
                       maxHeight: '100%',

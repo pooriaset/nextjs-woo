@@ -23,6 +23,7 @@ import PostsSlider from '../(container)/blog/components/PostsSlider';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
 import ProductsSlider from './components/ProductsSlider';
+import SlidersContainer from './components/SlidersContainer';
 import SlidersSkeleton from './components/SlidersSkeleton';
 
 const getCategories = async () => {
@@ -139,8 +140,8 @@ export default async function Home() {
           </Suspense>
         </Box>
 
-        <Container maxWidth="xl">
-          <Stack spacing={2}>
+        <SlidersContainer>
+          <Stack spacing={4}>
             <MainCategories
               items={
                 categories.status === 'fulfilled'
@@ -176,19 +177,19 @@ export default async function Home() {
               }
             />
           </Stack>
-        </Container>
+        </SlidersContainer>
 
         {!!_posts.length && (
           <Box
             sx={{
-              py: 4,
+              py: 2,
               bgcolor: '#f1f4f7',
               width: '100%',
             }}
           >
-            <Container maxWidth="xl">
+            <SlidersContainer>
               <PostsSlider items={_posts} />
-            </Container>
+            </SlidersContainer>
           </Box>
         )}
       </Stack>

@@ -47,7 +47,7 @@ const VariableProductItem: FC<ProductItemProps> = ({ data, vertical }) => {
             alt="Product Image"
             style={{
               objectFit: 'contain',
-              width: _horizontal ? 120 : '100%',
+              width: '100%',
             }}
           />
 
@@ -58,7 +58,6 @@ const VariableProductItem: FC<ProductItemProps> = ({ data, vertical }) => {
               justifyContent: 'space-between',
               gap: 1,
               width: '100%',
-              mt: !_horizontal ? 3 : 0,
               p: 1,
             }}
           >
