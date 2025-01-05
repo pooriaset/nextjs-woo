@@ -64,6 +64,7 @@ const TopSection: FC = () => {
           sx={{
             display: 'flex',
             userSelect: 'none',
+            minWidth: 176,
           }}
         >
           <Logo />

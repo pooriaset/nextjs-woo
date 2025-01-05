@@ -71,7 +71,8 @@
     "back": "Back",
     "register": "Register",
     "apply": "Apply",
-    "save": "Save"
+    "save": "Save",
+    "backToUp": "Back to Up"
   },
   "footer": {
     "links": {

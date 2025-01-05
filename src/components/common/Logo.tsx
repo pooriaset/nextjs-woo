@@ -7,9 +7,12 @@ const Logo: FC<Partial<ImageProps>> = (props) => {
     <Image
       draggable={false}
       width={176}
-      height={26}
+      height={32}
       alt="Logo"
       src="/assets/images/logo.svg"
+      style={{
+        width: 'fit-content',
+      }}
       {...props}
     />
   );
