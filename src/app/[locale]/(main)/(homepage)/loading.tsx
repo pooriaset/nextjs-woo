@@ -1,3 +1,5 @@
+'use client';
+
 import { MobileView } from '@/components/ResponsiveDesign';
 import { VariableProductItemSkeleton } from '@/components/VariableProductItem';
 import {
@@ -9,8 +11,11 @@ import {
   Stack,
 } from '@mui/material';
 import SlidersSkeleton from './components/SlidersSkeleton';
+import { useAppContext } from '@/hooks/useAppContext';
 
 const Loading = () => {
+  const { isMobile } = useAppContext();
+  const width = isMobile ? 100 : 160;
   return (
     <>
       <MobileView>
@@ -35,29 +40,38 @@ const Loading = () => {
           <Container maxWidth="xl">
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Grid container spacing={2}>
-                  {new Array(4).fill(1).map((item, index) => {
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  flexWrap="nowrap"
+                  spacing={isMobile ? 1 : 2}
+                  sx={{
+                    overflow: 'hidden',
+                  }}
+                >
+                  {new Array(6).fill(1).map((_item, index) => {
                     return (
-                      <Grid key={index} item xs={12} md={6} lg={4} xl={3}>
-                        <Stack alignItems="end">
-                          <Skeleton
-                            width="100%"
-                            variant="rectangular"
-                            height={120}
-                          />
-                          <Skeleton variant="text" width={60} />
-                        </Stack>
-                      </Grid>
+                      <Stack key={index.toString()} alignItems="center">
+                        <Skeleton
+                          width={width}
+                          variant="circular"
+                          height={width}
+                          sx={{
+                            borderRadius: '50%',
+                          }}
+                        />
+                        <Skeleton variant="text" width={60} />
+                      </Stack>
                     );
                   })}
-                </Grid>
+                </Stack>
               </Grid>
               {new Array(3).fill(1).map((item) => (
                 <Grid item xs={12} key={item}>
                   <Card variant="outlined">
                     <CardContent>
                       <Grid container spacing={2}>
-                        {new Array(6).fill(1).map((item, index) => {
+                        {new Array(6).fill(1).map((_item, index) => {
                           return (
                             <Grid key={index} item xs={12} md={6} lg={3} xl={2}>
                               <VariableProductItemSkeleton />

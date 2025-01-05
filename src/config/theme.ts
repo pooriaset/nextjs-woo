@@ -43,6 +43,9 @@ export const globalStyles: GlobalStylesProps['styles'] = (theme) => ({
     height: 36,
     transform: 'translate(0, -50%)',
   },
+  '.swiper-button-disabled': {
+    display: 'none',
+  },
   '.swiper-wrapper': {
     textAlign: 'center',
   },

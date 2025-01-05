@@ -3,9 +3,10 @@
 import Image from '@/components/common/Image';
 import { useAppContext } from '@/hooks/useAppContext';
 import { ChevronLeft } from '@mui/icons-material';
-import { Box, Grid, Link, Stack, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Link, Stack, Typography, useTheme } from '@mui/material';
 import { FC } from 'react';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export interface IMainCategory {
   id: number | string;
@@ -17,56 +18,73 @@ export interface MainCategoriesProps {
 }
 const MainCategories: FC<MainCategoriesProps> = ({ items }) => {
   const { isMobile } = useAppContext();
-  return (
-    <Grid container justifyContent="center" gap={2}>
-      {items.map((item) => {
-        const params = new URLSearchParams();
-        params.set('categoryId', item.id.toString());
+  const theme = useTheme();
 
-        return (
-          <Grid key={item.id} item xs={4} md={4} lg={2}>
-            <Link href={`/search?${params.toString()}`}>
-              <Stack spacing={1} alignItems="end">
-                <Box
-                  width="100%"
-                  height={isMobile ? 100 : 210}
-                  sx={{
-                    bgcolor: grey[100],
-                    borderRadius: 2,
-                    textAlign: 'center',
-                  }}
-                >
+  const modules = [];
+  if (!isMobile) {
+    modules.push(Navigation);
+  }
+
+  const spaceBetween = theme.spacing(1);
+  const width = isMobile ? 100 : 160;
+
+  return (
+    <>
+      <Swiper
+        dir={theme.direction}
+        navigation={!!modules.length}
+        modules={modules}
+        slidesPerView={'auto'}
+        spaceBetween={spaceBetween}
+      >
+        {items.map((item, index) => {
+          const params = new URLSearchParams();
+          params.set('categoryId', item.id.toString());
+
+          return (
+            <SwiperSlide
+              key={item.id}
+              style={{
+                height: 'auto',
+                boxSizing: 'border-box',
+                width: isMobile ? 130 : 240,
+                paddingLeft: index === items.length - 1 ? spaceBetween : 0,
+              }}
+            >
+              <Link key={item.id} href={`/search?${params.toString()}`}>
+                <Stack spacing={1} alignItems="center">
                   <Image
-                    width={350}
-                    height={350}
+                    width={width}
+                    height={width}
                     src={item.imageUrl}
                     alt={item.title}
                     style={{
-                      objectFit: 'contain',
+                      borderRadius: '50%',
+                      objectFit: 'cover',
                       maxWidth: '100%',
                       maxHeight: '100%',
                     }}
                   />
-                </Box>
 
-                <Stack direction="row" spacing={1}>
-                  <Typography variant="body2">{item.title}</Typography>
-                  {!isMobile && (
-                    <ChevronLeft
-                      fontSize="small"
-                      sx={{
-                        transform: (theme) =>
-                          theme.direction === 'ltr' ? 'rotate(180deg)' : null,
-                      }}
-                    />
-                  )}
+                  <Stack direction="row" spacing={1}>
+                    <Typography variant="body2">{item.title}</Typography>
+                    {!isMobile && (
+                      <ChevronLeft
+                        fontSize="small"
+                        sx={{
+                          transform: (theme) =>
+                            theme.direction === 'ltr' ? 'rotate(180deg)' : null,
+                        }}
+                      />
+                    )}
+                  </Stack>
                 </Stack>
-              </Stack>
-            </Link>
-          </Grid>
-        );
-      })}
-    </Grid>
+              </Link>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 };
 
