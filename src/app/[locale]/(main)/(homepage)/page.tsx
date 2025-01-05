@@ -16,15 +16,16 @@ import {
   menuOrderSortOptions,
   newestSortOption,
 } from '@/static/sortOptions';
-import { Box, Container, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
-import PostsSlider from './components/PostsSlider';
-import Header from './components/Header';
+import MobileHeader from './components/MobileHeader';
 import MainCategories from './components/MainCategories';
+import PostsSlider from './components/PostsSlider';
 import ProductsSlider from './components/ProductsSlider';
 import SlidersContainer from './components/SlidersContainer';
 import SlidersSkeleton from './components/SlidersSkeleton';
+import { Header } from '@/components/Header';
 
 const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({
@@ -124,9 +125,9 @@ export default async function Home() {
   return (
     <>
       <MobileView>
-        <Container maxWidth="xl">
-          <Header />
-        </Container>
+        <Header>
+          <MobileHeader />
+        </Header>
       </MobileView>
 
       <Stack spacing={4} alignItems="center">

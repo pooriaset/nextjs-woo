@@ -1,16 +1,16 @@
 'use client';
 
 import useSearchPageParams from '@/hooks/useSearchPageParams';
+import { SearchPageParamsKeys } from '@/utils/params';
 import { SearchOutlined } from '@mui/icons-material';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useTranslations } from 'next-intl';
 import { useState, useTransition } from 'react';
 import SearchDialog from './SearchDialog';
 import SearchSection from './SearchSection';
-import { SearchPageParamsKeys } from '@/utils/params';
 
-const Header = () => {
+const MobileHeader = () => {
   const [isPending, startTransition] = useTransition();
 
   const { navigate, q } = useSearchPageParams();
@@ -31,7 +31,10 @@ const Header = () => {
   const t = useTranslations();
 
   return (
-    <>
+    <Container
+      maxWidth="xl"
+      sx={{ borderBottom: '2px solid', borderColor: 'divider' }}
+    >
       <SearchDialog open={open} onClose={handleToggleDialog}>
         <SearchSection
           onClickOnBack={handleToggleDialog}
@@ -71,8 +74,8 @@ const Header = () => {
           </Typography>
         </Box>
       </Stack>
-    </>
+    </Container>
   );
 };
 
-export default Header;
+export default MobileHeader;
