@@ -76,6 +76,7 @@ export const createErrorLink = () => {
       'invalid-secret-key | Signature verification failed',
       'Expired token',
       'Wrong number of segments',
+      'Internal server error',
     ];
     let observable;
 
