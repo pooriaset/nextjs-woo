@@ -3,10 +3,10 @@
 import { VariableProductItem } from '@/components/VariableProductItem';
 import { GetAllProductsQuery } from '@/graphql/types/graphql';
 import { useAppContext } from '@/hooks/useAppContext';
-import { Card, CardContent, CardHeader, Stack, useTheme } from '@mui/material';
+import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { FC } from 'react';
-import { Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import HomepageSwiper from './HomepageSwiper';
+import HomepageSwiperSlide from './HomepageSwiperSlide';
 import SlidersHeader from './SlidersHeader';
 
 export interface ProductsSliderProps {
@@ -15,46 +15,24 @@ export interface ProductsSliderProps {
 }
 
 const ProductsSlider: FC<ProductsSliderProps> = ({ title, items }) => {
-  const theme = useTheme();
-
   const { isMobile } = useAppContext();
 
-  const modules = [];
-  if (!isMobile) {
-    modules.push(Navigation);
-  }
-
-  const spaceBetween = theme.spacing(1.5);
-
   const slider = (
-    <Swiper
-      dir={theme.direction}
-      navigation={!!modules.length}
-      modules={modules}
-      slidesPerView={'auto'}
-      spaceBetween={spaceBetween}
-      style={{
-        paddingLeft: spaceBetween,
-      }}
-    >
+    <HomepageSwiper>
       {items?.map((product, index) => {
         if (product.__typename === 'VariableProduct') {
           return (
-            <SwiperSlide
+            <HomepageSwiperSlide
               key={product.databaseId}
-              style={{
-                height: 'auto',
-                boxSizing: 'border-box',
-                width: isMobile ? 165 : 240,
-                marginRight: index === 0 ? spaceBetween : 0,
-              }}
+              index={index}
+              width={isMobile ? 165 : 240}
             >
               <VariableProductItem data={product} vertical />
-            </SwiperSlide>
+            </HomepageSwiperSlide>
           );
         }
       })}
-    </Swiper>
+    </HomepageSwiper>
   );
 
   if (isMobile) {

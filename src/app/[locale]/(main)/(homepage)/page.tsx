@@ -19,7 +19,7 @@ import {
 import { Box, Container, Stack } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
-import PostsSlider from '../(container)/blog/components/PostsSlider';
+import PostsSlider from './components/PostsSlider';
 import Header from './components/Header';
 import MainCategories from './components/MainCategories';
 import ProductsSlider from './components/ProductsSlider';
@@ -30,7 +30,7 @@ const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({
     query: GET_MAIN_CATEGORIES,
     variables: {
-      first: 6,
+      first: 10,
       parent: 0,
     },
   });

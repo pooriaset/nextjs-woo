@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import PostItemSkeleton from './PostItemSkeleton';
+import PostItemSkeleton from '@/components/PostItem/PostItemSkeleton';
 
 const PostsSkeleton = () => {
   return (

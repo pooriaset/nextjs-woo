@@ -13,8 +13,8 @@ import { Grid } from '@mui/material';
 import { FC, useEffect, useMemo } from 'react';
 import { useIntersectionObserver } from 'usehooks-ts';
 import NotFoundItem from './NotFoundItem';
-import PostItem from './PostItem';
-import PostItemSkeleton from './PostItemSkeleton';
+import PostItem from '@/components/PostItem/PostItem';
+import PostItemSkeleton from '@/components/PostItem/PostItemSkeleton';
 
 export interface PostsProps {
   categoryIn?: string[];
