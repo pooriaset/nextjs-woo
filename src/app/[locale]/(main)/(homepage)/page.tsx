@@ -26,6 +26,7 @@ import ProductsSlider from './components/ProductsSlider';
 import SlidersContainer from './components/SlidersContainer';
 import SlidersSkeleton from './components/SlidersSkeleton';
 import { Header } from '@/components/Header';
+import ColorfulSection from './components/ColorfulSection';
 
 const getCategories = async () => {
   const { data } = await getClient().query<GetMainCategoriesQuery>({
@@ -181,17 +182,11 @@ export default async function Home() {
         </SlidersContainer>
 
         {!!_posts.length && (
-          <Box
-            sx={{
-              py: 2,
-              bgcolor: '#f1f4f7',
-              width: '100%',
-            }}
-          >
+          <ColorfulSection>
             <SlidersContainer>
               <PostsSlider items={_posts} />
             </SlidersContainer>
-          </Box>
+          </ColorfulSection>
         )}
       </Stack>
     </>

@@ -70,6 +70,7 @@ const themeOptions: ThemeOptions = {
       main: green[500],
       contrastText: '#fff',
       lighter: green[200],
+      ...green,
     },
   },
   shape: {
