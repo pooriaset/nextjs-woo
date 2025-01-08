@@ -72,7 +72,15 @@
     "submit": "ثبت"
   },
   "footer": {
+    "support": {
+      "phoneNumber": "تلفن پشتیبانی <span></span>",
+      "customerServiceHours:": "شنبه تا پنجشنبه ساعت 9 تا 18"
+    },
+    "socialMedia": {
+      "stayTuned": "با ما همراه باشید!"
+    },
     "links": {
+      "title": "لینک‌های مفید",
       "aboutUs": "درباره ما",
       "contactUs": "تماس با ما"
     },

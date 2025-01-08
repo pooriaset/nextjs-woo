@@ -19,6 +19,8 @@ import { FC } from 'react';
 import BadgeImage from './BadgeImage';
 import Newsletter from './Newsletter';
 import SocialMedia from './SocialMedia';
+import { phoneNumber } from '@/config/app';
+import { getPhoneNumber } from '@/utils/number';
 
 export interface FooterProps {
   pages: IPageListItem[];
@@ -66,8 +68,34 @@ const Footer: FC<FooterProps> = ({ pages }) => {
     >
       <Container maxWidth="xl">
         <Stack spacing={4}>
-          <Stack direction="row" justifyContent="space-between">
-            <Logo />
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="flex-start"
+          >
+            <Stack spacing={2}>
+              <Logo />
+              <Stack spacing={2} direction="row" alignItems="center">
+                <Typography
+                  variant="body2"
+                  component={Link}
+                  href={`tel:${getPhoneNumber(phoneNumber)}`}
+                  color="text.primary"
+                >
+                  {t.rich('footer.support.phoneNumber', {
+                    span: () => (
+                      <Box component="span" letterSpacing={1.5} dir="ltr">
+                        {phoneNumber}
+                      </Box>
+                    ),
+                  })}
+                </Typography>
+                <span>|</span>
+                <Typography variant="body2" color="text.primary">
+                  {t('footer.support.customerServiceHours:')}
+                </Typography>
+              </Stack>
+            </Stack>
             <Button
               onClick={backToTop}
               variant="outlined"
@@ -89,7 +117,7 @@ const Footer: FC<FooterProps> = ({ pages }) => {
             </Stack>
 
             <Stack spacing={1}>
-              <Typography variant="h6">لینک های مفید</Typography>
+              <Typography variant="h6">{t('footer.links.title')}</Typography>
               <Stack spacing={1}>
                 {pages.map((page) => {
                   return (

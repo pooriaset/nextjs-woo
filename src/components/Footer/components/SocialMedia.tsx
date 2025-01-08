@@ -1,5 +1,4 @@
-import FilledBale from '@/components/Icons/components/Use/FilledBale';
-import { Email, Instagram, Phone, Telegram } from '@mui/icons-material';
+import { Instagram, Telegram } from '@mui/icons-material';
 import { Stack, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import SocialMediaButton from './SocialMediaButton';
@@ -9,31 +8,13 @@ const socialMediaButtons = [
     id: 'instagram',
     title: 'Instagram',
     icon: <Instagram />,
-    link: '#',
+    link: 'https://instagram.com',
   },
   {
     id: 'telegram',
     title: 'Telegram',
     icon: <Telegram />,
-    link: '#',
-  },
-  {
-    id: 'bale',
-    title: 'Bale',
-    icon: <FilledBale />,
-    link: '#',
-  },
-  {
-    id: 'phone',
-    title: 'Phone',
-    icon: <Phone />,
-    link: '#',
-  },
-  {
-    id: 'email',
-    title: 'Email',
-    icon: <Email />,
-    link: '#',
+    link: 'https://telegram.me/',
   },
 ];
 
@@ -42,7 +23,7 @@ const SocialMedia = () => {
 
   return (
     <Stack spacing={1}>
-      <Typography variant="h6">{t('footer.links.contactUs')}</Typography>
+      <Typography variant="h6">{t('footer.socialMedia.stayTuned')}</Typography>
       <Stack direction="row" spacing={1}>
         {socialMediaButtons.map((button) => {
           return (

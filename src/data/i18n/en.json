@@ -76,7 +76,15 @@
     "submit": "Submit"
   },
   "footer": {
+    "support": {
+      "phoneNumber": "PhoneNumber <span></span>",
+      "customerServiceHours:": "Customer Service Hours:"
+    },
+    "socialMedia": {
+      "stayTuned": "Stay Tuned!"
+    },
     "links": {
+      "title": "Useful Links",
       "aboutUs": "About Us",
       "contactUs": "Contact Us"
     },
