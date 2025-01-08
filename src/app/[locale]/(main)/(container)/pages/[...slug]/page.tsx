@@ -2,6 +2,7 @@ import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_PAGE } from '@/graphql/queries/pages';
 import { GetPageQuery } from '@/graphql/types/graphql';
 import { Locale } from '@/navigation';
+import { getRefinedMetaDescription } from '@/utils/text';
 import { Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
@@ -34,6 +35,7 @@ export async function generateMetadata(props: PageProps) {
 
   return {
     title: page?.title,
+    description: getRefinedMetaDescription(page?.content),
   };
 }
 

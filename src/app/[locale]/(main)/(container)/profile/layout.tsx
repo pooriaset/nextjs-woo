@@ -11,6 +11,7 @@ import Menu from './components/Menu';
 export interface LayoutProps {
   children: ReactNode;
 }
+
 const Layout: FC<LayoutProps> = ({ children }) => {
   const { isMobile } = useAppContext();
   return (

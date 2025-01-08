@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_SINGLE_VARIABLE_PRODUCT_QUERY } from '@/graphql/queries/products';
 import { GetSingleProductQuery } from '@/graphql/types/graphql';
+import { getRefinedMetaDescription } from '@/utils/text';
 import {
   Card,
   CardContent,
@@ -13,13 +14,12 @@ import {
   Typography,
 } from '@mui/material';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import BuyBox from './components/BuyBox';
 import ProductGallery from './components/ProductGallery';
 import ProductTabs from './components/ProductTabs';
 import VariantSelector from './components/VariantSelector';
 import ProductProvider from './providers/ProductProvider';
-import { notFound } from 'next/navigation';
-import { stripHtml } from '@/utils/text';
 
 type PageProps = {
   params: {
@@ -38,11 +38,38 @@ export async function generateMetadata({
   }
 
   if (product?.__typename === 'VariableProduct') {
+    const title = product.title || '';
+    const description = getRefinedMetaDescription(product.content) || '';
+    const imageUrl = product.image?.sourceUrl || '';
+
+    const baseUrl = process.env.NEXT_PUBLIC_ORIGIN_URL!;
+    const canonical = `/products/${id}/${product.slug}`;
+
     return {
-      title: product.title,
-      description: stripHtml(product.description),
+      title,
+      description,
       alternates: {
-        canonical: `/products/${id}/${product.slug}`,
+        canonical,
+      },
+      openGraph: {
+        title,
+        description: description,
+        url: `${baseUrl}${canonical}`,
+        siteName: title,
+        images: [
+          {
+            url: imageUrl,
+            width: 1200,
+            height: 760,
+            alt: title,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: title,
+        description: description,
+        images: [imageUrl],
       },
     };
   }

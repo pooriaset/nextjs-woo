@@ -5,6 +5,7 @@ import { GET_GENERAL_SETTINGS } from '@/graphql/queries/general';
 import { GetGeneralSettingsQuery } from '@/graphql/types/graphql';
 import { Locale, languages } from '@/navigation';
 import { ApolloProvider, AppProvider } from '@/providers';
+import ConfirmAlertProvider from '@/providers/ConfirmAlertProvider';
 import I18nProvider from '@/providers/I18nProvider';
 import {
   CssBaseline,
@@ -17,43 +18,90 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { PropsWithChildren } from 'react';
-import ConfirmAlertProvider from '@/providers/ConfirmAlertProvider';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import IconsSymbols from '@/components/Icons/components/IconsSymbols';
-import { getServerSession } from 'next-auth';
 import SessionProvider from '@/components/Auth/SessionProvider';
-import { Toaster } from 'react-hot-toast';
+import IconsSymbols from '@/components/Icons/components/IconsSymbols';
 import { Provider } from 'jotai';
+import { getServerSession } from 'next-auth';
+import { Toaster } from 'react-hot-toast';
+import { DefaultTemplateString } from 'next/dist/lib/metadata/types/metadata-types';
 
 export type LocaleLayoutParams = { params: { locale: Locale } };
 
-export async function generateMetadata(): Promise<Metadata> {
+export const generateMetadata = async (
+  props: LocaleLayoutParams,
+): Promise<Metadata> => {
   try {
     const { data } = await getClient().query<GetGeneralSettingsQuery>({
       query: GET_GENERAL_SETTINGS,
     });
 
+    const title = data.generalSettings?.title || '';
+    const description = data.generalSettings?.description || '';
+
+    const baseUrl = process.env.NEXT_PUBLIC_ORIGIN_URL!;
+
+    const imageUrl = `${baseUrl}/assets/images/logo.jpg`;
+
+    const template = `%s - ${title!}`;
+
+    const defaultTemplateString: DefaultTemplateString = {
+      template,
+      default: title,
+    };
+
     return {
-      title: {
-        template: `%s - ${data.generalSettings?.title!}`,
-        default: data.generalSettings?.title! ?? 'NextJs Woo',
-      },
-      description: data.generalSettings?.description!,
-      metadataBase: new URL(`https://mywebsite.com`),
+      title: defaultTemplateString,
+      description: description,
+      metadataBase: new URL(baseUrl),
       alternates: {
         canonical: './',
+      },
+      openGraph: {
+        title: defaultTemplateString,
+        description,
+        url: baseUrl,
+        siteName: title,
+        images: [
+          {
+            url: imageUrl,
+            width: 176,
+            height: 40,
+            alt: title,
+          },
+        ],
+        locale: languages[props.params.locale].code || 'en_US',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: defaultTemplateString,
+        description,
+        images: [imageUrl],
+      },
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      icons: {
+        icon: '/favicon.ico',
+        shortcut: '/assets/images/favicon-16x16.png',
+        apple: '/assets/images/logo-192x192.png',
       },
     };
   } catch (error) {
     return {
-      title: 'NextJs Woo',
+      title: '',
     };
   }
-}
-
+};
 export default async function LocaleLayout({
   children,
   params: { locale },

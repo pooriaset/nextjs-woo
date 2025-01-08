@@ -4,11 +4,13 @@ import {
   GetCategoryQuery,
   GetCategoryQueryVariables,
 } from '@/graphql/types/graphql';
+import { getRefinedMetaDescription } from '@/utils/text';
 import { Grid, Typography } from '@mui/material';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
-import Posts from '../../../../components/Posts';
 import ColumnSection from '../../../../components/ColumnSection';
+import Posts from '../../../../components/Posts';
+import { Metadata } from 'next';
 
 type PageProps = { params: { slug: string; id: string } };
 
@@ -26,17 +28,36 @@ const getCategory = async (id: string) => {
   return data.category;
 };
 
-export async function generateMetadata({ params: { id } }: PageProps) {
+export async function generateMetadata({
+  params: { id },
+}: PageProps): Promise<Metadata> {
   const category = await getCategory(id);
 
   if (!category) {
     return notFound();
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_ORIGIN_URL!;
+  const title = category.name || '';
+  const description = getRefinedMetaDescription(category.description);
+  const canonical = `/blog/categories/${id}/${category.slug}`;
+
   return {
-    title: category.name,
+    title,
+    description,
     alternates: {
-      canonical: `/blog/categories/${id}/${category.slug}`,
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}${canonical}`,
+      siteName: title,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
     },
   };
 }

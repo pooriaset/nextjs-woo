@@ -2,13 +2,16 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { GET_HOMEPAGE_SLIDERS } from '@/graphql/queries/sliders';
+import { GetHomePageSlidersQuery } from '@/graphql/types/graphql';
+import { useSuspenseQuery } from '@apollo/client';
 import { useTheme } from '@mui/material';
 import { FC } from 'react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { SliderItem } from './components/SliderItem';
-import { useSuspenseQuery } from '@apollo/client';
-import { GetHomePageSlidersQuery } from '@/graphql/types/graphql';
-import { GET_HOMEPAGE_SLIDERS } from '@/graphql/queries/sliders';
 import { ISliderItem } from './types';
 
 const MainSlider: FC = () => {

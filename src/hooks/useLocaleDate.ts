@@ -9,7 +9,8 @@ const useLocaleDate = (value: string | number | Date | null | undefined) => {
   }
 
   return new Date(value).toLocaleDateString(
-    languages[locale]?.code || navigator.language,
+    languages[locale]?.code?.replace('_', '-').toLowerCase() ||
+      navigator.language,
   );
 };
 

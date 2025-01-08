@@ -23,13 +23,13 @@ export const languages: Record<
   en: {
     label: 'English',
     direction: 'ltr',
-    code: 'en-us',
+    code: 'en_US',
     country: CountriesEnum.Us,
   },
   fa: {
     label: 'Persian',
     direction: 'rtl',
-    code: 'fa-ir',
+    code: 'fa_IR',
     yupLocale: faLocale,
     country: CountriesEnum.Ir,
   },

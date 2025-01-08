@@ -2,13 +2,13 @@ import LocaleDate from '@/components/LocaleDate/LocaleDate';
 import { getClient } from '@/graphql/clients/serverSideClient';
 import { GET_POST } from '@/graphql/queries/blog';
 import { GetPostQuery, GetPostQueryVariables } from '@/graphql/types/graphql';
+import { getRefinedMetaDescription } from '@/utils/text';
 import { AccessTimeOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
 import PostCategories from './components/PostCategories';
-import { Metadata } from 'next';
-import { stripHtml } from '@/utils/text';
 
 export type PageProps = {
   params: { id: string };
@@ -37,11 +37,38 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     return notFound();
   }
 
+  const title = post.title || '';
+  const description = getRefinedMetaDescription(post.excerpt) || '';
+
+  const baseUrl = process.env.NEXT_PUBLIC_ORIGIN_URL!;
+  const imageUrl = post.featuredImage?.node?.sourceUrl || '';
+  const canonical = `/blog/${id}/${post.slug}`;
+
   return {
-    title: post.title,
-    description: stripHtml(post.excerpt),
+    title,
+    description,
     alternates: {
-      canonical: `/blog/${id}/${post.slug}`,
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}${canonical}`,
+      siteName: title,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 760,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [imageUrl],
     },
   };
 }
