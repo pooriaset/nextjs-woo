@@ -1,6 +1,7 @@
 import Image from '@/components/common/Image';
 import { PostItemFragment } from '@/graphql/types/graphql';
 import { Link } from '@/navigation';
+import { getRefinedMetaDescription } from '@/utils/text';
 import { Box, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
 
@@ -43,20 +44,34 @@ const PostItem: FC<PostItemProps> = ({ fragment }) => {
           }}
         />
       </Box>
-      <Typography
-        component="h3"
-        variant="body1"
-        sx={{
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          display: '-webkit-box',
-          WebkitLineClamp: '21',
-          WebkitBoxOrient: 'vertical',
-          p: 2,
-        }}
-      >
-        {fragment?.title}
-      </Typography>
+      <Stack p={2} spacing={1}>
+        <Typography
+          component="h3"
+          variant="h6"
+          sx={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: '21',
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {fragment?.title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: '2',
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {getRefinedMetaDescription(fragment?.excerpt)}
+        </Typography>
+      </Stack>
     </Stack>
   );
 };

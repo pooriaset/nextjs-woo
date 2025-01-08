@@ -21,6 +21,7 @@ export const POST_ITEM_FRAGMENT = gql`
     slug
     title
     content
+    excerpt
     featuredImage {
       node {
         sourceUrl

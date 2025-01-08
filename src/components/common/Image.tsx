@@ -1,6 +1,7 @@
 'use client';
 
 import Skeleton from '@mui/material/Skeleton';
+import { grey } from '@mui/material/colors';
 import NextImage, { type ImageProps as NextImageProps } from 'next/image';
 import { FC, useState } from 'react';
 
@@ -44,7 +45,13 @@ const Image: FC<
           maxWidth: '100%',
           ...props.style,
           visibility: loaded ? 'visible' : 'hidden',
-          objectFit: !src ? 'contain' : props.style?.objectFit || 'contain',
+          ...(!src
+            ? {
+                padding: typeof width === 'number' ? width / 10 : 24,
+                backgroundColor: grey[50],
+                objectFit: 'contain',
+              }
+            : {}),
         }}
       />
     </>
