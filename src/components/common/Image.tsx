@@ -42,10 +42,9 @@ const Image: FC<
         onLoad={handleOnLoad}
         style={{
           maxWidth: '100%',
-          objectFit: 'contain',
           ...props.style,
           visibility: loaded ? 'visible' : 'hidden',
-          height: loaded ? undefined : 0,
+          objectFit: !src ? 'contain' : props.style?.objectFit || 'contain',
         }}
       />
     </>

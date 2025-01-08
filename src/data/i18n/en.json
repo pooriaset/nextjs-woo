@@ -72,7 +72,8 @@
     "register": "Register",
     "apply": "Apply",
     "save": "Save",
-    "backToUp": "Back to Up"
+    "backToUp": "Back to Up",
+    "submit": "Submit"
   },
   "footer": {
     "links": {
@@ -85,7 +86,10 @@
       "categories": "Categories",
       "home": "Home"
     },
-    "text": "All rights reserved for this website, and the publication of content is only allowed with proper attribution."
+    "text": "All rights reserved for this website, and the publication of content is only allowed with proper attribution.",
+    "newsletter": {
+      "title": "Be the first to know about our latest offers!"
+    }
   },
   "units": {
     "price": "T"

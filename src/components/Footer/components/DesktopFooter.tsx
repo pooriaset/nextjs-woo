@@ -1,11 +1,24 @@
 'use client';
 
+import Image from '@/components/common/Image';
 import Logo from '@/components/common/Logo';
 import { IPageListItem } from '@/graphql/types/common';
 import { KeyboardArrowUp } from '@mui/icons-material';
-import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Link,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import BadgeImage from './BadgeImage';
+import Newsletter from './Newsletter';
+import SocialMedia from './SocialMedia';
 
 export interface FooterProps {
   pages: IPageListItem[];
@@ -20,6 +33,27 @@ const Footer: FC<FooterProps> = ({ pages }) => {
       left: 0,
     });
   };
+
+  const badges = [
+    {
+      id: '1',
+      src: null,
+      title: 'Title',
+      href: '#',
+    },
+    {
+      id: '2',
+      src: null,
+      title: 'Title',
+      href: '#',
+    },
+    {
+      id: '3',
+      src: null,
+      title: 'Title',
+      href: '#',
+    },
+  ];
 
   return (
     <Box
@@ -41,44 +75,63 @@ const Footer: FC<FooterProps> = ({ pages }) => {
               endIcon={<KeyboardArrowUp />}
               sx={{
                 width: 'fit-content',
+                borderColor: 'divider',
               }}
             >
               {t('buttons.backToUp')}
             </Button>
           </Stack>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography variant="body2">{t('footer.text')}</Typography>
-            </Box>
 
-            <Typography
-              variant="body2"
-              align="center"
-              sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
-            >
-              {pages.map((page) => {
+          <Stack direction="row" justifyContent="space-between">
+            <Stack spacing={4}>
+              <SocialMedia />
+              <Newsletter />
+            </Stack>
+
+            <Stack spacing={1}>
+              <Typography variant="h6">لینک های مفید</Typography>
+              <Stack spacing={1}>
+                {pages.map((page) => {
+                  return (
+                    <Link key={page.title} href={`/pages/${page.slug}`}>
+                      {page.title}
+                    </Link>
+                  );
+                })}
+
+                <Link href="#">{t('footer.links.aboutUs')}</Link>
+
+                <Link href="#">{t('footer.links.contactUs')}</Link>
+              </Stack>
+            </Stack>
+
+            <Stack spacing={1} direction="row">
+              {badges.map((badge) => {
                 return (
-                  <Link key={page.title} href={`/pages/${page.slug}`}>
-                    {page.title}
-                  </Link>
+                  <Tooltip title={badge.title} key={badge.id}>
+                    <BadgeImage href={badge.href}>
+                      <Image
+                        width={100}
+                        height={100}
+                        src={badge.src}
+                        alt={badge.title}
+                      />
+                    </BadgeImage>
+                  </Tooltip>
                 );
               })}
-
-              <Link href="#">{t('footer.links.aboutUs')}</Link>
-
-              <Link href="#">{t('footer.links.contactUs')}</Link>
-            </Typography>
+            </Stack>
           </Stack>
+          <Divider />
+
+          <Typography
+            variant="body2"
+            sx={{
+              textAlign: 'center',
+            }}
+          >
+            {t('footer.text')}
+          </Typography>
         </Stack>
       </Container>
     </Box>
