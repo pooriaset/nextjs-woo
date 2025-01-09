@@ -81,7 +81,12 @@
       "customerServiceHours:": "Customer Service Hours:"
     },
     "socialMedia": {
-      "stayTuned": "Stay Tuned!"
+      "stayTuned": "Stay Tuned!",
+      "items": {
+        "instagram": "Instagram",
+        "x": "X",
+        "telegram": "Telegram"
+      }
     },
     "links": {
       "title": "Useful Links",

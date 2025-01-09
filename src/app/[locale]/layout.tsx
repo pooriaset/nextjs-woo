@@ -78,6 +78,7 @@ export const generateMetadata = async (
         title: defaultTemplateString,
         description,
         images: [imageUrl],
+        creator: '@username',
       },
       robots: {
         index: true,

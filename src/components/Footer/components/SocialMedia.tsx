@@ -1,25 +1,31 @@
-import { Instagram, Telegram } from '@mui/icons-material';
+import { Instagram, Telegram, X } from '@mui/icons-material';
 import { Stack, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import SocialMediaButton from './SocialMediaButton';
 
-const socialMediaButtons = [
-  {
-    id: 'instagram',
-    title: 'Instagram',
-    icon: <Instagram />,
-    link: 'https://instagram.com',
-  },
-  {
-    id: 'telegram',
-    title: 'Telegram',
-    icon: <Telegram />,
-    link: 'https://telegram.me/',
-  },
-];
-
 const SocialMedia = () => {
   const t = useTranslations();
+
+  const socialMediaButtons = [
+    {
+      id: 'instagram',
+      title: t('footer.socialMedia.items.instagram'),
+      icon: <Instagram />,
+      link: 'https://instagram.com',
+    },
+    {
+      id: 'telegram',
+      title: t('footer.socialMedia.items.telegram'),
+      icon: <Telegram />,
+      link: 'https://telegram.me/',
+    },
+    {
+      id: 'x',
+      title: t('footer.socialMedia.items.x'),
+      icon: <X />,
+      link: 'https://x.com/',
+    },
+  ];
 
   return (
     <Stack spacing={1}>

@@ -77,7 +77,12 @@
       "customerServiceHours:": "شنبه تا پنجشنبه ساعت 9 تا 18"
     },
     "socialMedia": {
-      "stayTuned": "با ما همراه باشید!"
+      "stayTuned": "با ما همراه باشید!",
+      "items": {
+        "instagram": "اینستاگرام",
+        "x": "اکس",
+        "telegram": "تلگرام"
+      }
     },
     "links": {
       "title": "لینک‌های مفید",

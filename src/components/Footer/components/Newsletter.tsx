@@ -43,7 +43,7 @@ const Newsletter = () => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <Typography variant="h6">{t('footer.newsletter.title')}</Typography>
-        <Stack spacing={1} alignItems="center" direction="row">
+        <Stack spacing={1} alignItems="flex-start" direction="row">
           <Controller
             name="email"
             control={form.control}
