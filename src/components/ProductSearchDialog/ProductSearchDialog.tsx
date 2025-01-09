@@ -5,7 +5,7 @@ import { Box, Button, Dialog, DialogContent, DialogProps } from '@mui/material';
 import { useLocale, useTranslations } from 'next-intl';
 import { FC } from 'react';
 
-const SearchDialog: FC<DialogProps> = (props) => {
+const ProductSearchDialog: FC<DialogProps> = (props) => {
   const locale = useLocale();
   const t = useTranslations();
 
@@ -51,4 +51,4 @@ const SearchDialog: FC<DialogProps> = (props) => {
   );
 };
 
-export default SearchDialog;
+export default ProductSearchDialog;

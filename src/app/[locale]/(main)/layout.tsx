@@ -7,6 +7,7 @@ import { GetPublishedPagesListQuery } from '@/graphql/types/graphql';
 import { FC, ReactNode } from 'react';
 import Wrapper from './components/Wrapper';
 import { Stack } from '@mui/material';
+import TopBanner from '@/components/Header/components/TopBanner';
 
 export interface LayoutProps {
   children: ReactNode;
@@ -29,6 +30,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
 
   return (
     <Stack sx={{ minHeight: '100vh' }}>
+      <TopBanner />
       <MainLayoutHeader />
       <Wrapper>{children}</Wrapper>
       <Footer pages={pagesList} />

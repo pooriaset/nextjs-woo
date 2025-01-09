@@ -1,6 +1,10 @@
+'use client';
+
 import IconButtonWithLoading from '@/components/common/IconButtonWithLoading';
 import useInputFiller from '@/hooks/useInputFiller';
+import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { Locale, languages } from '@/navigation';
+import { SearchPageParamsKeys } from '@/utils/params';
 import {
   ArrowBackOutlined,
   ArrowForwardOutlined,
@@ -8,24 +12,33 @@ import {
 } from '@mui/icons-material';
 import { IconButton, IconButtonProps, TextField } from '@mui/material';
 import { useLocale, useTranslations } from 'next-intl';
-import { DOMAttributes, FC } from 'react';
+import { DOMAttributes, FC, useTransition } from 'react';
 
-export interface SearchSectionProps {
+export interface ProductSearchFormProps {
   onClickOnBack?: IconButtonProps['onClick'];
-  onClickOnSearch?: (q: string) => void;
-  isPending?: boolean;
+  onClickOnSearch?: VoidFunction;
 }
 
-const SearchSection: FC<SearchSectionProps> = ({
+const ProductSearchForm: FC<ProductSearchFormProps> = ({
   onClickOnBack,
   onClickOnSearch,
-  isPending,
 }) => {
   const { inputRef } = useInputFiller();
 
+  const [isPending, startTransition] = useTransition();
+
+  const searchPageParams = useSearchPageParams();
+
   const onSubmit: DOMAttributes<HTMLFormElement>['onSubmit'] = (event) => {
     event.preventDefault();
-    onClickOnSearch?.(event.currentTarget.q.value);
+
+    startTransition(() => {
+      searchPageParams.navigate(
+        SearchPageParamsKeys.Q,
+        event.currentTarget.q.value,
+      );
+    });
+    onClickOnSearch?.();
   };
 
   const t = useTranslations();
@@ -40,7 +53,7 @@ const SearchSection: FC<SearchSectionProps> = ({
         name="q"
         placeholder={t('header.search.placeholder')}
         InputProps={{
-          startAdornment: (
+          startAdornment: !!onClickOnBack && (
             <IconButton onClick={onClickOnBack}>
               {languages[locale as Locale].direction === 'rtl' ? (
                 <ArrowForwardOutlined />
@@ -63,4 +76,4 @@ const SearchSection: FC<SearchSectionProps> = ({
   );
 };
 
-export default SearchSection;
+export default ProductSearchForm;

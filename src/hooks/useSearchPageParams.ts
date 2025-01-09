@@ -23,7 +23,8 @@ const useSearchPageParams: IUseSearchPageParams = () => {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const count = params.size;
+
+  const props = getSearchPageParams(params);
 
   const _redirect = (target: string) => {
     if (pathname.includes('/search')) {
@@ -38,7 +39,7 @@ const useSearchPageParams: IUseSearchPageParams = () => {
     value,
   ) => {
     const newParams = new URLSearchParams(params);
-    if (value === undefined || value === null || +value < 0) {
+    if (value === undefined || value === null || +value < 0 || value === '') {
       newParams.delete(key);
     } else {
       newParams.set(key, value.toString());
@@ -56,8 +57,9 @@ const useSearchPageParams: IUseSearchPageParams = () => {
   return {
     navigate,
     clear,
-    count,
-    ...getSearchPageParams(params),
+    count: [!!props.categoryId, props.inStock === false].filter((item) => item)
+      .length,
+    ...props,
   };
 };
 

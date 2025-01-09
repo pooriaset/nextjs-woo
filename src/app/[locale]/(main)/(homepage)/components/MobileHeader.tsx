@@ -1,32 +1,21 @@
 'use client';
 
+import ProductSearchForm from '@/components/ProductSearchForm/ProductSearchForm';
 import useSearchPageParams from '@/hooks/useSearchPageParams';
-import { SearchPageParamsKeys } from '@/utils/params';
 import { SearchOutlined } from '@mui/icons-material';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useTranslations } from 'next-intl';
-import { useState, useTransition } from 'react';
-import SearchDialog from './SearchDialog';
-import SearchSection from './SearchSection';
+import { useState } from 'react';
+import ProductSearchDialog from '@/components/ProductSearchDialog/ProductSearchDialog';
 
 const MobileHeader = () => {
-  const [isPending, startTransition] = useTransition();
-
-  const { navigate, q } = useSearchPageParams();
-
   const [open, setOpen] = useState(false);
-
   const handleToggleDialog = () => {
     setOpen((prevState) => !prevState);
   };
 
-  const onClickOnSearch = (q: string) => {
-    startTransition(() => {
-      navigate(SearchPageParamsKeys.Q, q);
-      setOpen(false);
-    });
-  };
+  const { q } = useSearchPageParams();
 
   const t = useTranslations();
 
@@ -35,13 +24,9 @@ const MobileHeader = () => {
       maxWidth="xl"
       sx={{ borderBottom: '2px solid', borderColor: 'divider' }}
     >
-      <SearchDialog open={open} onClose={handleToggleDialog}>
-        <SearchSection
-          onClickOnBack={handleToggleDialog}
-          onClickOnSearch={onClickOnSearch}
-          isPending={isPending}
-        />
-      </SearchDialog>
+      <ProductSearchDialog open={open} onClose={handleToggleDialog}>
+        <ProductSearchForm onClickOnBack={handleToggleDialog} />
+      </ProductSearchDialog>
       <Stack direction="row" spacing={1} alignItems="center" height={56}>
         <Box
           onClick={handleToggleDialog}
@@ -70,7 +55,7 @@ const MobileHeader = () => {
               pl: 1,
             }}
           >
-            {q ? q : t('header.search.placeholder')}
+            {q || t('header.search.placeholder')}
           </Typography>
         </Box>
       </Stack>
