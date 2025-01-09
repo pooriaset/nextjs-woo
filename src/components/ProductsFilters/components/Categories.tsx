@@ -5,7 +5,6 @@ import { Collapse, IconButton, List, ListItemText } from '@mui/material';
 import { FC, MouseEventHandler, useMemo, useState } from 'react';
 import { ProductCategoryOptions } from '../types';
 import { ListItem } from './ListItem';
-import { Title } from './Title';
 
 export interface CategoriesProps {
   options: ProductCategoryOptions;
@@ -80,12 +79,17 @@ const Categories: FC<CategoriesProps> = ({ options, parentId = null }) => {
       >
         <ListItem dense disableRipple>
           <ListItemText
-            primary={<Title>{option.name}</Title>}
-            onClick={handleClickOnItem(option.id)}
-            sx={{
-              color: (theme) =>
-                isActive ? theme.palette.primary.main : undefined,
+            primary={option.name}
+            primaryTypographyProps={{
+              variant: 'body2',
+              ...(isActive
+                ? {
+                    fontWeight: 700,
+                    color: 'primary',
+                  }
+                : {}),
             }}
+            onClick={handleClickOnItem(option.id)}
           />
           {hasChildren && (
             <IconButton size="small" onClick={handleClickOnIcon(option.id)}>
@@ -93,11 +97,7 @@ const Categories: FC<CategoriesProps> = ({ options, parentId = null }) => {
             </IconButton>
           )}
         </ListItem>
-        <Collapse
-          timeout="auto"
-          in={(isActive || open[option.id]) ?? false}
-          unmountOnExit
-        >
+        <Collapse timeout="auto" in={open[option.id] ?? false} unmountOnExit>
           <Categories
             options={options}
             parentId={option.id > 0 ? option.id : null}

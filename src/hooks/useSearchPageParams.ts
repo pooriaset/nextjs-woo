@@ -14,6 +14,8 @@ export interface IUseSearchPageParams {
       key: SearchPageParamsKeys,
       value: string | number | boolean | null,
     ) => void;
+    clear: () => void;
+    count: number;
   } & SearchPagesParams;
 }
 
@@ -21,6 +23,15 @@ const useSearchPageParams: IUseSearchPageParams = () => {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const count = params.size;
+
+  const _redirect = (target: string) => {
+    if (pathname.includes('/search')) {
+      window.history.pushState(null, '', target);
+    } else {
+      router.push(target);
+    }
+  };
 
   const navigate: ReturnType<IUseSearchPageParams>['navigate'] = (
     key,
@@ -34,16 +45,18 @@ const useSearchPageParams: IUseSearchPageParams = () => {
     }
 
     const target = `/search?${newParams}`;
+    _redirect(target);
+  };
 
-    if (pathname.includes('/search')) {
-      window.history.pushState(null, '', target);
-    } else {
-      router.push(target);
-    }
+  const clear = () => {
+    const target = `/search`;
+    _redirect(target);
   };
 
   return {
     navigate,
+    clear,
+    count,
     ...getSearchPageParams(params),
   };
 };

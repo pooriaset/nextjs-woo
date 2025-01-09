@@ -118,7 +118,10 @@
     "filters": {
       "title": "فیلترها",
       "categories": "دسته بندی ها",
-      "justInStock": "فقط کالاهای موجود"
+      "justInStock": "فقط کالاهای موجود",
+      "buttons": {
+        "removeFilters": "حذف فیلترها"
+      }
     },
     "sort": {
       "title": "مرتب‌سازی",

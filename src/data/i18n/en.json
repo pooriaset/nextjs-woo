@@ -118,7 +118,10 @@
     "filters": {
       "title": "Filters",
       "categories": "Categories",
-      "justInStock": "Just in stock"
+      "justInStock": "Just in stock",
+      "buttons": {
+        "removeFilters": "Clear Filters"
+      }
     },
     "sort": {
       "title": "Sort",

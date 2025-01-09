@@ -5,12 +5,11 @@ import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
 import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { SearchPageParamsKeys } from '@/utils/params';
 import { useQuery } from '@apollo/client';
-import { Divider, List, ListItemText, Switch } from '@mui/material';
+import { List, ListItemText, Switch } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import Categories from './components/Categories';
 import { ListItem } from './components/ListItem';
-import { Title } from './components/Title';
 
 export interface ProductsFiltersProps {}
 
@@ -29,19 +28,25 @@ const ProductsFilters: FC<ProductsFiltersProps> = () => {
   };
 
   return (
-    <List>
+    <List dense disablePadding>
       <ListItem disableGutters disableRipple>
         <ListItemText
-          primary={<Title>{t('products.filters.categories')}</Title>}
+          primary={t('products.filters.categories')}
+          primaryTypographyProps={{
+            variant: 'body1',
+            fontWeight: 600,
+          }}
         />
       </ListItem>
       {!!categories?.length && <Categories options={categories} />}
 
-      <Divider />
-
       <ListItem disableGutters disableRipple onClick={handleClickOnInStock}>
         <ListItemText
-          primary={<Title>{t('products.filters.justInStock')}</Title>}
+          primary={t('products.filters.justInStock')}
+          primaryTypographyProps={{
+            variant: 'body1',
+            fontWeight: 600,
+          }}
         />
         <Switch checked={inStock} />
       </ListItem>
