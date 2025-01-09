@@ -16,14 +16,14 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, useState } from 'react';
-import { ProductsFilters } from '../ProductsFilters';
 import Dialog from '../Dialog/Dialog';
+import { ProductsFilters } from '../ProductsFilters';
 
 export interface InlineFiltersProps {}
 const InlineFilters: FC<InlineFiltersProps> = () => {
   const t = useTranslations();
 
-  const { sort, navigate } = useSearchPageParams();
+  const { sort, navigate, count, clear } = useSearchPageParams();
 
   const [sortDialog, setSortDialog] = useState(false);
 
@@ -48,6 +48,11 @@ const InlineFilters: FC<InlineFiltersProps> = () => {
     setFiltersDialog((prevState) => !prevState);
   };
 
+  const handleClickOnClear = () => {
+    clear();
+    onToggleFiltersDialog();
+  };
+
   return (
     <>
       <Dialog
@@ -63,6 +68,24 @@ const InlineFilters: FC<InlineFiltersProps> = () => {
             size: 'large',
             fullWidth: true,
             onClick: onToggleFiltersDialog,
+          },
+          {
+            id: 'clear-filters',
+            children: t('products.filters.buttons.removeFilters'),
+            ...(!!count
+              ? {
+                  color: 'error',
+                  variant: 'outlined',
+                }
+              : {
+                  color: 'inherit',
+                  variant: 'contained',
+                  disabled: true,
+                }),
+
+            size: 'large',
+            fullWidth: true,
+            onClick: handleClickOnClear,
           },
         ]}
       >
@@ -111,6 +134,7 @@ const InlineFilters: FC<InlineFiltersProps> = () => {
         }}
       >
         <Button
+          color="inherit"
           variant="outlined"
           size="small"
           endIcon={<SortOutlined />}
@@ -118,11 +142,33 @@ const InlineFilters: FC<InlineFiltersProps> = () => {
         >
           {t(selectedSort?.label || sortOptions[0].label)}
         </Button>
+
         <Button
+          color="inherit"
           variant="outlined"
           size="small"
           endIcon={<KeyboardArrowDownIcon />}
           onClick={onToggleFiltersDialog}
+          startIcon={
+            !!count && (
+              <Box
+                width={18}
+                height={18}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: (theme) => theme.palette.error.main,
+                  borderRadius: '50%',
+                  color: '#fff',
+                  fontSize: (theme) =>
+                    `${theme.typography.caption.fontSize} !important`,
+                }}
+              >
+                {count}
+              </Box>
+            )
+          }
         >
           {t('products.filters.title')}
         </Button>
