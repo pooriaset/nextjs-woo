@@ -1,4 +1,4 @@
-import { ColumnFilters } from '@/components/ColumnFilters';
+import { ProductsFilters } from '@/components/ProductsFilters';
 import { InlineFilters } from '@/components/InlineFilters';
 import ProductsList from '@/components/ProductsList/ProductsList';
 import DesktopView from '@/components/ResponsiveDesign/components/DesktopView';
@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import ProductsListSkeleton from './components/ProductsListSkeleton';
 import SortRow from './components/SortRow';
 import SortWrapper from './components/SortWrapper';
+import FiltersCard from '@/components/ProductsFilters/components/FiltersCard';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -41,7 +42,9 @@ const Page = async () => {
               minWidth: 270,
             }}
           >
-            <ColumnFilters />
+            <FiltersCard>
+              <ProductsFilters />
+            </FiltersCard>
           </Box>
           <Box sx={{ flexGrow: 1 }}>
             <SortWrapper>

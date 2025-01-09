@@ -31,6 +31,7 @@ const Image: FC<
             maxWidth: '100%',
             maxHeight: '100%',
             margin: '0 auto',
+            minWidth: width,
           }}
         />
       )}

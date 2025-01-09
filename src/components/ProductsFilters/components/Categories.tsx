@@ -1,20 +1,18 @@
 import useSearchPageParams from '@/hooks/useSearchPageParams';
+import { SearchPageParamsKeys } from '@/utils/params';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, IconButton, List, ListItemText } from '@mui/material';
 import { FC, MouseEventHandler, useMemo, useState } from 'react';
 import { ProductCategoryOptions } from '../types';
 import { ListItem } from './ListItem';
 import { Title } from './Title';
-import { SearchPageParamsKeys } from '@/utils/params';
 
 export interface CategoriesProps {
   options: ProductCategoryOptions;
   parentId?: null | number;
 }
 
-const allItemId = -1;
-
-const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
+const Categories: FC<CategoriesProps> = ({ options, parentId = null }) => {
   const _options = useMemo(() => {
     return options?.filter((option) => option.parentId === parentId) ?? [];
   }, [options, parentId]);
@@ -68,18 +66,16 @@ const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
   return _options.map((option) => {
     const hasChildren = options?.some((child) => child.parentId === option.id);
 
-    const isActive =
-      (categoryId === null && option?.id === allItemId) ||
-      option?.id === categoryId;
+    const isActive = option.id === categoryId;
 
     return (
       <List
+        sx={{
+          pl: parentId === null ? 0 : 2,
+        }}
         dense
         component="div"
         key={option.id}
-        sx={{
-          pl: parentId === -1 ? 0 : 2,
-        }}
         disablePadding
       >
         <ListItem dense disableRipple>
@@ -97,7 +93,11 @@ const Categories: FC<CategoriesProps> = ({ options, parentId = allItemId }) => {
             </IconButton>
           )}
         </ListItem>
-        <Collapse timeout="auto" in={open[option.id] ?? false} unmountOnExit>
+        <Collapse
+          timeout="auto"
+          in={(isActive || open[option.id]) ?? false}
+          unmountOnExit
+        >
           <Categories
             options={options}
             parentId={option.id > 0 ? option.id : null}

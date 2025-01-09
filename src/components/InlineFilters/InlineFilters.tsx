@@ -1,6 +1,5 @@
 'use client';
 
-import { GetAllCategoriesQuery } from '@/graphql/types/graphql';
 import useSearchPageParams from '@/hooks/useSearchPageParams';
 import { sortOptions } from '@/static/sortOptions';
 import { SearchPageParamsKeys } from '@/utils/params';
@@ -17,12 +16,11 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FC, useState } from 'react';
+import { ProductsFilters } from '../ProductsFilters';
 import Dialog from '../Dialog/Dialog';
 
-export interface InlineFiltersProps {
-  categories?: NonNullable<GetAllCategoriesQuery['productCategories']>['nodes'];
-}
-const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
+export interface InlineFiltersProps {}
+const InlineFilters: FC<InlineFiltersProps> = () => {
   const t = useTranslations();
 
   const { sort, navigate } = useSearchPageParams();
@@ -44,8 +42,33 @@ const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
 
   const selectedSort = sortOptions.find((item) => item.key === sort);
 
+  const [filtersDialog, setFiltersDialog] = useState(false);
+
+  const onToggleFiltersDialog = () => {
+    setFiltersDialog((prevState) => !prevState);
+  };
+
   return (
     <>
+      <Dialog
+        open={filtersDialog}
+        onClose={onToggleFiltersDialog}
+        title={t('products.filters.title')}
+        buttons={[
+          {
+            id: 'view-products',
+            children: t('buttons.viewProducts'),
+            variant: 'contained',
+            color: 'primary',
+            size: 'large',
+            fullWidth: true,
+            onClick: onToggleFiltersDialog,
+          },
+        ]}
+      >
+        <ProductsFilters />
+      </Dialog>
+
       <Dialog
         key={sort}
         open={sortDialog}
@@ -99,8 +122,9 @@ const InlineFilters: FC<InlineFiltersProps> = ({ categories }) => {
           variant="outlined"
           size="small"
           endIcon={<KeyboardArrowDownIcon />}
+          onClick={onToggleFiltersDialog}
         >
-          {t('products.filters.categories')}
+          {t('products.filters.title')}
         </Button>
       </Box>
     </>

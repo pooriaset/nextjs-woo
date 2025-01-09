@@ -73,7 +73,8 @@
     "apply": "Apply",
     "save": "Save",
     "backToUp": "Back to Up",
-    "submit": "Submit"
+    "submit": "Submit",
+    "viewProducts": "View Products"
   },
   "footer": {
     "support": {
@@ -115,6 +116,7 @@
     "count": "Product(s)",
     "outOfStock": "Out of stock",
     "filters": {
+      "title": "Filters",
       "categories": "Categories",
       "justInStock": "Just in stock"
     },
