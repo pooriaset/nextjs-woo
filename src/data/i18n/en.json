@@ -240,7 +240,8 @@
     "state": "State",
     "city": "City",
     "address1": "Address",
-    "postcode": "Postcode"
+    "postcode": "Postcode",
+    "phone": "Mobile Number"
   },
   "profile": {
     "myOrders": "My Orders",

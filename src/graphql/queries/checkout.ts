@@ -13,9 +13,19 @@ export const GET_PAYMENT_GATEWAYS = gql`
   }
 `;
 export const CHECKOUT_MUTATION = gql`
-  mutation Checkout($customerNote: String, $paymentMethod: String) {
+  mutation Checkout(
+    $customerNote: String
+    $paymentMethod: String
+    $billing: CustomerAddressInput
+    $shipping: CustomerAddressInput
+  ) {
     checkout(
-      input: { customerNote: $customerNote, paymentMethod: $paymentMethod }
+      input: {
+        customerNote: $customerNote
+        paymentMethod: $paymentMethod
+        billing: $billing
+        shipping: $shipping
+      }
     ) {
       redirect
       clientMutationId

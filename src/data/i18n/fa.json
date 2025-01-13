@@ -240,7 +240,8 @@
     "state": "استان",
     "city": "شهر",
     "address1": "آدرس",
-    "postcode": "کد پستی"
+    "postcode": "کد پستی",
+    "phone": "شماره موبایل"
   },
   "profile": {
     "myOrders": "سفارش‌های من",

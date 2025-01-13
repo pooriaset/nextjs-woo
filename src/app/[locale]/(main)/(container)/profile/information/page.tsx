@@ -1,80 +1,37 @@
 'use client';
 
 import CustomSkeleton from '@/components/CustomSkeleton/CustomSkeleton';
+import UserFields from '@/components/UserFields/UserFields';
+import useUserFields, {
+  type UserFieldNames,
+} from '@/components/UserFields/hooks/useUserFields';
 import ButtonWithLoading from '@/components/common/ButtonWithLoading';
 import {
   GET_CUSTOMER_BILLING,
   GET_CUSTOMER_PROFILE,
   UPDATE_CUSTOMER_MUTATION,
 } from '@/graphql/queries/customer';
-import { GET_COUNTRY_STATES } from '@/graphql/queries/general';
 import {
-  GetCountryStatesQuery,
   GetCustomerBillingQuery,
   UpdateCustomerMutation,
 } from '@/graphql/types/graphql';
-import { Locale, languages } from '@/navigation';
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Autocomplete, Grid, TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { useLocale, useTranslations } from 'next-intl';
-import {
-  Controller,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form';
+import { useTranslations } from 'next-intl';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import * as yup from 'yup';
 import CardHeader from '../components/CardHeader';
-import { BILLING_STATE_NAME_METADATA_KEY } from '@/config/inAppMetadata';
-
-type FieldNames = Record<
-  'firstName' | 'lastName' | 'state' | 'city' | 'address1' | 'postcode',
-  string | null
->;
 
 const Page = () => {
   const t = useTranslations();
 
-  const locale = useLocale();
+  const { schema } = useUserFields();
 
-  const states = useQuery<GetCountryStatesQuery>(GET_COUNTRY_STATES, {
-    variables: {
-      country: languages[locale as Locale].country,
-    },
-  });
-
-  const options =
-    states.data?.countryStates?.map((state) => {
-      return {
-        id: state?.code!,
-        value: state?.code!,
-        label: state?.name!,
-      };
-    }) || [];
-
-  const labels: Record<keyof FieldNames, string> = {
-    firstName: t('fields.firstName'),
-    lastName: t('fields.lastName'),
-    state: t('fields.state'),
-    city: t('fields.city'),
-    address1: t('fields.address1'),
-    postcode: t('fields.postcode'),
-  };
-  const resolveSchema: yup.ObjectSchema<FieldNames> = yup.object({
-    firstName: yup.string().nullable().required().label(labels.firstName),
-    lastName: yup.string().nullable().required().label(labels.lastName),
-    state: yup.string().nullable().required().label(labels.state),
-    city: yup.string().nullable().required().label(labels.city),
-    address1: yup.string().nullable().required().label(labels.address1),
-    postcode: yup.string().nullable().required().label(labels.postcode),
-  });
-
-  const form = useForm<FieldNames>({
-    resolver: yupResolver(resolveSchema),
+  const form = useForm<Partial<UserFieldNames>>({
+    resolver: yupResolver(schema),
   });
 
   const [mutateAsync, { loading }] = useMutation<UpdateCustomerMutation>(
@@ -83,20 +40,10 @@ const Page = () => {
 
   const client = useApolloClient();
 
-  const onSubmit: SubmitHandler<FieldNames> = async (payload) => {
-    const selectedState = states.data?.countryStates?.find(
-      (item) => item?.code === payload.state,
-    );
-
+  const onSubmit: SubmitHandler<UserFieldNames> = async (payload) => {
     const { errors } = await mutateAsync({
       variables: {
         billing: payload,
-        metaData: [
-          {
-            key: BILLING_STATE_NAME_METADATA_KEY,
-            value: selectedState?.name,
-          },
-        ],
       },
     });
     if (!errors?.length) {
@@ -134,193 +81,7 @@ const Page = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             component="form"
           >
-            <Grid item xs={6}>
-              <CustomSkeleton isLoading={customer.loading}>
-                <Controller
-                  control={form.control}
-                  name="firstName"
-                  render={({
-                    field: { name, value, onChange },
-                    fieldState: { error },
-                  }) => {
-                    return (
-                      <TextField
-                        disabled={loading}
-                        onChange={onChange}
-                        name={name}
-                        value={value || ''}
-                        variant="outlined"
-                        fullWidth
-                        label={labels[name]}
-                        error={!!error?.message}
-                        helperText={error?.message?.toString()}
-                        InputProps={{
-                          autoComplete: 'new-password',
-                        }}
-                      />
-                    );
-                  }}
-                />
-              </CustomSkeleton>
-            </Grid>
-            <Grid item xs={6}>
-              <CustomSkeleton isLoading={customer.loading}>
-                <Controller
-                  control={form.control}
-                  name="lastName"
-                  render={({
-                    field: { name, value, onChange },
-                    fieldState: { error },
-                  }) => {
-                    return (
-                      <TextField
-                        disabled={loading}
-                        onChange={onChange}
-                        name={name}
-                        value={value || ''}
-                        variant="outlined"
-                        fullWidth
-                        label={labels[name]}
-                        error={!!error?.message}
-                        helperText={error?.message?.toString()}
-                        InputProps={{
-                          autoComplete: 'new-password',
-                        }}
-                      />
-                    );
-                  }}
-                />
-              </CustomSkeleton>
-            </Grid>
-            <Grid item xs={6}>
-              <CustomSkeleton isLoading={customer.loading || states.loading}>
-                <Controller
-                  control={form.control}
-                  name="state"
-                  render={({
-                    field: { name, value, onChange },
-                    fieldState: { error },
-                  }) => {
-                    const _value = options.find(
-                      (option) => option.value === value,
-                    );
-
-                    return (
-                      <Autocomplete
-                        onChange={(_event, option) => {
-                          onChange(option?.value);
-                        }}
-                        value={_value || { id: '', value: '', label: '' }}
-                        options={options}
-                        fullWidth
-                        disabled={loading}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            error={!!error?.message}
-                            helperText={error?.message?.toString()}
-                            label={labels[name]}
-                            InputProps={{
-                              autoComplete: 'new-password',
-                              ...params.InputProps,
-                            }}
-                          />
-                        )}
-                      />
-                    );
-                  }}
-                />
-              </CustomSkeleton>
-            </Grid>
-            <Grid item xs={6}>
-              <CustomSkeleton isLoading={customer.loading}>
-                <Controller
-                  control={form.control}
-                  name="city"
-                  render={({
-                    field: { name, value, onChange },
-                    fieldState: { error },
-                  }) => {
-                    return (
-                      <TextField
-                        disabled={loading}
-                        onChange={onChange}
-                        name={name}
-                        value={value || ''}
-                        variant="outlined"
-                        fullWidth
-                        label={labels[name]}
-                        error={!!error?.message}
-                        helperText={error?.message?.toString()}
-                        InputProps={{
-                          autoComplete: 'new-password',
-                        }}
-                      />
-                    );
-                  }}
-                />
-              </CustomSkeleton>
-            </Grid>
-            <Grid item xs={12}>
-              <CustomSkeleton isLoading={customer.loading}>
-                <Controller
-                  control={form.control}
-                  name="address1"
-                  render={({
-                    field: { name, value, onChange },
-                    fieldState: { error },
-                  }) => {
-                    return (
-                      <TextField
-                        disabled={loading}
-                        multiline
-                        rows={3}
-                        onChange={onChange}
-                        name={name}
-                        value={value || ''}
-                        variant="outlined"
-                        fullWidth
-                        label={labels[name]}
-                        error={!!error?.message}
-                        helperText={error?.message?.toString()}
-                        InputProps={{
-                          autoComplete: 'new-password',
-                        }}
-                      />
-                    );
-                  }}
-                />
-              </CustomSkeleton>
-            </Grid>
-            <Grid item xs={12}>
-              <CustomSkeleton isLoading={customer.loading}>
-                <Controller
-                  control={form.control}
-                  name="postcode"
-                  render={({
-                    field: { name, value, onChange },
-                    fieldState: { error },
-                  }) => {
-                    return (
-                      <TextField
-                        disabled={loading}
-                        onChange={onChange}
-                        name={name}
-                        value={value || ''}
-                        variant="outlined"
-                        fullWidth
-                        label={labels[name]}
-                        error={!!error?.message}
-                        helperText={error?.message?.toString()}
-                        InputProps={{
-                          autoComplete: 'new-password',
-                        }}
-                      />
-                    );
-                  }}
-                />
-              </CustomSkeleton>
-            </Grid>
+            <UserFields disabled={loading} loading={customer.loading} />
             <Grid item xs={12}>
               <CustomSkeleton isLoading={customer.loading}>
                 <ButtonWithLoading

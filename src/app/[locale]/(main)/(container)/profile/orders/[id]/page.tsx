@@ -83,11 +83,6 @@ const Page: FC<PageProps> = (props) => {
       value: `${shipping.city} - ${shipping.address1}`,
       type: 'typography',
     },
-    {
-      title: t('order.info.phone'),
-      value: shipping.phone,
-      type: 'typography',
-    },
   ];
 
   const checkoutItems = [
