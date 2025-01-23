@@ -3164,11 +3164,11 @@ __metadata:
   linkType: hard
 
 "@types/react-swipeable-views@npm:^0":
-  version: 0.13.5
-  resolution: "@types/react-swipeable-views@npm:0.13.5"
+  version: 0.13.6
+  resolution: "@types/react-swipeable-views@npm:0.13.6"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/d1dcc78d862f37d30a43d79d915fdb388e05dce0b2ac07462ca4f1b00e0eef37cb41d75997f5685dec79bcce1ffee0dfbc744f20d5266dd3090658def5b4e193
+  checksum: 10c0/a26879146748417234bb7f44c5a71e6bab2b76c0b34c72f0493c18403487a5d77021510e8665bd8bd22786904fbbd90d6db55c8dd2bf983c32421139de851c94
   languageName: node
   linkType: hard
 
