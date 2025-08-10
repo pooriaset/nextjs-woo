@@ -9302,14 +9302,14 @@ __metadata:
   linkType: hard
 
 "react-countdown@npm:^2.3.5":
-  version: 2.3.5
-  resolution: "react-countdown@npm:2.3.5"
+  version: 2.3.6
+  resolution: "react-countdown@npm:2.3.6"
   dependencies:
     prop-types: "npm:^15.7.2"
   peerDependencies:
     react: ">= 15"
     react-dom: ">= 15"
-  checksum: 10c0/894383a2f6d99717b32bc3d52ab6c8c7f01c41105b05bda9aa829f13fc9a3285caec4bf6769ce821f7e6c78a19ed58bb14fb285dd3b5c62487cbcd759bd304cb
+  checksum: 10c0/defb75cb9802c499eb0d5f6c8c6e4269de1005f9c05d5162bccf45063782fd2f5f87acd95d11f70e623fa75085a546b9d0fb0df27c5287ed6a86334342d903cf
   languageName: node
   linkType: hard
 
