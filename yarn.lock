@@ -8461,7 +8461,7 @@ __metadata:
     sharp: "npm:^0.33.5"
     stylis: "npm:^4.3.1"
     stylis-plugin-rtl: "npm:^2.1.1"
-    swiper: "npm:^11.1.1"
+    swiper: "npm:^12.0.0"
     ts-jest: "npm:^29.1.2"
     typescript: "npm:5.4"
     usehooks-ts: "npm:^3.1.0"
@@ -10560,10 +10560,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swiper@npm:^11.1.1":
-  version: 11.1.1
-  resolution: "swiper@npm:11.1.1"
-  checksum: 10c0/02ded86e5033dbac47bbaa5e5592e15e945be990235f244236ddb2b8d6299cf6e66f1a45ad67277b1a133295daa5c7bad38e9c725b6d00b72d33431603202288
+"swiper@npm:^12.0.0":
+  version: 12.2.0
+  resolution: "swiper@npm:12.2.0"
+  checksum: 10c0/459c9621e170130c0a6874b05e24fefd0411529600a17b2d8afc4987dc2e803ab18d42983081b723423819d464568fdb541b6c3f517e558c60888c644dc4ead1
   languageName: node
   linkType: hard
 
